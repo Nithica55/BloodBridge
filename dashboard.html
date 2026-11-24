@@ -1,639 +1,240 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>BloodBridge | Dashboard</title>
-
-    <link rel="stylesheet"
-          href="style.css">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BloodBridge Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
+            gap: 18px;
+        }
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.07);
+            text-align: center;
+        }
+        .stat-card h3 { color: #b71c1c; }
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #c62828;
+        }
+        .bar-row {
+            margin: 15px 0;
+        }
+        .bar-track {
+            height: 13px;
+            background: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            background: #d32f2f;
+            border-radius: 10px;
+        }
+        .analytics-card {
+            background: white;
+            padding: 22px;
+            border-radius: 14px;
+            margin-top: 22px;
+            box-shadow: 0 4px 15px rgba(0,0,0,.07);
+        }
+        .small-note {
+            color: #777;
+            font-size: 13px;
+        }
+    </style>
 </head>
-
 
 <body>
 
-
-<!-- HEADER -->
-
 <header>
-
     <h1>🩸 BloodBridge</h1>
-
-    <p>
-        Blood Donor Management Dashboard
-    </p>
-
+    <p>Donor Analytics Dashboard</p>
 </header>
 
-
-
-<!-- NAVIGATION -->
-
 <nav>
-
     <a href="index.html">Home</a>
-
-    <a href="register.html">
-        Become a Donor
-    </a>
-
-    <a href="search.html">
-        Find Donor
-    </a>
-
-    <a href="request.html">
-        Emergency Request
-    </a>
-
-    <a href="matching.html">
-        Smart Matching
-    </a>
-
-    <a href="dashboard.html">
-        Dashboard
-    </a>
-
+    <a href="register.html">Become a Donor</a>
+    <a href="search.html">Find Donor</a>
+    <a href="request.html">Emergency Request</a>
+    <a href="matching.html">Smart Matching</a>
+    <a href="dashboard.html">Dashboard</a>
 </nav>
 
-
-
-<!-- DASHBOARD -->
-
 <section>
+    <h2>📊 Live Platform Statistics</h2>
 
-    <h2>
-        📊 BloodBridge Dashboard
-    </h2>
+    <div class="stats-grid">
 
-
-    <p style="text-align:center; color:#666;">
-        Real-time prototype statistics
-        from registered donors and blood requests.
-    </p>
-
-
-
-    <!-- STATISTICS -->
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                👥
-            </h3>
-
-            <h2 id="totalDonors">
-                0
-            </h2>
-
-            <p>
-                Registered Donors
-            </p>
-
+        <div class="stat-card">
+            <h3>Registered Donors</h3>
+            <div class="stat-number" id="totalDonors">0</div>
         </div>
 
-
-
-        <div class="card">
-
-            <h3>
-                🟢
-            </h3>
-
-            <h2 id="availableDonors">
-                0
-            </h2>
-
-            <p>
-                Available Donors
-            </p>
-
+        <div class="stat-card">
+            <h3>Available Donors</h3>
+            <div class="stat-number" id="availableDonors">0</div>
         </div>
 
-
-
-        <div class="card">
-
-            <h3>
-                🚨
-            </h3>
-
-            <h2 id="totalRequests">
-                0
-            </h2>
-
-            <p>
-                Blood Requests
-            </p>
-
+        <div class="stat-card">
+            <h3>Unavailable Donors</h3>
+            <div class="stat-number" id="unavailableDonors">0</div>
         </div>
 
+        <div class="stat-card">
+            <h3>Emergency Requests</h3>
+            <div class="stat-number" id="totalRequests">0</div>
+        </div>
 
-
-        <div class="card">
-
-            <h3>
-                📍
-            </h3>
-
-            <h2 id="totalCities">
-                0
-            </h2>
-
-            <p>
-                Cities Covered
-            </p>
-
+        <div class="stat-card">
+            <h3>Cities Covered</h3>
+            <div class="stat-number" id="totalCities">0</div>
         </div>
 
     </div>
-
 </section>
 
+<section class="analytics-card">
+    <h2>🩸 Blood Group Distribution</h2>
+    <div id="bloodChart"></div>
+</section>
 
+<section class="analytics-card">
+    <h2>📍 State-wise Donor Coverage</h2>
+    <div id="stateChart"></div>
+</section>
 
-<!-- BLOOD GROUP STATISTICS -->
+<section class="analytics-card">
+    <h2>🚨 Recent Emergency Requests</h2>
+    <div id="recentRequests"></div>
+</section>
 
 <section>
-
-    <h2>
-        🩸 Blood Group Availability
-    </h2>
-
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                A+
-            </h3>
-
-            <p id="aPositive">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                A-
-            </h3>
-
-            <p id="aNegative">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                B+
-            </h3>
-
-            <p id="bPositive">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                B-
-            </h3>
-
-            <p id="bNegative">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                O+
-            </h3>
-
-            <p id="oPositive">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                O-
-            </h3>
-
-            <p id="oNegative">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                AB+
-            </h3>
-
-            <p id="abPositive">
-                0 donors
-            </p>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                AB-
-            </h3>
-
-            <p id="abNegative">
-                0 donors
-            </p>
-
-        </div>
-
-    </div>
-
+    <button onclick="loadDashboard()">🔄 Refresh Dashboard</button>
 </section>
-
-
-
-<!-- RECENT REQUESTS -->
-
-<section>
-
-    <h2>
-        🚨 Recent Blood Requests
-    </h2>
-
-    <div id="recentRequests">
-
-        <div class="card">
-
-            <p>
-                No blood requests yet.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- QUICK ACTIONS -->
-
-<section>
-
-    <h2>
-        ⚡ Quick Actions
-    </h2>
-
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                🩸 Register Donor
-            </h3>
-
-            <p>
-                Add a potential blood donor.
-            </p>
-
-            <a class="button"
-               href="register.html">
-
-                Register
-
-            </a>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                🔎 Find Donor
-            </h3>
-
-            <p>
-                Search potential donors.
-            </p>
-
-            <a class="button"
-               href="search.html">
-
-                Search
-
-            </a>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                🚨 Emergency Request
-            </h3>
-
-            <p>
-                Create a new blood request.
-            </p>
-
-            <a class="button"
-               href="request.html">
-
-                Request
-
-            </a>
-
-        </div>
-
-
-
-        <div class="card">
-
-            <h3>
-                🧠 Smart Matching
-            </h3>
-
-            <p>
-                Find potential donor matches.
-            </p>
-
-            <a class="button"
-               href="matching.html">
-
-                Match
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- FOOTER -->
 
 <footer>
-
-    <p>
-        © 2026 BloodBridge
-    </p>
-
-    <p>
-        Healthcare Technology Prototype
-    </p>
-
+    <p>© 2026 BloodBridge</p>
+    <p class="small-note">Prototype analytics using browser-stored demo data.</p>
 </footer>
 
-
-
-<!-- JAVASCRIPT -->
-
 <script>
+function loadDashboard() {
 
-
-/* GET DATA */
-
-const donors =
-    JSON.parse(
+    const donors = JSON.parse(
         localStorage.getItem("bloodbridgeDonors")
     ) || [];
 
-
-const requests =
-    JSON.parse(
+    const requests = JSON.parse(
         localStorage.getItem("bloodbridgeRequests")
     ) || [];
 
-
-
-/* BASIC STATISTICS */
-
-document.getElementById("totalDonors")
-    .textContent = donors.length;
-
-
-const available =
-    donors.filter(
-        donor =>
-        donor.availability === "Available"
+    const available = donors.filter(
+        d => String(d.availability || "").trim().toLowerCase() === "available"
     );
 
+    const unavailable = donors.length - available.length;
 
-document.getElementById("availableDonors")
-    .textContent = available.length;
+    const cities = new Set(
+        donors.map(d => String(d.city || "").trim().toLowerCase())
+              .filter(Boolean)
+    );
 
+    document.getElementById("totalDonors").textContent = donors.length;
+    document.getElementById("availableDonors").textContent = available.length;
+    document.getElementById("unavailableDonors").textContent = unavailable;
+    document.getElementById("totalRequests").textContent = requests.length;
+    document.getElementById("totalCities").textContent = cities.size;
 
-document.getElementById("totalRequests")
-    .textContent = requests.length;
+    // Blood group chart
+    const groups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
+    const chart = document.getElementById("bloodChart");
 
+    chart.innerHTML = "";
 
+    groups.forEach(group => {
 
-/* UNIQUE CITIES */
-
-const cities = new Set();
-
-
-donors.forEach(donor => {
-
-    if (donor.city) {
-
-        cities.add(donor.city);
-
-    }
-
-});
-
-
-document.getElementById("totalCities")
-    .textContent = cities.size;
-
-
-
-/* BLOOD GROUP COUNTS */
-
-const groups = {
-
-    "A+": "aPositive",
-    "A-": "aNegative",
-
-    "B+": "bPositive",
-    "B-": "bNegative",
-
-    "O+": "oPositive",
-    "O-": "oNegative",
-
-    "AB+": "abPositive",
-    "AB-": "abNegative"
-
-};
-
-
-
-Object.keys(groups).forEach(group => {
-
-    const count =
-        donors.filter(
-            donor =>
-            donor.bloodGroup === group
+        const count = donors.filter(
+            d => String(d.bloodGroup || "").trim().toUpperCase() === group
         ).length;
 
-    document.getElementById(
-        groups[group]
-    ).textContent =
-        count + " donor" +
-        (count !== 1 ? "s" : "");
+        const percent = donors.length
+            ? (count / donors.length) * 100
+            : 0;
 
-});
-
-
-
-/* RECENT REQUESTS */
-
-const requestContainer =
-    document.getElementById(
-        "recentRequests"
-    );
-
-
-requestContainer.innerHTML = "";
-
-
-if (requests.length === 0) {
-
-    requestContainer.innerHTML = `
-
-        <div class="card">
-
-            <p>
-                No blood requests yet.
-            </p>
-
-        </div>
-
-    `;
-
-}
-
-
-else {
-
-    const recent =
-        requests.slice(-5).reverse();
-
-
-    recent.forEach(request => {
-
-        const card =
-            document.createElement("div");
-
-        card.className = "card";
-
-
-        card.innerHTML = `
-
-            <h3>
-                🚨 ${request.patientName || "Blood Request"}
-            </h3>
-
-            <p>
-                <strong>
-                    Blood Group:
-                </strong>
-
-                ${request.bloodGroup}
-            </p>
-
-
-            <p>
-                <strong>
-                    Location:
-                </strong>
-
-                ${request.city},
-                ${request.state}
-            </p>
-
-
-            <p>
-                <strong>
-                    Hospital:
-                </strong>
-
-                ${request.hospital}
-            </p>
-
-
-            <p>
-                <strong>
-                    Units Required:
-                </strong>
-
-                ${request.units}
-            </p>
-
-
-            <p>
-                <strong>
-                    Urgency:
-                </strong>
-
-                ${request.urgency}
-            </p>
-
+        chart.innerHTML += `
+            <div class="bar-row">
+                <strong>${group}: ${count} donor(s)</strong>
+                <div class="bar-track">
+                    <div class="bar-fill" style="width:${percent}%"></div>
+                </div>
+            </div>
         `;
-
-
-        requestContainer.appendChild(card);
-
     });
 
+    // State coverage
+    const stateCounts = {};
+
+    donors.forEach(d => {
+        const state = String(d.state || "").trim();
+        if (state) {
+            stateCounts[state] = (stateCounts[state] || 0) + 1;
+        }
+    });
+
+    const stateChart = document.getElementById("stateChart");
+    stateChart.innerHTML = "";
+
+    const stateEntries = Object.entries(stateCounts);
+
+    if (stateEntries.length === 0) {
+        stateChart.innerHTML = "<p>No donor locations available yet.</p>";
+    } else {
+        stateEntries.forEach(([state, count]) => {
+            stateChart.innerHTML += `
+                <div class="bar-row">
+                    <strong>${state}: ${count} donor(s)</strong>
+                    <div class="bar-track">
+                        <div class="bar-fill"
+                             style="width:${(count / donors.length) * 100}%"></div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Recent requests
+    const recent = document.getElementById("recentRequests");
+    recent.innerHTML = "";
+
+    if (requests.length === 0) {
+        recent.innerHTML = "<p>No emergency requests yet.</p>";
+    } else {
+        requests.slice(-5).reverse().forEach(request => {
+            recent.innerHTML += `
+                <div class="card">
+                    <h3>🚨 ${request.patientName || "Emergency Request"}</h3>
+                    <p>Blood Group: ${request.bloodGroup || "Not specified"}</p>
+                    <p>Location: ${request.city || ""}, ${request.state || ""}</p>
+                    <p>Urgency: ${request.urgency || "Not specified"}</p>
+                    <p class="small-note">${request.date || ""}</p>
+                </div>
+            `;
+        });
+    }
 }
 
+loadDashboard();
 </script>
 
-
 </body>
-
-        </html>
+    </html>
+    
