@@ -1,229 +1,224 @@
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-    background: #fff5f5;
-    color: #333;
+    background: #f5f7fa;
+    color: #222;
+    line-height: 1.6;
 }
 
 
 /* HEADER */
 
 header {
-    background: #b71c1c;
+    background: linear-gradient(135deg, #b71c1c, #e53935);
     color: white;
     text-align: center;
     padding: 35px 20px;
 }
 
 header h1 {
-    font-size: 40px;
-    margin: 10px;
+    font-size: 38px;
+    margin-bottom: 8px;
 }
 
 header p {
-    font-size: 17px;
+    font-size: 16px;
 }
 
 
 /* NAVIGATION */
 
 nav {
-    background: white;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 nav a {
     text-decoration: none;
-    color: #b71c1c;
-    margin: 0 15px;
+    color: #333;
+    padding: 9px 14px;
+    border-radius: 20px;
     font-weight: bold;
 }
 
 nav a:hover {
-    color: #8b0000;
+    background: #ffe5e5;
+    color: #c62828;
 }
 
 
-/* HOME HERO */
+/* HERO */
 
 .hero {
+    max-width: 1000px;
+    margin: 35px auto;
+    padding: 55px 25px;
     text-align: center;
-    padding: 70px 20px;
+    background: white;
+    border-radius: 18px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .hero h2 {
-    font-size: 35px;
-    color: #8b0000;
+    font-size: 34px;
+    color: #b71c1c;
+    margin-bottom: 15px;
 }
 
 .hero p {
-    max-width: 600px;
+    max-width: 650px;
     margin: auto;
-    line-height: 1.7;
+    color: #666;
 }
 
 
-/* BUTTON */
+/* BUTTONS */
 
-.button {
+.button,
+button {
     display: inline-block;
-    margin: 25px 8px;
-    padding: 13px 25px;
-    background: #d32f2f;
+    background: #c62828;
     color: white;
-    text-decoration: none;
-    border-radius: 25px;
     border: none;
+    padding: 12px 20px;
+    margin: 10px 5px;
+    border-radius: 8px;
+    text-decoration: none;
     cursor: pointer;
+    font-size: 15px;
+    font-weight: bold;
 }
 
-.button:hover {
-    background: #8b0000;
+.button:hover,
+button:hover {
+    background: #8e0000;
+}
+
+
+/* SECTIONS */
+
+section {
+    max-width: 1100px;
+    margin: 35px auto;
+    padding: 10px 20px;
+}
+
+section > h2 {
+    text-align: center;
+    color: #b71c1c;
+    margin-bottom: 20px;
 }
 
 
 /* CARDS */
 
-section {
-    padding: 35px 20px;
-    text-align: center;
-}
-
 .cards {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
     gap: 20px;
-    flex-wrap: wrap;
 }
 
 .card {
     background: white;
-    width: 280px;
     padding: 25px;
     border-radius: 15px;
 
     box-shadow:
-        0 3px 12px rgba(0, 0, 0, 0.1);
+        0 5px 18px rgba(0, 0, 0, 0.08);
+
+    border-top: 4px solid #d32f2f;
 }
 
 .card h3 {
-    color: #c62828;
+    color: #b71c1c;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
 }
 
 
-/* REGISTRATION FORM */
+/* FORM */
 
 .form-section {
     max-width: 650px;
-    margin: 50px auto;
-    padding: 35px;
-
+    margin: 40px auto;
     background: white;
-
+    padding: 35px;
     border-radius: 18px;
 
     box-shadow:
-        0 4px 15px rgba(0, 0, 0, 0.12);
+        0 5px 20px rgba(0, 0, 0, 0.08);
 }
 
 .form-section h2 {
     color: #b71c1c;
     text-align: center;
-    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-.form-intro {
+.form-section > p {
     text-align: center;
     color: #666;
     margin-bottom: 25px;
 }
 
 
-/* FORM */
-
-form {
-    display: flex;
-    flex-direction: column;
-}
+/* INPUTS */
 
 label {
+    display: block;
     margin-top: 18px;
-    margin-bottom: 7px;
+    margin-bottom: 6px;
     font-weight: bold;
-    color: #444;
 }
 
 input,
 select {
     width: 100%;
-
-    padding: 13px;
-
-    border: 1px solid #ccc;
-
+    padding: 12px;
+    border: 1px solid #ddd;
     border-radius: 8px;
-
-    font-size: 16px;
-
-    background: white;
+    font-size: 15px;
+    outline: none;
 }
 
 input:focus,
 select:focus {
-    outline: none;
-
     border-color: #d32f2f;
-
-    box-shadow:
-        0 0 0 2px rgba(211, 47, 47, 0.1);
+    box-shadow: 0 0 0 3px rgba(211, 47, 47, 0.1);
 }
 
 
-/* SUBMIT BUTTON */
+/* DASHBOARD NUMBERS */
 
-button {
-    margin-top: 30px;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 25px;
-
-    background: #d32f2f;
-
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-button:hover {
-    background: #8b0000;
+.card h2 {
+    font-size: 32px;
+    color: #c62828;
 }
 
 
 /* FOOTER */
 
 footer {
-    background: #8b0000;
-
+    margin-top: 50px;
+    background: #222;
     color: white;
-
     text-align: center;
-
-    padding: 20px;
-
-    margin-top: 40px;
+    padding: 25px;
 }
 
 
@@ -232,34 +227,29 @@ footer {
 @media (max-width: 600px) {
 
     header h1 {
-        font-size: 30px;
+        font-size: 28px;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: stretch;
     }
 
     nav a {
-        display: block;
-
-        margin: 10px 0;
-    }
-
-    .hero {
-        padding: 45px 15px;
+        text-align: center;
     }
 
     .hero h2 {
-        font-size: 27px;
+        font-size: 25px;
     }
 
     .form-section {
-        margin: 25px 15px;
-
+        margin: 20px 15px;
         padding: 25px 20px;
     }
 
-    .button {
-        display: block;
-
-        margin: 15px auto;
-
-        max-width: 250px;
+    section {
+        padding: 10px 15px;
     }
-    }
+
+            }
