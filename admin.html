@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodBridge | Admin Panel</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#263247}
+header{background:#a90024;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+button,select,input{font:inherit}
+button{cursor:pointer;border:0;border-radius:7px;padding:10px 14px;font-weight:bold}
+.lang{background:white;color:#a90024}
+nav{background:white;padding:15px 5%;display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#a90024;text-decoration:none;font-weight:bold}
+main{max-width:1200px;margin:30px auto;padding:0 16px}
+h1,h2{color:#a90024}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:15px;margin:25px 0}
+.stat,.panel{background:white;padding:20px;border-radius:12px;box-shadow:0 3px 15px #00000009}
+.stat p{color:#687386;margin:0}
+.stat h2{font-size:30px;margin:12px 0 0}
+.panel{margin-bottom:22px;overflow-x:auto}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:15px 0}
+input,select{padding:11px;border:1px solid #d7dce5;border-radius:7px;background:white}
+.controls input{flex:1;min-width:180px}
+table{width:100%;border-collapse:collapse;min-width:600px}
+th,td{text-align:left;padding:13px 10px;border-bottom:1px solid #eee;font-size:14px}
+th{background:#fff0f3;color:#a90024}
+.action{background:#a90024;color:white}
+.delete{background:#ffe5e9;color:#a90024}
+.status{padding:7px;border-radius:6px;border:1px solid #ddd}
+.small{color:#687386;font-size:13px;line-height:1.5}
+.empty{padding:18px;color:#777}
+footer{text-align:center;padding:25px;color:#777}
+@media(max-width:600px){main{margin-top:20px}.panel{padding:14px}}
+</style>
+</head>
+<body>
+
+<header>
+<h2 style="color:white;margin:0">🩸 BloodBridge Admin</h2>
+<button class="lang" id="language" onclick="toggleLanguage()">தமிழ்</button>
+</header>
+
+<nav>
+<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
+<a href="register.html" data-en="Register" data-ta="பதிவு">Register</a>
+<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
+<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
+<a href="admin.html" data-en="Admin Panel" data-ta="நிர்வாகப் பலகை">Admin Panel</a>
+</nav>
+
+<main>
+<h1 data-en="Admin Control Panel" data-ta="நிர்வாகக் கட்டுப்பாட்டுப் பலகை">Admin Control Panel</h1>
+<p data-en="Manage your BloodBridge demo donors and emergency requests."
+data-ta="BloodBridge மாதிரி நன்கொடையாளர்கள் மற்றும் அவசர கோரிக்கைகளை நிர்வகிக்கவும்.">
+Manage your BloodBridge demo donors and emergency requests.
+</p>
+
+<section class="stats">
+<div class="stat">
+<p data-en="Total Donors" data-ta="மொத்த நன்கொடையாளர்கள்">Total Donors</p>
+<h2 id="totalDonors">0</h2>
+</div>
+<div class="stat">
+<p data-en="Available Donors" data-ta="கிடைக்கும் நன்கொடையாளர்கள்">Available Donors</p>
+<h2 id="availableDonors">0</h2>
+</div>
+<div class="stat">
+<p data-en="Total Requests" data-ta="மொத்த கோரிக்கைகள்">Total Requests</p>
+<h2 id="totalRequests">0</h2>
+</div>
+<div class="stat">
+<p data-en="Pending Requests" data-ta="நிலுவைக் கோரிக்கைகள்">Pending Requests</p>
+<h2 id="pendingRequests">0</h2>
+</div>
+</section>
+
+<section class="panel">
+<h2 data-en="Donor Management" data-ta="நன்கொடையாளர் மேலாண்மை">Donor Management</h2>
+
+<div class="controls">
+<input id="donorSearch" placeholder="Search by name or city" oninput="renderDonors()">
+<select id="groupFilter" onchange="renderDonors()">
+<option value="">All Blood Groups</option>
+<option>A+</option><option>A-</option>
+<option>B+</option><option>B-</option>
+<option>AB+</option><option>AB-</option>
+<option>O+</option><option>O-</option>
+</select>
+<select id="availabilityFilter" onchange="renderDonors()">
+<option value="">All Availability</option>
+<option value="Available">Available</option>
+<option value="Temporarily Unavailable">Temporarily Unavailable</option>
+<option value="Not Available">Not Available</option>
+</select>
+</div>
+
+<div id="donorTable"></div>
+<p class="small" data-en="Demo records only. Avoid using real personal contact information in this public prototype."
+data-ta="மாதிரி பதிவுகள் மட்டுமே. இந்த பொது மாதிரி தளத்தில் உண்மையான தனிப்பட்ட தொடர்பு விவரங்களைப் பயன்படுத்த வேண்டாம்.">
+Demo records only. Avoid using real personal contact information in this public prototype.
+</p>
+</section>
+
+<section class="panel">
+<h2 data-en="Emergency Request Management" data-ta="அவசர கோரிக்கை மேலாண்மை">Emergency Request Management</h2>
+<div id="requestTable"></div>
+</section>
+
+</main>
+
+<footer>BloodBridge © 2026 | Admin Demo Panel</footer>
+
+<script>
+let lang="en";
+
+function applyLanguage(language){
+ lang=language;
+ document.documentElement.lang=language;
+
+ document.querySelectorAll("[data-en]").forEach(el=>{
+  el.textContent=el.getAttribute("data-"+language);
+ });
+
+ document.getElementById("language").textContent=
+  language==="en"?"தமிழ்":"English";
+
+ localStorage.setItem("bloodbridgeLanguage",language);
+ renderDonors();
+ renderRequests();
+}
+
+function toggleLanguage(){
+ applyLanguage(lang==="en"?"ta":"en");
+}
+
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
+
+function getDonors(){
+ return JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
+}
+
+function getRequests(){
+ return JSON.parse(localStorage.getItem("bloodbridgeRequests")||"[]");
+}
+
+function updateStats(){
+ const donors=getDonors();
+ const requests=getRequests();
+
+ document.getElementById("totalDonors").textContent=donors.length;
+ document.getElementById("availableDonors").textContent=
+  donors.filter(d=>String(d.availability||"").toLowerCase().trim()==="available").length;
+ document.getElementById("totalRequests").textContent=requests.length;
+
+ // Requests are pending until an admin reviews them.
+ document.getElementById("pendingRequests").textContent=
+  requests.filter(r=>!r.status||r.status==="Pending").length;
+}
+
+function renderDonors(){
+ const donors=getDonors();
+ const search=document.getElementById("donorSearch").value.toLowerCase().trim();
+ const group=document.getElementById("groupFilter").value;
+ const availability=document.getElementById("availabilityFilter").value;
+
+ const filtered=donors.filter(d=>{
+  const matchesSearch=
+   String(d.name||"").toLowerCase().includes(search)||
+   String(d.city||"").toLowerCase().includes(search);
+  return matchesSearch&&
+   (!group||d.bloodGroup===group)&&
+   (!availability||d.availability===availability);
+ });
+
+ const empty=lang==="ta"?"நன்கொடையாளர்கள் இல்லை.":"No donors found.";
+
+ document.getElementById("donorTable").innerHTML=
+ filtered.length?`
+ <table>
+ <thead><tr>
+ <th>${lang==="ta"?"பெயர்":"Name"}</th>
+ <th>${lang==="ta"?"இரத்த வகை":"Blood Group"}</th>
+ <th>${lang==="ta"?"நகரம்":"City"}</th>
+ <th>${lang==="ta"?"கிடைக்கும் நிலை":"Availability"}</th>
+ <th>${lang==="ta"?"செயல்":"Action"}</th>
+ </tr></thead>
+ <tbody>
+ ${filtered.map(d=>`
+ <tr>
+ <td>${escapeHTML(d.name)}</td>
+ <td>${escapeHTML(d.bloodGroup)}</td>
+ <td>${escapeHTML(d.city)}</td>
+ <td>${escapeHTML(d.availability)}</td>
+ <td><button class="delete" onclick="deleteDonor(${Number(d.id)})">${lang==="ta"?"நீக்கு":"Delete"}</button></td>
+ </tr>`).join("")}
+ </tbody></table>`:`<p class="empty">${empty}</p>`;
+}
+
+function renderRequests(){
+ const requests=getRequests();
+ const container=document.getElementById("requestTable");
+
+ if(!requests.length){
+  container.innerHTML=`<p class="empty">${lang==="ta"?"அவசர கோரிக்கைகள் இல்லை.":"No emergency requests found."}</p>`;
+  return;
+ }
+
+ container.innerHTML=`
+ <table>
+ <thead><tr>
+ <th>${lang==="ta"?"நோயாளி":"Patient"}</th>
+ <th>${lang==="ta"?"இரத்த வகை":"Blood Group"}</th>
+ <th>${lang==="ta"?"இடம்":"Location"}</th>
+ <th>${lang==="ta"?"அவசரம்":"Urgency"}</th>
+ <th>${lang==="ta"?"நிலை":"Status"}</th>
+ </tr></thead>
+ <tbody>
+ ${requests.map((r,index)=>`
+ <tr>
+ <td>${escapeHTML(r.patientName)}</td>
+ <td>${escapeHTML(r.bloodGroup)}</td>
+ <td>${escapeHTML(r.city)}, ${escapeHTML(r.state)}</td>
+ <td>${escapeHTML(r.urgency)}</td>
+ <td>
+ <select class="status" onchange="updateStatus(${index},this.value)">
+ <option value="Pending" ${(!r.status||r.status==="Pending")?"selected":""}>Pending</option>
+ <option value="Reviewed" ${r.status==="Reviewed"?"selected":""}>Reviewed</option>
+ <option value="Completed" ${r.status==="Completed"?"selected":""}>Completed</option>
+ </select>
+ </td>
+ </tr>`).join("")}
+ </tbody></table>`;
+}
+
+function deleteDonor(id){
+ if(!confirm(lang==="ta"?"இந்த நன்கொடையாளர் பதிவை நீக்கவா?":"Delete this donor record?"))return;
+
+ const donors=getDonors().filter(d=>Number(d.id)!==id);
+ localStorage.setItem("bloodbridgeDonors",JSON.stringify(donors));
+ updateStats();
+ renderDonors();
+}
+
+function updateStatus(index,status){
+ const requests=getRequests();
+ if(!requests[index])return;
+
+ requests[index].status=status;
+ localStorage.setItem("bloodbridgeRequests",JSON.stringify(requests));
+ updateStats();
+}
+
+applyLanguage(localStorage.getItem("bloodbridgeLanguage")||"en");
+updateStats();
+</script>
+
+</body>
+</html>
