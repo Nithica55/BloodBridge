@@ -2,29 +2,27 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <title>Smart Matching | BloodBridge</title>
+    <title>BloodBridge | Smart Matching</title>
 
     <link rel="stylesheet" href="style.css">
-
 </head>
 
-
 <body>
-
 
 <header>
 
     <h1>🩸 BloodBridge</h1>
 
-    <p>Smart Emergency Donor Matching</p>
+    <p>
+        Smart Donor Matching System
+    </p>
 
 </header>
-
 
 
 <nav>
@@ -39,51 +37,71 @@
 
     <a href="matching.html">Smart Matching</a>
 
+    <a href="dashboard.html">Dashboard</a>
+
 </nav>
 
 
+<section>
 
-<section class="form-section">
+    <h2>
+        🧠 Smart Donor Matching
+    </h2>
 
-    <h2>🚨 Smart Donor Matching</h2>
-
-    <p>
-        Select an emergency request to find
-        potential available donors.
+    <p style="text-align:center; color:#666;">
+        Select an emergency request to identify
+        potential donor matches.
     </p>
-
-
-    <!-- REQUEST SELECTOR -->
-
-    <label>Select Emergency Request</label>
-
-    <select id="requestSelect">
-
-        <option value="">
-            Select a request
-        </option>
-
-    </select>
-
-
-    <button onclick="findMatches()">
-        🔎 Find Potential Donors
-    </button>
 
 </section>
 
-
-
-<!-- MATCHING RESULTS -->
 
 <section>
 
-    <h2>Potential Donor Matches</h2>
+    <div class="form-section">
 
-    <div id="results" class="cards"></div>
+        <label>
+            Select Emergency Request
+        </label>
+
+        <select id="requestSelect">
+
+            <option value="">
+                -- Select a request --
+            </option>
+
+        </select>
+
+
+        <button onclick="findMatches()">
+            🔎 Find Potential Matches
+        </button>
+
+    </div>
 
 </section>
 
+
+<section>
+
+    <h2>
+        🎯 Potential Donor Matches
+    </h2>
+
+    <div id="results">
+
+        <div class="card">
+
+            <p>
+                Select an emergency request
+                to start matching.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 <footer>
@@ -92,34 +110,39 @@
         © 2026 BloodBridge
     </p>
 
-</footer>
+    <p>
+        Prototype matching system
+    </p>
 
+</footer>
 
 
 <script>
 
-
-// Load emergency requests
-
-const requests =
+const donors =
     JSON.parse(
-        localStorage.getItem(
-            "bloodbridgeRequests"
-        )
+        localStorage.getItem("bloodbridgeDonors")
     ) || [];
 
 
+const requests =
+    JSON.parse(
+        localStorage.getItem("bloodbridgeRequests")
+    ) || [];
+
 
 const requestSelect =
-    document.getElementById(
-        "requestSelect"
-    );
+    document.getElementById("requestSelect");
+
+
+const results =
+    document.getElementById("results");
 
 
 
-// Display requests in dropdown
+/* LOAD REQUESTS */
 
-requests.forEach(function(request, index) {
+requests.forEach((request, index) => {
 
     const option =
         document.createElement("option");
@@ -127,11 +150,7 @@ requests.forEach(function(request, index) {
     option.value = index;
 
     option.textContent =
-        request.bloodGroup +
-        " - " +
-        request.city +
-        " - " +
-        request.urgency;
+        `${request.bloodGroup} | ${request.city}, ${request.state} | ${request.urgency}`;
 
     requestSelect.appendChild(option);
 
@@ -139,89 +158,69 @@ requests.forEach(function(request, index) {
 
 
 
+/* FIND MATCHES */
+
 function findMatches() {
 
-
-    const selectedIndex =
+    const selected =
         requestSelect.value;
 
 
-    const results =
-        document.getElementById(
-            "results"
+    if (selected === "") {
+
+        alert(
+            "Please select an emergency request."
         );
-
-
-    results.innerHTML = "";
-
-
-
-    if (selectedIndex === "") {
-
-        results.innerHTML = `
-
-        <div class="card">
-
-            <h3>
-                ⚠️ Select a request
-            </h3>
-
-            <p>
-                Please select an emergency
-                request first.
-            </p>
-
-        </div>
-
-        `;
 
         return;
 
     }
 
 
-
     const request =
-        requests[selectedIndex];
+        requests[selected];
 
-
-
-    // Get donors
-
-    const donors =
-        JSON.parse(
-            localStorage.getItem(
-                "bloodbridgeDonors"
-            )
-        ) || [];
-
-
-
-    // Calculate matches
 
     const matches = [];
 
 
-
-    donors.forEach(function(donor) {
-
-
-        let score = 0;
-
-
-        // Blood group match
+    donors.forEach(donor => {
 
         if (
-            donor.bloodGroup ===
+            donor.bloodGroup !==
             request.bloodGroup
         ) {
 
-            score += 50;
+            return;
 
         }
 
 
-        // State match
+        if (
+            donor.availability !==
+            "Available"
+        ) {
+
+            return;
+
+        }
+
+
+        let score = 50;
+
+        let reasons = [];
+
+
+
+        /* BLOOD GROUP */
+
+        reasons.push(
+            "✓ Blood group matches"
+        );
+
+
+
+        /* STATE */
 
         if (
             donor.state ===
@@ -230,86 +229,109 @@ function findMatches() {
 
             score += 20;
 
+            reasons.push(
+                "✓ Same state"
+            );
+
         }
 
 
-        // City match
+
+        /* CITY */
 
         if (
-            donor.city.toLowerCase() ===
-            request.city.toLowerCase()
+            donor.city ===
+            request.city
         ) {
 
             score += 20;
 
+            reasons.push(
+                "✓ Same city"
+            );
+
         }
 
 
-        // Availability
+
+        /* AREA */
 
         if (
-            donor.availability ===
-            "Available"
+            donor.area &&
+            request.area &&
+            donor.area.toLowerCase()
+            ===
+            request.area.toLowerCase()
         ) {
 
             score += 10;
 
-        }
-
-
-
-        // Only show donors
-        // with matching blood group
-
-        if (
-            donor.bloodGroup ===
-            request.bloodGroup &&
-            donor.availability ===
-            "Available"
-        ) {
-
-            matches.push({
-
-                donor: donor,
-
-                score: score
-
-            });
+            reasons.push(
+                "✓ Same locality"
+            );
 
         }
+
+
+
+        matches.push({
+
+            donor: donor,
+
+            score: score,
+
+            reasons: reasons
+
+        });
 
     });
 
 
 
-    // Sort highest score first
-
-    matches.sort(function(a, b) {
-
-        return b.score - a.score;
-
-    });
+    matches.sort(
+        (a, b) =>
+        b.score - a.score
+    );
 
 
+    displayMatches(
+        matches,
+        request
+    );
 
-    // No matches
+}
 
-    if (matches.length === 0) {
+
+
+/* DISPLAY MATCHES */
+
+function displayMatches(
+    matches,
+    request
+) {
+
+    results.innerHTML = "";
+
+
+    if (
+        matches.length === 0
+    ) {
 
         results.innerHTML = `
 
-        <div class="card">
+            <div class="card">
 
-            <h3>
-                ❌ No potential donors found
-            </h3>
+                <h3>
+                    ❌ No potential matches found
+                </h3>
 
-            <p>
-                Try another request or
-                search in another location.
-            </p>
+                <p>
+                    Try another request or
+                    register additional
+                    available donors.
+                </p>
 
-        </div>
+            </div>
 
         `;
 
@@ -319,90 +341,143 @@ function findMatches() {
 
 
 
-    // Display matches
+    matches.forEach(
+        (match, index) => {
 
-    matches.forEach(function(match) {
-
-        const donor =
-            match.donor;
-
+            const donor =
+                match.donor;
 
 
-        let locationText =
-            donor.city +
-            ", " +
-            donor.state;
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+            card.className =
+                "card";
+
+
+            let badge = "";
+
+
+            if (
+                index === 0
+            ) {
+
+                badge = `
+                    <p>
+                        🏆
+                        <strong>
+                            Top Potential Match
+                        </strong>
+                    </p>
+                `;
+
+            }
 
 
 
-        let scoreText =
-            match.score + "%";
+            card.innerHTML = `
+
+                ${badge}
+
+                <h3>
+                    ${donor.name}
+                </h3>
 
 
+                <p>
 
-        results.innerHTML += `
+                    <strong>
+                        Blood Group:
+                    </strong>
 
-        <div class="card">
+                    ${donor.bloodGroup}
 
-            <h3>
-                🩸 ${donor.bloodGroup} Donor
-            </h3>
+                </p>
 
-            <p>
-                <strong>Name:</strong>
-                ${donor.name}
-            </p>
 
-            <p>
-                <strong>Location:</strong>
-                ${locationText}
-            </p>
+                <p>
 
-            <p>
-                <strong>Area:</strong>
-                ${donor.area}
-            </p>
+                    <strong>
+                        Location:
+                    </strong>
 
-            <p>
-                <strong>Status:</strong>
-                🟢 Available
-            </p>
+                    ${donor.city},
+                    ${donor.state}
 
-            <p>
-                <strong>Prototype Match Score:</strong>
-                ${scoreText}
-            </p>
+                </p>
 
-            <button
-                onclick="requestContact('${donor.name}')">
 
-                📩 Request Contact
+                <p>
 
-            </button>
+                    <strong>
+                        Availability:
+                    </strong>
 
-        </div>
+                    🟢 ${donor.availability}
 
-        `;
+                </p>
 
-    });
+
+                <h3>
+                    🎯 Match Score:
+                    ${match.score}%
+                </h3>
+
+
+                <p>
+                    <strong>
+                        Why this donor matched:
+                    </strong>
+                </p>
+
+
+                <p>
+
+                    ${match.reasons.join("<br>")}
+
+                </p>
+
+
+                <button
+                    onclick="requestContact('${donor.name}')">
+
+                    📩 Request Contact
+
+                </button>
+
+            `;
+
+
+            results.appendChild(
+                card
+            );
+
+        }
+
+    );
 
 }
 
 
 
-function requestContact(name) {
+/* CONTACT REQUEST */
+
+function requestContact(
+    name
+) {
 
     alert(
-        "📩 Contact request sent to " +
+        "Contact request sent for " +
         name +
-        "!"
+        ". Further verification is required."
     );
 
 }
 
 </script>
 
-
 </body>
 
-  </html>
+</html>
