@@ -1,406 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloodBridge | Emergency Request</title>
+<title>BloodBridge - Emergency Request</title>
 
 <style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
-}
-
-body{
-    background:#f5f7fa;
-    color:#292d3a;
-}
-
-header{
-    background:#a50025;
-    color:white;
-    padding:18px 6%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-wrap:wrap;
-}
-
-header h2{
-    font-size:24px;
-}
-
-.language{
-    background:white;
-    color:#a50025;
-    border:0;
-    padding:10px 16px;
-    border-radius:7px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-nav{
-    background:white;
-    padding:14px;
-    display:flex;
-    justify-content:center;
-    gap:18px;
-    flex-wrap:wrap;
-    box-shadow:0 2px 8px rgba(0,0,0,.05);
-}
-
-nav a{
-    text-decoration:none;
-    color:#a50025;
-    font-weight:bold;
-    font-size:14px;
-}
-
-main{
-    max-width:1000px;
-    margin:35px auto;
-    padding:0 18px;
-}
-
-.card{
-    background:white;
-    border-radius:15px;
-    padding:28px;
-    box-shadow:0 5px 20px rgba(0,0,0,.07);
-    margin-bottom:25px;
-}
-
-h1{
-    color:#a50025;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    color:#737987;
-    line-height:1.6;
-    margin-bottom:25px;
-}
-
-.form-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-    gap:15px;
-}
-
-label{
-    display:block;
-    font-weight:bold;
-    margin:12px 0 7px;
-}
-
-input,select{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:7px;
-    outline:none;
-}
-
-input:focus,select:focus{
-    border-color:#a50025;
-}
-
-.full{
-    grid-column:1/-1;
-}
-
-button{
-    border:0;
-    border-radius:7px;
-    padding:12px 18px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.submit{
-    width:100%;
-    background:#a50025;
-    color:white;
-    margin-top:20px;
-}
-
-.track{
-    margin-top:20px;
-}
-
-.request-box{
-    background:#fff4f6;
-    border-left:5px solid #a50025;
-    padding:20px;
-    border-radius:10px;
-}
-
-.request-id{
-    color:#a50025;
-    font-size:18px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.details{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:12px;
-    margin-top:15px;
-}
-
-.detail{
-    background:white;
-    padding:13px;
-    border-radius:8px;
-}
-
-.detail small{
-    display:block;
-    color:#777;
-    margin-bottom:5px;
-}
-
-.timeline{
-    margin-top:25px;
-    position:relative;
-}
-
-.step{
-    display:flex;
-    gap:15px;
-    margin-bottom:25px;
-    position:relative;
-}
-
-.step:not(:last-child)::after{
-    content:"";
-    position:absolute;
-    left:17px;
-    top:36px;
-    width:3px;
-    height:35px;
-    background:#ddd;
-}
-
-.circle{
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:#ddd;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    font-weight:bold;
-}
-
-.step.active .circle{
-    background:#a50025;
-    color:white;
-}
-
-.step.done .circle{
-    background:#16834a;
-    color:white;
-}
-
-.step-content h3{
-    color:#a50025;
-    margin-bottom:5px;
-}
-
-.step-content p{
-    color:#777;
-    font-size:13px;
-    line-height:1.5;
-}
-
-.status{
-    display:inline-block;
-    padding:7px 12px;
-    border-radius:20px;
-    background:#ffe5eb;
-    color:#a50025;
-    font-weight:bold;
-    margin-top:10px;
-}
-
-.success{
-    background:#e9f8ef;
-    color:#16834a;
-}
-
-.info{
-    background:#fff8e8;
-    color:#66552e;
-    padding:15px;
-    border-radius:8px;
-    margin-top:20px;
-    font-size:13px;
-    line-height:1.6;
-}
-
-.track-input{
-    margin-top:10px;
-}
-
-.track-button{
-    background:#a50025;
-    color:white;
-    margin-top:10px;
-    width:100%;
-}
-
-.hidden{
-    display:none;
-}
-
-.empty{
-    text-align:center;
-    padding:30px;
-    color:#777;
-}
-
-footer{
-    text-align:center;
-    padding:25px;
-    color:#777;
-    font-size:13px;
-}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff5f5;color:#333}
+header{background:#b51220;color:white;text-align:center;padding:20px}
+nav{background:#8e101b;padding:12px;text-align:center}
+nav a{color:white;text-decoration:none;margin:7px;display:inline-block}
+.container{max-width:850px;margin:25px auto;padding:18px}
+.card{background:white;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 3px 12px #0001}
+h2,h3{color:#b51220}
+input,select,button{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:7px}
+button{background:#b51220;color:white;border:0;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6}
+#message{font-weight:bold;text-align:center}
+.donor{border:1px solid #eee;padding:15px;border-radius:9px;margin:12px 0}
+.status{font-weight:bold;color:#b51220}
+.step{padding:12px;border-left:4px solid #ccc;margin:8px 0;background:#fafafa}
+.step.done{border-left-color:green}
+.muted{font-size:13px;color:#666;line-height:1.5}
 </style>
 </head>
 
 <body>
 
 <header>
-
-<h2>🩸 BloodBridge</h2>
-
-<button class="language"
-onclick="toggleLanguage()"
-id="languageButton">
-தமிழ்
-</button>
-
+<h1>🩸 BloodBridge</h1>
+<p>Emergency Blood Request & Donor Matching</p>
 </header>
 
 <nav>
-
-<a href="index.html"
-data-en="Home"
-data-ta="முகப்பு">
-Home
-</a>
-
-<a href="register.html"
-data-en="Register"
-data-ta="பதிவு">
-Register
-</a>
-
-<a href="search.html"
-data-en="Find Donor"
-data-ta="நன்கொடையாளரை தேடுக">
-Find Donor
-</a>
-
-<a href="request.html"
-data-en="Emergency Request"
-data-ta="அவசர கோரிக்கை">
-Emergency Request
-</a>
-
-<a href="notifications.html"
-data-en="Notifications"
-data-ta="அறிவிப்புகள்">
-Notifications
-</a>
-
-<a href="dashboard.html"
-data-en="Dashboard"
-data-ta="டாஷ்போர்டு">
-Dashboard
-</a>
-
-<a href="admin.html"
-data-en="Admin Panel"
-data-ta="நிர்வாகப் பலகை">
-Admin Panel
-</a>
-
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="search.html">Find Donors</a>
+<a href="request.html">Emergency Request</a>
+<a href="notifications.html">Notifications</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="login.html">Login</a>
 </nav>
 
-<main>
-
-<!-- REQUEST FORM -->
+<div class="container">
 
 <div class="card">
-
-<h1
-data-en="Emergency Blood Request"
-data-ta="அவசர இரத்த கோரிக்கை">
-Emergency Blood Request
-</h1>
-
-<p class="subtitle"
-data-en="Submit an emergency blood request and receive a unique tracking ID."
-data-ta="அவசர இரத்த கோரிக்கையைச் சமர்ப்பித்து தனிப்பட்ட கண்காணிப்பு ID-ஐப் பெறுங்கள்.">
-Submit an emergency blood request and receive a unique tracking ID.
-</p>
+<h2>Submit Emergency Request</h2>
 
 <form id="requestForm">
 
-<div class="form-grid">
-
-<div>
-<label data-en="Patient Name"
-data-ta="நோயாளியின் பெயர்">
-Patient Name
-</label>
-
-<input
-id="patientName"
-required
-placeholder="Enter patient name">
-</div>
-
-<div>
-<label data-en="Blood Group"
-data-ta="இரத்த வகை">
-Blood Group
-</label>
+<input id="patientName" placeholder="Patient Demo Name" required>
 
 <select id="bloodGroup" required>
-
-<option value="">Select</option>
-
-<option>A+</option>
-<option>A-</option>
-<option>B+</option>
-<option>B-</option>
-<option>AB+</option>
-<option>AB-</option>
-<option>O+</option>
-<option>O-</option>
-
+<option value="">Select Required Blood Group</option>
+<option>A+</option><option>A-</option>
+<option>B+</option><option>B-</option>
+<option>AB+</option><option>AB-</option>
+<option>O+</option><option>O-</option>
 </select>
 
-</div>
-
-<div>
-<label data-en="State"
-data-ta="மாநிலம்">
-State
-</label>
-
 <select id="state" required>
-
 <option value="">Select State</option>
-
 <option>Tamil Nadu</option>
 <option>Kerala</option>
 <option>Karnataka</option>
@@ -417,569 +79,265 @@ State
 <option>Bihar</option>
 <option>Odisha</option>
 <option>Assam</option>
-<option>Goa</option>
-<option>Jharkhand</option>
-<option>Chhattisgarh</option>
-<option>Madhya Pradesh</option>
-<option>Himachal Pradesh</option>
-<option>Uttarakhand</option>
-<option>Manipur</option>
-<option>Meghalaya</option>
-<option>Mizoram</option>
-<option>Nagaland</option>
-<option>Tripura</option>
-<option>Sikkim</option>
-
 </select>
 
-</div>
+<input id="city" placeholder="City" required>
 
-<div>
+<input id="hospital" placeholder="Hospital (Demo Name)" required>
 
-<label data-en="City"
-data-ta="நகரம்">
-City
-</label>
+<input id="units" type="number" min="1" max="10"
+placeholder="Units required" required>
 
-<input
-id="city"
-required
-placeholder="Example: Coimbatore">
-
-</div>
-
-<div>
-
-<label data-en="Hospital"
-data-ta="மருத்துவமனை">
-Hospital
-</label>
-
-<input
-id="hospital"
-required
-placeholder="Hospital name">
-
-</div>
-
-<div>
-
-<label data-en="Units Required"
-data-ta="தேவையான அலகுகள்">
-Units Required
-</label>
-
-<input
-id="units"
-type="number"
-min="1"
-required
-placeholder="Example: 2">
-
-</div>
-
-<div>
-
-<label data-en="Urgency"
-data-ta="அவசர நிலை">
-Urgency
-</label>
-
-<select id="urgency">
-
-<option value="Emergency">
-Emergency
-</option>
-
-<option value="Urgent">
-Urgent
-</option>
-
-<option value="Normal">
-Normal
-</option>
-
+<select id="urgency" required>
+<option value="">Select Urgency</option>
+<option>Emergency</option>
+<option>Urgent</option>
+<option>Normal</option>
 </select>
 
-</div>
-
-</div>
-
-<button
-class="submit"
-type="submit"
-data-en="Submit Emergency Request"
-data-ta="அவசர கோரிக்கையைச் சமர்ப்பிக்கவும்">
-Submit Emergency Request
-</button>
+<button id="submitBtn" type="submit">Submit Emergency Request</button>
 
 </form>
 
-<div class="info"
-data-en="Prototype notice: use fictional/demo patient and hospital information. BloodBridge does not determine medical eligibility or final transfusion compatibility."
-data-ta="மாதிரி தள அறிவிப்பு: கற்பனை/டெமோ நோயாளர் மற்றும் மருத்துவமனை தகவல்களைப் பயன்படுத்தவும். BloodBridge மருத்துவத் தகுதி அல்லது இறுதி இரத்தப் பொருத்தத்தை தீர்மானிக்காது.">
-Prototype notice: use fictional/demo patient and hospital information.
+<p id="message" role="status"></p>
 </div>
-
-</div>
-
-
-<!-- TRACK REQUEST -->
 
 <div class="card">
+<h2>Request Tracking</h2>
 
-<h1
-data-en="Track Your Request"
-data-ta="உங்கள் கோரிக்கையை கண்காணிக்கவும்">
-Track Your Request
-</h1>
+<input id="trackingId" placeholder="Enter Request ID">
 
-<p class="subtitle"
-data-en="Enter your Request ID to check the current status."
-data-ta="தற்போதைய நிலையைப் பார்க்க உங்கள் கோரிக்கை ID-ஐ உள்ளிடவும்.">
-Enter your Request ID to check the current status.
-</p>
-
-<input
-class="track-input"
-id="trackingId"
-placeholder="Example: BB-123456">
-
-<button
-class="track-button"
-onclick="trackRequest()"
-data-en="Track Request"
-data-ta="கோரிக்கையை கண்காணிக்கவும்">
-Track Request
-</button>
+<button id="trackBtn" type="button">Track Request</button>
+<button id="refreshBtn" type="button">Refresh Tracking & Matches</button>
 
 <div id="trackingResult"></div>
-
 </div>
 
-</main>
+<div class="card">
+<h2>Potential Matching Donors</h2>
+<p class="muted">Matches are based on exact blood group and same city.</p>
+<div id="donorResults">Submit or track a request to see potential matches.</div>
+</div>
 
-<footer>
-BloodBridge © 2026
-</footer>
-
-<script>
-
-let language =
-localStorage.getItem("bloodbridgeLanguage") || "en";
-
-
-function setLanguage(lang){
-
-language = lang;
-
-document.documentElement.lang = lang;
-
-document.querySelectorAll("[data-en]").forEach(el => {
-
-el.textContent =
-el.getAttribute("data-" + lang);
-
-});
-
-document.getElementById("languageButton").textContent =
-lang === "en" ? "தமிழ்" : "English";
-
-localStorage.setItem("bloodbridgeLanguage",lang);
-
-}
-
-
-function toggleLanguage(){
-
-setLanguage(
-language === "en" ? "ta" : "en"
-);
-
-}
-
-
-/* CREATE REQUEST */
-
-document
-.getElementById("requestForm")
-.addEventListener("submit",function(e){
-
-e.preventDefault();
-
-const requests =
-JSON.parse(
-localStorage.getItem("bloodbridgeRequests") || "[]"
-);
-
-const requestId =
-"BB-" +
-Math.floor(100000 + Math.random() * 900000);
-
-const request = {
-
-id:requestId,
-
-patientName:
-document.getElementById("patientName").value.trim(),
-
-bloodGroup:
-document.getElementById("bloodGroup").value,
-
-state:
-document.getElementById("state").value,
-
-city:
-document.getElementById("city").value.trim(),
-
-hospital:
-document.getElementById("hospital").value.trim(),
-
-units:
-document.getElementById("units").value,
-
-urgency:
-document.getElementById("urgency").value,
-
-status:"Pending",
-
-createdAt:new Date().toISOString()
-
-};
-
-requests.push(request);
-
-localStorage.setItem(
-"bloodbridgeRequests",
-JSON.stringify(requests)
-);
-
-alert(
-language === "en"
-?
-"Emergency request submitted successfully!\n\nYour Request ID: " +
-requestId
-:
-"அவசர கோரிக்கை வெற்றிகரமாக சமர்ப்பிக்கப்பட்டது!\n\nஉங்கள் கோரிக்கை ID: " +
-requestId
-);
-
-document.getElementById("requestForm").reset();
-
-document.getElementById("trackingId").value =
-requestId;
-
-trackRequest();
-
-});
-
-
-/* TRACK REQUEST */
-
-function trackRequest(){
-
-const id =
-document.getElementById("trackingId").value.trim();
-
-const requests =
-JSON.parse(
-localStorage.getItem("bloodbridgeRequests") || "[]"
-);
-
-const request =
-requests.find(r =>
-String(r.id).toLowerCase() === id.toLowerCase()
-);
-
-const result =
-document.getElementById("trackingResult");
-
-if(!request){
-
-result.innerHTML = `
-
-<div class="empty">
-
-<h3>
-${language === "en"
-? "Request not found"
-: "கோரிக்கை கிடைக்கவில்லை"}
-</h3>
-
-<p>
-${language === "en"
-? "Please check your Request ID and try again."
-: "உங்கள் கோரிக்கை ID-ஐ சரிபார்த்து மீண்டும் முயற்சிக்கவும்."}
+<p class="muted">
+Hackathon demonstration only. Use fictional details. Blood group and location matching do not establish clinical compatibility. Medical professionals must verify donor eligibility and transfusion compatibility. Donor contact information requires explicit consent and authorized access.
 </p>
 
 </div>
 
-`;
+<script type="module">
 
-return;
+import {
+ db,
+ collection,
+ addDoc,
+ getDocs,
+ query,
+ where,
+ doc,
+ updateDoc,
+ serverTimestamp
+} from "./firebase.js";
+
+const form = document.getElementById("requestForm");
+const message = document.getElementById("message");
+const trackingResult = document.getElementById("trackingResult");
+const donorResults = document.getElementById("donorResults");
+
+let activeRequest = null;
+
+function safe(value) {
+ return String(value ?? "").replace(/[&<>"']/g, c => ({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
+}
+
+function makeRequestId() {
+ return "BB-" + Math.random().toString(36).slice(2,8).toUpperCase();
+}
+
+form.addEventListener("submit", async event => {
+ event.preventDefault();
+
+ const button = document.getElementById("submitBtn");
+ button.disabled = true;
+ message.textContent = "Submitting request...";
+
+ const request = {
+  requestId: makeRequestId(),
+  patientName: document.getElementById("patientName").value.trim(),
+  bloodGroup: document.getElementById("bloodGroup").value,
+  state: document.getElementById("state").value,
+  city: document.getElementById("city").value.trim(),
+  hospital: document.getElementById("hospital").value.trim(),
+  units: Number(document.getElementById("units").value),
+  urgency: document.getElementById("urgency").value,
+  status: "Pending",
+  createdAt: serverTimestamp()
+ };
+
+ try {
+  await addDoc(collection(db, "requests"), request);
+
+  activeRequest = request;
+  document.getElementById("trackingId").value = request.requestId;
+
+  message.style.color = "green";
+  message.textContent = "Request submitted! Your ID is " + request.requestId;
+
+  await showTracking(request);
+  await findDonors(request);
+
+  form.reset();
+
+ } catch(error) {
+  console.error(error);
+  message.style.color = "red";
+  message.textContent = "Request failed: " + error.message;
+ } finally {
+  button.disabled = false;
+ }
+});
+
+async function loadRequest(id) {
+ const snapshot = await getDocs(
+  query(collection(db, "requests"), where("requestId","==",id))
+ );
+
+ if(snapshot.empty) return null;
+
+ const item = snapshot.docs[0];
+ return { documentId:item.id, ...item.data() };
+}
+
+async function trackRequest() {
+ const id = document.getElementById("trackingId").value.trim();
+
+ if(!id) {
+  trackingResult.textContent = "Enter your request ID.";
+  return;
+ }
+
+ trackingResult.textContent = "Loading tracking...";
+
+ try {
+  const request = await loadRequest(id);
+
+  if(!request) {
+   trackingResult.textContent = "Request ID not found.";
+   donorResults.innerHTML = "";
+   return;
+  }
+
+  activeRequest = request;
+  await showTracking(request);
+  await findDonors(request);
+
+ } catch(error) {
+  console.error(error);
+  trackingResult.textContent = "Unable to track: " + error.message;
+ }
+}
+
+async function showTracking(request) {
+
+ const stages = ["Pending","Matching","Donor Found","Completed"];
+ const current = stages.indexOf(request.status || "Pending");
+
+ trackingResult.innerHTML = `
+ <p><b>Request ID:</b> ${safe(request.requestId)}</p>
+ <p><b>Patient:</b> ${safe(request.patientName)}</p>
+ <p><b>Blood Group:</b> ${safe(request.bloodGroup)}</p>
+ <p><b>Location:</b> ${safe(request.city)}, ${safe(request.state)}</p>
+ <p><b>Hospital:</b> ${safe(request.hospital)}</p>
+ <p><b>Urgency:</b> ${safe(request.urgency)}</p>
+ <p><b>Current Status:</b> <span class="status">${safe(request.status || "Pending")}</span></p>
+ <h3>Tracking Timeline</h3>
+ ${stages.map((stage,index)=>`
+  <div class="step ${index <= current ? "done" : ""}">
+   ${index <= current ? "✅" : "⏳"} ${stage}
+  </div>
+ `).join("")}
+ `;
 
 }
 
-const status =
-request.status || "Pending";
+async function findDonors(request) {
 
-const steps = [
+ donorResults.textContent = "Searching shared donor database...";
 
-{
-key:"Pending",
-en:"Pending",
-ta:"நிலுவையில்",
-icon:"1"
-},
+ try {
 
-{
-key:"Matching",
-en:"Matching",
-ta:"பொருத்தம் தேடப்படுகிறது",
-icon:"2"
-},
+  const donorQuery = query(
+   collection(db,"donors"),
+   where("bloodGroup","==",request.bloodGroup),
+   where("city","==",request.city),
+   where("availability","==","Available")
+  );
 
-{
-key:"Donor Found",
-en:"Donor Found",
-ta:"நன்கொடையாளர் கிடைத்தார்",
-icon:"3"
-},
+  const snapshot = await getDocs(donorQuery);
 
-{
-key:"Completed",
-en:"Completed",
-ta:"நிறைவு",
-icon:"4"
-}
+  const donors = snapshot.docs.map(item=>({
+   id:item.id,
+   ...item.data()
+  }));
 
-];
+  if(donors.length === 0) {
+   donorResults.innerHTML = `
+    <p>No available donors found in the same city with this exact blood group.</p>
+    <p class="muted">Try another location or consult the hospital blood bank.</p>
+   `;
+   return;
+  }
 
-const statusOrder = {
-"Pending":0,
-"Matching":1,
-"Donor Found":2,
-"Completed":3
-};
+  donorResults.innerHTML = `
+   <p><b>${donors.length}</b> potential donor(s) found.</p>
+   ${donors.map(donor=>`
+    <div class="donor">
+     <h3>${safe(donor.name)}</h3>
+     <p><b>Blood Group:</b> ${safe(donor.bloodGroup)}</p>
+     <p><b>Age Group:</b> ${safe(donor.ageGroup)}</p>
+     <p><b>City:</b> ${safe(donor.city)}</p>
+     <p><b>Availability:</b> ${safe(donor.availability)}</p>
+     <p class="muted">Contact details are protected. Contact information can only be shared through an authorized, consent-based process.</p>
+    </div>
+   `).join("")}
+  `;
 
-const currentIndex =
-statusOrder[status] !== undefined
-?
-statusOrder[status]
-:
-0;
-
-result.innerHTML = `
-
-<div class="request-box">
-
-<div class="request-id">
-🆔 ${escapeHTML(request.id)}
-</div>
-
-<span class="status ${status === "Completed" ? "success" : ""}">
-${escapeHTML(
-translateStatus(status)
-)}
-</span>
-
-<div class="details">
-
-<div class="detail">
-
-<small>
-${language === "en" ? "Patient" : "நோயாளர்"}
-</small>
-
-${escapeHTML(request.patientName)}
-
-</div>
-
-<div class="detail">
-
-<small>
-${language === "en" ? "Blood Group" : "இரத்த வகை"}
-</small>
-
-${escapeHTML(request.bloodGroup)}
-
-</div>
-
-<div class="detail">
-
-<small>
-${language === "en" ? "Location" : "இருப்பிடம்"}
-</small>
-
-${escapeHTML(request.city)},
-${escapeHTML(request.state)}
-
-</div>
-
-<div class="detail">
-
-<small>
-${language === "en" ? "Urgency" : "அவசர நிலை"}
-</small>
-
-${escapeHTML(request.urgency)}
-
-</div>
-
-</div>
-
-
-<div class="timeline">
-
-${steps.map((step,index)=>{
-
-let className = "";
-
-if(index < currentIndex){
-
-className = "done";
+ } catch(error) {
+  console.error(error);
+  donorResults.textContent = "Donor search failed: " + error.message;
+ }
 
 }
 
-else if(index === currentIndex){
+document.getElementById("trackBtn").addEventListener("click",trackRequest);
 
-className = "active";
+document.getElementById("refreshBtn").addEventListener("click",async()=>{
+ if(!activeRequest) {
+  await trackRequest();
+  return;
+ }
 
-}
+ try {
+  const latest = await loadRequest(activeRequest.requestId);
 
-return `
+  if(!latest) {
+   trackingResult.textContent = "Request not found.";
+   return;
+  }
 
-<div class="step ${className}">
+  activeRequest = latest;
+  await showTracking(latest);
+  await findDonors(latest);
 
-<div class="circle">
-${index < currentIndex ? "✓" : step.icon}
-</div>
-
-<div class="step-content">
-
-<h3>
-${language === "en"
-? step.en
-: step.ta}
-</h3>
-
-<p>
-
-${getStepDescription(step.key)}
-
-</p>
-
-</div>
-
-</div>
-
-`;
-
-}).join("")}
-
-</div>
-
-</div>
-
-`;
-
-}
-
-
-function translateStatus(status){
-
-const translations = {
-
-"Pending":
-language === "en"
-? "Pending"
-: "நிலுவையில்",
-
-"Matching":
-language === "en"
-? "Matching"
-: "பொருத்தம் தேடப்படுகிறது",
-
-"Donor Found":
-language === "en"
-? "Donor Found"
-: "நன்கொடையாளர் கிடைத்தார்",
-
-"Completed":
-language === "en"
-? "Completed"
-: "நிறைவு",
-
-"Cancelled":
-language === "en"
-? "Cancelled"
-: "ரத்து செய்யப்பட்டது"
-
-};
-
-return translations[status] || status;
-
-}
-
-
-function getStepDescription(step){
-
-const descriptions = {
-
-"Pending":
-language === "en"
-?
-"Request has been submitted and is waiting for review."
-:
-"கோரிக்கை சமர்ப்பிக்கப்பட்டு பரிசீலனைக்காக காத்திருக்கிறது.",
-
-"Matching":
-language === "en"
-?
-"BloodBridge is checking registered donor records for potential matches."
-:
-"BloodBridge பதிவு செய்யப்பட்ட நன்கொடையாளர் விவரங்களில் சாத்தியமான பொருத்தங்களைச் சரிபார்க்கிறது.",
-
-"Donor Found":
-language === "en"
-?
-"A potential donor match has been identified."
-:
-"சாத்தியமான நன்கொடையாளர் பொருத்தம் கண்டறியப்பட்டுள்ளது.",
-
-"Completed":
-language === "en"
-?
-"The request has been marked as completed."
-:
-"கோரிக்கை நிறைவு பெற்றதாகக் குறிக்கப்பட்டுள்ளது."
-
-};
-
-return descriptions[step] || "";
-
-}
-
-
-function escapeHTML(value){
-
-return String(value ?? "")
-.replace(/[&<>"']/g,char => ({
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#39;"
-
-})[char]);
-
-}
-
-
-setLanguage(language);
+ } catch(error) {
+  trackingResult.textContent = "Refresh failed: " + error.message;
+ }
+});
 
 </script>
-
 </body>
- </html>
+    </html>
+    
