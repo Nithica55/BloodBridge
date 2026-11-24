@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BloodBridge | Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#fff5f7,#f5f7fa);
+    color:#292d3a;
+}
+
+header{
+    background:#a50025;
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h2{
+    font-size:24px;
+}
+
+.language{
+    background:white;
+    color:#a50025;
+    border:0;
+    padding:10px 16px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.container{
+    min-height:calc(100vh - 70px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:30px 18px;
+}
+
+.login-card{
+    width:100%;
+    max-width:430px;
+    background:white;
+    padding:32px;
+    border-radius:16px;
+    box-shadow:0 8px 30px rgba(0,0,0,.1);
+}
+
+.logo{
+    text-align:center;
+    font-size:45px;
+    margin-bottom:10px;
+}
+
+h1{
+    text-align:center;
+    color:#a50025;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#777;
+    line-height:1.5;
+    margin-bottom:25px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin:15px 0 7px;
+}
+
+input,select{
+    width:100%;
+    padding:13px;
+    border:1px solid #ddd;
+    border-radius:7px;
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:#a50025;
+}
+
+.login-btn{
+    width:100%;
+    background:#a50025;
+    color:white;
+    border:0;
+    padding:13px;
+    border-radius:7px;
+    font-weight:bold;
+    margin-top:22px;
+    cursor:pointer;
+}
+
+.login-btn:hover{
+    opacity:.92;
+}
+
+.message{
+    display:none;
+    margin-top:18px;
+    padding:13px;
+    border-radius:8px;
+    line-height:1.5;
+    font-size:14px;
+}
+
+.error{
+    display:block;
+    background:#fff0f3;
+    color:#a50025;
+}
+
+.success{
+    display:block;
+    background:#eaf8ef;
+    color:#167a42;
+}
+
+.demo{
+    margin-top:25px;
+    padding:15px;
+    background:#fff8e8;
+    border-radius:8px;
+    font-size:13px;
+    line-height:1.6;
+    color:#66552e;
+}
+
+.demo strong{
+    color:#a50025;
+}
+
+.back{
+    display:block;
+    text-align:center;
+    margin-top:22px;
+    color:#a50025;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+footer{
+    text-align:center;
+    color:#777;
+    font-size:12px;
+    padding:20px;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>🩸 BloodBridge</h2>
+
+<button
+class="language"
+onclick="toggleLanguage()"
+id="languageButton">
+தமிழ்
+</button>
+
+</header>
+
+
+<div class="container">
+
+<div class="login-card">
+
+<div class="logo">
+🩸
+</div>
+
+<h1
+data-en="Welcome Back"
+data-ta="மீண்டும் வரவேற்கிறோம்">
+Welcome Back
+</h1>
+
+<p class="subtitle"
+data-en="Login to access your BloodBridge account."
+data-ta="உங்கள் BloodBridge கணக்கை அணுக உள்நுழையுங்கள்.">
+Login to access your BloodBridge account.
+</p>
+
+
+<form id="loginForm">
+
+<label
+data-en="Email"
+data-ta="மின்னஞ்சல்">
+Email
+</label>
+
+<input
+type="email"
+id="email"
+required
+placeholder="example@email.com">
+
+
+<label
+data-en="Password"
+data-ta="கடவுச்சொல்">
+Password
+</label>
+
+<input
+type="password"
+id="password"
+required
+placeholder="Enter password">
+
+
+<label
+data-en="Login As"
+data-ta="உள்நுழைவு வகை">
+Login As
+</label>
+
+<select id="role" required>
+
+<option value="">
+Select role
+</option>
+
+<option value="donor">
+Donor
+</option>
+
+<option value="requester">
+Requester
+</option>
+
+<option value="admin">
+Admin
+</option>
+
+</select>
+
+
+<button
+class="login-btn"
+type="submit"
+data-en="Login"
+data-ta="உள்நுழைய">
+Login
+</button>
+
+</form>
+
+
+<div id="message" class="message"></div>
+
+
+<div class="demo">
+
+<strong
+data-en="Hackathon Demo Accounts"
+data-ta="ஹேக்கத்தான் டெமோ கணக்குகள்">
+Hackathon Demo Accounts
+</strong>
+
+<br><br>
+
+📌 Donor<br>
+Email: donor@bloodbridge.demo<br>
+Password: donor123
+
+<br><br>
+
+📌 Requester<br>
+Email: requester@bloodbridge.demo<br>
+Password: request123
+
+<br><br>
+
+📌 Admin<br>
+Email: admin@bloodbridge.demo<br>
+Password: admin123
+
+</div>
+
+
+<a
+href="index.html"
+class="back"
+data-en="← Back to Home"
+data-ta="← முகப்புக்குத் திரும்பு">
+← Back to Home
+</a>
+
+</div>
+
+</div>
+
+
+<footer>
+BloodBridge © 2026
+</footer>
+
+
+<script>
+
+let language =
+localStorage.getItem("bloodbridgeLanguage") || "en";
+
+
+function setLanguage(lang){
+
+language = lang;
+
+document.documentElement.lang = lang;
+
+document.querySelectorAll("[data-en]").forEach(el => {
+
+el.textContent =
+el.getAttribute("data-" + lang);
+
+});
+
+document.getElementById("languageButton").textContent =
+lang === "en" ? "தமிழ்" : "English";
+
+localStorage.setItem(
+"bloodbridgeLanguage",
+lang
+);
+
+}
+
+
+function toggleLanguage(){
+
+setLanguage(
+language === "en" ? "ta" : "en"
+);
+
+}
+
+
+const demoAccounts = {
+
+donor:{
+email:"donor@bloodbridge.demo",
+password:"donor123",
+role:"donor"
+},
+
+requester:{
+email:"requester@bloodbridge.demo",
+password:"request123",
+role:"requester"
+},
+
+admin:{
+email:"admin@bloodbridge.demo",
+password:"admin123",
+role:"admin"
+}
+
+};
+
+
+document
+.getElementById("loginForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const email =
+document.getElementById("email")
+.value
+.trim()
+.toLowerCase();
+
+const password =
+document.getElementById("password")
+.value;
+
+const role =
+document.getElementById("role")
+.value;
+
+const message =
+document.getElementById("message");
+
+
+if(!role){
+
+message.className="message error";
+
+message.textContent =
+language === "en"
+?
+"Please select a login role."
+:
+"உள்நுழைவு வகையைத் தேர்ந்தெடுக்கவும்.";
+
+return;
+
+}
+
+
+const account =
+demoAccounts[role];
+
+
+if(
+account &&
+email === account.email &&
+password === account.password
+){
+
+localStorage.setItem(
+"bloodbridgeLoggedIn",
+"true"
+);
+
+localStorage.setItem(
+"bloodbridgeUserRole",
+role
+);
+
+localStorage.setItem(
+"bloodbridgeUserEmail",
+email
+);
+
+
+message.className="message success";
+
+message.textContent =
+language === "en"
+?
+"Login successful! Redirecting..."
+:
+"உள்நுழைவு வெற்றிகரமாக முடிந்தது! மாற்றப்படுகிறது...";
+
+
+setTimeout(function(){
+
+if(role === "admin"){
+
+window.location.href="admin.html";
+
+}
+
+else if(role === "donor"){
+
+window.location.href="dashboard.html";
+
+}
+
+else{
+
+window.location.href="request.html";
+
+}
+
+},800);
+
+}
+
+else{
+
+message.className="message error";
+
+message.textContent =
+language === "en"
+?
+"Invalid email, password, or role."
+:
+"மின்னஞ்சல், கடவுச்சொல் அல்லது உள்நுழைவு வகை தவறாக உள்ளது.";
+
+}
+
+});
+
+
+setLanguage(language);
+
+</script>
+
+</body>
+  </html>
