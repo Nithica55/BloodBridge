@@ -238,22 +238,17 @@ document.getElementById("state").addEventListener(
 
 function searchDonor() {
 
-    const bloodGroup =
-        document.getElementById("bloodGroup").value;
+ const bloodGroup =
+        document.getElementById("bloodGroup").value.trim();
 
     const state =
-        document.getElementById("state").value;
+        document.getElementById("state").value.trim();
 
     const city =
-        document.getElementById("city").value;
-
-
-    /* FIRST TEST */
+        document.getElementById("city").value.trim();
 
     alert("🔎 Searching for donor...");
 
-
-    /* CHECK SELECTION */
 
     if (
         bloodGroup === "" ||
@@ -266,7 +261,6 @@ function searchDonor() {
         );
 
         return;
-
     }
 
 
@@ -278,22 +272,53 @@ function searchDonor() {
         ) || [];
 
 
-    /* FIND MATCH */
+    console.log("Saved donors:", donors);
+
+
+    /* NORMALIZE TEXT */
+
+    function clean(text) {
+
+        return String(text || "")
+            .trim()
+            .toLowerCase();
+
+    }
+
+
+    /* FIND MATCHES */
 
     const matches =
         donors.filter(function(donor) {
 
             return (
-                donor.bloodGroup === bloodGroup &&
-                donor.state === state &&
-                donor.city === city &&
-                donor.availability === "Available"
+
+                clean(donor.bloodGroup)
+                ===
+                clean(bloodGroup)
+
+                &&
+
+                clean(donor.state)
+                ===
+                clean(state)
+
+                &&
+
+                clean(donor.city)
+                ===
+                clean(city)
+
+                &&
+
+                clean(donor.availability)
+                ===
+                "available"
+
             );
 
         });
 
-
-    /* RESULTS */
 
     const results =
         document.getElementById("results");
@@ -310,7 +335,7 @@ function searchDonor() {
         alert(
             "🩸 MATCH FOUND!\n\n" +
             matches.length +
-            " available donor(s) found!"
+            " available potential donor(s) found!"
         );
 
 
@@ -369,7 +394,13 @@ function searchDonor() {
 
         alert(
             "❌ NO MATCH FOUND\n\n" +
-            "No available donor matches your selection."
+            "No available donor found for " +
+            bloodGroup +
+            " in " +
+            city +
+            ", " +
+            state +
+            "."
         );
 
 
@@ -378,20 +409,21 @@ function searchDonor() {
             <div class="card">
 
                 <h3>
-                    ❌ No Available Donor
+                    ❌ No Available Donor Found
                 </h3>
 
                 <p>
-                    No available donor matches:
+                    We couldn't find an available
+                    potential donor matching:
                 </p>
 
                 <p>
-                    🩸 Blood Group:
+                    🩸 <strong>Blood Group:</strong>
                     ${bloodGroup}
                 </p>
 
                 <p>
-                    📍 Location:
+                    📍 <strong>Location:</strong>
                     ${city}, ${state}
                 </p>
 
@@ -409,7 +441,7 @@ function searchDonor() {
 
     }
 
-}
+    }
 
 
 /* ==============================
