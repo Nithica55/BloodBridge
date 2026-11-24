@@ -5,169 +5,274 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BloodBridge | Find Donors</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#263247}
-header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-button{cursor:pointer;border:0;border-radius:8px;padding:12px 17px;font-weight:bold}
-nav{background:white;padding:16px 6%;display:flex;gap:20px;flex-wrap:wrap}
-nav a{color:#a90024;text-decoration:none;font-weight:bold}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f5f6fa;color:#293044}
+header{background:#a50025;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header h2{font-size:24px}
+button{cursor:pointer;border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
+.language{background:white;color:#a50025}
+nav{background:white;padding:16px 5%;display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
+nav a{color:#a50025;text-decoration:none;font-weight:bold;font-size:14px}
 main{max-width:850px;margin:35px auto;padding:0 16px}
-.card{background:white;padding:26px;border-radius:15px;box-shadow:0 4px 20px #0000000b;margin-bottom:20px}
-h1,h2{color:#a90024}
-label{display:block;margin:16px 0 7px;font-weight:bold}
-select{width:100%;padding:13px;border:1px solid #d7dce5;border-radius:8px;background:white}
-.search{width:100%;margin-top:23px;background:#a90024;color:white}
-.result{padding:17px;border:1px solid #eee;border-radius:10px;margin-top:12px}
-.success{color:#16713a}
-.empty{color:#777}
-.small{font-size:13px;color:#687386;line-height:1.5}
+.panel{background:white;padding:25px;border-radius:13px;box-shadow:0 4px 18px #0000000c}
+h1{color:#a50025;margin-bottom:12px}
+.description{color:#737b8c;line-height:1.6;margin-bottom:22px}
+label{display:block;font-weight:bold;margin:15px 0 7px}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:7px;background:white}
+.search-btn{background:#a50025;color:white;width:100%;margin-top:22px;padding:14px}
+.results{margin-top:25px}
+.donor-card{background:white;border:1px solid #eee;border-left:5px solid #b0002c;padding:20px;border-radius:10px;margin-bottom:15px}
+.donor-card h3{color:#a50025;margin-bottom:10px}
+.detail{margin-top:10px;color:#4c566a;overflow-wrap:anywhere}
+.available{color:#16834a;font-weight:bold}
+.contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.contact a{background:#a50025;color:white;text-decoration:none;padding:10px 14px;border-radius:7px;font-size:14px}
+.empty{background:#fff0f3;padding:18px;border-radius:8px;color:#a50025;line-height:1.6}
+.note{background:#fff8e9;padding:15px;margin-top:20px;border-radius:8px;font-size:13px;line-height:1.6;color:#66552e}
+footer{text-align:center;padding:25px;color:#777;font-size:13px}
 </style>
 </head>
+
 <body>
 
 <header>
-<h2 style="color:white">🩸 BloodBridge</h2>
-<button id="language" onclick="toggleLanguage()" style="color:#a90024">தமிழ்</button>
+<h2>🩸 BloodBridge</h2>
+<button class="language" onclick="toggleLanguage()" id="languageButton">தமிழ்</button>
 </header>
 
 <nav>
 <a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
-<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="register.html" data-en="Register" data-ta="பதிவு">Register</a>
 <a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
 <a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
-<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
+<a href="dashboard.html" data-en="Dashboard" data-ta="புள்ளிவிவரங்கள்">Dashboard</a>
+<a href="admin.html" data-en="Admin Panel" data-ta="நிர்வாகப் பலகை">Admin Panel</a>
 </nav>
 
 <main>
-<div class="card">
-<h1 data-en="Find a Blood Donor" data-ta="இரத்த நன்கொடையாளரைத் தேடுங்கள்">Find a Blood Donor</h1>
-<p data-en="Search for potential donors by blood group and location."
-data-ta="இரத்த வகை மற்றும் இருப்பிடத்தின் அடிப்படையில் சாத்தியமான நன்கொடையாளர்களைத் தேடுங்கள்.">
-Search for potential donors by blood group and location.
+
+<div class="panel">
+
+<h1 data-en="Find Blood Donors" data-ta="இரத்த நன்கொடையாளர்களைக் கண்டறியவும்">
+Find Blood Donors
+</h1>
+
+<p class="description"
+data-en="Search for potential donors using blood group, state and city."
+data-ta="இரத்த வகை, மாநிலம் மற்றும் நகரத்தின் அடிப்படையில் நன்கொடையாளர்களைத் தேடுங்கள்.">
+Search for potential donors using blood group, state and city.
 </p>
 
-<label data-en="Blood Group" data-ta="இரத்த வகை">Blood Group</label>
-<select id="bloodGroup">
-<option value="">Select blood group</option>
-<option>A+</option><option>A-</option>
-<option>B+</option><option>B-</option>
-<option>AB+</option><option>AB-</option>
-<option>O+</option><option>O-</option>
+<form id="searchForm">
+
+<label data-en="Select Blood Group" data-ta="இரத்த வகையைத் தேர்ந்தெடுக்கவும்">Select Blood Group</label>
+
+<select id="bloodGroup" required>
+<option value="">Select Blood Group</option>
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
 </select>
 
-<label data-en="State" data-ta="மாநிலம்">State</label>
-<select id="state">
-<option value="">Select state</option>
+<label data-en="Select State" data-ta="மாநிலத்தைத் தேர்ந்தெடுக்கவும்">Select State</label>
+
+<select id="state" required>
+<option value="">Select State</option>
 <option>Tamil Nadu</option>
 <option>Kerala</option>
 <option>Karnataka</option>
 <option>Andhra Pradesh</option>
 <option>Telangana</option>
 <option>Maharashtra</option>
+<option>Delhi</option>
 <option>Gujarat</option>
 <option>Rajasthan</option>
+<option>Uttar Pradesh</option>
 <option>West Bengal</option>
-<option>Delhi</option>
+<option>Punjab</option>
+<option>Haryana</option>
+<option>Bihar</option>
+<option>Odisha</option>
+<option>Assam</option>
+<option>Goa</option>
+<option>Jharkhand</option>
+<option>Chhattisgarh</option>
+<option>Madhya Pradesh</option>
+<option>Himachal Pradesh</option>
+<option>Uttarakhand</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Tripura</option>
+<option>Sikkim</option>
 </select>
 
-<label data-en="City" data-ta="நகரம்">City</label>
-<input id="city" placeholder="Enter city" style="width:100%;padding:13px;border:1px solid #d7dce5;border-radius:8px">
+<label data-en="Enter City" data-ta="நகரத்தை உள்ளிடவும்">Enter City</label>
+<input id="city" type="text" placeholder="Example: Coimbatore" required>
 
-<button class="search" onclick="searchDonor()"
-data-en="🔎 Search Donors" data-ta="🔎 நன்கொடையாளர்களைத் தேடு">
-🔎 Search Donors
+<button class="search-btn" type="submit"
+data-en="Search Available Donors"
+data-ta="கிடைக்கும் நன்கொடையாளர்களைத் தேடு">
+Search Available Donors
 </button>
 
-<p class="small" style="margin-top:15px"
-data-en="This prototype displays potential matches only. Medical compatibility must be confirmed by a healthcare professional."
-data-ta="இந்த மாதிரி தளம் சாத்தியமான பொருத்தங்களை மட்டுமே காட்டும். மருத்துவப் பொருத்தத்தை மருத்துவ நிபுணர் உறுதிப்படுத்த வேண்டும்.">
-This prototype displays potential matches only. Medical compatibility must be confirmed by a healthcare professional.
-</p>
+</form>
+
+<div id="results" class="results"></div>
+
+<div class="note"
+data-en="Privacy notice: This is a demonstration website. Use fictional contact details only. A real platform must obtain donor consent and protect personal information. Matching does not confirm medical compatibility; healthcare professionals must verify eligibility and compatibility."
+data-ta="தனியுரிமை குறிப்பு: இது ஒரு மாதிரி இணையதளம். கற்பனையான தொடர்பு விவரங்களை மட்டுமே பயன்படுத்தவும். உண்மையான தளத்தில் நன்கொடையாளரின் ஒப்புதல் மற்றும் தனிப்பட்ட தகவல் பாதுகாப்பு அவசியம். இந்தப் பொருத்தம் மருத்துவ ரீதியான இரத்தப் பொருத்தத்தை உறுதிப்படுத்தாது.">
+Privacy notice: This is a demonstration website. Use fictional contact details only. A real platform must obtain donor consent and protect personal information.
 </div>
 
-<div class="card">
-<h2 data-en="Search Results" data-ta="தேடல் முடிவுகள்">Search Results</h2>
-<div id="results" class="empty">Your results will appear here.</div>
 </div>
 </main>
 
+<footer>BloodBridge © 2026 | Connecting Lives</footer>
+
 <script>
-function applyLanguage(lang){
- document.documentElement.lang=lang;
- document.querySelectorAll("[data-en]").forEach(el=>{
-   el.textContent=el.getAttribute("data-"+lang);
- });
- document.getElementById("language").textContent=
-   lang==="en"?"தமிழ்":"English";
- localStorage.setItem("bloodbridgeLanguage",lang);
+
+let language=localStorage.getItem("bloodbridgeLanguage")||"en";
+
+function setLanguage(lang){
+
+language=lang;
+document.documentElement.lang=lang;
+
+document.querySelectorAll("[data-en]").forEach(element=>{
+element.textContent=element.getAttribute("data-"+lang);
+});
+
+document.getElementById("languageButton").textContent=
+lang==="en"?"தமிழ்":"English";
+
+localStorage.setItem("bloodbridgeLanguage",lang);
+
 }
+
 function toggleLanguage(){
- const current=localStorage.getItem("bloodbridgeLanguage")||"en";
- applyLanguage(current==="en"?"ta":"en");
+setLanguage(language==="en"?"ta":"en");
 }
-applyLanguage(localStorage.getItem("bloodbridgeLanguage")||"en");
 
 function normalize(value){
- return String(value||"").trim().toLowerCase().replace(/\s+/g,"");
-}
-
-function searchDonor(){
- const group=document.getElementById("bloodGroup").value;
- const state=document.getElementById("state").value;
- const city=document.getElementById("city").value;
-
- const results=document.getElementById("results");
- const lang=localStorage.getItem("bloodbridgeLanguage")||"en";
-
- if(!group||!state||!city.trim()){
-  results.textContent=lang==="ta"
-   ?"அனைத்து தேடல் விவரங்களையும் நிரப்பவும்."
-   :"Please enter blood group, state and city.";
-  results.className="empty";
-  return;
- }
-
- const donors=JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
-
- const matches=donors.filter(d=>
-  normalize(d.bloodGroup)===normalize(group)&&
-  normalize(d.state)===normalize(state)&&
-  normalize(d.city)===normalize(city)&&
-  normalize(d.availability)==="available"
- );
-
- if(matches.length===0){
-  results.innerHTML=lang==="ta"
-   ?"பொருத்தமான நன்கொடையாளர் கிடைக்கவில்லை. வேறு இருப்பிடத்தை முயற்சிக்கவும்."
-   :"No potential donor match found. Try another location.";
-  results.className="empty";
-  alert(lang==="ta"?"நன்கொடையாளர் கிடைக்கவில்லை.":"No potential donor found.");
-  return;
- }
-
- results.className="";
- results.innerHTML=`
- <p class="success"><b>${matches.length}</b> ${
- lang==="ta"?"சாத்தியமான பொருத்தம் கண்டறியப்பட்டது!":"potential match(es) found!"
- }</p>
- `+matches.map(d=>`
- <div class="result">
- <h3>🩸 ${escapeHTML(d.name)}</h3>
- <p><b>${lang==="ta"?"இரத்த வகை":"Blood Group"}:</b> ${escapeHTML(d.bloodGroup)}</p>
- <p><b>${lang==="ta"?"நகரம்":"City"}:</b> ${escapeHTML(d.city)}</p>
- <p><b>${lang==="ta"?"மாநிலம்":"State"}:</b> ${escapeHTML(d.state)}</p>
- <p><b>${lang==="ta"?"கிடைக்கும் நிலை":"Availability"}:</b> ${escapeHTML(d.availability)}</p>
- </div>`).join("");
-
- alert(lang==="ta"?"சாத்தியமான நன்கொடையாளர் பொருத்தம் கண்டறியப்பட்டது!":"Potential donor match found!");
+return String(value||"").trim().toLowerCase();
 }
 
 function escapeHTML(value){
- return String(value??"").replace(/[&<>"']/g,c=>({
- "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
- })[c]);
+return String(value??"").replace(/[&<>"']/g,char=>({
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#39;"
+})[char]);
 }
+
+function searchDonors(event){
+
+event.preventDefault();
+
+const group=document.getElementById("bloodGroup").value;
+const state=document.getElementById("state").value;
+const city=document.getElementById("city").value;
+
+const donors=JSON.parse(
+localStorage.getItem("bloodbridgeDonors")||"[]"
+);
+
+const matches=donors.filter(donor=>{
+
+return normalize(donor.bloodGroup)===normalize(group)&&
+normalize(donor.state)===normalize(state)&&
+normalize(donor.city)===normalize(city)&&
+normalize(donor.availability)==="available";
+
+});
+
+const results=document.getElementById("results");
+
+if(matches.length===0){
+
+results.innerHTML=`
+<div class="empty">
+<strong>${language==="en"?"No available donor found!":"கிடைக்கும் நன்கொடையாளர் எவரும் இல்லை!"}</strong>
+<p>${language==="en"?
+"Try checking your blood group, state and city.":
+"உங்கள் இரத்த வகை, மாநிலம் மற்றும் நகரத்தைச் சரிபார்க்கவும்."}</p>
+</div>`;
+
+return;
+
+}
+
+results.innerHTML=`
+<h2 style="color:#a50025;margin-bottom:15px">
+${language==="en"?"Potential Donor Matches":"பொருந்தக்கூடிய நன்கொடையாளர்கள்"}
+(${matches.length})
+</h2>
+${matches.map(donor=>{
+
+const phone=String(donor.phone||"").trim();
+const email=String(donor.email||"").trim();
+
+const validPhone=/^[0-9+()\-\s]{7,20}$/.test(phone);
+const validEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+return `
+<div class="donor-card">
+
+<h3>🩸 ${escapeHTML(donor.name||"Demo Donor")}</h3>
+
+<div class="detail">
+<strong>${language==="en"?"Blood Group:":"இரத்த வகை:"}</strong>
+${escapeHTML(donor.bloodGroup)}
+</div>
+
+<div class="detail">
+<strong>${language==="en"?"Location:":"இருப்பிடம்:"}</strong>
+${escapeHTML(donor.city)}, ${escapeHTML(donor.state)}
+</div>
+
+<div class="detail available">
+● ${language==="en"?"Available":"கிடைக்கிறது"}
+</div>
+
+<div class="detail">
+<strong>${language==="en"?"Phone:":"தொலைபேசி:"}</strong>
+${escapeHTML(phone||"Not provided")}
+</div>
+
+<div class="detail">
+<strong>${language==="en"?"Email:":"மின்னஞ்சல்:"}</strong>
+${escapeHTML(email||"Not provided")}
+</div>
+
+<div class="contact">
+${validPhone?`<a href="tel:${encodeURIComponent(phone)}">${language==="en"?"Call":"அழைக்க"}</a>`:""}
+${validEmail?`<a href="mailto:${encodeURIComponent(email)}">${language==="en"?"Email":"மின்னஞ்சல்"}</a>`:""}
+</div>
+
+</div>`;
+
+}).join("")}`;
+
+}
+
+document.getElementById("searchForm").addEventListener("submit",searchDonors);
+
+setLanguage(language);
+
 </script>
+
 </body>
-</html>
+ </html>
+ 
