@@ -3,9 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Find Donor - BloodBridge</title>
 
@@ -16,61 +14,28 @@
 
 <header>
     <h1>🩸 BloodBridge</h1>
-
-    <p>
-        Find potential blood donors near you
-    </p>
+    <p>Find a potential blood donor</p>
 </header>
 
-
 <nav>
-
     <a href="index.html">Home</a>
-
-    <a href="register.html">
-        Become a Donor
-    </a>
-
-    <a href="search.html">
-        Find Donor
-    </a>
-
-    <a href="request.html">
-        Emergency Request
-    </a>
-
-    <a href="matching.html">
-        Smart Matching
-    </a>
-
-    <a href="dashboard.html">
-        Dashboard
-    </a>
-
+    <a href="register.html">Become a Donor</a>
+    <a href="search.html">Find Donor</a>
+    <a href="request.html">Emergency Request</a>
+    <a href="matching.html">Smart Matching</a>
+    <a href="dashboard.html">Dashboard</a>
 </nav>
 
 
 <section class="form-section">
 
-    <h2>🔎 Find a Blood Donor</h2>
+    <h2>🔎 Find a Donor</h2>
 
-    <p>
-        Search for an available potential donor
-        based on blood group and location.
-    </p>
-
-
-    <!-- BLOOD GROUP -->
-
-    <label for="bloodGroup">
-        Blood Group
-    </label>
+    <label>Blood Group</label>
 
     <select id="bloodGroup">
 
-        <option value="">
-            Select Blood Group
-        </option>
+        <option value="">Select Blood Group</option>
 
         <option value="A+">A+</option>
         <option value="A-">A-</option>
@@ -87,161 +52,52 @@
     </select>
 
 
-    <!-- STATE -->
-
-    <label for="state">
-        State / Union Territory
-    </label>
+    <label>State</label>
 
     <select id="state">
 
-        <option value="">
-            Select State
-        </option>
+        <option value="">Select State</option>
 
-        <option value="Tamil Nadu">
-            Tamil Nadu
-        </option>
-
-        <option value="Kerala">
-            Kerala
-        </option>
-
-        <option value="Karnataka">
-            Karnataka
-        </option>
-
-        <option value="Andhra Pradesh">
-            Andhra Pradesh
-        </option>
-
-        <option value="Telangana">
-            Telangana
-        </option>
-
-        <option value="Maharashtra">
-            Maharashtra
-        </option>
-
-        <option value="Delhi">
-            Delhi
-        </option>
-
-        <option value="West Bengal">
-            West Bengal
-        </option>
-
-        <option value="Gujarat">
-            Gujarat
-        </option>
-
-        <option value="Rajasthan">
-            Rajasthan
-        </option>
-
-        <option value="Uttar Pradesh">
-            Uttar Pradesh
-        </option>
-
-        <option value="Madhya Pradesh">
-            Madhya Pradesh
-        </option>
-
-        <option value="Bihar">
-            Bihar
-        </option>
-
-        <option value="Odisha">
-            Odisha
-        </option>
-
-        <option value="Punjab">
-            Punjab
-        </option>
-
-        <option value="Haryana">
-            Haryana
-        </option>
-
-        <option value="Jharkhand">
-            Jharkhand
-        </option>
-
-        <option value="Chhattisgarh">
-            Chhattisgarh
-        </option>
-
-        <option value="Assam">
-            Assam
-        </option>
-
-        <option value="Goa">
-            Goa
-        </option>
-
-        <option value="Uttarakhand">
-            Uttarakhand
-        </option>
-
-        <option value="Himachal Pradesh">
-            Himachal Pradesh
-        </option>
-
-        <option value="Jammu and Kashmir">
-            Jammu and Kashmir
-        </option>
-
-        <option value="Puducherry">
-            Puducherry
-        </option>
+        <option value="Tamil Nadu">Tamil Nadu</option>
+        <option value="Kerala">Kerala</option>
+        <option value="Karnataka">Karnataka</option>
+        <option value="Andhra Pradesh">Andhra Pradesh</option>
+        <option value="Telangana">Telangana</option>
+        <option value="Maharashtra">Maharashtra</option>
+        <option value="Delhi">Delhi</option>
+        <option value="Gujarat">Gujarat</option>
+        <option value="Rajasthan">Rajasthan</option>
+        <option value="West Bengal">West Bengal</option>
 
     </select>
 
 
-    <!-- CITY -->
-
-    <label for="city">
-        City
-    </label>
+    <label>City</label>
 
     <select id="city">
 
-        <option value="">
-            Select City
-        </option>
+        <option value="">Select City</option>
 
     </select>
 
 
-    <!-- SEARCH BUTTON -->
-
-    <button onclick="searchDonors()">
-        🔎 Search Available Donors
+    <button onclick="searchDonor()">
+        🔎 SEARCH DONOR
     </button>
 
 </section>
 
 
-<!-- RESULTS -->
-
 <section>
 
-    <h2>🩸 Search Results</h2>
+    <h2>🩸 Results</h2>
 
     <div id="results">
 
         <div class="card">
-
-            <h3>
-                Search for a donor
-            </h3>
-
             <p>
-                Select your blood group,
-                state and city to find
-                potential available donors.
+                Select your requirements and search.
             </p>
-
         </div>
 
     </div>
@@ -251,37 +107,29 @@
 
 <footer>
 
-    <p>
-        © 2026 BloodBridge |
-        Connecting people through technology
-    </p>
+    <p>© 2026 BloodBridge</p>
 
 </footer>
 
 
-
 <script>
 
-/* ==========================================
-   CITY DATABASE
-========================================== */
+/* ==============================
+   CITY LIST
+============================== */
 
-const cities = {
+const cityData = {
 
     "Tamil Nadu": [
         "Chennai",
         "Coimbatore",
         "Madurai",
-        "Tiruchirappalli",
         "Salem",
         "Tirunelveli",
         "Nagercoil",
-        "Thoothukudi",
-        "Erode",
         "Tiruppur",
-        "Vellore",
-        "Dindigul",
-        "Thanjavur",
+        "Erode",
+        "Thoothukudi",
         "Kanyakumari"
     ],
 
@@ -290,239 +138,122 @@ const cities = {
         "Kochi",
         "Kozhikode",
         "Kollam",
-        "Thrissur",
-        "Kannur",
-        "Alappuzha",
-        "Kottayam"
+        "Thrissur"
     ],
 
     "Karnataka": [
         "Bengaluru",
         "Mysuru",
         "Mangaluru",
-        "Hubballi",
-        "Belagavi",
-        "Shivamogga"
+        "Hubballi"
     ],
 
     "Andhra Pradesh": [
         "Visakhapatnam",
         "Vijayawada",
         "Guntur",
-        "Tirupati",
-        "Nellore",
-        "Kurnool"
+        "Tirupati"
     ],
 
     "Telangana": [
         "Hyderabad",
         "Warangal",
-        "Nizamabad",
-        "Karimnagar",
-        "Khammam"
+        "Nizamabad"
     ],
 
     "Maharashtra": [
         "Mumbai",
         "Pune",
         "Nagpur",
-        "Nashik",
-        "Aurangabad",
-        "Kolhapur"
+        "Nashik"
     ],
 
     "Delhi": [
         "New Delhi"
     ],
 
-    "West Bengal": [
-        "Kolkata",
-        "Howrah",
-        "Durgapur",
-        "Siliguri"
-    ],
-
     "Gujarat": [
         "Ahmedabad",
         "Surat",
-        "Vadodara",
-        "Rajkot",
-        "Gandhinagar"
+        "Vadodara"
     ],
 
     "Rajasthan": [
         "Jaipur",
         "Jodhpur",
-        "Udaipur",
-        "Kota",
-        "Ajmer"
+        "Udaipur"
     ],
 
-    "Uttar Pradesh": [
-        "Lucknow",
-        "Kanpur",
-        "Agra",
-        "Varanasi",
-        "Noida",
-        "Prayagraj"
-    ],
-
-    "Madhya Pradesh": [
-        "Bhopal",
-        "Indore",
-        "Gwalior",
-        "Jabalpur",
-        "Ujjain"
-    ],
-
-    "Bihar": [
-        "Patna",
-        "Gaya",
-        "Muzaffarpur",
-        "Bhagalpur"
-    ],
-
-    "Odisha": [
-        "Bhubaneswar",
-        "Cuttack",
-        "Rourkela",
-        "Puri"
-    ],
-
-    "Punjab": [
-        "Amritsar",
-        "Ludhiana",
-        "Jalandhar",
-        "Patiala"
-    ],
-
-    "Haryana": [
-        "Gurugram",
-        "Faridabad",
-        "Panipat",
-        "Hisar"
-    ],
-
-    "Jharkhand": [
-        "Ranchi",
-        "Jamshedpur",
-        "Dhanbad",
-        "Bokaro"
-    ],
-
-    "Chhattisgarh": [
-        "Raipur",
-        "Bhilai",
-        "Bilaspur",
-        "Korba"
-    ],
-
-    "Assam": [
-        "Guwahati",
-        "Dibrugarh",
-        "Silchar",
-        "Jorhat"
-    ],
-
-    "Goa": [
-        "Panaji",
-        "Margao",
-        "Vasco da Gama"
-    ],
-
-    "Uttarakhand": [
-        "Dehradun",
-        "Haridwar",
-        "Nainital",
-        "Haldwani"
-    ],
-
-    "Himachal Pradesh": [
-        "Shimla",
-        "Dharamshala",
-        "Mandi",
-        "Solan"
-    ],
-
-    "Jammu and Kashmir": [
-        "Srinagar",
-        "Jammu",
-        "Anantnag"
-    ],
-
-    "Puducherry": [
-        "Puducherry"
+    "West Bengal": [
+        "Kolkata",
+        "Howrah",
+        "Siliguri"
     ]
+
 };
 
 
-/* ==========================================
+/* ==============================
    STATE → CITY
-========================================== */
+============================== */
 
-const stateSelect =
-    document.getElementById("state");
-
-const citySelect =
-    document.getElementById("city");
-
-
-stateSelect.addEventListener(
+document.getElementById("state").addEventListener(
     "change",
     function () {
 
-        citySelect.innerHTML =
+        const city =
+            document.getElementById("city");
+
+        city.innerHTML =
             '<option value="">Select City</option>';
 
         const selectedState =
-            stateSelect.value;
+            this.value;
 
-        if (cities[selectedState]) {
+        if (cityData[selectedState]) {
 
-            cities[selectedState].forEach(
-                function (city) {
+            cityData[selectedState].forEach(
+                function (name) {
 
                     const option =
                         document.createElement("option");
 
-                    option.value = city;
+                    option.value = name;
+                    option.textContent = name;
 
-                    option.textContent = city;
-
-                    citySelect.appendChild(option);
+                    city.appendChild(option);
 
                 }
             );
+
         }
 
     }
 );
 
 
+/* ==============================
+   SEARCH
+============================== */
 
-/* ==========================================
-   SEARCH DONORS
-========================================== */
-
-function searchDonors() {
+function searchDonor() {
 
     const bloodGroup =
-        document.getElementById(
-            "bloodGroup"
-        ).value;
+        document.getElementById("bloodGroup").value;
 
     const state =
-        document.getElementById(
-            "state"
-        ).value;
+        document.getElementById("state").value;
 
     const city =
-        document.getElementById(
-            "city"
-        ).value;
+        document.getElementById("city").value;
 
 
-    /* CHECK INPUT */
+    /* FIRST TEST */
+
+    alert("🔎 Searching for donor...");
+
+
+    /* CHECK SELECTION */
 
     if (
         bloodGroup === "" ||
@@ -535,129 +266,82 @@ function searchDonors() {
         );
 
         return;
+
     }
 
 
-    /* GET DONORS */
+    /* GET SAVED DONORS */
 
     const donors =
         JSON.parse(
-            localStorage.getItem(
-                "bloodbridgeDonors"
-            )
+            localStorage.getItem("bloodbridgeDonors")
         ) || [];
 
 
-    console.log(
-        "BloodBridge donors:",
-        donors
-    );
-
-
-    /* FIND MATCHES */
+    /* FIND MATCH */
 
     const matches =
-        donors.filter(
-            function (donor) {
+        donors.filter(function(donor) {
 
-                return (
+            return (
+                donor.bloodGroup === bloodGroup &&
+                donor.state === state &&
+                donor.city === city &&
+                donor.availability === "Available"
+            );
 
-                    donor.bloodGroup ===
-                    bloodGroup
-
-                    &&
-
-                    donor.state ===
-                    state
-
-                    &&
-
-                    donor.city ===
-                    city
-
-                    &&
-
-                    donor.availability ===
-                    "Available"
-
-                );
-
-            }
-        );
+        });
 
 
-    /* RESULTS AREA */
+    /* RESULTS */
 
     const results =
-        document.getElementById(
-            "results"
-        );
-
+        document.getElementById("results");
 
     results.innerHTML = "";
 
 
-    /* ======================================
+    /* ==============================
        MATCH FOUND
-    ====================================== */
+    ============================== */
 
     if (matches.length > 0) {
 
         alert(
             "🩸 MATCH FOUND!\n\n" +
             matches.length +
-            " available potential donor(s) found."
+            " available donor(s) found!"
         );
 
 
-        matches.forEach(
-            function (donor) {
+        matches.forEach(function(donor) {
 
-                const card =
-                    document.createElement(
-                        "div"
-                    );
+            results.innerHTML += `
 
-                card.className =
-                    "card";
-
-
-                card.innerHTML = `
+                <div class="card">
 
                     <h3>
                         🩸 ${donor.name}
                     </h3>
 
                     <p>
-                        <strong>
-                        Blood Group:
-                        </strong>
-
+                        <strong>Blood Group:</strong>
                         ${donor.bloodGroup}
                     </p>
 
                     <p>
-                        <strong>
-                        Location:
-                        </strong>
-
+                        <strong>Location:</strong>
                         ${donor.city},
                         ${donor.state}
                     </p>
 
                     <p>
-                        <strong>
-                        Area:
-                        </strong>
-
+                        <strong>Area:</strong>
                         ${donor.area}
                     </p>
 
                     <p>
-                        <strong>
-                        Availability:
-                        </strong>
-
+                        <strong>Availability:</strong>
                         🟢 Available
                     </p>
 
@@ -668,27 +352,24 @@ function searchDonors() {
 
                     </button>
 
-                `;
+                </div>
 
+            `;
 
-                results.appendChild(
-                    card
-                );
-
-            }
-        );
+        });
 
     }
 
 
-    /* ======================================
+    /* ==============================
        NO MATCH
-    ====================================== */
+    ============================== */
 
     else {
 
         alert(
-            "❌ No available donor found."
+            "❌ NO MATCH FOUND\n\n" +
+            "No available donor matches your selection."
         );
 
 
@@ -697,30 +378,28 @@ function searchDonors() {
             <div class="card">
 
                 <h3>
-                    ❌ No Available Donor Found
+                    ❌ No Available Donor
                 </h3>
 
                 <p>
-
-                    No available potential donor
-                    matches your selected blood
-                    group and location.
-
+                    No available donor matches:
                 </p>
 
                 <p>
+                    🩸 Blood Group:
+                    ${bloodGroup}
+                </p>
 
-                    Try another nearby city
-                    or submit an emergency
-                    blood request.
-
+                <p>
+                    📍 Location:
+                    ${city}, ${state}
                 </p>
 
                 <a
-                    class="button"
-                    href="request.html">
+                    href="request.html"
+                    class="button">
 
-                    🚨 Emergency Request
+                    🚨 Send Emergency Request
 
                 </a>
 
@@ -733,18 +412,15 @@ function searchDonors() {
 }
 
 
-
-/* ==========================================
-   REQUEST CONTACT
-========================================== */
+/* ==============================
+   CONTACT
+============================== */
 
 function requestContact(name) {
 
     alert(
-        "📩 Contact request sent!\n\n" +
-        "Your request to connect with " +
-        name +
-        " has been recorded."
+        "📩 Contact request sent for " +
+        name
     );
 
 }
@@ -752,5 +428,4 @@ function requestContact(name) {
 </script>
 
 </body>
-
     </html>
