@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Request - BloodBridge</title>
+    <title>BloodBridge Emergency Request</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -11,7 +11,7 @@
 
 <header>
     <h1>🩸 BloodBridge</h1>
-    <p>Emergency Blood Request System</p>
+    <p>Emergency Blood Donor Connection</p>
 </header>
 
 <nav>
@@ -24,15 +24,13 @@
 </nav>
 
 <section class="form-section">
-
     <h2>🚨 Emergency Blood Request</h2>
-
-    <p>Submit your blood requirement to find potential donors.</p>
+    <p>Find registered potential donors in your location.</p>
 
     <form id="requestForm">
 
         <label>Patient / Request Name</label>
-        <input type="text" id="patientName" required>
+        <input id="patientName" required>
 
         <label>Required Blood Group</label>
         <select id="bloodGroup" required>
@@ -48,19 +46,16 @@
         </select>
 
         <label>State</label>
-        <input type="text" id="state"
-               placeholder="Example: Tamil Nadu" required>
+        <input id="state" placeholder="Tamil Nadu" required>
 
         <label>City</label>
-        <input type="text" id="city"
-               placeholder="Example: Coimbatore" required>
+        <input id="city" placeholder="Coimbatore" required>
 
         <label>Hospital Name</label>
-        <input type="text" id="hospital" required>
+        <input id="hospital" required>
 
         <label>Required Units</label>
-        <input type="number" id="units"
-               min="1" max="20" required>
+        <input id="units" type="number" min="1" required>
 
         <label>Urgency</label>
         <select id="urgency" required>
@@ -71,19 +66,21 @@
         </select>
 
         <label>Contact Number</label>
-        <input type="tel" id="phone"
-               pattern="[0-9]{10}"
-               maxlength="10"
-               placeholder="10-digit number" required>
+        <input id="phone" type="tel"
+               pattern="[0-9]{10}" maxlength="10" required>
 
-        <button type="submit">
-            🚨 Submit Emergency Request
-        </button>
+        <button type="submit">🚨 Submit Request</button>
 
     </form>
+</section>
 
-    <div id="result"></div>
-
+<section>
+    <h2>🩸 Donor Matching Results</h2>
+    <div id="results">
+        <div class="card">
+            <p>Submit an emergency request to find potential donors.</p>
+        </div>
+    </div>
 </section>
 
 <footer>
@@ -92,8 +89,11 @@
 
 <script>
 
-function clean(value) {
-    return String(value || "").trim().toLowerCase();
+function normalize(value) {
+    return String(value || "")
+        .trim()
+        .replace(/\s+/g, "")
+        .toLowerCase();
 }
 
 document.getElementById("requestForm")
@@ -114,11 +114,15 @@ document.getElementById("requestForm")
         date: new Date().toLocaleString()
     };
 
-    // Save emergency request
+    // Read registered donors
+    const donors = JSON.parse(
+        localStorage.getItem("bloodbridgeDonors") || "[]"
+    );
 
-    let requests = JSON.parse(
-        localStorage.getItem("bloodbridgeRequests")
-    ) || [];
+    // Save emergency request
+    const requests = JSON.parse(
+        localStorage.getItem("bloodbridgeRequests") || "[]"
+    );
 
     requests.push(request);
 
@@ -127,70 +131,93 @@ document.getElementById("requestForm")
         JSON.stringify(requests)
     );
 
-    // Get registered donors
-
-    const donors = JSON.parse(
-        localStorage.getItem("bloodbridgeDonors")
-    ) || [];
-
-    // Find potential matches
-
+    // Match blood group, state, city and availability
     const matches = donors.filter(function(donor) {
 
         return (
-            clean(donor.bloodGroup) === clean(request.bloodGroup) &&
-            clean(donor.state) === clean(request.state) &&
-            clean(donor.city) === clean(request.city) &&
-            clean(donor.availability) === "available"
+            normalize(donor.bloodGroup) === normalize(request.bloodGroup) &&
+            normalize(donor.state) === normalize(request.state) &&
+            normalize(donor.city) === normalize(request.city) &&
+            normalize(donor.availability) === "available"
         );
 
     });
 
-    const result = document.getElementById("result");
+    const sameBloodGroup = donors.filter(function(donor) {
+        return normalize(donor.bloodGroup) === normalize(request.bloodGroup);
+    });
+
+    const results = document.getElementById("results");
+    results.innerHTML = "";
 
     if (matches.length > 0) {
 
         alert(
-            "🩸 POTENTIAL DONOR MATCH FOUND!\n\n" +
+            "🩸 POTENTIAL MATCH FOUND!\n\n" +
             matches.length +
-            " available donor(s) found in " +
-            request.city + "."
+            " available donor(s) found!"
         );
 
-        result.innerHTML = `
-            <div class="card">
-                <h3>🩸 Potential Matches Found!</h3>
-                <p>${matches.length} available donor(s) found.</p>
-                <p>Blood Group: ${request.bloodGroup}</p>
-                <p>Location: ${request.city}, ${request.state}</p>
-                <p>Your request has been saved successfully.</p>
-            </div>
-        `;
+        const heading = document.createElement("h3");
+        heading.textContent = "🩸 Potential Donor Matches";
+        results.appendChild(heading);
+
+        matches.forEach(function(donor) {
+
+            const card = document.createElement("div");
+            card.className = "card";
+
+            const name = document.createElement("h3");
+            name.textContent = "🩸 " + donor.name;
+
+            const group = document.createElement("p");
+            group.textContent = "Blood Group: " + donor.bloodGroup;
+
+            const location = document.createElement("p");
+            location.textContent =
+                "Location: " + donor.city + ", " + donor.state;
+
+            const status = document.createElement("p");
+            status.textContent = "Availability: Available";
+
+            card.append(name, group, location, status);
+            results.appendChild(card);
+
+        });
 
     } else {
 
         alert(
-            "⚠️ NO MATCH FOUND\n\n" +
-            "Your emergency request has been saved. " +
-            "No available potential donor was found " +
-            "in the selected location."
+            "⚠️ NO EXACT MATCH FOUND\n\n" +
+            "Registered donors: " + donors.length +
+            "\nSame blood group: " + sameBloodGroup.length +
+            "\nAvailable exact location matches: 0"
         );
 
-        result.innerHTML = `
-            <div class="card">
-                <h3>⚠️ No Potential Match Found</h3>
-                <p>Your emergency request has been saved.</p>
-                <p>Try checking nearby locations or contact a hospital blood bank.</p>
-            </div>
-        `;
+        const card = document.createElement("div");
+        card.className = "card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "No Exact Match Found";
+
+        const info = document.createElement("p");
+        info.textContent =
+            "Registered donors: " + donors.length +
+            ". Donors with the requested blood group: " +
+            sameBloodGroup.length + ".";
+
+        const suggestion = document.createElement("p");
+        suggestion.textContent =
+            "Check the spelling of the state and city, or try another location.";
+
+        card.append(heading, info, suggestion);
+        results.appendChild(card);
 
     }
-
-    this.reset();
 
 });
 
 </script>
 
 </body>
-    </html>
+</html>
