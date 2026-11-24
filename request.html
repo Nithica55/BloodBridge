@@ -118,6 +118,11 @@ document.getElementById("requestForm")
     const donors = JSON.parse(
         localStorage.getItem("bloodbridgeDonors") || "[]"
     );
+    console.log("ALL SAVED DONORS:", donors);
+
+console.log("DONOR COUNT:", donors.length);
+
+console.log("FIRST DONOR:", donors[0]);
 
     // Save emergency request
     const requests = JSON.parse(
