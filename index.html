@@ -1,69 +1,445 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>BloodBridge</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BloodBridge | Connect. Respond. Save.</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- ================= HEADER ================= -->
+
 <header>
+
     <h1>🩸 BloodBridge</h1>
-    <p>Connecting blood donors with people in need</p>
-</header>
-
-<nav>
-    <a href="index.html">Home</a>
-    <a href="register.html">Become a Donor</a>
-    <a href="search.html">Find Donor</a>
-    <a href="request.html">Emergency Request</a>
-    <a href="matching.html">Smart Matching</a>
-    <a href="dashboard.html">Dashboard</a>
-</nav>
-
-<section class="hero">
-    <h2>Every Drop Can Make a Difference</h2>
 
     <p>
-        BloodBridge helps people find potential blood donors
-        based on blood group and location.
+        Connecting potential blood donors with people in need
     </p>
 
-    <a class="button" href="register.html">
+</header>
+
+
+<!-- ================= NAVIGATION ================= -->
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="register.html">
         Become a Donor
     </a>
 
-    <a class="button" href="search.html">
-        Find a Donor
+    <a href="search.html">
+        Find Donor
     </a>
+
+    <a href="request.html">
+        Emergency Request
+    </a>
+
+    <a href="matching.html">
+        Smart Matching
+    </a>
+
+    <a href="dashboard.html">
+        Dashboard
+    </a>
+
+</nav>
+
+
+<!-- ================= HERO SECTION ================= -->
+
+<section class="hero">
+
+    <h2>
+        Every Drop Can Make a Difference ❤️
+    </h2>
+
+    <p>
+
+        BloodBridge is a software-based platform designed to
+        connect potential blood donors with people requiring
+        blood based on blood group and location.
+
+    </p>
+
+    <div>
+
+        <a class="button" href="request.html">
+            🚨 Emergency Blood Request
+        </a>
+
+        <a class="button" href="register.html">
+            🩸 Become a Donor
+        </a>
+
+    </div>
+
 </section>
 
+
+<!-- ================= QUICK STATS ================= -->
+
 <section>
-    <h2>How BloodBridge Works</h2>
+
+    <h2>BloodBridge at a Glance</h2>
 
     <div class="cards">
 
         <div class="card">
-            <h3>1. Register</h3>
-            <p>Donors register their blood group and location.</p>
+
+            <h3 id="donorCount">
+                0
+            </h3>
+
+            <p>
+                Registered Donors
+            </p>
+
         </div>
 
-        <div class="card">
-            <h3>2. Search</h3>
-            <p>People can search for potential donors.</p>
-        </div>
 
         <div class="card">
-            <h3>3. Connect</h3>
-            <p>Donors can choose whether to respond to a request.</p>
+
+            <h3 id="availableCount">
+                0
+            </h3>
+
+            <p>
+                Available Donors
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3 id="requestCount">
+                0
+            </h3>
+
+            <p>
+                Blood Requests
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3 id="cityCount">
+                0
+            </h3>
+
+            <p>
+                Cities Covered
+            </p>
+
         </div>
 
     </div>
+
 </section>
 
+
+<!-- ================= PROBLEM ================= -->
+
+<section>
+
+    <div class="card">
+
+        <h2>
+            🚨 The Problem
+        </h2>
+
+        <p>
+
+            During emergency situations, patients and their
+            families may struggle to identify potential blood
+            donors quickly.
+
+            BloodBridge aims to make donor discovery faster
+            by organizing donor information according to
+            blood group and location.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HOW IT WORKS ================= -->
+
+<section>
+
+    <h2>
+        How BloodBridge Works
+    </h2>
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h3>
+                1️⃣ Register
+            </h3>
+
+            <p>
+
+                Potential donors can register their blood group,
+                location and availability.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                2️⃣ Request
+            </h3>
+
+            <p>
+
+                A patient or authorized requester can submit
+                an emergency blood requirement.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                3️⃣ Match
+            </h3>
+
+            <p>
+
+                BloodBridge identifies potential donors using
+                blood group and location-based matching.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                4️⃣ Connect
+            </h3>
+
+            <p>
+
+                Potential matches can be contacted for further
+                verification and coordination.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FEATURES ================= -->
+
+<section>
+
+    <h2>
+        ✨ BloodBridge Features
+    </h2>
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <h3>
+                🔎 Donor Search
+            </h3>
+
+            <p>
+
+                Search potential donors using blood group
+                and location.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🚨 Emergency Requests
+            </h3>
+
+            <p>
+
+                Submit urgent blood requirements and
+                identify potential matches.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                🧠 Smart Matching
+            </h3>
+
+            <p>
+
+                A prototype matching system prioritizes
+                potential donors based on relevant
+                location and availability information.
+
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>
+                📊 Live Dashboard
+            </h3>
+
+            <p>
+
+                View donor registrations, requests,
+                availability and cities covered.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CALL TO ACTION ================= -->
+
+<section>
+
+    <div class="hero">
+
+        <h2>
+            Be Someone's Hope 🩸
+        </h2>
+
+        <p>
+
+            Register as a potential donor or submit a
+            blood request through the BloodBridge platform.
+
+        </p>
+
+
+        <a class="button" href="register.html">
+            🩸 Register as Donor
+        </a>
+
+
+        <a class="button" href="request.html">
+            🚨 Request Blood
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
 <footer>
-    <p>© 2026 BloodBridge</p>
+
+    <p>
+        © 2026 BloodBridge
+    </p>
+
+    <p>
+        Software Prototype | Healthcare Technology
+    </p>
+
 </footer>
 
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    /*
+     * BloodBridge stores prototype data in the browser's
+     * localStorage.
+     */
+
+    const donors =
+        JSON.parse(localStorage.getItem("bloodbridgeDonors")) || [];
+
+    const requests =
+        JSON.parse(localStorage.getItem("bloodbridgeRequests")) || [];
+
+
+    /* Total donors */
+
+    document.getElementById("donorCount").textContent =
+        donors.length;
+
+
+    /* Available donors */
+
+    const availableDonors =
+        donors.filter(
+            donor => donor.availability === "Available"
+        );
+
+    document.getElementById("availableCount").textContent =
+        availableDonors.length;
+
+
+    /* Emergency requests */
+
+    document.getElementById("requestCount").textContent =
+        requests.length;
+
+
+    /* Cities covered */
+
+    const cities = new Set();
+
+    donors.forEach(donor => {
+
+        if (donor.city) {
+
+            cities.add(donor.city);
+
+        }
+
+    });
+
+    document.getElementById("cityCount").textContent =
+        cities.size;
+
+</script>
+
 </body>
+
 </html>
