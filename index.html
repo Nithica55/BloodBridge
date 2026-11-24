@@ -4,165 +4,706 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>BloodBridge | Connecting Lives</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#f7f8fc;color:#263247}
-header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
-.logo{font-size:25px;font-weight:bold}
-button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;font-weight:bold}
-#language{background:white;color:#a90024}
-nav{background:white;padding:17px 6%;display:flex;gap:25px;flex-wrap:wrap;box-shadow:0 2px 10px #0000000a}
-nav a{text-decoration:none;color:#a90024;font-weight:bold}
-.hero{padding:75px 7%;background:linear-gradient(120deg,#fff0f2,#fff);display:grid;grid-template-columns:1.4fr 1fr;gap:35px;align-items:center}
-.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.15;color:#a90024;margin-bottom:18px}
-.hero p{font-size:17px;line-height:1.7;color:#586477;margin-bottom:25px}
-.primary{background:#b20c32;color:white;padding:15px 23px}
-.secondary{background:white;color:#a90024;border:1px solid #a90024;padding:15px 23px}
-.hero-art{background:#a90024;color:white;border-radius:24px;padding:40px;text-align:center;min-height:230px;display:flex;flex-direction:column;justify-content:center}
-.hero-art .drop{font-size:65px}
-.hero-art h2{margin:15px 0}
-section.content{max-width:1150px;margin:55px auto;padding:0 20px}
-.heading{text-align:center;color:#a90024;font-size:29px;margin-bottom:28px}
-.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
-.card{background:white;padding:26px;border-radius:15px;box-shadow:0 4px 18px #0000000b}
-.card .icon{font-size:35px}
-.card h3{margin:15px 0;color:#a90024}
-.card p{color:#687386;line-height:1.6}
-.cta{background:#a90024;color:white;text-align:center;padding:48px 20px;margin-top:55px}
-.cta h2{font-size:30px;margin-bottom:15px}
-.cta p{margin-bottom:22px}
-footer{text-align:center;padding:25px;color:#687386;background:white;line-height:1.7}
-@media(max-width:700px){
-.hero{grid-template-columns:1fr;padding:50px 7%}
-nav{gap:15px}
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f7f8fc;
+    color:#252b3a;
+}
+
+header{
+    background:#a50025;
+    color:white;
+    padding:18px 6%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:15px;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:bold;
+}
+
+.logo span{
+    color:#ffd5dc;
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.language-btn{
+    background:white;
+    color:#a50025;
+    padding:10px 16px;
+    border:0;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+nav{
+    background:white;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    padding:17px 10px;
+    box-shadow:0 2px 10px #0000000c;
+}
+
+nav a{
+    color:#343b4b;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:14px;
+}
+
+nav a:hover{
+    color:#c00030;
+}
+
+.hero{
+    background:linear-gradient(120deg,#8e001e,#d51c48);
+    color:white;
+    padding:75px 7%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:35px;
+    flex-wrap:wrap;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.hero h1{
+    font-size:clamp(34px,5vw,54px);
+    line-height:1.15;
+    margin-bottom:20px;
+}
+
+.hero p{
+    font-size:17px;
+    line-height:1.8;
+    color:#ffe8ed;
+    margin-bottom:25px;
+}
+
+.hero-buttons{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.primary-btn,.secondary-btn{
+    display:inline-block;
+    padding:14px 22px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.primary-btn{
+    background:white;
+    color:#a50025;
+}
+
+.secondary-btn{
+    border:1px solid white;
+    color:white;
+}
+
+.hero-symbol{
+    font-size:125px;
+    text-align:center;
+    min-width:160px;
+}
+
+.section{
+    padding:60px 7%;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.section-heading h2{
+    color:#a50025;
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.section-heading p{
+    color:#737b8c;
+    line-height:1.6;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.feature-card{
+    background:white;
+    padding:28px 22px;
+    border-radius:13px;
+    box-shadow:0 4px 18px #0000000b;
+    border:1px solid #f0e9eb;
+    transition:0.2s;
+}
+
+.feature-card:hover{
+    transform:translateY(-5px);
+}
+
+.feature-icon{
+    font-size:36px;
+    margin-bottom:17px;
+}
+
+.feature-card h3{
+    color:#a50025;
+    margin-bottom:12px;
+    font-size:19px;
+}
+
+.feature-card p{
+    color:#737b8c;
+    font-size:14px;
+    line-height:1.7;
+    margin-bottom:18px;
+}
+
+.feature-card a{
+    display:inline-block;
+    color:#b0002c;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.admin-section{
+    background:#fff0f3;
+    padding:55px 7%;
+}
+
+.admin-box{
+    max-width:1000px;
+    margin:auto;
+    background:white;
+    padding:35px;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+    flex-wrap:wrap;
+    box-shadow:0 4px 18px #0000000b;
+}
+
+.admin-box h2{
+    color:#a50025;
+    margin-bottom:12px;
+}
+
+.admin-box p{
+    color:#737b8c;
+    line-height:1.7;
+    max-width:600px;
+}
+
+.admin-btn{
+    background:#a50025;
+    color:white;
+    text-decoration:none;
+    padding:14px 23px;
+    border-radius:8px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.steps{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:20px;
+}
+
+.step{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    text-align:center;
+    box-shadow:0 3px 15px #0000000a;
+}
+
+.step-number{
+    background:#ffe3e9;
+    color:#a50025;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:20px;
+    font-weight:bold;
+    margin:0 auto 15px;
+}
+
+.step h3{
+    margin-bottom:10px;
+    color:#a50025;
+}
+
+.step p{
+    color:#737b8c;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.notice{
+    background:#fff8e9;
+    border-left:5px solid #e3a52c;
+    padding:18px;
+    margin-top:25px;
+    color:#66552e;
+    line-height:1.7;
+    border-radius:7px;
+    font-size:13px;
+}
+
+footer{
+    background:#252b3a;
+    color:white;
+    text-align:center;
+    padding:30px 15px;
+}
+
+footer p{
+    color:#d5d9e2;
+    font-size:13px;
+    line-height:1.8;
+}
+
+@media(max-width:600px){
+    header{
+        padding:16px 5%;
+    }
+
+    nav{
+        gap:15px;
+    }
+
+    .hero{
+        padding:55px 7%;
+    }
+
+    .hero-symbol{
+        font-size:85px;
+        width:100%;
+    }
+
+    .admin-box{
+        padding:25px;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<!-- HEADER -->
+
 <header>
-<div class="logo">🩸 BloodBridge</div>
-<button id="language" onclick="toggleLanguage()">தமிழ்</button>
+
+    <div class="logo">
+        🩸 Blood<span>Bridge</span>
+    </div>
+
+    <div class="header-right">
+        <button class="language-btn" onclick="toggleLanguage()" id="languageButton">
+            தமிழ்
+        </button>
+    </div>
+
 </header>
 
+<!-- NAVIGATION -->
+
 <nav>
-<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
-<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
-<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
-<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
-<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
- 
+
+    <a href="index.html"
+       data-en="Home"
+       data-ta="முகப்பு">Home</a>
+
+    <a href="register.html"
+       data-en="Register Donor"
+       data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+
+    <a href="search.html"
+       data-en="Find Donor"
+       data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+
+    <a href="request.html"
+       data-en="Emergency Request"
+       data-ta="அவசர கோரிக்கை">Emergency Request</a>
+
+    <a href="dashboard.html"
+       data-en="Dashboard"
+       data-ta="புள்ளிவிவரப் பலகை">Dashboard</a>
+
+    <a href="admin.html"
+       data-en="Admin Panel"
+       data-ta="நிர்வாகப் பலகை">Admin Panel</a>
+
 </nav>
 
-<div class="hero">
-<div>
-<h1 data-en="Every Drop Can Make a Difference."
-data-ta="ஒவ்வொரு துளியும் ஒரு மாற்றத்தை உருவாக்கும்.">
-Every Drop Can Make a Difference.
-</h1>
+<!-- HERO SECTION -->
 
-<p data-en="BloodBridge connects potential blood donors with people who need blood. Find donors, register your availability and submit emergency requests."
-data-ta="இரத்தம் தேவைப்படுபவர்களையும் சாத்தியமான இரத்த தானம் செய்பவர்களையும் BloodBridge இணைக்கிறது. நன்கொடையாளர்களைத் தேடுங்கள், பதிவு செய்யுங்கள் மற்றும் அவசர கோரிக்கைகளைச் சமர்ப்பியுங்கள்.">
-BloodBridge connects potential blood donors with people who need blood. Find donors, register your availability and submit emergency requests.
-</p>
+<section class="hero">
 
-<a href="search.html"><button class="primary" data-en="Find a Donor →" data-ta="நன்கொடையாளரைத் தேடு →">Find a Donor →</button></a>
-<a href="register.html"><button class="secondary" data-en="Register Now" data-ta="இப்போது பதிவு செய்">Register Now</button></a>
-</div>
+    <div class="hero-content">
 
-<div class="hero-art">
-<div class="drop">🩸</div>
-<h2 data-en="Connect. Donate. Save Lives." data-ta="இணைவோம். இரத்தம் கொடுப்போம். உயிர்களைக் காப்போம்.">Connect. Donate. Save Lives.</h2>
-<p data-en="A digital bridge between donors and patients."
-data-ta="நன்கொடையாளர்களுக்கும் நோயாளிகளுக்கும் இடையிலான டிஜிட்டல் பாலம்.">
-A digital bridge between donors and patients.
-</p>
-</div>
-</div>
+        <h1 data-en="Connecting Blood Donors. Saving Lives."
+            data-ta="இரத்த தானம் செய்பவர்களை இணைத்து உயிர்களைக் காப்போம்.">
+            Connecting Blood Donors. Saving Lives.
+        </h1>
 
-<section class="content">
-<h2 class="heading" data-en="Our Platform" data-ta="எங்கள் தளம்">Our P<a href="admin.html">Admin Panel</a>latform</h2>
+        <p data-en="BloodBridge is a blood donor connection platform designed to help people discover potential blood donors and manage emergency blood requests."
+           data-ta="BloodBridge என்பது இரத்த தானம் செய்பவர்களைக் கண்டறியவும் அவசர இரத்தக் கோரிக்கைகளை நிர்வகிக்கவும் உதவும் ஒரு தளமாகும்.">
+            BloodBridge is a blood donor connection platform designed to help people discover potential blood donors and manage emergency blood requests.
+        </p>
 
-<div class="features">
-<div class="card">
-<div class="icon">📝</div>
-<h3 data-en="Donor Registration" data-ta="நன்கொடையாளர் பதிவு">Donor Registration</h3>
-<p data-en="Register donor details and availability in the demo platform."
-data-ta="மாதிரி தளத்தில் நன்கொடையாளர் விவரங்களையும் கிடைக்கும் நிலையையும் பதிவு செய்யுங்கள்.">
-Register donor details and availability in the demo platform.
-</p>
-</div>
+        <div class="hero-buttons">
 
-<div class="card">
-<div class="icon">🔎</div>
-<h3 data-en="Smart Search" data-ta="சிறந்த தேடல்">Smart Search</h3>
-<p data-en="Search potential donors using blood group and location."
-data-ta="இரத்த வகை மற்றும் இருப்பிடத்தின் அடிப்படையில் சாத்தியமான நன்கொடையாளர்களைத் தேடுங்கள்.">
-Search potential donors using blood group and location.
-</p>
-</div>
+            <a href="search.html" class="primary-btn"
+               data-en="Find a Donor"
+               data-ta="நன்கொடையாளரைத் தேடு">
+               Find a Donor
+            </a>
 
-<div class="card">
-<div class="icon">🚨</div>
-<h3 data-en="Emergency Requests" data-ta="அவசர கோரிக்கைகள்">Emergency Requests</h3>
-<p data-en="Submit an emergency blood request through the platform."
-data-ta="இந்த தளத்தின் மூலம் அவசர இரத்த கோரிக்கையைச் சமர்ப்பியுங்கள்.">
-Submit an emergency blood request through the platform.
-</p>
-</div>
+            <a href="register.html" class="secondary-btn"
+               data-en="Become a Donor"
+               data-ta="நன்கொடையாளராகப் பதிவு செய்">
+               Become a Donor
+            </a>
 
-<div class="card">
-<div class="icon">📊</div>
-<h3 data-en="Analytics Dashboard" data-ta="புள்ளிவிவர பலகை">Analytics Dashboard</h3>
-<p data-en="View donor statistics and emergency request information."
-data-ta="நன்கொடையாளர் புள்ளிவிவரங்களையும் அவசர கோரிக்கை விவரங்களையும் பாருங்கள்.">
-View donor statistics and emergency request information.
-</p>
-</div>
-</div>
+        </div>
+
+    </div>
+
+    <div class="hero-symbol">
+        🩸
+    </div>
+
 </section>
 
-<div class="cta">
-<h2 data-en="Be a Link in Someone's Lifeline"
-data-ta="ஒருவரின் உயிர்காக்கும் இணைப்பாக இருங்கள்">
-Be a Link in Someone's Lifeline
-</h2>
-<p data-en="Explore BloodBridge and discover how the platform works."
-data-ta="BloodBridge தளத்தைப் பயன்படுத்தி அது எவ்வாறு செயல்படுகிறது என்பதை அறியுங்கள்.">
-Explore BloodBridge and discover how the platform works.
-</p>
-<a href="register.html"><button class="secondary" data-en="Join BloodBridge" data-ta="BloodBridge-இல் இணையுங்கள்">Join BloodBridge</button></a>
-</div>
+<!-- FEATURES -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <h2 data-en="Explore BloodBridge"
+            data-ta="BloodBridge வசதிகள்">
+            Explore BloodBridge
+        </h2>
+
+        <p data-en="Everything you need to connect donors and manage requests."
+           data-ta="நன்கொடையாளர்களை இணைக்கவும் கோரிக்கைகளை நிர்வகிக்கவும் தேவையான வசதிகள்.">
+            Everything you need to connect donors and manage requests.
+        </p>
+
+    </div>
+
+    <div class="features">
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🧑‍🤝‍🧑</div>
+
+            <h3 data-en="Donor Registration"
+                data-ta="நன்கொடையாளர் பதிவு">
+                Donor Registration
+            </h3>
+
+            <p data-en="Register demo donor details with blood group, state, city and availability."
+               data-ta="இரத்த வகை, மாநிலம், நகரம் மற்றும் கிடைக்கும் நிலையைப் பதிவு செய்யுங்கள்.">
+                Register demo donor details with blood group, state, city and availability.
+            </p>
+
+            <a href="register.html"
+               data-en="Register Now →"
+               data-ta="இப்போது பதிவு செய் →">
+               Register Now →
+            </a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🔍</div>
+
+            <h3 data-en="Find Blood Donors"
+                data-ta="இரத்த நன்கொடையாளர்களைக் கண்டறி">
+                Find Blood Donors
+            </h3>
+
+            <p data-en="Search for potential donors using blood group, state and city."
+               data-ta="இரத்த வகை, மாநிலம் மற்றும் நகரத்தின் அடிப்படையில் நன்கொடையாளர்களைத் தேடுங்கள்.">
+                Search for potential donors using blood group, state and city.
+            </p>
+
+            <a href="search.html"
+               data-en="Search Donors →"
+               data-ta="தேடுங்கள் →">
+               Search Donors →
+            </a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">🚨</div>
+
+            <h3 data-en="Emergency Requests"
+                data-ta="அவசர இரத்தக் கோரிக்கைகள்">
+                Emergency Requests
+            </h3>
+
+            <p data-en="Submit a demo emergency request and check for potential donor matches."
+               data-ta="மாதிரி அவசரக் கோரிக்கையைச் சமர்ப்பித்து பொருந்தக்கூடிய நன்கொடையாளர்களைச் சரிபார்க்கவும்.">
+                Submit a demo emergency request and check for potential donor matches.
+            </p>
+
+            <a href="request.html"
+               data-en="Create Request →"
+               data-ta="கோரிக்கையை உருவாக்கு →">
+               Create Request →
+            </a>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="feature-icon">📊</div>
+
+            <h3 data-en="Analytics Dashboard"
+                data-ta="புள்ளிவிவரப் பலகை">
+                Analytics Dashboard
+            </h3>
+
+            <p data-en="View donor statistics, available donors and emergency request summaries."
+               data-ta="நன்கொடையாளர் எண்ணிக்கை, கிடைக்கும் நன்கொடையாளர்கள் மற்றும் அவசரக் கோரிக்கை விவரங்களைப் பார்க்கவும்.">
+                View donor statistics, available donors and emergency request summaries.
+            </p>
+
+            <a href="dashboard.html"
+               data-en="View Dashboard →"
+               data-ta="புள்ளிவிவரங்களைப் பார் →">
+               View Dashboard →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ADMIN PANEL -->
+
+<section class="admin-section">
+
+    <div class="admin-box">
+
+        <div>
+
+            <h2 data-en="⚙️ Admin Control Panel"
+                data-ta="⚙️ நிர்வாகக் கட்டுப்பாட்டுப் பலகை">
+                ⚙️ Admin Control Panel
+            </h2>
+
+            <p data-en="Manage demo donor records, review emergency requests, update request statuses and monitor BloodBridge activity."
+               data-ta="மாதிரி நன்கொடையாளர் பதிவுகளை நிர்வகிக்கவும், அவசரக் கோரிக்கைகளைப் பார்வையிடவும், கோரிக்கை நிலைகளைப் புதுப்பிக்கவும்.">
+                Manage demo donor records, review emergency requests, update request statuses and monitor BloodBridge activity.
+            </p>
+
+        </div>
+
+        <a href="admin.html" class="admin-btn"
+           data-en="Open Admin Panel →"
+           data-ta="நிர்வாகப் பலகையைத் திற →">
+            Open Admin Panel →
+        </a>
+
+    </div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section class="section">
+
+    <div class="section-heading">
+
+        <h2 data-en="How BloodBridge Works"
+            data-ta="BloodBridge எவ்வாறு செயல்படுகிறது">
+            How BloodBridge Works
+        </h2>
+
+        <p data-en="A simple process to discover potential blood donors."
+           data-ta="இரத்த நன்கொடையாளர்களைக் கண்டறியும் எளிய செயல்முறை.">
+            A simple process to discover potential blood donors.
+        </p>
+
+    </div>
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3 data-en="Register"
+                data-ta="பதிவு செய்">Register</h3>
+
+            <p data-en="Add a demo donor profile with blood group and location."
+               data-ta="இரத்த வகை மற்றும் இருப்பிடத்துடன் மாதிரி நன்கொடையாளர் விவரங்களைச் சேர்க்கவும்.">
+                Add a demo donor profile with blood group and location.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3 data-en="Search"
+                data-ta="தேடு">Search</h3>
+
+            <p data-en="Search for potential donors by blood group and location."
+               data-ta="இரத்த வகை மற்றும் இருப்பிடத்தின் அடிப்படையில் நன்கொடையாளர்களைத் தேடவும்.">
+                Search for potential donors by blood group and location.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3 data-en="Submit Request"
+                data-ta="கோரிக்கையைச் சமர்ப்பி">
+                Submit Request
+            </h3>
+
+            <p data-en="Create an emergency blood request in the prototype."
+               data-ta="இந்த மாதிரி தளத்தில் அவசர இரத்தக் கோரிக்கையை உருவாக்கவும்.">
+                Create an emergency blood request in the prototype.
+            </p>
+
+        </div>
+
+        <div class="step">
+
+            <div class="step-number">4</div>
+
+            <h3 data-en="Manage"
+                data-ta="நிர்வகி">Manage</h3>
+
+            <p data-en="View records and update request statuses in the admin panel."
+               data-ta="பதிவுகளைப் பார்த்து நிர்வாகப் பலகையில் கோரிக்கை நிலைகளைப் புதுப்பிக்கவும்.">
+                View records and update request statuses in the admin panel.
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="notice"
+         data-en="Important: BloodBridge is an educational prototype. Its donor matching is only a preliminary search, not confirmation of medical compatibility or donor eligibility. Actual transfusions require healthcare professionals and proper blood testing. Do not enter real patient or donor personal information into this public demo."
+         data-ta="முக்கியம்: BloodBridge ஒரு கல்வி நோக்கத்திற்கான மாதிரி தளம். இது ஆரம்பநிலை நன்கொடையாளர் தேடலுக்கு மட்டுமே உதவும்; மருத்துவ ரீதியான இரத்தப் பொருத்தம் அல்லது நன்கொடையாளர் தகுதியை உறுதிப்படுத்தாது. உண்மையான இரத்தமாற்றத்திற்கு மருத்துவ நிபுணர்களின் பரிசோதனை அவசியம். இந்த பொது மாதிரி தளத்தில் உண்மையான நோயாளி அல்லது நன்கொடையாளர் தனிப்பட்ட தகவல்களைப் பதிவு செய்ய வேண்டாம்.">
+        Important: BloodBridge is an educational prototype. Its donor matching is only a preliminary search, not confirmation of medical compatibility or donor eligibility. Actual transfusions require healthcare professionals and proper blood testing. Do not enter real patient or donor personal information into this public demo.
+    </div>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-<strong>BloodBridge © 2026</strong><br>
-<span data-en="A student-developed blood donor connection prototype."
-data-ta="மாணவர்களால் உருவாக்கப்பட்ட இரத்த தான இணைப்பு மாதிரி தளம்.">
-A student-developed blood donor connection prototype.
-</span>
+
+    <h2>🩸 BloodBridge</h2>
+
+    <p style="margin-top:12px"
+       data-en="Connecting Blood Donors. Saving Lives."
+       data-ta="இரத்த தானம் செய்பவர்களை இணைத்து உயிர்களைக் காப்போம்.">
+       Connecting Blood Donors. Saving Lives.
+    </p>
+
+    <p style="margin-top:15px">
+        © 2026 BloodBridge | Educational Prototype
+    </p>
+
 </footer>
 
+<!-- LANGUAGE SCRIPT -->
+
 <script>
-function applyLanguage(lang){
- document.documentElement.lang = lang;
- document.querySelectorAll("[data-en]").forEach(element=>{
-  element.textContent = element.getAttribute("data-" + lang);
- });
- document.getElementById("language").textContent =
-  lang === "en" ? "தமிழ்" : "English";
- localStorage.setItem("bloodbridgeLanguage",lang);
+
+let currentLanguage =
+    localStorage.getItem("bloodbridgeLanguage") || "en";
+
+function setLanguage(language){
+
+    currentLanguage = language;
+
+    document.documentElement.lang = language;
+
+    document.querySelectorAll("[data-en]").forEach(element => {
+
+        element.textContent =
+            element.getAttribute("data-" + language);
+
+    });
+
+    document.getElementById("languageButton").textContent =
+        language === "en" ? "தமிழ்" : "English";
+
+    localStorage.setItem("bloodbridgeLanguage", language);
+
 }
 
 function toggleLanguage(){
- const current = localStorage.getItem("bloodbridgeLanguage") || "en";
- applyLanguage(current === "en" ? "ta" : "en");
+
+    const newLanguage =
+        currentLanguage === "en" ? "ta" : "en";
+
+    setLanguage(newLanguage);
+
 }
 
-applyLanguage(localStorage.getItem("bloodbridgeLanguage") || "en");
+// Load saved language when homepage opens
+setLanguage(currentLanguage);
+
 </script>
 
 </body>
-</html>
+ </html>
+ 
