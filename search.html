@@ -4,73 +4,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloodBridge | Advanced Donor Search</title>
+<title>BloodBridge - Find Donors</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f5f6fa;color:#293044}
-header{background:#a50025;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
-button{cursor:pointer;border:0;border-radius:7px;padding:12px 16px;font-weight:bold}
-.language{background:white;color:#a50025}
-nav{background:white;padding:15px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-nav a{color:#a50025;text-decoration:none;font-weight:bold;font-size:14px}
-main{max-width:1000px;margin:35px auto;padding:0 16px}
-.panel{background:white;padding:25px;border-radius:13px;box-shadow:0 4px 18px #0000000c}
-h1{color:#a50025;margin-bottom:10px}
-.description{color:#737b8c;line-height:1.6;margin-bottom:22px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
-label{display:block;font-weight:bold;margin:15px 0 7px}
-input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:7px;background:white}
-.search-btn{background:#a50025;color:white;width:100%;margin-top:23px}
-.reset-btn{background:#f1e8eb;color:#a50025;width:100%;margin-top:10px}
-.results{margin-top:25px}
-.result-heading{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:15px}
-.donor-card{background:white;border:1px solid #eee;border-left:5px solid #b0002c;padding:20px;border-radius:10px;margin-bottom:15px}
-.donor-card h3{color:#a50025;margin-bottom:10px}
-.detail{margin-top:10px;color:#4c566a;overflow-wrap:anywhere}
-.available{color:#16834a;font-weight:bold}
-.contact{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
-.contact a{background:#a50025;color:white;text-decoration:none;padding:10px 14px;border-radius:7px;font-size:14px}
-.empty{background:#fff0f3;padding:18px;border-radius:8px;color:#a50025;line-height:1.6}
-.count{background:#ffe5eb;color:#a50025;padding:8px 13px;border-radius:20px;font-weight:bold}
-.note{background:#fff8e9;padding:15px;margin-top:20px;border-radius:8px;font-size:13px;line-height:1.6;color:#66552e}
-footer{text-align:center;padding:25px;color:#777;font-size:13px}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#fff5f5;color:#333}
+header{background:#b51220;color:white;text-align:center;padding:20px}
+nav{background:#8e101b;padding:12px;text-align:center}
+nav a{color:white;text-decoration:none;margin:7px;display:inline-block}
+.container{max-width:950px;margin:25px auto;padding:20px}
+.filters,.donor-card{background:white;padding:18px;border-radius:12px;margin-bottom:16px;box-shadow:0 3px 12px #0001}
+h2{color:#b51220}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+input,select,button{width:100%;padding:12px;border:1px solid #ccc;border-radius:7px;margin:5px 0}
+button{background:#b51220;color:white;border:0;cursor:pointer;font-weight:bold}
+.donor-card h3{color:#b51220;margin-top:0}
+.status{color:green;font-weight:bold}
+.muted{color:#666;font-size:13px}
+#message{font-weight:bold;text-align:center}
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>🩸 BloodBridge</h2>
-<button class="language" onclick="toggleLanguage()" id="languageButton">தமிழ்</button>
+<h1>🩸 BloodBridge</h1>
+<p>Find Blood Donors Across Locations</p>
 </header>
 
 <nav>
-<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
-<a href="register.html" data-en="Register" data-ta="பதிவு">Register</a>
-<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
-<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
-<a href="dashboard.html" data-en="Dashboard" data-ta="புள்ளிவிவரங்கள்">Dashboard</a>
-<a href="admin.html" data-en="Admin Panel" data-ta="நிர்வாகப் பலகை">Admin Panel</a>
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="search.html">Find Donors</a>
+<a href="request.html">Emergency Request</a>
+<a href="notifications.html">Notifications</a>
+<a href="dashboard.html">Dashboard</a>
+<a href="login.html">Login</a>
 </nav>
 
-<main>
-<div class="panel">
+<div class="container">
 
-<h1 data-en="Advanced Donor Search" data-ta="மேம்பட்ட நன்கொடையாளர் தேடல்">Advanced Donor Search</h1>
+<h2>Find Available Donors</h2>
 
-<p class="description"
-data-en="Find potential donors using multiple filters."
-data-ta="பல வடிகட்டிகளைப் பயன்படுத்தி நன்கொடையாளர்களைக் கண்டறியுங்கள்.">
-Find potential donors using multiple filters.
-</p>
-
-<form id="searchForm">
+<div class="filters">
 
 <div class="grid">
 
-<div>
-<label data-en="Blood Group" data-ta="இரத்த வகை">Blood Group</label>
 <select id="bloodGroup">
 <option value="">All Blood Groups</option>
 <option>A+</option><option>A-</option>
@@ -78,10 +57,7 @@ Find potential donors using multiple filters.
 <option>AB+</option><option>AB-</option>
 <option>O+</option><option>O-</option>
 </select>
-</div>
 
-<div>
-<label data-en="State" data-ta="மாநிலம்">State</label>
 <select id="state">
 <option value="">All States</option>
 <option>Tamil Nadu</option>
@@ -100,217 +76,161 @@ Find potential donors using multiple filters.
 <option>Bihar</option>
 <option>Odisha</option>
 <option>Assam</option>
-<option>Goa</option>
-<option>Jharkhand</option>
-<option>Chhattisgarh</option>
-<option>Madhya Pradesh</option>
-<option>Himachal Pradesh</option>
-<option>Uttarakhand</option>
-<option>Manipur</option>
-<option>Meghalaya</option>
-<option>Mizoram</option>
-<option>Nagaland</option>
-<option>Tripura</option>
-<option>Sikkim</option>
 </select>
-</div>
 
-<div>
-<label data-en="City" data-ta="நகரம்">City</label>
-<input id="city" placeholder="Example: Coimbatore">
-</div>
+<input id="city" placeholder="Enter City">
 
-<div>
-<label data-en="Age Group" data-ta="வயது பிரிவு">Age Group</label>
 <select id="ageGroup">
 <option value="">All Age Groups</option>
-<option value="18-25">18–25</option>
-<option value="26-35">26–35</option>
-<option value="36-45">36–45</option>
-<option value="46-55">46–55</option>
-<option value="56+">56+</option>
+<option>18-25</option>
+<option>26-35</option>
+<option>36-45</option>
+<option>46-55</option>
+<option>56+</option>
 </select>
-</div>
 
-<div>
-<label data-en="Availability" data-ta="கிடைக்கும் நிலை">Availability</label>
 <select id="availability">
 <option value="Available">Available Only</option>
 <option value="Temporarily Unavailable">Temporarily Unavailable</option>
 <option value="Not Available">Not Available</option>
-<option value="">All Availability</option>
+<option value="All">All Availability</option>
 </select>
-</div>
 
-<div>
-<label data-en="Sort Results" data-ta="முடிவுகளை வரிசைப்படுத்து">Sort Results</label>
 <select id="sort">
-<option value="name">Name A–Z</option>
-<option value="blood">Blood Group</option>
-<option value="city">City</option>
+<option value="name">Sort by Name</option>
+<option value="city">Sort by City</option>
+<option value="bloodGroup">Sort by Blood Group</option>
 </select>
-</div>
 
 </div>
 
-<button type="submit" class="search-btn"
-data-en="Search Donors"
-data-ta="நன்கொடையாளர்களைத் தேடு">
-Search Donors
-</button>
-
-<button type="button" class="reset-btn" onclick="resetFilters()"
-data-en="Reset Filters"
-data-ta="வடிகட்டிகளை மீட்டமை">
-Reset Filters
-</button>
-
-</form>
-
-<div id="results" class="results"></div>
-
-<div class="note"
-data-en="Educational prototype only. Use fictional contact information. Contact details must not be publicly exposed without donor consent. Search results are not medical compatibility or eligibility confirmation."
-data-ta="கல்வி நோக்கத்திற்கான மாதிரி தளம் மட்டுமே. கற்பனையான தொடர்பு விவரங்களைப் பயன்படுத்தவும். நன்கொடையாளரின் ஒப்புதல் இல்லாமல் தொடர்பு விவரங்களைப் பொதுவில் வெளியிடக்கூடாது. தேடல் முடிவுகள் மருத்துவப் பொருத்தம் அல்லது தகுதியை உறுதிப்படுத்தாது.">
-Educational prototype only.
-</div>
+<button id="searchBtn">Search Donors</button>
+<button id="resetBtn">Reset Filters</button>
 
 </div>
-</main>
 
-<footer>BloodBridge © 2026</footer>
+<p id="message" role="status">Loading donors...</p>
+<p id="count"></p>
+<div id="results"></div>
 
-<script>
+<p class="muted">
+Hackathon demo only. Contact information is not displayed publicly.
+Potential matches are not medical compatibility confirmations.
+Healthcare professionals must verify donor eligibility and compatibility.
+</p>
 
-let language=localStorage.getItem("bloodbridgeLanguage")||"en";
+</div>
 
-function setLanguage(lang){
-language=lang;
-document.documentElement.lang=lang;
+<script type="module">
 
-document.querySelectorAll("[data-en]").forEach(el=>{
-el.textContent=el.getAttribute("data-"+lang);
+import { db, collection, getDocs }
+from "./firebase.js";
+
+const results = document.getElementById("results");
+const message = document.getElementById("message");
+const count = document.getElementById("count");
+
+let allDonors = [];
+
+function escapeHTML(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[char]);
+}
+
+async function loadDonors() {
+
+  message.textContent = "Loading shared donor database...";
+  results.innerHTML = "";
+
+  try {
+    const snapshot = await getDocs(collection(db, "donors"));
+
+    allDonors = snapshot.docs.map(item => ({
+      id: item.id,
+      ...item.data()
+    }));
+
+    message.textContent = "Shared donor database loaded successfully!";
+    applyFilters();
+
+  } catch(error) {
+    console.error(error);
+    message.textContent = "Unable to load donors: " + error.message;
+    count.textContent = "";
+  }
+}
+
+function applyFilters() {
+
+  const group = document.getElementById("bloodGroup").value;
+  const state = document.getElementById("state").value;
+  const city = document.getElementById("city").value.trim().toLowerCase();
+  const age = document.getElementById("ageGroup").value;
+  const availability = document.getElementById("availability").value;
+  const sort = document.getElementById("sort").value;
+
+  let filtered = allDonors.filter(donor => {
+
+    const matchesGroup = !group || donor.bloodGroup === group;
+    const matchesState = !state || donor.state === state;
+    const matchesCity = !city || String(donor.city || "").toLowerCase().includes(city);
+    const matchesAge = !age || donor.ageGroup === age;
+    const matchesAvailability =
+      availability === "All" || donor.availability === availability;
+
+    return matchesGroup && matchesState && matchesCity &&
+           matchesAge && matchesAvailability;
+  });
+
+  filtered.sort((a,b) =>
+    String(a[sort] || "").localeCompare(String(b[sort] || ""))
+  );
+
+  count.textContent = "Potential donors found: " + filtered.length;
+
+  if(filtered.length === 0) {
+    results.innerHTML =
+      "<div class='donor-card'>No matching donors found. Try changing your filters.</div>";
+    return;
+  }
+
+  results.innerHTML = filtered.map(donor => `
+    <div class="donor-card">
+      <h3>${escapeHTML(donor.name)}</h3>
+      <p><b>Blood Group:</b> ${escapeHTML(donor.bloodGroup)}</p>
+      <p><b>Age Group:</b> ${escapeHTML(donor.ageGroup)}</p>
+      <p><b>State:</b> ${escapeHTML(donor.state)}</p>
+      <p><b>City:</b> ${escapeHTML(donor.city)}</p>
+      <p><b>Availability:</b>
+        <span class="${donor.availability === "Available" ? "status" : ""}">
+          ${escapeHTML(donor.availability)}
+        </span>
+      </p>
+      <p class="muted">Contact details are protected in this demo.</p>
+    </div>
+  `).join("");
+}
+
+document.getElementById("searchBtn").addEventListener("click", applyFilters);
+
+document.getElementById("resetBtn").addEventListener("click", () => {
+  document.getElementById("bloodGroup").value = "";
+  document.getElementById("state").value = "";
+  document.getElementById("city").value = "";
+  document.getElementById("ageGroup").value = "";
+  document.getElementById("availability").value = "Available";
+  document.getElementById("sort").value = "name";
+  applyFilters();
 });
 
-document.getElementById("languageButton").textContent=
-lang==="en"?"தமிழ்":"English";
-
-localStorage.setItem("bloodbridgeLanguage",lang);
-}
-
-function toggleLanguage(){
-setLanguage(language==="en"?"ta":"en");
-}
-
-function normalize(value){
-return String(value||"").trim().toLowerCase();
-}
-
-function escapeHTML(value){
-return String(value??"").replace(/[&<>"']/g,char=>({
-"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-})[char]);
-}
-
-function searchDonors(event){
-if(event)event.preventDefault();
-
-const group=document.getElementById("bloodGroup").value;
-const state=document.getElementById("state").value;
-const city=normalize(document.getElementById("city").value);
-const age=document.getElementById("ageGroup").value;
-const availability=document.getElementById("availability").value;
-const sort=document.getElementById("sort").value;
-
-const donors=JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
-
-let matches=donors.filter(d=>{
-
-return (!group||normalize(d.bloodGroup)===normalize(group))&&
-(!state||normalize(d.state)===normalize(state))&&
-(!city||normalize(d.city).includes(city))&&
-(!age||normalize(d.ageGroup)===normalize(age))&&
-(!availability||normalize(d.availability)===normalize(availability));
-
-});
-
-matches.sort((a,b)=>{
-if(sort==="blood")return normalize(a.bloodGroup).localeCompare(normalize(b.bloodGroup));
-if(sort==="city")return normalize(a.city).localeCompare(normalize(b.city));
-return normalize(a.name).localeCompare(normalize(b.name));
-});
-
-displayResults(matches);
-}
-
-function displayResults(matches){
-
-const results=document.getElementById("results");
-
-if(matches.length===0){
-results.innerHTML=`
-<div class="empty">
-<strong>${language==="en"?"No matching donors found.":"பொருந்தக்கூடிய நன்கொடையாளர்கள் இல்லை."}</strong>
-<p>${language==="en"?"Try changing your filters.":"வடிகட்டிகளை மாற்றி மீண்டும் முயற்சிக்கவும்."}</p>
-</div>`;
-return;
-}
-
-results.innerHTML=`
-<div class="result-heading">
-<h2 style="color:#a50025">
-${language==="en"?"Search Results":"தேடல் முடிவுகள்"}
-</h2>
-<span class="count">${matches.length} ${language==="en"?"Donors":"நன்கொடையாளர்கள்"}</span>
-</div>
-
-${matches.map(d=>{
-
-const isAvailable=normalize(d.availability)==="available";
-const phone=String(d.phone||"").trim();
-const email=String(d.email||"").trim();
-const validPhone=/^[0-9+()\-\s]{7,20}$/.test(phone);
-const validEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-
-return `
-<div class="donor-card">
-<h3>🩸 ${escapeHTML(d.name||"Demo Donor")}</h3>
-
-<div class="detail"><strong>${language==="en"?"Age Group:":"வயது பிரிவு:"}</strong> ${escapeHTML(d.ageGroup||"Not provided")}</div>
-
-<div class="detail"><strong>${language==="en"?"Blood Group:":"இரத்த வகை:"}</strong> ${escapeHTML(d.bloodGroup)}</div>
-
-<div class="detail"><strong>${language==="en"?"Location:":"இருப்பிடம்:"}</strong> ${escapeHTML(d.city)}, ${escapeHTML(d.state)}</div>
-
-<div class="detail ${isAvailable?"available":""}">
-● ${escapeHTML(d.availability||"Not specified")}
-</div>
-
-<div class="detail"><strong>${language==="en"?"Phone:":"தொலைபேசி:"}</strong> ${escapeHTML(phone||"Not provided")}</div>
-
-<div class="detail"><strong>${language==="en"?"Email:":"மின்னஞ்சல்:"}</strong> ${escapeHTML(email||"Not provided")}</div>
-
-<div class="contact">
-${validPhone?`<a href="tel:${encodeURIComponent(phone)}">${language==="en"?"Call":"அழைக்க"}</a>`:""}
-${validEmail?`<a href="mailto:${encodeURIComponent(email)}">${language==="en"?"Email":"மின்னஞ்சல்"}</a>`:""}
-</div>
-
-</div>`;
-
-}).join("")}`;
-
-}
-
-function resetFilters(){
-document.getElementById("searchForm").reset();
-document.getElementById("results").innerHTML="";
-}
-
-document.getElementById("searchForm").addEventListener("submit",searchDonors);
-
-setLanguage(language);
+loadDonors();
 
 </script>
-
 </body>
-</html>
+  </html>
+  
