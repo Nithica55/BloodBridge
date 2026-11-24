@@ -2,239 +2,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodBridge Analytics</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit,minmax(180px,1fr));
-            gap: 18px;
-        }
-        .stat-card {
-            background: white;
-            padding: 22px;
-            border-radius: 14px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.07);
-            text-align: center;
-        }
-        .stat-card h3 { color: #b71c1c; }
-        .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #c62828;
-        }
-        .bar-row {
-            margin: 15px 0;
-        }
-        .bar-track {
-            height: 13px;
-            background: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-        .bar-fill {
-            height: 100%;
-            background: #d32f2f;
-            border-radius: 10px;
-        }
-        .analytics-card {
-            background: white;
-            padding: 22px;
-            border-radius: 14px;
-            margin-top: 22px;
-            box-shadow: 0 4px 15px rgba(0,0,0,.07);
-        }
-        .small-note {
-            color: #777;
-            font-size: 13px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodBridge | Analytics</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#202b3c}
+header{background:#a90024;color:white;padding:20px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+header h2{margin:0}
+nav{background:white;padding:14px 6%;display:flex;gap:22px;flex-wrap:wrap;box-shadow:0 2px 8px #0000000b}
+nav a{color:#a90024;text-decoration:none;font-weight:bold}
+main{max-width:1150px;margin:30px auto;padding:0 18px}
+.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+select{padding:10px;border:1px solid #ddd;border-radius:8px;background:white}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:18px;margin:25px 0}
+.card,.panel{background:white;padding:22px;border-radius:14px;box-shadow:0 3px 15px #18243b0b}
+.card p{color:#697586;margin:0}
+.number{font-size:32px;font-weight:bold;color:#a90024;margin-top:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.panel h3{margin-top:0}
+.barrow{margin:15px 0}
+.barlabel{display:flex;justify-content:space-between;margin-bottom:7px;font-size:14px}
+.track{height:11px;background:#f0e5e8;border-radius:20px;overflow:hidden}
+.fill{height:100%;background:#c51d42;border-radius:20px}
+.item{padding:12px 0;border-bottom:1px solid #eee;font-size:14px}
+.empty{color:#777;padding:12px 0}
+footer{text-align:center;color:#777;padding:30px}
+button{background:white;color:#a90024;border:0;border-radius:8px;padding:10px 14px;font-weight:bold}
+</style>
 </head>
-
 <body>
 
 <header>
-    <h1>🩸 BloodBridge</h1>
-    <p>Donor Analytics Dashboard</p>
+<h2>🩸 BloodBridge</h2>
+<button onclick="toggleLanguage()" id="langBtn">தமிழ்</button>
 </header>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="register.html">Become a Donor</a>
-    <a href="search.html">Find Donor</a>
-    <a href="request.html">Emergency Request</a>
-    <a href="matching.html">Smart Matching</a>
-    <a href="dashboard.html">Dashboard</a>
+<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
+<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
+<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
 </nav>
 
-<section>
-    <h2>📊 Live Platform Statistics</h2>
+<main>
+<div class="top">
+<div>
+<h1 data-en="Analytics Dashboard" data-ta="புள்ளிவிவர பலகை">Analytics Dashboard</h1>
+<p data-en="A live overview of your BloodBridge demo data."
+data-ta="BloodBridge மாதிரி தரவுகளின் நேரடி கண்ணோட்டம்.">
+A live overview of your BloodBridge demo data.
+</p>
+</div>
+<button onclick="loadDashboard()" style="background:#a90024;color:white"
+data-en="↻ Refresh" data-ta="↻ புதுப்பிக்க">↻ Refresh</button>
+</div>
 
-    <div class="stats-grid">
-
-        <div class="stat-card">
-            <h3>Registered Donors</h3>
-            <div class="stat-number" id="totalDonors">0</div>
-        </div>
-
-        <div class="stat-card">
-            <h3>Available Donors</h3>
-            <div class="stat-number" id="availableDonors">0</div>
-        </div>
-
-        <div class="stat-card">
-            <h3>Unavailable Donors</h3>
-            <div class="stat-number" id="unavailableDonors">0</div>
-        </div>
-
-        <div class="stat-card">
-            <h3>Emergency Requests</h3>
-            <div class="stat-number" id="totalRequests">0</div>
-        </div>
-
-        <div class="stat-card">
-            <h3>Cities Covered</h3>
-            <div class="stat-number" id="totalCities">0</div>
-        </div>
-
-    </div>
+<section class="cards">
+<div class="card"><p data-en="Total Donors" data-ta="மொத்த நன்கொடையாளர்கள்">Total Donors</p><div class="number" id="total">0</div></div>
+<div class="card"><p data-en="Available Donors" data-ta="கிடைக்கக்கூடிய நன்கொடையாளர்கள்">Available Donors</p><div class="number" id="available">0</div></div>
+<div class="card"><p data-en="Emergency Requests" data-ta="அவசர கோரிக்கைகள்">Emergency Requests</p><div class="number" id="requests">0</div></div>
+<div class="card"><p data-en="Cities Covered" data-ta="உள்ளடக்கப்பட்ட நகரங்கள்">Cities Covered</p><div class="number" id="cities">0</div></div>
 </section>
 
-<section class="analytics-card">
-    <h2>🩸 Blood Group Distribution</h2>
-    <div id="bloodChart"></div>
+<div class="grid">
+<section class="panel">
+<h3 data-en="Blood Group Distribution" data-ta="இரத்த வகை விநியோகம்">Blood Group Distribution</h3>
+<div id="bloodChart"></div>
 </section>
 
-<section class="analytics-card">
-    <h2>📍 State-wise Donor Coverage</h2>
-    <div id="stateChart"></div>
+<section class="panel">
+<h3 data-en="State-wise Donors" data-ta="மாநில வாரியான நன்கொடையாளர்கள்">State-wise Donors</h3>
+<div id="stateChart"></div>
 </section>
 
-<section class="analytics-card">
-    <h2>🚨 Recent Emergency Requests</h2>
-    <div id="recentRequests"></div>
+<section class="panel">
+<h3 data-en="Recent Emergency Requests" data-ta="சமீபத்திய அவசர கோரிக்கைகள்">Recent Emergency Requests</h3>
+<div id="recent"></div>
 </section>
+</div>
+</main>
 
-<section>
-    <button onclick="loadDashboard()">🔄 Refresh Dashboard</button>
-</section>
-
-<footer>
-    <p>© 2026 BloodBridge</p>
-    <p class="small-note">Prototype analytics using browser-stored demo data.</p>
-</footer>
+<footer>BloodBridge © 2026 | Connecting Donors, Supporting Lives</footer>
 
 <script>
-function loadDashboard() {
+let language = "en";
 
-    const donors = JSON.parse(
-        localStorage.getItem("bloodbridgeDonors")
-    ) || [];
+function toggleLanguage(){
+ language = language === "en" ? "ta" : "en";
+ document.querySelectorAll("[data-en]").forEach(el=>{
+   el.textContent = el.getAttribute("data-" + language);
+ });
+ document.getElementById("langBtn").textContent =
+   language === "en" ? "தமிழ்" : "English";
+}
 
-    const requests = JSON.parse(
-        localStorage.getItem("bloodbridgeRequests")
-    ) || [];
+function loadDashboard(){
+ const donors = JSON.parse(localStorage.getItem("bloodbridgeDonors") || "[]");
+ const requests = JSON.parse(localStorage.getItem("bloodbridgeRequests") || "[]");
 
-    const available = donors.filter(
-        d => String(d.availability || "").trim().toLowerCase() === "available"
-    );
+ const available = donors.filter(d =>
+   String(d.availability || "").trim().toLowerCase() === "available"
+ );
 
-    const unavailable = donors.length - available.length;
+ document.getElementById("total").textContent = donors.length;
+ document.getElementById("available").textContent = available.length;
+ document.getElementById("requests").textContent = requests.length;
 
-    const cities = new Set(
-        donors.map(d => String(d.city || "").trim().toLowerCase())
-              .filter(Boolean)
-    );
+ const citySet = new Set(donors.map(d=>d.city).filter(Boolean));
+ document.getElementById("cities").textContent = citySet.size;
 
-    document.getElementById("totalDonors").textContent = donors.length;
-    document.getElementById("availableDonors").textContent = available.length;
-    document.getElementById("unavailableDonors").textContent = unavailable;
-    document.getElementById("totalRequests").textContent = requests.length;
-    document.getElementById("totalCities").textContent = cities.size;
+ const groups = ["A+","A-","B+","B-","AB+","AB-","O+","O-"];
+ const maxGroup = Math.max(1,...groups.map(g=>
+   donors.filter(d=>String(d.bloodGroup || "").toUpperCase()===g).length
+ ));
 
-    // Blood group chart
-    const groups = ["A+","A-","B+","B-","O+","O-","AB+","AB-"];
-    const chart = document.getElementById("bloodChart");
+ document.getElementById("bloodChart").innerHTML = groups.map(g=>{
+   const count = donors.filter(d=>
+     String(d.bloodGroup || "").toUpperCase()===g
+   ).length;
+   return `<div class="barrow">
+     <div class="barlabel"><b>${g}</b><span>${count}</span></div>
+     <div class="track"><div class="fill" style="width:${count/maxGroup*100}%"></div></div>
+   </div>`;
+ }).join("");
 
-    chart.innerHTML = "";
+ const states = {};
+ donors.forEach(d=>{
+   if(d.state) states[d.state] = (states[d.state] || 0)+1;
+ });
+ const stateEntries = Object.entries(states);
+ const maxState = Math.max(1,...stateEntries.map(x=>x[1]));
 
-    groups.forEach(group => {
+ document.getElementById("stateChart").innerHTML =
+ stateEntries.length ? stateEntries.map(([name,count])=>`
+   <div class="barrow">
+     <div class="barlabel"><b>${name}</b><span>${count}</span></div>
+     <div class="track"><div class="fill" style="width:${count/maxState*100}%"></div></div>
+   </div>`).join("") : '<p class="empty">No donor data yet.</p>';
 
-        const count = donors.filter(
-            d => String(d.bloodGroup || "").trim().toUpperCase() === group
-        ).length;
-
-        const percent = donors.length
-            ? (count / donors.length) * 100
-            : 0;
-
-        chart.innerHTML += `
-            <div class="bar-row">
-                <strong>${group}: ${count} donor(s)</strong>
-                <div class="bar-track">
-                    <div class="bar-fill" style="width:${percent}%"></div>
-                </div>
-            </div>
-        `;
-    });
-
-    // State coverage
-    const stateCounts = {};
-
-    donors.forEach(d => {
-        const state = String(d.state || "").trim();
-        if (state) {
-            stateCounts[state] = (stateCounts[state] || 0) + 1;
-        }
-    });
-
-    const stateChart = document.getElementById("stateChart");
-    stateChart.innerHTML = "";
-
-    const stateEntries = Object.entries(stateCounts);
-
-    if (stateEntries.length === 0) {
-        stateChart.innerHTML = "<p>No donor locations available yet.</p>";
-    } else {
-        stateEntries.forEach(([state, count]) => {
-            stateChart.innerHTML += `
-                <div class="bar-row">
-                    <strong>${state}: ${count} donor(s)</strong>
-                    <div class="bar-track">
-                        <div class="bar-fill"
-                             style="width:${(count / donors.length) * 100}%"></div>
-                    </div>
-                </div>
-            `;
-        });
-    }
-
-    // Recent requests
-    const recent = document.getElementById("recentRequests");
-    recent.innerHTML = "";
-
-    if (requests.length === 0) {
-        recent.innerHTML = "<p>No emergency requests yet.</p>";
-    } else {
-        requests.slice(-5).reverse().forEach(request => {
-            recent.innerHTML += `
-                <div class="card">
-                    <h3>🚨 ${request.patientName || "Emergency Request"}</h3>
-                    <p>Blood Group: ${request.bloodGroup || "Not specified"}</p>
-                    <p>Location: ${request.city || ""}, ${request.state || ""}</p>
-                    <p>Urgency: ${request.urgency || "Not specified"}</p>
-                    <p class="small-note">${request.date || ""}</p>
-                </div>
-            `;
-        });
-    }
+ const recent = requests.slice(-5).reverse();
+ document.getElementById("recent").innerHTML =
+ recent.length ? recent.map(r=>`
+   <div class="item">
+     <b>${r.bloodGroup || "Blood group not specified"}</b><br>
+     ${r.city || "Location not specified"}, ${r.state || ""}<br>
+     <span style="color:#a90024">${r.urgency || "Request submitted"}</span>
+   </div>`).join("") : '<p class="empty">No emergency requests yet.</p>';
 }
 
 loadDashboard();
 </script>
-
 </body>
-    </html>
-    
+</html>
