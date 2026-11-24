@@ -1,7 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Become a Donor - BloodBridge</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -9,8 +14,9 @@
 
 <header>
     <h1>🩸 BloodBridge</h1>
-    <p>Become a Blood Donor</p>
+    <p>Connecting blood donors with people in need</p>
 </header>
+
 
 <nav>
     <a href="index.html">Home</a>
@@ -19,45 +25,552 @@
     <a href="request.html">Emergency Request</a>
 </nav>
 
+
 <section class="form-section">
 
-    <h2>Donor Registration</h2>
+    <h2>🩸 Donor Registration</h2>
 
-    <form>
+    <p class="form-intro">
+        Register as a potential blood donor and help someone in need.
+    </p>
 
-        <label>Name</label>
-        <input type="text" placeholder="Enter your name">
 
-        <label>Blood Group</label>
-        <select>
-            <option>Select Blood Group</option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B+</option>
-            <option>B-</option>
-            <option>O+</option>
-            <option>O-</option>
-            <option>AB+</option>
-            <option>AB-</option>
+    <form id="donorForm">
+
+        <!-- NAME -->
+
+        <label for="name">Full Name</label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required>
+
+
+        <!-- BLOOD GROUP -->
+
+        <label for="bloodGroup">Blood Group</label>
+
+        <select id="bloodGroup" required>
+
+            <option value="">Select Blood Group</option>
+
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+
         </select>
 
-        <label>City</label>
-        <input type="text" placeholder="Enter your city">
 
-        <label>Area</label>
-        <input type="text" placeholder="Enter your area">
+        <!-- STATE -->
 
-        <label>Availability</label>
-        <select>
+        <label for="state">State / Union Territory</label>
+
+        <select id="state" required>
+
+            <option value="">Select State / UT</option>
+
+            <option>Andhra Pradesh</option>
+            <option>Arunachal Pradesh</option>
+            <option>Assam</option>
+            <option>Bihar</option>
+            <option>Chhattisgarh</option>
+            <option>Goa</option>
+            <option>Gujarat</option>
+            <option>Haryana</option>
+            <option>Himachal Pradesh</option>
+            <option>Jharkhand</option>
+            <option>Karnataka</option>
+            <option>Kerala</option>
+            <option>Madhya Pradesh</option>
+            <option>Maharashtra</option>
+            <option>Manipur</option>
+            <option>Meghalaya</option>
+            <option>Mizoram</option>
+            <option>Nagaland</option>
+            <option>Odisha</option>
+            <option>Punjab</option>
+            <option>Rajasthan</option>
+            <option>Sikkim</option>
+            <option>Tamil Nadu</option>
+            <option>Telangana</option>
+            <option>Tripura</option>
+            <option>Uttar Pradesh</option>
+            <option>Uttarakhand</option>
+            <option>West Bengal</option>
+
+            <option>Andaman and Nicobar Islands</option>
+            <option>Chandigarh</option>
+            <option>Dadra and Nagar Haveli and Daman and Diu</option>
+            <option>Delhi</option>
+            <option>Jammu and Kashmir</option>
+            <option>Ladakh</option>
+            <option>Lakshadweep</option>
+            <option>Puducherry</option>
+
+        </select>
+
+
+        <!-- CITY -->
+
+        <label for="city">City</label>
+
+        <select id="city" required>
+
+            <option value="">Select State First</option>
+
+        </select>
+
+
+        <!-- AREA -->
+
+        <label for="area">Area / Locality</label>
+
+        <input
+            type="text"
+            id="area"
+            placeholder="Enter your area / locality"
+            required>
+
+
+        <!-- PHONE -->
+
+        <label for="phone">Phone Number</label>
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="10-digit mobile number"
+            maxlength="10"
+            pattern="[0-9]{10}"
+            required>
+
+
+        <!-- EMAIL -->
+
+        <label for="email">Email ID</label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="example@email.com"
+            required>
+
+
+        <!-- AVAILABILITY -->
+
+        <label for="availability">Donation Availability</label>
+
+        <select id="availability" required>
+
+            <option value="">Select Availability</option>
+
             <option>Available</option>
+
             <option>Not Available</option>
+
         </select>
 
-        <button type="submit">Register as Donor</button>
+
+        <!-- SUBMIT -->
+
+        <button type="submit">
+            Register as Donor
+        </button>
 
     </form>
 
 </section>
 
+
+<script>
+
+/* -----------------------------------------
+   STATE → CITY DATA
+----------------------------------------- */
+
+const cities = {
+
+    "Andhra Pradesh": [
+        "Visakhapatnam",
+        "Vijayawada",
+        "Guntur",
+        "Nellore",
+        "Kurnool",
+        "Tirupati",
+        "Rajahmundry",
+        "Kadapa",
+        "Anantapur",
+        "Eluru"
+    ],
+
+    "Arunachal Pradesh": [
+        "Itanagar",
+        "Naharlagun",
+        "Tawang",
+        "Pasighat",
+        "Ziro",
+        "Bomdila"
+    ],
+
+    "Assam": [
+        "Guwahati",
+        "Dibrugarh",
+        "Silchar",
+        "Jorhat",
+        "Tezpur",
+        "Nagaon"
+    ],
+
+    "Bihar": [
+        "Patna",
+        "Gaya",
+        "Bhagalpur",
+        "Muzaffarpur",
+        "Darbhanga",
+        "Purnia"
+    ],
+
+    "Chhattisgarh": [
+        "Raipur",
+        "Bhilai",
+        "Bilaspur",
+        "Korba",
+        "Durg",
+        "Jagdalpur"
+    ],
+
+    "Goa": [
+        "Panaji",
+        "Margao",
+        "Vasco da Gama",
+        "Mapusa",
+        "Ponda"
+    ],
+
+    "Gujarat": [
+        "Ahmedabad",
+        "Surat",
+        "Vadodara",
+        "Rajkot",
+        "Bhavnagar",
+        "Jamnagar",
+        "Gandhinagar",
+        "Junagadh"
+    ],
+
+    "Haryana": [
+        "Gurugram",
+        "Faridabad",
+        "Panipat",
+        "Ambala",
+        "Hisar",
+        "Karnal",
+        "Rohtak"
+    ],
+
+    "Himachal Pradesh": [
+        "Shimla",
+        "Dharamshala",
+        "Mandi",
+        "Solan",
+        "Kullu",
+        "Manali"
+    ],
+
+    "Jharkhand": [
+        "Ranchi",
+        "Jamshedpur",
+        "Dhanbad",
+        "Bokaro",
+        "Deoghar",
+        "Hazaribagh"
+    ],
+
+    "Karnataka": [
+        "Bengaluru",
+        "Mysuru",
+        "Mangaluru",
+        "Hubballi",
+        "Belagavi",
+        "Davangere",
+        "Ballari",
+        "Shivamogga"
+    ],
+
+    "Kerala": [
+        "Thiruvananthapuram",
+        "Kochi",
+        "Kozhikode",
+        "Kollam",
+        "Thrissur",
+        "Alappuzha",
+        "Kannur",
+        "Kottayam",
+        "Palakkad"
+    ],
+
+    "Madhya Pradesh": [
+        "Bhopal",
+        "Indore",
+        "Jabalpur",
+        "Gwalior",
+        "Ujjain",
+        "Sagar",
+        "Rewa"
+    ],
+
+    "Maharashtra": [
+        "Mumbai",
+        "Pune",
+        "Nagpur",
+        "Nashik",
+        "Thane",
+        "Aurangabad",
+        "Kolhapur",
+        "Solapur"
+    ],
+
+    "Manipur": [
+        "Imphal",
+        "Thoubal",
+        "Churachandpur",
+        "Kakching"
+    ],
+
+    "Meghalaya": [
+        "Shillong",
+        "Tura",
+        "Jowai",
+        "Nongpoh"
+    ],
+
+    "Mizoram": [
+        "Aizawl",
+        "Lunglei",
+        "Champhai",
+        "Kolasib"
+    ],
+
+    "Nagaland": [
+        "Kohima",
+        "Dimapur",
+        "Mokokchung",
+        "Tuensang"
+    ],
+
+    "Odisha": [
+        "Bhubaneswar",
+        "Cuttack",
+        "Rourkela",
+        "Puri",
+        "Berhampur",
+        "Sambalpur"
+    ],
+
+    "Punjab": [
+        "Amritsar",
+        "Ludhiana",
+        "Jalandhar",
+        "Patiala",
+        "Bathinda"
+    ],
+
+    "Rajasthan": [
+        "Jaipur",
+        "Jodhpur",
+        "Udaipur",
+        "Kota",
+        "Ajmer",
+        "Bikaner",
+        "Alwar"
+    ],
+
+    "Sikkim": [
+        "Gangtok",
+        "Namchi",
+        "Gyalshing",
+        "Mangan"
+    ],
+
+    "Tamil Nadu": [
+        "Chennai",
+        "Coimbatore",
+        "Madurai",
+        "Tiruchirappalli",
+        "Salem",
+        "Tirunelveli",
+        "Nagercoil",
+        "Thoothukudi",
+        "Erode",
+        "Vellore",
+        "Thanjavur",
+        "Dindigul",
+        "Tiruppur",
+        "Kanchipuram",
+        "Hosur"
+    ],
+
+    "Telangana": [
+        "Hyderabad",
+        "Warangal",
+        "Nizamabad",
+        "Karimnagar",
+        "Khammam",
+        "Nalgonda"
+    ],
+
+    "Tripura": [
+        "Agartala",
+        "Udaipur",
+        "Dharmanagar",
+        "Kailashahar"
+    ],
+
+    "Uttar Pradesh": [
+        "Lucknow",
+        "Kanpur",
+        "Agra",
+        "Varanasi",
+        "Prayagraj",
+        "Ghaziabad",
+        "Noida",
+        "Meerut",
+        "Bareilly",
+        "Gorakhpur"
+    ],
+
+    "Uttarakhand": [
+        "Dehradun",
+        "Haridwar",
+        "Rishikesh",
+        "Haldwani",
+        "Nainital",
+        "Roorkee"
+    ],
+
+    "West Bengal": [
+        "Kolkata",
+        "Howrah",
+        "Durgapur",
+        "Siliguri",
+        "Asansol",
+        "Darjeeling"
+    ],
+
+    "Andaman and Nicobar Islands": [
+        "Port Blair",
+        "Diglipur",
+        "Mayabunder"
+    ],
+
+    "Chandigarh": [
+        "Chandigarh"
+    ],
+
+    "Dadra and Nagar Haveli and Daman and Diu": [
+        "Daman",
+        "Diu",
+        "Silvassa"
+    ],
+
+    "Delhi": [
+        "New Delhi",
+        "Delhi"
+    ],
+
+    "Jammu and Kashmir": [
+        "Srinagar",
+        "Jammu",
+        "Anantnag",
+        "Baramulla",
+        "Kathua"
+    ],
+
+    "Ladakh": [
+        "Leh",
+        "Kargil"
+    ],
+
+    "Lakshadweep": [
+        "Kavaratti",
+        "Agatti",
+        "Andrott"
+    ],
+
+    "Puducherry": [
+        "Puducherry",
+        "Karaikal",
+        "Mahe",
+        "Yanam"
+    ]
+
+};
+
+
+/* -----------------------------------------
+   STATE → CITY DROPDOWN
+----------------------------------------- */
+
+const stateSelect = document.getElementById("state");
+
+const citySelect = document.getElementById("city");
+
+
+stateSelect.addEventListener("change", function () {
+
+    const selectedState = this.value;
+
+    citySelect.innerHTML =
+        '<option value="">Select City</option>';
+
+
+    if (cities[selectedState]) {
+
+        cities[selectedState].forEach(function(city) {
+
+            const option =
+                document.createElement("option");
+
+            option.value = city;
+
+            option.textContent = city;
+
+            citySelect.appendChild(option);
+
+        });
+
+    }
+
+});
+
+
+/* -----------------------------------------
+   FORM SUBMISSION
+----------------------------------------- */
+
+document
+.getElementById("donorForm")
+.addEventListener("submit", function(event) {
+
+    event.preventDefault();
+
+    alert(
+        "🎉 Donor registration submitted successfully!"
+    );
+
+});
+
+</script>
+
 </body>
-  </html>
+</html>
