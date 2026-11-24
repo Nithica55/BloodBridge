@@ -1,445 +1,167 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodBridge | Connecting Lives</title>
 
-    <title>BloodBridge | Connect. Respond. Save.</title>
-
-    <link rel="stylesheet" href="style.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f7f8fc;color:#263247}
+header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font-size:25px;font-weight:bold}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;font-weight:bold}
+#language{background:white;color:#a90024}
+nav{background:white;padding:17px 6%;display:flex;gap:25px;flex-wrap:wrap;box-shadow:0 2px 10px #0000000a}
+nav a{text-decoration:none;color:#a90024;font-weight:bold}
+.hero{padding:75px 7%;background:linear-gradient(120deg,#fff0f2,#fff);display:grid;grid-template-columns:1.4fr 1fr;gap:35px;align-items:center}
+.hero h1{font-size:clamp(32px,5vw,52px);line-height:1.15;color:#a90024;margin-bottom:18px}
+.hero p{font-size:17px;line-height:1.7;color:#586477;margin-bottom:25px}
+.primary{background:#b20c32;color:white;padding:15px 23px}
+.secondary{background:white;color:#a90024;border:1px solid #a90024;padding:15px 23px}
+.hero-art{background:#a90024;color:white;border-radius:24px;padding:40px;text-align:center;min-height:230px;display:flex;flex-direction:column;justify-content:center}
+.hero-art .drop{font-size:65px}
+.hero-art h2{margin:15px 0}
+section.content{max-width:1150px;margin:55px auto;padding:0 20px}
+.heading{text-align:center;color:#a90024;font-size:29px;margin-bottom:28px}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{background:white;padding:26px;border-radius:15px;box-shadow:0 4px 18px #0000000b}
+.card .icon{font-size:35px}
+.card h3{margin:15px 0;color:#a90024}
+.card p{color:#687386;line-height:1.6}
+.cta{background:#a90024;color:white;text-align:center;padding:48px 20px;margin-top:55px}
+.cta h2{font-size:30px;margin-bottom:15px}
+.cta p{margin-bottom:22px}
+footer{text-align:center;padding:25px;color:#687386;background:white;line-height:1.7}
+@media(max-width:700px){
+.hero{grid-template-columns:1fr;padding:50px 7%}
+nav{gap:15px}
+}
+</style>
 </head>
 
 <body>
 
-<!-- ================= HEADER ================= -->
-
 <header>
-
-    <h1>🩸 BloodBridge</h1>
-
-    <p>
-        Connecting potential blood donors with people in need
-    </p>
-
+<div class="logo">🩸 BloodBridge</div>
+<button id="language" onclick="toggleLanguage()">தமிழ்</button>
 </header>
 
-
-<!-- ================= NAVIGATION ================= -->
-
 <nav>
-
-    <a href="index.html">Home</a>
-
-    <a href="register.html">
-        Become a Donor
-    </a>
-
-    <a href="search.html">
-        Find Donor
-    </a>
-
-    <a href="request.html">
-        Emergency Request
-    </a>
-
-    <a href="matching.html">
-        Smart Matching
-    </a>
-
-    <a href="dashboard.html">
-        Dashboard
-    </a>
-
+<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
+<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
+<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
 </nav>
 
+<div class="hero">
+<div>
+<h1 data-en="Every Drop Can Make a Difference."
+data-ta="ஒவ்வொரு துளியும் ஒரு மாற்றத்தை உருவாக்கும்.">
+Every Drop Can Make a Difference.
+</h1>
 
-<!-- ================= HERO SECTION ================= -->
+<p data-en="BloodBridge connects potential blood donors with people who need blood. Find donors, register your availability and submit emergency requests."
+data-ta="இரத்தம் தேவைப்படுபவர்களையும் சாத்தியமான இரத்த தானம் செய்பவர்களையும் BloodBridge இணைக்கிறது. நன்கொடையாளர்களைத் தேடுங்கள், பதிவு செய்யுங்கள் மற்றும் அவசர கோரிக்கைகளைச் சமர்ப்பியுங்கள்.">
+BloodBridge connects potential blood donors with people who need blood. Find donors, register your availability and submit emergency requests.
+</p>
 
-<section class="hero">
+<a href="search.html"><button class="primary" data-en="Find a Donor →" data-ta="நன்கொடையாளரைத் தேடு →">Find a Donor →</button></a>
+<a href="register.html"><button class="secondary" data-en="Register Now" data-ta="இப்போது பதிவு செய்">Register Now</button></a>
+</div>
 
-    <h2>
-        Every Drop Can Make a Difference ❤️
-    </h2>
+<div class="hero-art">
+<div class="drop">🩸</div>
+<h2 data-en="Connect. Donate. Save Lives." data-ta="இணைவோம். இரத்தம் கொடுப்போம். உயிர்களைக் காப்போம்.">Connect. Donate. Save Lives.</h2>
+<p data-en="A digital bridge between donors and patients."
+data-ta="நன்கொடையாளர்களுக்கும் நோயாளிகளுக்கும் இடையிலான டிஜிட்டல் பாலம்.">
+A digital bridge between donors and patients.
+</p>
+</div>
+</div>
 
-    <p>
+<section class="content">
+<h2 class="heading" data-en="Our Platform" data-ta="எங்கள் தளம்">Our Platform</h2>
 
-        BloodBridge is a software-based platform designed to
-        connect potential blood donors with people requiring
-        blood based on blood group and location.
+<div class="features">
+<div class="card">
+<div class="icon">📝</div>
+<h3 data-en="Donor Registration" data-ta="நன்கொடையாளர் பதிவு">Donor Registration</h3>
+<p data-en="Register donor details and availability in the demo platform."
+data-ta="மாதிரி தளத்தில் நன்கொடையாளர் விவரங்களையும் கிடைக்கும் நிலையையும் பதிவு செய்யுங்கள்.">
+Register donor details and availability in the demo platform.
+</p>
+</div>
 
-    </p>
+<div class="card">
+<div class="icon">🔎</div>
+<h3 data-en="Smart Search" data-ta="சிறந்த தேடல்">Smart Search</h3>
+<p data-en="Search potential donors using blood group and location."
+data-ta="இரத்த வகை மற்றும் இருப்பிடத்தின் அடிப்படையில் சாத்தியமான நன்கொடையாளர்களைத் தேடுங்கள்.">
+Search potential donors using blood group and location.
+</p>
+</div>
 
-    <div>
+<div class="card">
+<div class="icon">🚨</div>
+<h3 data-en="Emergency Requests" data-ta="அவசர கோரிக்கைகள்">Emergency Requests</h3>
+<p data-en="Submit an emergency blood request through the platform."
+data-ta="இந்த தளத்தின் மூலம் அவசர இரத்த கோரிக்கையைச் சமர்ப்பியுங்கள்.">
+Submit an emergency blood request through the platform.
+</p>
+</div>
 
-        <a class="button" href="request.html">
-            🚨 Emergency Blood Request
-        </a>
-
-        <a class="button" href="register.html">
-            🩸 Become a Donor
-        </a>
-
-    </div>
-
+<div class="card">
+<div class="icon">📊</div>
+<h3 data-en="Analytics Dashboard" data-ta="புள்ளிவிவர பலகை">Analytics Dashboard</h3>
+<p data-en="View donor statistics and emergency request information."
+data-ta="நன்கொடையாளர் புள்ளிவிவரங்களையும் அவசர கோரிக்கை விவரங்களையும் பாருங்கள்.">
+View donor statistics and emergency request information.
+</p>
+</div>
+</div>
 </section>
 
-
-<!-- ================= QUICK STATS ================= -->
-
-<section>
-
-    <h2>BloodBridge at a Glance</h2>
-
-    <div class="cards">
-
-        <div class="card">
-
-            <h3 id="donorCount">
-                0
-            </h3>
-
-            <p>
-                Registered Donors
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3 id="availableCount">
-                0
-            </h3>
-
-            <p>
-                Available Donors
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3 id="requestCount">
-                0
-            </h3>
-
-            <p>
-                Blood Requests
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3 id="cityCount">
-                0
-            </h3>
-
-            <p>
-                Cities Covered
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= PROBLEM ================= -->
-
-<section>
-
-    <div class="card">
-
-        <h2>
-            🚨 The Problem
-        </h2>
-
-        <p>
-
-            During emergency situations, patients and their
-            families may struggle to identify potential blood
-            donors quickly.
-
-            BloodBridge aims to make donor discovery faster
-            by organizing donor information according to
-            blood group and location.
-
-        </p>
-
-    </div>
-
-</section>
-
-
-<!-- ================= HOW IT WORKS ================= -->
-
-<section>
-
-    <h2>
-        How BloodBridge Works
-    </h2>
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                1️⃣ Register
-            </h3>
-
-            <p>
-
-                Potential donors can register their blood group,
-                location and availability.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                2️⃣ Request
-            </h3>
-
-            <p>
-
-                A patient or authorized requester can submit
-                an emergency blood requirement.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                3️⃣ Match
-            </h3>
-
-            <p>
-
-                BloodBridge identifies potential donors using
-                blood group and location-based matching.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                4️⃣ Connect
-            </h3>
-
-            <p>
-
-                Potential matches can be contacted for further
-                verification and coordination.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FEATURES ================= -->
-
-<section>
-
-    <h2>
-        ✨ BloodBridge Features
-    </h2>
-
-    <div class="cards">
-
-
-        <div class="card">
-
-            <h3>
-                🔎 Donor Search
-            </h3>
-
-            <p>
-
-                Search potential donors using blood group
-                and location.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                🚨 Emergency Requests
-            </h3>
-
-            <p>
-
-                Submit urgent blood requirements and
-                identify potential matches.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                🧠 Smart Matching
-            </h3>
-
-            <p>
-
-                A prototype matching system prioritizes
-                potential donors based on relevant
-                location and availability information.
-
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <h3>
-                📊 Live Dashboard
-            </h3>
-
-            <p>
-
-                View donor registrations, requests,
-                availability and cities covered.
-
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- ================= CALL TO ACTION ================= -->
-
-<section>
-
-    <div class="hero">
-
-        <h2>
-            Be Someone's Hope 🩸
-        </h2>
-
-        <p>
-
-            Register as a potential donor or submit a
-            blood request through the BloodBridge platform.
-
-        </p>
-
-
-        <a class="button" href="register.html">
-            🩸 Register as Donor
-        </a>
-
-
-        <a class="button" href="request.html">
-            🚨 Request Blood
-        </a>
-
-    </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
+<div class="cta">
+<h2 data-en="Be a Link in Someone's Lifeline"
+data-ta="ஒருவரின் உயிர்காக்கும் இணைப்பாக இருங்கள்">
+Be a Link in Someone's Lifeline
+</h2>
+<p data-en="Explore BloodBridge and discover how the platform works."
+data-ta="BloodBridge தளத்தைப் பயன்படுத்தி அது எவ்வாறு செயல்படுகிறது என்பதை அறியுங்கள்.">
+Explore BloodBridge and discover how the platform works.
+</p>
+<a href="register.html"><button class="secondary" data-en="Join BloodBridge" data-ta="BloodBridge-இல் இணையுங்கள்">Join BloodBridge</button></a>
+</div>
 
 <footer>
-
-    <p>
-        © 2026 BloodBridge
-    </p>
-
-    <p>
-        Software Prototype | Healthcare Technology
-    </p>
-
+<strong>BloodBridge © 2026</strong><br>
+<span data-en="A student-developed blood donor connection prototype."
+data-ta="மாணவர்களால் உருவாக்கப்பட்ட இரத்த தான இணைப்பு மாதிரி தளம்.">
+A student-developed blood donor connection prototype.
+</span>
 </footer>
 
-
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
+function applyLanguage(lang){
+ document.documentElement.lang = lang;
+ document.querySelectorAll("[data-en]").forEach(element=>{
+  element.textContent = element.getAttribute("data-" + lang);
+ });
+ document.getElementById("language").textContent =
+  lang === "en" ? "தமிழ்" : "English";
+ localStorage.setItem("bloodbridgeLanguage",lang);
+}
 
-    /*
-     * BloodBridge stores prototype data in the browser's
-     * localStorage.
-     */
+function toggleLanguage(){
+ const current = localStorage.getItem("bloodbridgeLanguage") || "en";
+ applyLanguage(current === "en" ? "ta" : "en");
+}
 
-    const donors =
-        JSON.parse(localStorage.getItem("bloodbridgeDonors")) || [];
-
-    const requests =
-        JSON.parse(localStorage.getItem("bloodbridgeRequests")) || [];
-
-
-    /* Total donors */
-
-    document.getElementById("donorCount").textContent =
-        donors.length;
-
-
-    /* Available donors */
-
-    const availableDonors =
-        donors.filter(
-            donor => donor.availability === "Available"
-        );
-
-    document.getElementById("availableCount").textContent =
-        availableDonors.length;
-
-
-    /* Emergency requests */
-
-    document.getElementById("requestCount").textContent =
-        requests.length;
-
-
-    /* Cities covered */
-
-    const cities = new Set();
-
-    donors.forEach(donor => {
-
-        if (donor.city) {
-
-            cities.add(donor.city);
-
-        }
-
-    });
-
-    document.getElementById("cityCount").textContent =
-        cities.size;
-
+applyLanguage(localStorage.getItem("bloodbridgeLanguage") || "en");
 </script>
 
 </body>
-
 </html>
