@@ -300,6 +300,8 @@ async function findDonors(request) {
      <p><b>Age Group:</b> ${safe(donor.ageGroup)}</p>
      <p><b>City:</b> ${safe(donor.city)}</p>
      <p><b>Availability:</b> ${safe(donor.availability)}</p>
+     <p><b>Phone:</b> ${safe(donor.phone || "Not provided")}</p>
+<p><b>Email:</b> ${safe(donor.email || "Not provided")}</p>
      <p class="muted">Contact details are protected. Contact information can only be shared through an authorized, consent-based process.</p>
     </div>
    `).join("")}
