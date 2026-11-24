@@ -99,3 +99,50 @@ footer {
     text-align: center;
     padding: 20px;
 }
+.form-section {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 35px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-section h2 {
+    color: #b71c1c;
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top: 18px;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+input,
+select {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+button {
+    margin-top: 25px;
+    padding: 13px;
+    border: none;
+    border-radius: 25px;
+    background: #d32f2f;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #8b0000;
+    }
