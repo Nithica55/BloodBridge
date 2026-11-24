@@ -1,228 +1,196 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodBridge Emergency Request</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodBridge | Emergency Request</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#263247}
+header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+button{cursor:pointer;border:0;border-radius:8px;padding:12px 17px;font-weight:bold}
+nav{background:white;padding:16px 6%;display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#a90024;text-decoration:none;font-weight:bold}
+main{max-width:700px;margin:35px auto;padding:0 16px}
+.card{background:white;padding:27px;border-radius:15px;box-shadow:0 4px 20px #0000000b}
+h1{color:#a90024}
+label{display:block;margin:16px 0 7px;font-weight:bold}
+input,select{width:100%;padding:12px;border:1px solid #d7dce5;border-radius:8px;font-size:15px}
+.submit{width:100%;margin-top:24px;background:#a90024;color:white}
+#result{margin-top:20px}
+.match{padding:15px;margin-top:12px;border:1px solid #ddd;border-radius:9px}
+.note{font-size:13px;color:#687386;line-height:1.5}
+</style>
 </head>
-
 <body>
 
 <header>
-    <h1>🩸 BloodBridge</h1>
-    <p>Emergency Blood Donor Connection</p>
+<h2>🩸 BloodBridge</h2>
+<button id="language" onclick="toggleLanguage()" style="color:#a90024">தமிழ்</button>
 </header>
 
 <nav>
-    <a href="index.html">Home</a>
-    <a href="register.html">Become a Donor</a>
-    <a href="search.html">Find Donor</a>
-    <a href="request.html">Emergency Request</a>
-    <a href="matching.html">Smart Matching</a>
-    <a href="dashboard.html">Dashboard</a>
+<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
+<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
+<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
 </nav>
 
-<section class="form-section">
-    <h2>🚨 Emergency Blood Request</h2>
-    <p>Find registered potential donors in your location.</p>
+<main>
+<div class="card">
+<h1 data-en="🚨 Emergency Blood Request" data-ta="🚨 அவசர இரத்த கோரிக்கை">🚨 Emergency Blood Request</h1>
 
-    <form id="requestForm">
+<p data-en="Submit your demo emergency blood request."
+data-ta="உங்கள் மாதிரி அவசர இரத்த கோரிக்கையைச் சமர்ப்பிக்கவும்.">
+Submit your demo emergency blood request.
+</p>
 
-        <label>Patient / Request Name</label>
-        <input id="patientName" required>
+<form id="requestForm">
 
-        <label>Required Blood Group</label>
-        <select id="bloodGroup" required>
-            <option value="">Select Blood Group</option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B+</option>
-            <option>B-</option>
-            <option>O+</option>
-            <option>O-</option>
-            <option>AB+</option>
-            <option>AB-</option>
-        </select>
+<label data-en="Patient Name (Demo)" data-ta="நோயாளியின் பெயர் (மாதிரி)">Patient Name (Demo)</label>
+<input id="patientName" required placeholder="Enter demo name">
 
-        <label>State</label>
-        <input id="state" placeholder="Tamil Nadu" required>
+<label data-en="Required Blood Group" data-ta="தேவையான இரத்த வகை">Required Blood Group</label>
+<select id="bloodGroup" required>
+<option value="">Select blood group</option>
+<option>A+</option><option>A-</option>
+<option>B+</option><option>B-</option>
+<option>AB+</option><option>AB-</option>
+<option>O+</option><option>O-</option>
+</select>
 
-        <label>City</label>
-        <input id="city" placeholder="Coimbatore" required>
+<label data-en="State" data-ta="மாநிலம்">State</label>
+<select id="state" required>
+<option value="">Select state</option>
+<option>Tamil Nadu</option>
+<option>Kerala</option>
+<option>Karnataka</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Maharashtra</option>
+<option>Gujarat</option>
+<option>Rajasthan</option>
+<option>West Bengal</option>
+<option>Delhi</option>
+</select>
 
-        <label>Hospital Name</label>
-        <input id="hospital" required>
+<label data-en="City" data-ta="நகரம்">City</label>
+<input id="city" required placeholder="Enter city">
 
-        <label>Required Units</label>
-        <input id="units" type="number" min="1" required>
+<label data-en="Hospital (Demo)" data-ta="மருத்துவமனை (மாதிரி)">Hospital (Demo)</label>
+<input id="hospital" required placeholder="Enter demo hospital name">
 
-        <label>Urgency</label>
-        <select id="urgency" required>
-            <option value="">Select Urgency</option>
-            <option>Critical</option>
-            <option>Urgent</option>
-            <option>Normal</option>
-        </select>
+<label data-en="Units Required" data-ta="தேவையான அலகுகள்">Units Required</label>
+<input id="units" type="number" min="1" max="10" value="1" required>
 
-        <label>Contact Number</label>
-        <input id="phone" type="tel"
-               pattern="[0-9]{10}" maxlength="10" required>
+<label data-en="Urgency" data-ta="அவசர நிலை">Urgency</label>
+<select id="urgency" required>
+<option value="Normal">Normal</option>
+<option value="Urgent">Urgent</option>
+<option value="Critical">Critical</option>
+</select>
 
-        <button type="submit">🚨 Submit Request</button>
+<button class="submit" type="submit"
+data-en="Submit Emergency Request"
+data-ta="அவசர கோரிக்கையைச் சமர்ப்பி">
+Submit Emergency Request
+</button>
+</form>
 
-    </form>
-</section>
+<p class="note" style="margin-top:16px"
+data-en="Prototype only: use fictional information. In a real emergency, contact a hospital or emergency medical service directly. Donor matches require professional verification."
+data-ta="மாதிரி தளம் மட்டுமே: கற்பனை விவரங்களைப் பயன்படுத்தவும். உண்மையான அவசரநிலையில் மருத்துவமனை அல்லது அவசர மருத்துவ சேவையை நேரடியாகத் தொடர்புகொள்ளவும். நன்கொடையாளர் பொருத்தத்தை மருத்துவ நிபுணர்கள் உறுதிப்படுத்த வேண்டும்.">
+Prototype only: use fictional information. In a real emergency, contact a hospital or emergency medical service directly. Donor matches require professional verification.
+</p>
 
-<section>
-    <h2>🩸 Donor Matching Results</h2>
-    <div id="results">
-        <div class="card">
-            <p>Submit an emergency request to find potential donors.</p>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <p>© 2026 BloodBridge</p>
-</footer>
+<div id="result"></div>
+</div>
+</main>
 
 <script>
-
-function normalize(value) {
-    return String(value || "")
-        .trim()
-        .replace(/\s+/g, "")
-        .toLowerCase();
+function applyLanguage(lang){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-en]").forEach(el=>{
+  el.textContent=el.getAttribute("data-"+lang);
+ });
+ document.getElementById("language").textContent=
+  lang==="en"?"தமிழ்":"English";
+ localStorage.setItem("bloodbridgeLanguage",lang);
 }
 
-document.getElementById("requestForm")
-.addEventListener("submit", function(event) {
+function toggleLanguage(){
+ const current=localStorage.getItem("bloodbridgeLanguage")||"en";
+ applyLanguage(current==="en"?"ta":"en");
+}
+applyLanguage(localStorage.getItem("bloodbridgeLanguage")||"en");
 
-    event.preventDefault();
+function normalize(value){
+ return String(value||"").trim().toLowerCase().replace(/\s+/g,"");
+}
 
-    const request = {
-        id: Date.now(),
-        patientName: document.getElementById("patientName").value.trim(),
-        bloodGroup: document.getElementById("bloodGroup").value,
-        state: document.getElementById("state").value.trim(),
-        city: document.getElementById("city").value.trim(),
-        hospital: document.getElementById("hospital").value.trim(),
-        units: document.getElementById("units").value,
-        urgency: document.getElementById("urgency").value,
-        phone: document.getElementById("phone").value.trim(),
-        date: new Date().toLocaleString()
-    };
+function escapeHTML(value){
+ return String(value??"").replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+ })[c]);
+}
 
-    // Read registered donors
-    const donors = JSON.parse(
-        localStorage.getItem("bloodbridgeDonors") || "[]"
-    );
-    console.log("ALL SAVED DONORS:", donors);
+document.getElementById("requestForm").addEventListener("submit",function(e){
+ e.preventDefault();
 
-console.log("DONOR COUNT:", donors.length);
+ const request={
+  id:Date.now(),
+  patientName:document.getElementById("patientName").value.trim(),
+  bloodGroup:document.getElementById("bloodGroup").value,
+  state:document.getElementById("state").value,
+  city:document.getElementById("city").value.trim(),
+  hospital:document.getElementById("hospital").value.trim(),
+  units:document.getElementById("units").value,
+  urgency:document.getElementById("urgency").value
+ };
 
-console.log("FIRST DONOR:", donors[0]);
+ const requests=JSON.parse(localStorage.getItem("bloodbridgeRequests")||"[]");
+ requests.push(request);
+ localStorage.setItem("bloodbridgeRequests",JSON.stringify(requests));
 
-    // Save emergency request
-    const requests = JSON.parse(
-        localStorage.getItem("bloodbridgeRequests") || "[]"
-    );
+ const donors=JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
 
-    requests.push(request);
+ const matches=donors.filter(d=>
+  normalize(d.bloodGroup)===normalize(request.bloodGroup)&&
+  normalize(d.state)===normalize(request.state)&&
+  normalize(d.city)===normalize(request.city)&&
+  normalize(d.availability)==="available"
+ );
 
-    localStorage.setItem(
-        "bloodbridgeRequests",
-        JSON.stringify(requests)
-    );
+ const lang=localStorage.getItem("bloodbridgeLanguage")||"en";
+ const result=document.getElementById("result");
 
-    // Match blood group, state, city and availability
-    const matches = donors.filter(function(donor) {
-
-        return (
-            normalize(donor.bloodGroup) === normalize(request.bloodGroup) &&
-            normalize(donor.state) === normalize(request.state) &&
-            normalize(donor.city) === normalize(request.city) &&
-            normalize(donor.availability) === "available"
-        );
-
-    });
-
-    const sameBloodGroup = donors.filter(function(donor) {
-        return normalize(donor.bloodGroup) === normalize(request.bloodGroup);
-    });
-
-    const results = document.getElementById("results");
-    results.innerHTML = "";
-
-    if (matches.length > 0) {
-
-        alert(
-            "🩸 POTENTIAL MATCH FOUND!\n\n" +
-            matches.length +
-            " available donor(s) found!"
-        );
-
-        const heading = document.createElement("h3");
-        heading.textContent = "🩸 Potential Donor Matches";
-        results.appendChild(heading);
-
-        matches.forEach(function(donor) {
-
-            const card = document.createElement("div");
-            card.className = "card";
-
-            const name = document.createElement("h3");
-            name.textContent = "🩸 " + donor.name;
-
-            const group = document.createElement("p");
-            group.textContent = "Blood Group: " + donor.bloodGroup;
-
-            const location = document.createElement("p");
-            location.textContent =
-                "Location: " + donor.city + ", " + donor.state;
-
-            const status = document.createElement("p");
-            status.textContent = "Availability: Available";
-
-            card.append(name, group, location, status);
-            results.appendChild(card);
-
-        });
-
-    } else {
-
-        alert(
-            "⚠️ NO EXACT MATCH FOUND\n\n" +
-            "Registered donors: " + donors.length +
-            "\nSame blood group: " + sameBloodGroup.length +
-            "\nAvailable exact location matches: 0"
-        );
-
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const heading = document.createElement("h3");
-        heading.textContent = "No Exact Match Found";
-
-        const info = document.createElement("p");
-        info.textContent =
-            "Registered donors: " + donors.length +
-            ". Donors with the requested blood group: " +
-            sameBloodGroup.length + ".";
-
-        const suggestion = document.createElement("p");
-        suggestion.textContent =
-            "Check the spelling of the state and city, or try another location.";
-
-        card.append(heading, info, suggestion);
-        results.appendChild(card);
-
-    }
-
+ if(matches.length){
+  result.innerHTML=`
+   <h2 style="color:#168044">
+   ${lang==="ta"?"சாத்தியமான பொருத்தம் கண்டறியப்பட்டது!":"Potential Match Found!"}
+   </h2>
+   <p>${matches.length} ${lang==="ta"?"நன்கொடையாளர் பொருத்தம்":"potential donor match(es)"}</p>
+   `+matches.map(d=>`
+    <div class="match">
+    <b>${escapeHTML(d.name)}</b><br>
+    ${lang==="ta"?"இரத்த வகை":"Blood Group"}: ${escapeHTML(d.bloodGroup)}<br>
+    ${escapeHTML(d.city)}, ${escapeHTML(d.state)}
+    </div>
+   `).join("")+
+   `<p class="note">${lang==="ta"?"மருத்துவப் பொருத்தத்தை நிபுணர் உறுதிப்படுத்த வேண்டும்.":"Medical compatibility must be verified by healthcare professionals."}</p>`;
+  alert(lang==="ta"?"சாத்தியமான நன்கொடையாளர் பொருத்தம் கண்டறியப்பட்டது!":"Potential donor match found!");
+ }else{
+  result.innerHTML=`
+  <h3 style="color:#a90024">
+  ${lang==="ta"?"பொருத்தமான நன்கொடையாளர் கிடைக்கவில்லை":"No Potential Match Found"}
+  </h3>
+  <p>${lang==="ta"?"கோரிக்கை சேமிக்கப்பட்டது. வேறு இடத்தை முயற்சிக்கவும்.":"Your request has been saved. Try another location."}</p>`;
+  alert(lang==="ta"?"பொருத்தமான நன்கொடையாளர் கிடைக்கவில்லை.":"No potential donor match found.");
+ }
 });
-
 </script>
-
 </body>
-</html>
+    </html>
+    
