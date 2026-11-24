@@ -9,6 +9,9 @@ body {
     color: #333;
 }
 
+
+/* HEADER */
+
 header {
     background: #b71c1c;
     color: white;
@@ -25,11 +28,14 @@ header p {
     font-size: 17px;
 }
 
+
+/* NAVIGATION */
+
 nav {
     background: white;
     padding: 15px;
     text-align: center;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 nav a {
@@ -38,6 +44,13 @@ nav a {
     margin: 0 15px;
     font-weight: bold;
 }
+
+nav a:hover {
+    color: #8b0000;
+}
+
+
+/* HOME HERO */
 
 .hero {
     text-align: center;
@@ -55,6 +68,9 @@ nav a {
     line-height: 1.7;
 }
 
+
+/* BUTTON */
+
 .button {
     display: inline-block;
     margin: 25px 8px;
@@ -63,11 +79,16 @@ nav a {
     color: white;
     text-decoration: none;
     border-radius: 25px;
+    border: none;
+    cursor: pointer;
 }
 
 .button:hover {
     background: #8b0000;
 }
+
+
+/* CARDS */
 
 section {
     padding: 35px 20px;
@@ -86,32 +107,45 @@ section {
     width: 280px;
     padding: 25px;
     border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+
+    box-shadow:
+        0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
 .card h3 {
     color: #c62828;
 }
 
-footer {
-    background: #8b0000;
-    color: white;
-    text-align: center;
-    padding: 20px;
-}
+
+/* REGISTRATION FORM */
+
 .form-section {
-    max-width: 600px;
+    max-width: 650px;
     margin: 50px auto;
     padding: 35px;
+
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.12);
 }
 
 .form-section h2 {
     color: #b71c1c;
     text-align: center;
+    font-size: 28px;
 }
+
+.form-intro {
+    text-align: center;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+
+/* FORM */
 
 form {
     display: flex;
@@ -120,29 +154,112 @@ form {
 
 label {
     margin-top: 18px;
-    margin-bottom: 6px;
+    margin-bottom: 7px;
     font-weight: bold;
+    color: #444;
 }
 
 input,
 select {
-    padding: 12px;
+    width: 100%;
+
+    padding: 13px;
+
     border: 1px solid #ccc;
+
     border-radius: 8px;
+
     font-size: 16px;
+
+    background: white;
 }
 
+input:focus,
+select:focus {
+    outline: none;
+
+    border-color: #d32f2f;
+
+    box-shadow:
+        0 0 0 2px rgba(211, 47, 47, 0.1);
+}
+
+
+/* SUBMIT BUTTON */
+
 button {
-    margin-top: 25px;
-    padding: 13px;
+    margin-top: 30px;
+
+    padding: 14px;
+
     border: none;
+
     border-radius: 25px;
+
     background: #d32f2f;
+
     color: white;
+
     font-size: 16px;
+
+    font-weight: bold;
+
     cursor: pointer;
 }
 
 button:hover {
     background: #8b0000;
+}
+
+
+/* FOOTER */
+
+footer {
+    background: #8b0000;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 20px;
+
+    margin-top: 40px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    nav a {
+        display: block;
+
+        margin: 10px 0;
+    }
+
+    .hero {
+        padding: 45px 15px;
+    }
+
+    .hero h2 {
+        font-size: 27px;
+    }
+
+    .form-section {
+        margin: 25px 15px;
+
+        padding: 25px 20px;
+    }
+
+    .button {
+        display: block;
+
+        margin: 15px auto;
+
+        max-width: 250px;
+    }
     }
