@@ -5,53 +5,74 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BloodBridge | Donor Registration</title>
+
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#263247}
-header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;font-weight:bold}
-nav{background:white;padding:16px 6%;display:flex;gap:20px;flex-wrap:wrap}
-nav a{color:#a90024;text-decoration:none;font-weight:bold}
-main{max-width:650px;margin:35px auto;padding:0 16px}
-.card{background:white;padding:28px;border-radius:16px;box-shadow:0 4px 20px #0000000b}
-h1{color:#a90024;margin-top:0}
-label{display:block;margin-top:17px;margin-bottom:7px;font-weight:bold}
-input,select{width:100%;padding:12px;border:1px solid #d7dce5;border-radius:8px;font-size:15px}
-.submit{width:100%;margin-top:24px;background:#a90024;color:white;padding:14px}
-.note{color:#687386;font-size:13px;line-height:1.5}
-#message{margin-top:15px;padding:12px;border-radius:8px;display:none}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
+body{background:#f5f6fa;color:#293044}
+header{background:#a50025;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+nav{background:white;padding:15px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+nav a{color:#a50025;text-decoration:none;font-weight:bold}
+button{cursor:pointer;border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
+.language{background:white;color:#a50025}
+main{max-width:650px;margin:35px auto;padding:0 15px}
+.panel{background:white;padding:27px;border-radius:12px;box-shadow:0 4px 15px #0000000c}
+h1{color:#a50025;margin-bottom:12px}
+p{color:#737b8c;line-height:1.6;margin-bottom:18px}
+label{display:block;margin:15px 0 7px;font-weight:bold}
+input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:7px;background:white}
+.submit{background:#a50025;color:white;width:100%;margin-top:23px}
+.message{margin-top:17px;padding:13px;border-radius:7px;display:none}
+.success{background:#e6f8ed;color:#176c3c}
+.error{background:#fff0f0;color:#a50025}
+.note{margin-top:20px;padding:14px;background:#fff8e9;border-radius:7px;font-size:13px;line-height:1.6;color:#66552e}
+footer{text-align:center;padding:25px;color:#777}
 </style>
 </head>
+
 <body>
 
 <header>
 <h2>🩸 BloodBridge</h2>
-<button id="language" onclick="toggleLanguage()" style="color:#a90024">தமிழ்</button>
+<button class="language" id="languageButton" onclick="toggleLanguage()">தமிழ்</button>
 </header>
 
 <nav>
 <a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
-<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="register.html" data-en="Register" data-ta="பதிவு">Register</a>
 <a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
 <a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
-<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
+<a href="dashboard.html" data-en="Dashboard" data-ta="புள்ளிவிவரங்கள்">Dashboard</a>
+<a href="admin.html" data-en="Admin Panel" data-ta="நிர்வாகப் பலகை">Admin Panel</a>
 </nav>
 
 <main>
-<div class="card">
+<div class="panel">
+
 <h1 data-en="Donor Registration" data-ta="நன்கொடையாளர் பதிவு">Donor Registration</h1>
-<p data-en="Register your demo donor information below."
-data-ta="உங்கள் மாதிரி நன்கொடையாளர் விவரங்களைப் பதிவு செய்யுங்கள்.">
-Register your demo donor information below.
+
+<p data-en="Enter fictional demo details to register a donor in BloodBridge."
+data-ta="BloodBridge தளத்தில் நன்கொடையாளரைப் பதிவு செய்ய கற்பனையான மாதிரி விவரங்களை உள்ளிடவும்.">
+Enter fictional demo details to register a donor in BloodBridge.
 </p>
 
 <form id="donorForm">
-<label data-en="Name" data-ta="பெயர்">Name</label>
-<input id="name" type="text" required placeholder="Enter demo name">
+
+<label data-en="Full Name" data-ta="முழுப் பெயர்">Full Name</label>
+<input id="name" type="text" required maxlength="60" placeholder="Enter name">
+
+<label data-en="Age Group" data-ta="வயது பிரிவு">Age Group</label>
+<select id="ageGroup" required>
+<option value="">Select Age Group</option>
+<option value="18-25">18–25</option>
+<option value="26-35">26–35</option>
+<option value="36-45">36–45</option>
+<option value="46-55">46–55</option>
+<option value="56+">56+</option>
+</select>
 
 <label data-en="Blood Group" data-ta="இரத்த வகை">Blood Group</label>
 <select id="bloodGroup" required>
-<option value="">Select blood group</option>
+<option value="">Select Blood Group</option>
 <option>A+</option><option>A-</option>
 <option>B+</option><option>B-</option>
 <option>AB+</option><option>AB-</option>
@@ -60,97 +81,134 @@ Register your demo donor information below.
 
 <label data-en="State" data-ta="மாநிலம்">State</label>
 <select id="state" required>
-<option value="">Select state</option>
+<option value="">Select State</option>
 <option>Tamil Nadu</option>
 <option>Kerala</option>
 <option>Karnataka</option>
 <option>Andhra Pradesh</option>
 <option>Telangana</option>
 <option>Maharashtra</option>
+<option>Delhi</option>
 <option>Gujarat</option>
 <option>Rajasthan</option>
+<option>Uttar Pradesh</option>
 <option>West Bengal</option>
-<option>Delhi</option>
+<option>Punjab</option>
+<option>Haryana</option>
+<option>Bihar</option>
+<option>Odisha</option>
+<option>Assam</option>
+<option>Goa</option>
+<option>Jharkhand</option>
+<option>Chhattisgarh</option>
+<option>Madhya Pradesh</option>
+<option>Himachal Pradesh</option>
+<option>Uttarakhand</option>
+<option>Manipur</option>
+<option>Meghalaya</option>
+<option>Mizoram</option>
+<option>Nagaland</option>
+<option>Tripura</option>
+<option>Sikkim</option>
 </select>
 
 <label data-en="City" data-ta="நகரம்">City</label>
-<input id="city" type="text" required placeholder="Enter city">
+<input id="city" type="text" required maxlength="60" placeholder="Example: Coimbatore">
 
-<label data-en="Area (Optional)" data-ta="பகுதி (விருப்பமானது)">Area (Optional)</label>
-<input id="area" type="text" placeholder="Enter area">
+<label data-en="Phone Number" data-ta="தொலைபேசி எண்">Phone Number</label>
+<input id="phone" type="tel" required maxlength="20" placeholder="Demo phone number">
 
-<label data-en="Phone Number (Demo only)" data-ta="தொலைபேசி எண் (மாதிரிக்கு மட்டும்)">Phone Number (Demo only)</label>
-<input id="phone" type="tel" placeholder="Demo phone number">
-
-<label data-en="Email (Demo only)" data-ta="மின்னஞ்சல் (மாதிரிக்கு மட்டும்)">Email (Demo only)</label>
-<input id="email" type="email" placeholder="Demo email">
+<label data-en="Email ID" data-ta="மின்னஞ்சல் முகவரி">Email ID</label>
+<input id="email" type="email" required maxlength="100" placeholder="demo@example.com">
 
 <label data-en="Availability" data-ta="கிடைக்கும் நிலை">Availability</label>
 <select id="availability" required>
+<option value="">Select Availability</option>
 <option value="Available">Available</option>
 <option value="Temporarily Unavailable">Temporarily Unavailable</option>
 <option value="Not Available">Not Available</option>
 </select>
 
-<p class="note" data-en="Prototype only: use fictional details for testing. Do not enter real contact information. Actual donor eligibility and blood compatibility must be confirmed by healthcare professionals."
-data-ta="மாதிரி தளம் மட்டுமே: சோதனைக்காக கற்பனை விவரங்களைப் பயன்படுத்துங்கள். உண்மையான தொடர்பு விவரங்களை உள்ளிட வேண்டாம். நன்கொடையாளர் தகுதியும் இரத்தப் பொருத்தமும் மருத்துவ நிபுணர்களால் உறுதிப்படுத்தப்பட வேண்டும்.">
-Prototype only: use fictional details for testing. Do not enter real contact information. Actual donor eligibility and blood compatibility must be confirmed by healthcare professionals.
-</p>
+<button class="submit" type="submit"
+data-en="Register Donor"
+data-ta="நன்கொடையாளரைப் பதிவு செய்">
+Register Donor
+</button>
 
-<button class="submit" type="submit" data-en="Register Donor" data-ta="நன்கொடையாளரைப் பதிவு செய்">Register Donor</button>
 </form>
 
-<div id="message" role="status"></div>
+<div id="message" class="message"></div>
+
+<div class="note"
+data-en="Prototype privacy notice: Use fictional demo details only. Real donor contact information must be collected only with informed consent and stored securely. Age group does not establish donation eligibility; a healthcare professional must assess eligibility."
+data-ta="தனியுரிமை குறிப்பு: கற்பனையான மாதிரி விவரங்களை மட்டுமே பயன்படுத்தவும். உண்மையான தொடர்பு விவரங்களை ஒப்புதலுடன் பாதுகாப்பாகச் சேமிக்க வேண்டும். வயது பிரிவு மட்டும் இரத்த தானத் தகுதியை உறுதிப்படுத்தாது; மருத்துவ நிபுணர் மதிப்பீடு அவசியம்.">
+Prototype privacy notice: Use fictional demo details only.
+</div>
+
 </div>
 </main>
 
+<footer>BloodBridge © 2026</footer>
+
 <script>
-function applyLanguage(lang){
- document.documentElement.lang=lang;
- document.querySelectorAll("[data-en]").forEach(el=>{
-   el.textContent=el.getAttribute("data-"+lang);
- });
- document.getElementById("language").textContent=
-   lang==="en"?"தமிழ்":"English";
- localStorage.setItem("bloodbridgeLanguage",lang);
+let language=localStorage.getItem("bloodbridgeLanguage")||"en";
+
+function setLanguage(lang){
+language=lang;
+document.documentElement.lang=lang;
+
+document.querySelectorAll("[data-en]").forEach(el=>{
+el.textContent=el.getAttribute("data-"+lang);
+});
+
+document.getElementById("languageButton").textContent=
+lang==="en"?"தமிழ்":"English";
+
+localStorage.setItem("bloodbridgeLanguage",lang);
 }
+
 function toggleLanguage(){
- const current=localStorage.getItem("bloodbridgeLanguage")||"en";
- applyLanguage(current==="en"?"ta":"en");
+setLanguage(language==="en"?"ta":"en");
 }
-applyLanguage(localStorage.getItem("bloodbridgeLanguage")||"en");
 
 document.getElementById("donorForm").addEventListener("submit",function(e){
- e.preventDefault();
 
- const donor={
-   id:Date.now(),
-   name:document.getElementById("name").value.trim(),
-   bloodGroup:document.getElementById("bloodGroup").value,
-   state:document.getElementById("state").value,
-   city:document.getElementById("city").value.trim(),
-   area:document.getElementById("area").value.trim(),
-   phone:document.getElementById("phone").value.trim(),
-   email:document.getElementById("email").value.trim(),
-   availability:document.getElementById("availability").value
- };
+e.preventDefault();
 
- const donors=JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
- donors.push(donor);
- localStorage.setItem("bloodbridgeDonors",JSON.stringify(donors));
+const donor={
+id:Date.now(),
+name:document.getElementById("name").value.trim(),
+ageGroup:document.getElementById("ageGroup").value,
+bloodGroup:document.getElementById("bloodGroup").value,
+state:document.getElementById("state").value,
+city:document.getElementById("city").value.trim(),
+phone:document.getElementById("phone").value.trim(),
+email:document.getElementById("email").value.trim(),
+availability:document.getElementById("availability").value
+};
 
- const message=document.getElementById("message");
- message.style.display="block";
- message.style.background="#e8f7ed";
- message.style.color="#176b35";
- message.textContent=
-   (localStorage.getItem("bloodbridgeLanguage")==="ta")
-   ?"நன்கொடையாளர் வெற்றிகரமாகப் பதிவு செய்யப்பட்டார்!"
-   :"Donor registered successfully!";
+const donors=JSON.parse(
+localStorage.getItem("bloodbridgeDonors")||"[]"
+);
 
- this.reset();
+donors.push(donor);
+
+localStorage.setItem("bloodbridgeDonors",JSON.stringify(donors));
+
+const message=document.getElementById("message");
+message.className="message success";
+message.style.display="block";
+message.textContent=language==="en"?
+"Donor registered successfully!":
+"நன்கொடையாளர் வெற்றிகரமாகப் பதிவு செய்யப்பட்டார்!";
+
+this.reset();
+
 });
+
+setLanguage(language);
 </script>
+
 </body>
-    </html>
-    
+ </html>
+ 
