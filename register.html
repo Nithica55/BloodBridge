@@ -1,874 +1,156 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>BloodBridge | Register Donor</title>
-
-    <link rel="stylesheet" href="style.css">
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BloodBridge | Donor Registration</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#263247}
+header{background:#a90024;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
+button{cursor:pointer;border:0;border-radius:8px;padding:11px 16px;font-weight:bold}
+nav{background:white;padding:16px 6%;display:flex;gap:20px;flex-wrap:wrap}
+nav a{color:#a90024;text-decoration:none;font-weight:bold}
+main{max-width:650px;margin:35px auto;padding:0 16px}
+.card{background:white;padding:28px;border-radius:16px;box-shadow:0 4px 20px #0000000b}
+h1{color:#a90024;margin-top:0}
+label{display:block;margin-top:17px;margin-bottom:7px;font-weight:bold}
+input,select{width:100%;padding:12px;border:1px solid #d7dce5;border-radius:8px;font-size:15px}
+.submit{width:100%;margin-top:24px;background:#a90024;color:white;padding:14px}
+.note{color:#687386;font-size:13px;line-height:1.5}
+#message{margin-top:15px;padding:12px;border-radius:8px;display:none}
+</style>
 </head>
-
-
 <body>
 
-
-<!-- ================= HEADER ================= -->
-
 <header>
-
-    <h1>🩸 BloodBridge</h1>
-
-    <p>
-        Register as a Potential Blood Donor
-    </p>
-
+<h2>🩸 BloodBridge</h2>
+<button id="language" onclick="toggleLanguage()" style="color:#a90024">தமிழ்</button>
 </header>
 
-
-
-<!-- ================= NAVIGATION ================= -->
-
 <nav>
-
-    <a href="index.html">Home</a>
-
-    <a href="register.html">
-        Become a Donor
-    </a>
-
-    <a href="search.html">
-        Find Donor
-    </a>
-
-    <a href="request.html">
-        Emergency Request
-    </a>
-
-    <a href="matching.html">
-        Smart Matching
-    </a>
-
-    <a href="dashboard.html">
-        Dashboard
-    </a>
-
+<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
+<a href="register.html" data-en="Register Donor" data-ta="நன்கொடையாளர் பதிவு">Register Donor</a>
+<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
+<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
+<a href="dashboard.html" data-en="Analytics" data-ta="புள்ளிவிவரங்கள்">Analytics</a>
 </nav>
 
-
-
-<!-- ================= REGISTRATION FORM ================= -->
-
-<section>
-
-    <div class="form-section">
-
-        <h2>
-            🩸 Donor Registration
-        </h2>
-
-        <p>
-            Register your details as a potential donor.
-        </p>
-
-
-
-        <form id="donorForm">
-
-
-            <!-- NAME -->
-
-            <label for="name">
-                Full Name
-            </label>
-
-            <input
-                type="text"
-                id="name"
-                placeholder="Enter your full name"
-                required>
-
-
-
-            <!-- BLOOD GROUP -->
-
-            <label for="bloodGroup">
-                Blood Group
-            </label>
-
-            <select
-                id="bloodGroup"
-                required>
-
-                <option value="">
-                    -- Select Blood Group --
-                </option>
-
-                <option value="A+">A+</option>
-
-                <option value="A-">A-</option>
-
-                <option value="B+">B+</option>
-
-                <option value="B-">B-</option>
-
-                <option value="O+">O+</option>
-
-                <option value="O-">O-</option>
-
-                <option value="AB+">AB+</option>
-
-                <option value="AB-">AB-</option>
-
-            </select>
-
-
-
-            <!-- STATE -->
-
-            <label for="state">
-                State / Union Territory
-            </label>
-
-            <select
-                id="state"
-                required>
-
-                <option value="">
-                    -- Select State / UT --
-                </option>
-
-            </select>
-
-
-
-            <!-- CITY -->
-
-            <label for="city">
-                City
-            </label>
-
-            <select
-                id="city"
-                required
-                disabled>
-
-                <option value="">
-                    -- Select State First --
-                </option>
-
-            </select>
-
-
-
-            <!-- AREA -->
-
-            <label for="area">
-                Area / Locality
-            </label>
-
-            <input
-                type="text"
-                id="area"
-                placeholder="Example: Peelamedu"
-                required>
-
-
-
-            <!-- PHONE -->
-
-            <label for="phone">
-                Phone Number
-            </label>
-
-            <input
-                type="tel"
-                id="phone"
-                placeholder="10-digit mobile number"
-                pattern="[0-9]{10}"
-                maxlength="10"
-                required>
-
-
-
-            <!-- EMAIL -->
-
-            <label for="email">
-                Email ID
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="example@email.com"
-                required>
-
-
-
-            <!-- AVAILABILITY -->
-
-            <label for="availability">
-                Donor Availability
-            </label>
-
-            <select
-                id="availability"
-                required>
-
-                <option value="Available">
-                    🟢 Available
-                </option>
-
-                <option value="Temporarily Unavailable">
-                    🟡 Temporarily Unavailable
-                </option>
-
-                <option value="Not Available">
-                    🔴 Not Available
-                </option>
-
-            </select>
-
-
-
-            <!-- SUBMIT -->
-
-            <button type="submit">
-                🩸 Register as Donor
-            </button>
-
-
-        </form>
-
-    </div>
-
-</section>
-
-
-
-<!-- ================= INFORMATION ================= -->
-
-<section>
-
-    <div class="card">
-
-        <h3>
-            🔐 Privacy Note
-        </h3>
-
-        <p>
-            BloodBridge is currently a demonstration prototype.
-            Do not enter real personal contact information
-            when using the public GitHub Pages demo.
-        </p>
-
-    </div>
-
-</section>
-
-
-
-<!-- ================= FOOTER ================= -->
-
-<footer>
-
-    <p>
-        © 2026 BloodBridge
-    </p>
-
-    <p>
-        Healthcare Technology Prototype
-    </p>
-
-</footer>
-
-
-
-<!-- ================= JAVASCRIPT ================= -->
+<main>
+<div class="card">
+<h1 data-en="Donor Registration" data-ta="நன்கொடையாளர் பதிவு">Donor Registration</h1>
+<p data-en="Register your demo donor information below."
+data-ta="உங்கள் மாதிரி நன்கொடையாளர் விவரங்களைப் பதிவு செய்யுங்கள்.">
+Register your demo donor information below.
+</p>
+
+<form id="donorForm">
+<label data-en="Name" data-ta="பெயர்">Name</label>
+<input id="name" type="text" required placeholder="Enter demo name">
+
+<label data-en="Blood Group" data-ta="இரத்த வகை">Blood Group</label>
+<select id="bloodGroup" required>
+<option value="">Select blood group</option>
+<option>A+</option><option>A-</option>
+<option>B+</option><option>B-</option>
+<option>AB+</option><option>AB-</option>
+<option>O+</option><option>O-</option>
+</select>
+
+<label data-en="State" data-ta="மாநிலம்">State</label>
+<select id="state" required>
+<option value="">Select state</option>
+<option>Tamil Nadu</option>
+<option>Kerala</option>
+<option>Karnataka</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Maharashtra</option>
+<option>Gujarat</option>
+<option>Rajasthan</option>
+<option>West Bengal</option>
+<option>Delhi</option>
+</select>
+
+<label data-en="City" data-ta="நகரம்">City</label>
+<input id="city" type="text" required placeholder="Enter city">
+
+<label data-en="Area (Optional)" data-ta="பகுதி (விருப்பமானது)">Area (Optional)</label>
+<input id="area" type="text" placeholder="Enter area">
+
+<label data-en="Phone Number (Demo only)" data-ta="தொலைபேசி எண் (மாதிரிக்கு மட்டும்)">Phone Number (Demo only)</label>
+<input id="phone" type="tel" placeholder="Demo phone number">
+
+<label data-en="Email (Demo only)" data-ta="மின்னஞ்சல் (மாதிரிக்கு மட்டும்)">Email (Demo only)</label>
+<input id="email" type="email" placeholder="Demo email">
+
+<label data-en="Availability" data-ta="கிடைக்கும் நிலை">Availability</label>
+<select id="availability" required>
+<option value="Available">Available</option>
+<option value="Temporarily Unavailable">Temporarily Unavailable</option>
+<option value="Not Available">Not Available</option>
+</select>
+
+<p class="note" data-en="Prototype only: use fictional details for testing. Do not enter real contact information. Actual donor eligibility and blood compatibility must be confirmed by healthcare professionals."
+data-ta="மாதிரி தளம் மட்டுமே: சோதனைக்காக கற்பனை விவரங்களைப் பயன்படுத்துங்கள். உண்மையான தொடர்பு விவரங்களை உள்ளிட வேண்டாம். நன்கொடையாளர் தகுதியும் இரத்தப் பொருத்தமும் மருத்துவ நிபுணர்களால் உறுதிப்படுத்தப்பட வேண்டும்.">
+Prototype only: use fictional details for testing. Do not enter real contact information. Actual donor eligibility and blood compatibility must be confirmed by healthcare professionals.
+</p>
+
+<button class="submit" type="submit" data-en="Register Donor" data-ta="நன்கொடையாளரைப் பதிவு செய்">Register Donor</button>
+</form>
+
+<div id="message" role="status"></div>
+</div>
+</main>
 
 <script>
-
-
-/* ==========================================
-   STATE → CITY DATABASE
-========================================== */
-
-
-const locations = {
-
-    "Andhra Pradesh": [
-        "Visakhapatnam",
-        "Vijayawada",
-        "Guntur",
-        "Tirupati",
-        "Nellore",
-        "Kurnool",
-        "Rajahmundry"
-    ],
-
-
-    "Arunachal Pradesh": [
-        "Itanagar",
-        "Naharlagun",
-        "Tawang",
-        "Pasighat",
-        "Ziro"
-    ],
-
-
-    "Assam": [
-        "Guwahati",
-        "Dibrugarh",
-        "Silchar",
-        "Jorhat",
-        "Tezpur",
-        "Nagaon"
-    ],
-
-
-    "Bihar": [
-        "Patna",
-        "Gaya",
-        "Muzaffarpur",
-        "Bhagalpur",
-        "Darbhanga",
-        "Purnia"
-    ],
-
-
-    "Chhattisgarh": [
-        "Raipur",
-        "Bhilai",
-        "Bilaspur",
-        "Durg",
-        "Korba",
-        "Jagdalpur"
-    ],
-
-
-    "Goa": [
-        "Panaji",
-        "Margao",
-        "Vasco da Gama",
-        "Mapusa"
-    ],
-
-
-    "Gujarat": [
-        "Ahmedabad",
-        "Surat",
-        "Vadodara",
-        "Rajkot",
-        "Bhavnagar",
-        "Gandhinagar",
-        "Jamnagar"
-    ],
-
-
-    "Haryana": [
-        "Gurugram",
-        "Faridabad",
-        "Panipat",
-        "Ambala",
-        "Hisar",
-        "Karnal"
-    ],
-
-
-    "Himachal Pradesh": [
-        "Shimla",
-        "Manali",
-        "Dharamshala",
-        "Solan",
-        "Mandi"
-    ],
-
-
-    "Jharkhand": [
-        "Ranchi",
-        "Jamshedpur",
-        "Dhanbad",
-        "Bokaro",
-        "Deoghar"
-    ],
-
-
-    "Karnataka": [
-        "Bengaluru",
-        "Mysuru",
-        "Mangaluru",
-        "Hubballi",
-        "Belagavi",
-        "Shivamogga",
-        "Udupi"
-    ],
-
-
-    "Kerala": [
-        "Thiruvananthapuram",
-        "Kochi",
-        "Kozhikode",
-        "Kollam",
-        "Thrissur",
-        "Kannur",
-        "Alappuzha"
-    ],
-
-
-    "Madhya Pradesh": [
-        "Bhopal",
-        "Indore",
-        "Jabalpur",
-        "Gwalior",
-        "Ujjain",
-        "Sagar"
-    ],
-
-
-    "Maharashtra": [
-        "Mumbai",
-        "Pune",
-        "Nagpur",
-        "Nashik",
-        "Aurangabad",
-        "Thane",
-        "Kolhapur"
-    ],
-
-
-    "Manipur": [
-        "Imphal",
-        "Thoubal",
-        "Bishnupur",
-        "Churachandpur"
-    ],
-
-
-    "Meghalaya": [
-        "Shillong",
-        "Tura",
-        "Jowai",
-        "Nongpoh"
-    ],
-
-
-    "Mizoram": [
-        "Aizawl",
-        "Lunglei",
-        "Champhai",
-        "Kolasib"
-    ],
-
-
-    "Nagaland": [
-        "Kohima",
-        "Dimapur",
-        "Mokokchung",
-        "Tuensang"
-    ],
-
-
-    "Odisha": [
-        "Bhubaneswar",
-        "Cuttack",
-        "Rourkela",
-        "Puri",
-        "Berhampur",
-        "Sambalpur"
-    ],
-
-
-    "Punjab": [
-        "Amritsar",
-        "Ludhiana",
-        "Jalandhar",
-        "Patiala",
-        "Bathinda",
-        "Mohali"
-    ],
-
-
-    "Rajasthan": [
-        "Jaipur",
-        "Jodhpur",
-        "Udaipur",
-        "Kota",
-        "Ajmer",
-        "Bikaner"
-    ],
-
-
-    "Sikkim": [
-        "Gangtok",
-        "Namchi",
-        "Gyalshing",
-        "Mangan"
-    ],
-
-
-    "Tamil Nadu": [
-        "Chennai",
-        "Coimbatore",
-        "Madurai",
-        "Tiruchirappalli",
-        "Salem",
-        "Tirunelveli",
-        "Nagercoil",
-        "Thoothukudi",
-        "Erode",
-        "Tiruppur",
-        "Vellore",
-        "Dindigul",
-        "Thanjavur",
-        "Kanyakumari"
-    ],
-
-
-    "Telangana": [
-        "Hyderabad",
-        "Warangal",
-        "Nizamabad",
-        "Karimnagar",
-        "Khammam"
-    ],
-
-
-    "Tripura": [
-        "Agartala",
-        "Udaipur",
-        "Dharmanagar",
-        "Kailashahar"
-    ],
-
-
-    "Uttar Pradesh": [
-        "Lucknow",
-        "Kanpur",
-        "Varanasi",
-        "Agra",
-        "Prayagraj",
-        "Meerut",
-        "Noida",
-        "Ghaziabad"
-    ],
-
-
-    "Uttarakhand": [
-        "Dehradun",
-        "Haridwar",
-        "Rishikesh",
-        "Nainital",
-        "Haldwani"
-    ],
-
-
-    "West Bengal": [
-        "Kolkata",
-        "Howrah",
-        "Durgapur",
-        "Asansol",
-        "Siliguri",
-        "Darjeeling"
-    ],
-
-
-    "Andaman and Nicobar Islands": [
-        "Port Blair",
-        "Diglipur",
-        "Mayabunder"
-    ],
-
-
-    "Chandigarh": [
-        "Chandigarh"
-    ],
-
-
-    "Dadra and Nagar Haveli and Daman and Diu": [
-        "Daman",
-        "Diu",
-        "Silvassa"
-    ],
-
-
-    "Delhi": [
-        "New Delhi",
-        "Delhi"
-    ],
-
-
-    "Jammu and Kashmir": [
-        "Srinagar",
-        "Jammu",
-        "Anantnag",
-        "Baramulla"
-    ],
-
-
-    "Ladakh": [
-        "Leh",
-        "Kargil"
-    ],
-
-
-    "Lakshadweep": [
-        "Kavaratti",
-        "Agatti",
-        "Andrott"
-    ],
-
-
-    "Puducherry": [
-        "Puducherry",
-        "Karaikal",
-        "Mahe",
-        "Yanam"
-    ]
-
-};
-
-
-
-/* ==========================================
-   LOAD STATES
-========================================== */
-
-
-const stateSelect =
-    document.getElementById("state");
-
-
-const citySelect =
-    document.getElementById("city");
-
-
-Object.keys(locations)
-    .sort()
-    .forEach(state => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = state;
-
-        option.textContent = state;
-
-        stateSelect.appendChild(option);
-
-    });
-
-
-
-/* ==========================================
-   STATE → CITY
-========================================== */
-
-
-stateSelect.addEventListener(
-    "change",
-    function () {
-
-        citySelect.innerHTML = "";
-
-        citySelect.disabled = true;
-
-
-        if (
-            this.value === ""
-        ) {
-
-            citySelect.innerHTML = `
-                <option value="">
-                    -- Select State First --
-                </option>
-            `;
-
-            return;
-
-        }
-
-
-        citySelect.disabled = false;
-
-
-        const defaultOption =
-            document.createElement("option");
-
-        defaultOption.value = "";
-
-        defaultOption.textContent =
-            "-- Select City --";
-
-        citySelect.appendChild(
-            defaultOption
-        );
-
-
-        locations[this.value]
-            .forEach(city => {
-
-                const option =
-                    document.createElement(
-                        "option"
-                    );
-
-                option.value = city;
-
-                option.textContent = city;
-
-                citySelect.appendChild(
-                    option
-                );
-
-            });
-
-    }
-);
-
-
-
-/* ==========================================
-   FORM SUBMISSION
-========================================== */
-
-
-document
-    .getElementById("donorForm")
-    .addEventListener(
-        "submit",
-        function (event) {
-
-            event.preventDefault();
-
-
-
-            /* PHONE VALIDATION */
-
-            const phone =
-                document.getElementById(
-                    "phone"
-                ).value;
-
-
-            if (
-                !/^[0-9]{10}$/.test(phone)
-            ) {
-
-                alert(
-                    "Please enter a valid 10-digit phone number."
-                );
-
-                return;
-
-            }
-
-
-
-            /* CREATE DONOR */
-
-            const donor = {
-
-                id:
-                    Date.now(),
-
-                name:
-                    document.getElementById(
-                        "name"
-                    ).value.trim(),
-
-                bloodGroup:
-                    document.getElementById(
-                        "bloodGroup"
-                    ).value,
-
-                state:
-                    stateSelect.value,
-
-                city:
-                    citySelect.value,
-
-                area:
-                    document.getElementById(
-                        "area"
-                    ).value.trim(),
-
-                phone:
-                    phone,
-
-                email:
-                    document.getElementById(
-                        "email"
-                    ).value.trim(),
-
-                availability:
-                    document.getElementById(
-                        "availability"
-                    ).value
-
-            };
-
-
-
-            /* GET EXISTING DONORS */
-
-            let donors =
-                JSON.parse(
-                    localStorage.getItem(
-                        "bloodbridgeDonors"
-                    )
-                ) || [];
-
-
-
-            /* ADD DONOR */
-
-            donors.push(donor);
-
-
-
-            /* SAVE */
-
-            localStorage.setItem(
-                "bloodbridgeDonors",
-                JSON.stringify(donors)
-            );
-
-
-
-            /* SUCCESS */
-
-            alert(
-                "🎉 Donor registered successfully!"
-            );
-
-
-
-            /* RESET FORM */
-
-            this.reset();
-
-
-            citySelect.innerHTML = `
-
-                <option value="">
-                    -- Select State First --
-                </option>
-
-            `;
-
-            citySelect.disabled = true;
-
-        }
-    );
-
+function applyLanguage(lang){
+ document.documentElement.lang=lang;
+ document.querySelectorAll("[data-en]").forEach(el=>{
+   el.textContent=el.getAttribute("data-"+lang);
+ });
+ document.getElementById("language").textContent=
+   lang==="en"?"தமிழ்":"English";
+ localStorage.setItem("bloodbridgeLanguage",lang);
+}
+function toggleLanguage(){
+ const current=localStorage.getItem("bloodbridgeLanguage")||"en";
+ applyLanguage(current==="en"?"ta":"en");
+}
+applyLanguage(localStorage.getItem("bloodbridgeLanguage")||"en");
+
+document.getElementById("donorForm").addEventListener("submit",function(e){
+ e.preventDefault();
+
+ const donor={
+   id:Date.now(),
+   name:document.getElementById("name").value.trim(),
+   bloodGroup:document.getElementById("bloodGroup").value,
+   state:document.getElementById("state").value,
+   city:document.getElementById("city").value.trim(),
+   area:document.getElementById("area").value.trim(),
+   phone:document.getElementById("phone").value.trim(),
+   email:document.getElementById("email").value.trim(),
+   availability:document.getElementById("availability").value
+ };
+
+ const donors=JSON.parse(localStorage.getItem("bloodbridgeDonors")||"[]");
+ donors.push(donor);
+ localStorage.setItem("bloodbridgeDonors",JSON.stringify(donors));
+
+ const message=document.getElementById("message");
+ message.style.display="block";
+ message.style.background="#e8f7ed";
+ message.style.color="#176b35";
+ message.textContent=
+   (localStorage.getItem("bloodbridgeLanguage")==="ta")
+   ?"நன்கொடையாளர் வெற்றிகரமாகப் பதிவு செய்யப்பட்டார்!"
+   :"Donor registered successfully!";
+
+ this.reset();
+});
 </script>
-
-
 </body>
-
     </html>
+    
