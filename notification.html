@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BloodBridge | Notifications</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+    color:#292d3a;
+}
+
+header{
+    background:#a50025;
+    color:white;
+    padding:18px 6%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+header h2{
+    font-size:24px;
+}
+
+.language{
+    background:white;
+    color:#a50025;
+    border:none;
+    padding:10px 16px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+nav{
+    background:white;
+    padding:14px;
+    display:flex;
+    justify-content:center;
+    gap:18px;
+    flex-wrap:wrap;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+nav a{
+    text-decoration:none;
+    color:#a50025;
+    font-weight:bold;
+    font-size:14px;
+}
+
+main{
+    max-width:950px;
+    margin:35px auto;
+    padding:0 18px;
+}
+
+.page-card{
+    background:white;
+    border-radius:15px;
+    padding:28px;
+    box-shadow:0 5px 20px rgba(0,0,0,.07);
+}
+
+h1{
+    color:#a50025;
+    margin-bottom:8px;
+}
+
+.subtitle{
+    color:#737987;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+    margin-bottom:25px;
+}
+
+.stat{
+    background:#fff4f6;
+    border-radius:10px;
+    padding:18px;
+}
+
+.stat h2{
+    color:#a50025;
+    margin-bottom:5px;
+}
+
+.stat p{
+    color:#666;
+    font-size:14px;
+}
+
+.notification{
+    display:flex;
+    gap:15px;
+    padding:18px;
+    margin-bottom:13px;
+    border:1px solid #eee;
+    border-radius:11px;
+    background:white;
+    border-left:5px solid #a50025;
+}
+
+.icon{
+    min-width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#ffe5eb;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:21px;
+}
+
+.content{
+    flex:1;
+}
+
+.content h3{
+    color:#a50025;
+    margin-bottom:6px;
+}
+
+.content p{
+    color:#555;
+    line-height:1.5;
+}
+
+.time{
+    color:#999;
+    font-size:12px;
+    margin-top:8px;
+}
+
+.badge{
+    display:inline-block;
+    margin-top:9px;
+    padding:5px 9px;
+    border-radius:20px;
+    background:#fff0f3;
+    color:#a50025;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+}
+
+button{
+    border:none;
+    border-radius:7px;
+    padding:11px 16px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.primary{
+    background:#a50025;
+    color:white;
+}
+
+.secondary{
+    background:#eee;
+    color:#444;
+}
+
+.empty{
+    text-align:center;
+    padding:40px 20px;
+    color:#777;
+}
+
+.note{
+    margin-top:25px;
+    background:#fff8e8;
+    color:#66552e;
+    padding:15px;
+    border-radius:9px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+footer{
+    text-align:center;
+    padding:25px;
+    color:#777;
+    font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h2>🩸 BloodBridge</h2>
+
+<button class="language"
+onclick="toggleLanguage()"
+id="languageButton">
+தமிழ்
+</button>
+
+</header>
+
+<nav>
+
+<a href="index.html"
+data-en="Home"
+data-ta="முகப்பு">
+Home
+</a>
+
+<a href="register.html"
+data-en="Register"
+data-ta="பதிவு">
+Register
+</a>
+
+<a href="search.html"
+data-en="Find Donor"
+data-ta="நன்கொடையாளரை தேடுக">
+Find Donor
+</a>
+
+<a href="request.html"
+data-en="Emergency Request"
+data-ta="அவசர கோரிக்கை">
+Emergency Request
+</a>
+
+<a href="dashboard.html"
+data-en="Dashboard"
+data-ta="டாஷ்போர்டு">
+Dashboard
+</a>
+
+<a href="notifications.html"
+data-en="Notifications"
+data-ta="அறிவிப்புகள்">
+Notifications
+</a>
+
+<a href="admin.html"
+data-en="Admin Panel"
+data-ta="நிர்வாகப் பலகை">
+Admin Panel
+</a>
+
+</nav>
+
+<main>
+
+<div class="page-card">
+
+<h1
+data-en="Notification Center"
+data-ta="அறிவிப்பு மையம்">
+Notification Center
+</h1>
+
+<p class="subtitle"
+data-en="Stay updated about donor matches and emergency blood requests."
+data-ta="நன்கொடையாளர் பொருத்தங்கள் மற்றும் அவசர இரத்த கோரிக்கைகள் பற்றிய புதுப்பிப்புகளைப் பெறுங்கள்.">
+Stay updated about donor matches and emergency blood requests.
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<h2 id="totalNotifications">0</h2>
+<p data-en="Total Notifications"
+data-ta="மொத்த அறிவிப்புகள்">
+Total Notifications
+</p>
+</div>
+
+<div class="stat">
+<h2 id="matchNotifications">0</h2>
+<p data-en="Potential Matches"
+data-ta="சாத்தியமான பொருத்தங்கள்">
+Potential Matches
+</p>
+</div>
+
+<div class="stat">
+<h2 id="pendingNotifications">0</h2>
+<p data-en="Pending Requests"
+data-ta="நிலுவையிலுள்ள கோரிக்கைகள்">
+Pending Requests
+</p>
+</div>
+
+</div>
+
+<div id="notificationList"></div>
+
+<div class="actions">
+
+<button class="primary"
+onclick="refreshNotifications()"
+data-en="Refresh Notifications"
+data-ta="அறிவிப்புகளைப் புதுப்பிக்கவும்">
+Refresh Notifications
+</button>
+
+<button class="secondary"
+onclick="clearNotifications()"
+data-en="Clear Demo Notifications"
+data-ta="டெமோ அறிவிப்புகளை அழிக்கவும்">
+Clear Demo Notifications
+</button>
+
+</div>
+
+<div class="note"
+data-en="This notification center is part of the GitHub Pages prototype. It uses browser storage, so notifications are local to this browser. Real cross-device notifications will require a secure backend and notification service."
+data-ta="இந்த அறிவிப்பு மையம் GitHub Pages மாதிரியின் ஒரு பகுதியாகும். இது browser storage-ஐ பயன்படுத்துகிறது. எனவே அறிவிப்புகள் இந்த browser-ல் மட்டுமே இருக்கும். உண்மையான பல சாதன அறிவிப்புகளுக்கு பாதுகாப்பான backend மற்றும் notification service தேவை.">
+This notification center is part of the GitHub Pages prototype.
+</div>
+
+</div>
+
+</main>
+
+<footer>
+BloodBridge © 2026
+</footer>
+
+<script>
+
+let language =
+localStorage.getItem("bloodbridgeLanguage") || "en";
+
+function setLanguage(lang){
+
+language = lang;
+
+document.documentElement.lang = lang;
+
+document.querySelectorAll("[data-en]").forEach(element => {
+
+element.textContent =
+element.getAttribute("data-" + lang);
+
+});
+
+document.getElementById("languageButton").textContent =
+lang === "en" ? "தமிழ்" : "English";
+
+localStorage.setItem("bloodbridgeLanguage",lang);
+
+refreshNotifications();
+}
+
+function toggleLanguage(){
+
+setLanguage(
+language === "en" ? "ta" : "en"
+);
+
+}
+
+function createNotifications(){
+
+const donors =
+JSON.parse(
+localStorage.getItem("bloodbridgeDonors") || "[]"
+);
+
+const requests =
+JSON.parse(
+localStorage.getItem("bloodbridgeRequests") || "[]"
+);
+
+let notifications = [];
+
+requests.forEach(request => {
+
+const matchingDonors = donors.filter(d => {
+
+return String(d.bloodGroup || "").toLowerCase()
+===
+String(request.bloodGroup || "").toLowerCase()
+
+&&
+
+String(d.state || "").toLowerCase()
+===
+String(request.state || "").toLowerCase()
+
+&&
+
+String(d.city || "").toLowerCase()
+===
+String(request.city || "").toLowerCase()
+
+&&
+
+String(d.availability || "").toLowerCase()
+===
+"available";
+
+});
+
+if(matchingDonors.length > 0){
+
+notifications.push({
+
+type:"match",
+
+icon:"🩸",
+
+titleEN:"Potential donor match found",
+
+titleTA:"சாத்தியமான நன்கொடையாளர் பொருத்தம் கிடைத்தது",
+
+messageEN:
+matchingDonors.length +
+" available donor(s) match the blood group and location for request #" +
+request.id,
+
+messageTA:
+request.id +
+" கோரிக்கைக்கு இரத்த வகை மற்றும் இருப்பிடத்துடன் " +
+matchingDonors.length +
+" நன்கொடையாளர் பொருத்தம் கிடைத்துள்ளது",
+
+time:request.id,
+
+badgeEN:"Potential Match",
+
+badgeTA:"சாத்தியமான பொருத்தம்"
+
+});
+
+}
+
+const status =
+request.status || "Pending";
+
+if(
+String(status).toLowerCase() === "pending"
+){
+
+notifications.push({
+
+type:"request",
+
+icon:"🚨",
+
+titleEN:"Emergency request pending",
+
+titleTA:"அவசர கோரிக்கை நிலுவையில் உள்ளது",
+
+messageEN:
+"Emergency request #" +
+request.id +
+" is waiting for review.",
+
+messageTA:
+request.id +
+" அவசர கோரிக்கை பரிசீலனைக்காக காத்திருக்கிறது.",
+
+time:request.id,
+
+badgeEN:"Pending",
+
+badgeTA:"நிலுவையில்"
+
+});
+
+}
+
+if(
+String(status).toLowerCase() === "completed"
+){
+
+notifications.push({
+
+type:"completed",
+
+icon:"✅",
+
+titleEN:"Request completed",
+
+titleTA:"கோரிக்கை நிறைவு பெற்றது",
+
+messageEN:
+"Request #" +
+request.id +
+" has been marked as completed.",
+
+messageTA:
+request.id +
+" கோரிக்கை நிறைவு பெற்றதாக குறிக்கப்பட்டுள்ளது.",
+
+time:request.id,
+
+badgeEN:"Completed",
+
+badgeTA:"நிறைவு"
+
+});
+
+}
+
+});
+
+return notifications;
+
+}
+
+function refreshNotifications(){
+
+const notifications =
+createNotifications();
+
+document.getElementById("totalNotifications")
+.textContent =
+notifications.length;
+
+document.getElementById("matchNotifications")
+.textContent =
+notifications.filter(n => n.type === "match").length;
+
+document.getElementById("pendingNotifications")
+.textContent =
+notifications.filter(n => n.type === "request").length;
+
+const list =
+document.getElementById("notificationList");
+
+if(notifications.length === 0){
+
+list.innerHTML = `
+
+<div class="empty">
+
+<div style="font-size:40px;">🔔</div>
+
+<h3 style="margin:10px 0;color:#a50025;">
+
+${language === "en"
+? "No notifications yet"
+: "இன்னும் அறிவிப்புகள் இல்லை"}
+
+</h3>
+
+<p>
+
+${language === "en"
+? "Notifications will appear when requests or potential matches are detected."
+: "கோரிக்கைகள் அல்லது சாத்தியமான பொருத்தங்கள் கண்டறியப்பட்டால் அறிவிப்புகள் தோன்றும்."}
+
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+list.innerHTML =
+notifications.map(notification => `
+
+<div class="notification">
+
+<div class="icon">
+${notification.icon}
+</div>
+
+<div class="content">
+
+<h3>
+${language === "en"
+? notification.titleEN
+: notification.titleTA}
+</h3>
+
+<p>
+${language === "en"
+? notification.messageEN
+: notification.messageTA}
+</p>
+
+<span class="badge">
+
+${language === "en"
+? notification.badgeEN
+: notification.badgeTA}
+
+</span>
+
+<div class="time">
+
+${language === "en"
+? "Request ID:"
+: "கோரிக்கை ID:"}
+
+${notification.time}
+
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+}
+
+function clearNotifications(){
+
+if(
+confirm(
+language === "en"
+? "Clear demo notifications?"
+: "டெமோ அறிவிப்புகளை அழிக்கவா?"
+)
+){
+
+localStorage.removeItem(
+"bloodbridgeNotifications"
+);
+
+refreshNotifications();
+
+}
+
+}
+
+setLanguage(language);
+
+</script>
+
+</body>
+  </html>
