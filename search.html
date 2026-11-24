@@ -8,10 +8,9 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Find Donor | BloodBridge</title>
+    <title>BloodBridge | Find Donor</title>
 
-    <link rel="stylesheet"
-          href="style.css">
+    <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -22,7 +21,9 @@
 
     <h1>🩸 BloodBridge</h1>
 
-    <p>Find potential blood donors</p>
+    <p>
+        Find Potential Blood Donors
+    </p>
 
 </header>
 
@@ -31,94 +32,106 @@
 
     <a href="index.html">Home</a>
 
-    <a href="register.html">
-        Become a Donor
-    </a>
+    <a href="register.html">Become a Donor</a>
 
-    <a href="search.html">
-        Find Donor
-    </a>
+    <a href="search.html">Find Donor</a>
 
-    <a href="request.html">
-        Emergency Request
-    </a>
+    <a href="request.html">Emergency Request</a>
+
+    <a href="matching.html">Smart Matching</a>
+
+    <a href="dashboard.html">Dashboard</a>
 
 </nav>
 
 
-<section class="form-section">
+<section>
 
-    <h2>🔎 Find a Potential Donor</h2>
+    <div class="form-section">
 
-    <label>Blood Group</label>
-
-    <select id="searchBlood">
-
-        <option value="">
-            Select Blood Group
-        </option>
-
-        <option>A+</option>
-        <option>A-</option>
-        <option>B+</option>
-        <option>B-</option>
-        <option>O+</option>
-        <option>O-</option>
-        <option>AB+</option>
-        <option>AB-</option>
-
-    </select>
+        <h2>
+            🔎 Search for a Donor
+        </h2>
 
 
-    <label>State</label>
+        <label>
+            Blood Group
+        </label>
 
-    <select id="searchState">
+        <select id="bloodGroup">
 
-        <option value="">
-            Select State
-        </option>
+            <option value="">
+                -- Select Blood Group --
+            </option>
 
-        <option>Tamil Nadu</option>
-        <option>Kerala</option>
-        <option>Karnataka</option>
-        <option>Andhra Pradesh</option>
-        <option>Telangana</option>
-        <option>Maharashtra</option>
-        <option>Delhi</option>
-        <option>West Bengal</option>
-        <option>Gujarat</option>
-        <option>Rajasthan</option>
-        <option>Uttar Pradesh</option>
-        <option>Bihar</option>
-        <option>Odisha</option>
-        <option>Punjab</option>
-        <option>Haryana</option>
-        <option>Jharkhand</option>
-        <option>Assam</option>
-        <option>Goa</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
 
-    </select>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+
+        </select>
 
 
-    <label>City</label>
+        <label>
+            State
+        </label>
 
-    <input
-        type="text"
-        id="searchCity"
-        placeholder="Enter city"
-    >
+        <select id="state">
+
+            <option value="">
+                -- Select State --
+            </option>
+
+        </select>
 
 
-    <button onclick="findDonors()">
-        🔎 Search Donors
-    </button>
+        <label>
+            City
+        </label>
 
+        <select id="city">
+
+            <option value="">
+                -- Select City --
+            </option>
+
+        </select>
+
+
+        <button onclick="searchDonors()">
+            🔎 Search Available Donors
+        </button>
+
+    </div>
 
 </section>
 
 
-<section id="results"
-         class="cards">
+<section>
+
+    <h2>
+        🩸 Search Results
+    </h2>
+
+    <div id="results">
+
+        <div class="card">
+
+            <p>
+                Enter your requirements above
+                to search for potential donors.
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
@@ -129,79 +142,356 @@
         © 2026 BloodBridge
     </p>
 
+    <p>
+        Healthcare Technology Prototype
+    </p>
+
 </footer>
 
 
 <script>
 
-function findDonors() {
 
-    const blood =
-        document.getElementById("searchBlood")
-        .value;
+/* ==============================
+   GET DONOR DATA
+============================== */
+
+const donors =
+    JSON.parse(
+        localStorage.getItem(
+            "bloodbridgeDonors"
+        )
+    ) || [];
+
+
+
+/* ==============================
+   STATES
+============================== */
+
+const states = [
+    "Andhra Pradesh",
+    "Arunachal Pradesh",
+    "Assam",
+    "Bihar",
+    "Chhattisgarh",
+    "Goa",
+    "Gujarat",
+    "Haryana",
+    "Himachal Pradesh",
+    "Jharkhand",
+    "Karnataka",
+    "Kerala",
+    "Madhya Pradesh",
+    "Maharashtra",
+    "Manipur",
+    "Meghalaya",
+    "Mizoram",
+    "Nagaland",
+    "Odisha",
+    "Punjab",
+    "Rajasthan",
+    "Sikkim",
+    "Tamil Nadu",
+    "Telangana",
+    "Tripura",
+    "Uttar Pradesh",
+    "Uttarakhand",
+    "West Bengal",
+    "Andaman and Nicobar Islands",
+    "Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu",
+    "Delhi",
+    "Jammu and Kashmir",
+    "Ladakh",
+    "Lakshadweep",
+    "Puducherry"
+];
+
+
+const stateSelect =
+    document.getElementById("state");
+
+
+const citySelect =
+    document.getElementById("city");
+
+
+states.forEach(state => {
+
+    const option =
+        document.createElement("option");
+
+    option.value = state;
+
+    option.textContent = state;
+
+    stateSelect.appendChild(option);
+
+});
+
+
+
+/* ==============================
+   CITY LIST
+============================== */
+
+const cities = {
+
+    "Tamil Nadu": [
+        "Chennai",
+        "Coimbatore",
+        "Madurai",
+        "Tiruchirappalli",
+        "Salem",
+        "Tirunelveli",
+        "Nagercoil",
+        "Thoothukudi",
+        "Erode",
+        "Tiruppur",
+        "Vellore",
+        "Dindigul",
+        "Thanjavur",
+        "Kanyakumari"
+    ],
+
+    "Kerala": [
+        "Thiruvananthapuram",
+        "Kochi",
+        "Kozhikode",
+        "Kollam",
+        "Thrissur",
+        "Kannur"
+    ],
+
+    "Karnataka": [
+        "Bengaluru",
+        "Mysuru",
+        "Mangaluru",
+        "Hubballi",
+        "Belagavi",
+        "Udupi"
+    ],
+
+    "Andhra Pradesh": [
+        "Visakhapatnam",
+        "Vijayawada",
+        "Guntur",
+        "Tirupati",
+        "Nellore",
+        "Kurnool"
+    ],
+
+    "Telangana": [
+        "Hyderabad",
+        "Warangal",
+        "Nizamabad",
+        "Karimnagar",
+        "Khammam"
+    ],
+
+    "Maharashtra": [
+        "Mumbai",
+        "Pune",
+        "Nagpur",
+        "Nashik",
+        "Thane"
+    ],
+
+    "Gujarat": [
+        "Ahmedabad",
+        "Surat",
+        "Vadodara",
+        "Rajkot",
+        "Gandhinagar"
+    ],
+
+    "Delhi": [
+        "Delhi",
+        "New Delhi"
+    ],
+
+    "West Bengal": [
+        "Kolkata",
+        "Howrah",
+        "Durgapur",
+        "Siliguri"
+    ],
+
+    "Uttar Pradesh": [
+        "Lucknow",
+        "Kanpur",
+        "Agra",
+        "Varanasi",
+        "Noida",
+        "Ghaziabad"
+    ]
+
+};
+
+
+
+/* ==============================
+   STATE → CITY
+============================== */
+
+stateSelect.addEventListener(
+    "change",
+    function () {
+
+        citySelect.innerHTML = `
+            <option value="">
+                -- Select City --
+            </option>
+        `;
+
+        const selectedState =
+            this.value;
+
+        if (
+            cities[selectedState]
+        ) {
+
+            cities[selectedState]
+                .forEach(city => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value = city;
+
+                    option.textContent = city;
+
+                    citySelect.appendChild(
+                        option
+                    );
+
+                });
+
+        }
+
+    }
+);
+
+
+
+/* ==============================
+   SEARCH DONORS
+============================== */
+
+function searchDonors() {
+
+    const bloodGroup =
+        document.getElementById(
+            "bloodGroup"
+        ).value;
 
     const state =
-        document.getElementById("searchState")
-        .value;
+        document.getElementById(
+            "state"
+        ).value;
 
     const city =
-        document.getElementById("searchCity")
-        .value
-        .toLowerCase();
+        document.getElementById(
+            "city"
+        ).value;
 
 
-    const donors =
-        JSON.parse(
-            localStorage.getItem(
-                "bloodbridgeDonors"
-            )
-        ) || [];
+    if (
+        bloodGroup === "" ||
+        state === "" ||
+        city === ""
+    ) {
+
+        alert(
+            "⚠️ Please select blood group, state and city."
+        );
+
+        return;
+
+    }
 
 
     const matches =
-        donors.filter(function(donor) {
+        donors.filter(donor =>
 
-            return (
+            donor.bloodGroup ===
+            bloodGroup &&
 
-                donor.bloodGroup === blood &&
+            donor.state ===
+            state &&
 
-                donor.state === state &&
+            donor.city ===
+            city &&
 
-                donor.city
-                    .toLowerCase()
-                    .includes(city) &&
+            donor.availability ===
+            "Available"
 
-                donor.availability ===
-                    "Available"
+        );
 
-            );
 
-        });
 
+    /* ==============================
+       MATCH FOUND
+    ============================== */
+
+    if (
+        matches.length > 0
+    ) {
+
+        alert(
+            "🩸 MATCH FOUND!\n\n" +
+            matches.length +
+            " available potential donor(s) " +
+            "with " +
+            bloodGroup +
+            " found in " +
+            city +
+            "."
+        );
+
+    }
+
+
+    /* ==============================
+       DISPLAY RESULTS
+    ============================== */
 
     const results =
-        document.getElementById("results");
-
+        document.getElementById(
+            "results"
+        );
 
     results.innerHTML = "";
 
 
-    if (matches.length === 0) {
+
+    if (
+        matches.length === 0
+    ) {
 
         results.innerHTML = `
-        
-        <div class="card">
 
-            <h3>
-                No donors found
-            </h3>
+            <div class="card">
 
-            <p>
-                Try another location
-                or blood group.
-            </p>
+                <h3>
+                    ❌ No Available Match
+                </h3>
 
-        </div>
+                <p>
+                    No available potential donor
+                    was found for the selected
+                    blood group and location.
+                </p>
+
+                <p>
+                    Try another location or
+                    submit an emergency request.
+                </p>
+
+            </div>
 
         `;
 
@@ -210,56 +500,95 @@ function findDonors() {
     }
 
 
-    matches.forEach(function(donor) {
 
-        results.innerHTML += `
+    matches.forEach(donor => {
 
-        <div class="card">
+        const card =
+            document.createElement(
+                "div"
+            );
+
+        card.className =
+            "card";
+
+
+        card.innerHTML = `
 
             <h3>
-                🩸 ${donor.bloodGroup} Donor
+                🩸 ${donor.name}
             </h3>
 
             <p>
-                <strong>Location:</strong>
-                ${donor.city}, ${donor.state}
+                <strong>
+                    Blood Group:
+                </strong>
+
+                ${donor.bloodGroup}
             </p>
 
             <p>
-                <strong>Area:</strong>
+                <strong>
+                    Location:
+                </strong>
+
+                ${donor.city},
+                ${donor.state}
+            </p>
+
+            <p>
+                <strong>
+                    Area:
+                </strong>
+
                 ${donor.area}
             </p>
 
             <p>
+                <strong>
+                    Availability:
+                </strong>
+
                 🟢 Available
             </p>
 
-            <button onclick="requestContact('${donor.name}')">
+            <button
+                onclick="requestContact('${donor.name}')">
 
-                Request Contact
+                📩 Request Contact
 
             </button>
 
-        </div>
-
         `;
+
+
+        results.appendChild(
+            card
+        );
 
     });
 
 }
 
 
-function requestContact(name) {
+
+/* ==============================
+   CONTACT REQUEST
+============================== */
+
+function requestContact(
+    name
+) {
 
     alert(
-        "Contact request sent to " +
+        "📩 Contact request created for " +
         name +
-        "!"
+        ". Further verification is required."
     );
 
 }
 
 </script>
+
 
 </body>
 
