@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Matching | BloodBridge</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <h1>🩸 BloodBridge</h1>
+
+    <p>Smart Emergency Donor Matching</p>
+
+</header>
+
+
+
+<nav>
+
+    <a href="index.html">Home</a>
+
+    <a href="register.html">Become a Donor</a>
+
+    <a href="search.html">Find Donor</a>
+
+    <a href="request.html">Emergency Request</a>
+
+    <a href="matching.html">Smart Matching</a>
+
+</nav>
+
+
+
+<section class="form-section">
+
+    <h2>🚨 Smart Donor Matching</h2>
+
+    <p>
+        Select an emergency request to find
+        potential available donors.
+    </p>
+
+
+    <!-- REQUEST SELECTOR -->
+
+    <label>Select Emergency Request</label>
+
+    <select id="requestSelect">
+
+        <option value="">
+            Select a request
+        </option>
+
+    </select>
+
+
+    <button onclick="findMatches()">
+        🔎 Find Potential Donors
+    </button>
+
+</section>
+
+
+
+<!-- MATCHING RESULTS -->
+
+<section>
+
+    <h2>Potential Donor Matches</h2>
+
+    <div id="results" class="cards"></div>
+
+</section>
+
+
+
+<footer>
+
+    <p>
+        © 2026 BloodBridge
+    </p>
+
+</footer>
+
+
+
+<script>
+
+
+// Load emergency requests
+
+const requests =
+    JSON.parse(
+        localStorage.getItem(
+            "bloodbridgeRequests"
+        )
+    ) || [];
+
+
+
+const requestSelect =
+    document.getElementById(
+        "requestSelect"
+    );
+
+
+
+// Display requests in dropdown
+
+requests.forEach(function(request, index) {
+
+    const option =
+        document.createElement("option");
+
+    option.value = index;
+
+    option.textContent =
+        request.bloodGroup +
+        " - " +
+        request.city +
+        " - " +
+        request.urgency;
+
+    requestSelect.appendChild(option);
+
+});
+
+
+
+function findMatches() {
+
+
+    const selectedIndex =
+        requestSelect.value;
+
+
+    const results =
+        document.getElementById(
+            "results"
+        );
+
+
+    results.innerHTML = "";
+
+
+
+    if (selectedIndex === "") {
+
+        results.innerHTML = `
+
+        <div class="card">
+
+            <h3>
+                ⚠️ Select a request
+            </h3>
+
+            <p>
+                Please select an emergency
+                request first.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    const request =
+        requests[selectedIndex];
+
+
+
+    // Get donors
+
+    const donors =
+        JSON.parse(
+            localStorage.getItem(
+                "bloodbridgeDonors"
+            )
+        ) || [];
+
+
+
+    // Calculate matches
+
+    const matches = [];
+
+
+
+    donors.forEach(function(donor) {
+
+
+        let score = 0;
+
+
+        // Blood group match
+
+        if (
+            donor.bloodGroup ===
+            request.bloodGroup
+        ) {
+
+            score += 50;
+
+        }
+
+
+        // State match
+
+        if (
+            donor.state ===
+            request.state
+        ) {
+
+            score += 20;
+
+        }
+
+
+        // City match
+
+        if (
+            donor.city.toLowerCase() ===
+            request.city.toLowerCase()
+        ) {
+
+            score += 20;
+
+        }
+
+
+        // Availability
+
+        if (
+            donor.availability ===
+            "Available"
+        ) {
+
+            score += 10;
+
+        }
+
+
+
+        // Only show donors
+        // with matching blood group
+
+        if (
+            donor.bloodGroup ===
+            request.bloodGroup &&
+            donor.availability ===
+            "Available"
+        ) {
+
+            matches.push({
+
+                donor: donor,
+
+                score: score
+
+            });
+
+        }
+
+    });
+
+
+
+    // Sort highest score first
+
+    matches.sort(function(a, b) {
+
+        return b.score - a.score;
+
+    });
+
+
+
+    // No matches
+
+    if (matches.length === 0) {
+
+        results.innerHTML = `
+
+        <div class="card">
+
+            <h3>
+                ❌ No potential donors found
+            </h3>
+
+            <p>
+                Try another request or
+                search in another location.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    // Display matches
+
+    matches.forEach(function(match) {
+
+        const donor =
+            match.donor;
+
+
+
+        let locationText =
+            donor.city +
+            ", " +
+            donor.state;
+
+
+
+        let scoreText =
+            match.score + "%";
+
+
+
+        results.innerHTML += `
+
+        <div class="card">
+
+            <h3>
+                🩸 ${donor.bloodGroup} Donor
+            </h3>
+
+            <p>
+                <strong>Name:</strong>
+                ${donor.name}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                ${locationText}
+            </p>
+
+            <p>
+                <strong>Area:</strong>
+                ${donor.area}
+            </p>
+
+            <p>
+                <strong>Status:</strong>
+                🟢 Available
+            </p>
+
+            <p>
+                <strong>Prototype Match Score:</strong>
+                ${scoreText}
+            </p>
+
+            <button
+                onclick="requestContact('${donor.name}')">
+
+                📩 Request Contact
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+
+function requestContact(name) {
+
+    alert(
+        "📩 Contact request sent to " +
+        name +
+        "!"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+  </html>
