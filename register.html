@@ -4,73 +4,52 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloodBridge | Donor Registration</title>
-
+<title>BloodBridge - Donor Registration</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;font-family:Arial,sans-serif}
-body{background:#f5f6fa;color:#293044}
-header{background:#a50025;color:white;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-nav{background:white;padding:15px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
-nav a{color:#a50025;text-decoration:none;font-weight:bold}
-button{cursor:pointer;border:0;border-radius:7px;padding:11px 16px;font-weight:bold}
-.language{background:white;color:#a50025}
-main{max-width:650px;margin:35px auto;padding:0 15px}
-.panel{background:white;padding:27px;border-radius:12px;box-shadow:0 4px 15px #0000000c}
-h1{color:#a50025;margin-bottom:12px}
-p{color:#737b8c;line-height:1.6;margin-bottom:18px}
-label{display:block;margin:15px 0 7px;font-weight:bold}
-input,select{width:100%;padding:13px;border:1px solid #ddd;border-radius:7px;background:white}
-.submit{background:#a50025;color:white;width:100%;margin-top:23px}
-.message{margin-top:17px;padding:13px;border-radius:7px;display:none}
-.success{background:#e6f8ed;color:#176c3c}
-.error{background:#fff0f0;color:#a50025}
-.note{margin-top:20px;padding:14px;background:#fff8e9;border-radius:7px;font-size:13px;line-height:1.6;color:#66552e}
-footer{text-align:center;padding:25px;color:#777}
+body{font-family:Arial,sans-serif;background:#fff5f5;margin:0;color:#333}
+header{background:#b51220;color:white;padding:20px;text-align:center}
+nav{text-align:center;background:#8e101b;padding:12px}
+nav a{color:white;text-decoration:none;margin:8px;display:inline-block}
+.container{max-width:550px;margin:25px auto;padding:22px;background:white;border-radius:12px;box-shadow:0 3px 15px #0002}
+h2{color:#b51220;text-align:center}
+input,select,button{width:100%;padding:12px;margin:9px 0;box-sizing:border-box;border:1px solid #ccc;border-radius:7px}
+button{background:#b51220;color:white;border:0;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.6}
+#message{text-align:center;font-weight:bold}
+.note{font-size:13px;color:#666;line-height:1.5}
 </style>
 </head>
-
 <body>
 
 <header>
-<h2>🩸 BloodBridge</h2>
-<button class="language" id="languageButton" onclick="toggleLanguage()">தமிழ்</button>
+<h1>🩸 BloodBridge</h1>
+<p>Connect. Donate. Save Lives.</p>
 </header>
 
 <nav>
-<a href="index.html" data-en="Home" data-ta="முகப்பு">Home</a>
-<a href="register.html" data-en="Register" data-ta="பதிவு">Register</a>
-<a href="search.html" data-en="Find Donor" data-ta="நன்கொடையாளர் தேடல்">Find Donor</a>
-<a href="request.html" data-en="Emergency Request" data-ta="அவசர கோரிக்கை">Emergency Request</a>
-<a href="dashboard.html" data-en="Dashboard" data-ta="புள்ளிவிவரங்கள்">Dashboard</a>
-<a href="admin.html" data-en="Admin Panel" data-ta="நிர்வாகப் பலகை">Admin Panel</a>
+<a href="index.html">Home</a>
+<a href="register.html">Register</a>
+<a href="search.html">Find Donors</a>
+<a href="request.html">Emergency Request</a>
+<a href="notifications.html">Notifications</a>
+<a href="login.html">Login</a>
 </nav>
 
-<main>
-<div class="panel">
-
-<h1 data-en="Donor Registration" data-ta="நன்கொடையாளர் பதிவு">Donor Registration</h1>
-
-<p data-en="Enter fictional demo details to register a donor in BloodBridge."
-data-ta="BloodBridge தளத்தில் நன்கொடையாளரைப் பதிவு செய்ய கற்பனையான மாதிரி விவரங்களை உள்ளிடவும்.">
-Enter fictional demo details to register a donor in BloodBridge.
-</p>
+<div class="container">
+<h2>Donor Registration</h2>
 
 <form id="donorForm">
+<input id="name" placeholder="Full Name (Demo Name)" required>
 
-<label data-en="Full Name" data-ta="முழுப் பெயர்">Full Name</label>
-<input id="name" type="text" required maxlength="60" placeholder="Enter name">
-
-<label data-en="Age Group" data-ta="வயது பிரிவு">Age Group</label>
 <select id="ageGroup" required>
 <option value="">Select Age Group</option>
-<option value="18-25">18–25</option>
-<option value="26-35">26–35</option>
-<option value="36-45">36–45</option>
-<option value="46-55">46–55</option>
-<option value="56+">56+</option>
+<option>18-25</option>
+<option>26-35</option>
+<option>36-45</option>
+<option>46-55</option>
+<option>56+</option>
 </select>
 
-<label data-en="Blood Group" data-ta="இரத்த வகை">Blood Group</label>
 <select id="bloodGroup" required>
 <option value="">Select Blood Group</option>
 <option>A+</option><option>A-</option>
@@ -79,7 +58,6 @@ Enter fictional demo details to register a donor in BloodBridge.
 <option>O+</option><option>O-</option>
 </select>
 
-<label data-en="State" data-ta="மாநிலம்">State</label>
 <select id="state" required>
 <option value="">Select State</option>
 <option>Tamil Nadu</option>
@@ -98,30 +76,14 @@ Enter fictional demo details to register a donor in BloodBridge.
 <option>Bihar</option>
 <option>Odisha</option>
 <option>Assam</option>
-<option>Goa</option>
-<option>Jharkhand</option>
-<option>Chhattisgarh</option>
-<option>Madhya Pradesh</option>
-<option>Himachal Pradesh</option>
-<option>Uttarakhand</option>
-<option>Manipur</option>
-<option>Meghalaya</option>
-<option>Mizoram</option>
-<option>Nagaland</option>
-<option>Tripura</option>
-<option>Sikkim</option>
 </select>
 
-<label data-en="City" data-ta="நகரம்">City</label>
-<input id="city" type="text" required maxlength="60" placeholder="Example: Coimbatore">
+<input id="city" placeholder="City" required>
 
-<label data-en="Phone Number" data-ta="தொலைபேசி எண்">Phone Number</label>
-<input id="phone" type="tel" required maxlength="20" placeholder="Demo phone number">
+<input id="phone" type="tel" placeholder="Demo Phone Number" required>
 
-<label data-en="Email ID" data-ta="மின்னஞ்சல் முகவரி">Email ID</label>
-<input id="email" type="email" required maxlength="100" placeholder="demo@example.com">
+<input id="email" type="email" placeholder="Demo Email Address" required>
 
-<label data-en="Availability" data-ta="கிடைக்கும் நிலை">Availability</label>
 <select id="availability" required>
 <option value="">Select Availability</option>
 <option value="Available">Available</option>
@@ -129,86 +91,57 @@ Enter fictional demo details to register a donor in BloodBridge.
 <option value="Not Available">Not Available</option>
 </select>
 
-<button class="submit" type="submit"
-data-en="Register Donor"
-data-ta="நன்கொடையாளரைப் பதிவு செய்">
-Register Donor
-</button>
-
+<button id="submitBtn" type="submit">Register Donor</button>
 </form>
 
-<div id="message" class="message"></div>
+<p id="message" role="status"></p>
 
-<div class="note"
-data-en="Prototype privacy notice: Use fictional demo details only. Real donor contact information must be collected only with informed consent and stored securely. Age group does not establish donation eligibility; a healthcare professional must assess eligibility."
-data-ta="தனியுரிமை குறிப்பு: கற்பனையான மாதிரி விவரங்களை மட்டுமே பயன்படுத்தவும். உண்மையான தொடர்பு விவரங்களை ஒப்புதலுடன் பாதுகாப்பாகச் சேமிக்க வேண்டும். வயது பிரிவு மட்டும் இரத்த தானத் தகுதியை உறுதிப்படுத்தாது; மருத்துவ நிபுணர் மதிப்பீடு அவசியம்.">
-Prototype privacy notice: Use fictional demo details only.
+<p class="note">
+Hackathon demonstration only. Use fictional details. Do not enter real personal contact information. Donor eligibility and blood compatibility must be verified by healthcare professionals.
+</p>
 </div>
 
-</div>
-</main>
+<script type="module">
+import { db, collection, addDoc, serverTimestamp }
+from "./firebase.js";
 
-<footer>BloodBridge © 2026</footer>
+const form = document.getElementById("donorForm");
+const message = document.getElementById("message");
+const submitBtn = document.getElementById("submitBtn");
 
-<script>
-let language=localStorage.getItem("bloodbridgeLanguage")||"en";
+form.addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-function setLanguage(lang){
-language=lang;
-document.documentElement.lang=lang;
+  submitBtn.disabled = true;
+  message.textContent = "Saving donor...";
 
-document.querySelectorAll("[data-en]").forEach(el=>{
-el.textContent=el.getAttribute("data-"+lang);
+  const donor = {
+    name: document.getElementById("name").value.trim(),
+    ageGroup: document.getElementById("ageGroup").value,
+    bloodGroup: document.getElementById("bloodGroup").value,
+    state: document.getElementById("state").value,
+    city: document.getElementById("city").value.trim(),
+    phone: document.getElementById("phone").value.trim(),
+    email: document.getElementById("email").value.trim(),
+    availability: document.getElementById("availability").value,
+    createdAt: serverTimestamp()
+  };
+
+  try {
+    await addDoc(collection(db, "donors"), donor);
+    message.textContent = "✅ Donor registered successfully!";
+    message.style.color = "green";
+    form.reset();
+  } catch (error) {
+    console.error("Firebase error:", error);
+    message.textContent = "❌ Registration failed: " + error.message;
+    message.style.color = "red";
+  } finally {
+    submitBtn.disabled = false;
+  }
 });
-
-document.getElementById("languageButton").textContent=
-lang==="en"?"தமிழ்":"English";
-
-localStorage.setItem("bloodbridgeLanguage",lang);
-}
-
-function toggleLanguage(){
-setLanguage(language==="en"?"ta":"en");
-}
-
-document.getElementById("donorForm").addEventListener("submit",function(e){
-
-e.preventDefault();
-
-const donor={
-id:Date.now(),
-name:document.getElementById("name").value.trim(),
-ageGroup:document.getElementById("ageGroup").value,
-bloodGroup:document.getElementById("bloodGroup").value,
-state:document.getElementById("state").value,
-city:document.getElementById("city").value.trim(),
-phone:document.getElementById("phone").value.trim(),
-email:document.getElementById("email").value.trim(),
-availability:document.getElementById("availability").value
-};
-
-const donors=JSON.parse(
-localStorage.getItem("bloodbridgeDonors")||"[]"
-);
-
-donors.push(donor);
-
-localStorage.setItem("bloodbridgeDonors",JSON.stringify(donors));
-
-const message=document.getElementById("message");
-message.className="message success";
-message.style.display="block";
-message.textContent=language==="en"?
-"Donor registered successfully!":
-"நன்கொடையாளர் வெற்றிகரமாகப் பதிவு செய்யப்பட்டார்!";
-
-this.reset();
-
-});
-
-setLanguage(language);
 </script>
 
 </body>
- </html>
- 
+                              </html>
+                              
