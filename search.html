@@ -1,57 +1,266 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <title>Find Donor - BloodBridge</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Find Donor | BloodBridge</title>
+
+    <link rel="stylesheet"
+          href="style.css">
+
 </head>
+
 
 <body>
 
 <header>
+
     <h1>🩸 BloodBridge</h1>
-    <p>Find a Potential Blood Donor</p>
+
+    <p>Find potential blood donors</p>
+
 </header>
 
+
 <nav>
+
     <a href="index.html">Home</a>
-    <a href="register.html">Become a Donor</a>
-    <a href="search.html">Find Donor</a>
-    <a href="request.html">Emergency Request</a>
+
+    <a href="register.html">
+        Become a Donor
+    </a>
+
+    <a href="search.html">
+        Find Donor
+    </a>
+
+    <a href="request.html">
+        Emergency Request
+    </a>
+
 </nav>
+
 
 <section class="form-section">
 
-    <h2>Find a Donor</h2>
+    <h2>🔎 Find a Potential Donor</h2>
 
-    <form>
+    <label>Blood Group</label>
 
-        <label>Blood Group</label>
+    <select id="searchBlood">
 
-        <select>
-            <option>Select Blood Group</option>
-            <option>A+</option>
-            <option>A-</option>
-            <option>B+</option>
-            <option>B-</option>
-            <option>O+</option>
-            <option>O-</option>
-            <option>AB+</option>
-            <option>AB-</option>
-        </select>
+        <option value="">
+            Select Blood Group
+        </option>
 
-        <label>Location</label>
+        <option>A+</option>
+        <option>A-</option>
+        <option>B+</option>
+        <option>B-</option>
+        <option>O+</option>
+        <option>O-</option>
+        <option>AB+</option>
+        <option>AB-</option>
 
-        <input
-            type="text"
-            placeholder="Enter city or area">
+    </select>
 
-        <button type="submit">
-            Search Donors
-        </button>
 
-    </form>
+    <label>State</label>
+
+    <select id="searchState">
+
+        <option value="">
+            Select State
+        </option>
+
+        <option>Tamil Nadu</option>
+        <option>Kerala</option>
+        <option>Karnataka</option>
+        <option>Andhra Pradesh</option>
+        <option>Telangana</option>
+        <option>Maharashtra</option>
+        <option>Delhi</option>
+        <option>West Bengal</option>
+        <option>Gujarat</option>
+        <option>Rajasthan</option>
+        <option>Uttar Pradesh</option>
+        <option>Bihar</option>
+        <option>Odisha</option>
+        <option>Punjab</option>
+        <option>Haryana</option>
+        <option>Jharkhand</option>
+        <option>Assam</option>
+        <option>Goa</option>
+
+    </select>
+
+
+    <label>City</label>
+
+    <input
+        type="text"
+        id="searchCity"
+        placeholder="Enter city"
+    >
+
+
+    <button onclick="findDonors()">
+        🔎 Search Donors
+    </button>
+
 
 </section>
 
+
+<section id="results"
+         class="cards">
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 BloodBridge
+    </p>
+
+</footer>
+
+
+<script>
+
+function findDonors() {
+
+    const blood =
+        document.getElementById("searchBlood")
+        .value;
+
+    const state =
+        document.getElementById("searchState")
+        .value;
+
+    const city =
+        document.getElementById("searchCity")
+        .value
+        .toLowerCase();
+
+
+    const donors =
+        JSON.parse(
+            localStorage.getItem(
+                "bloodbridgeDonors"
+            )
+        ) || [];
+
+
+    const matches =
+        donors.filter(function(donor) {
+
+            return (
+
+                donor.bloodGroup === blood &&
+
+                donor.state === state &&
+
+                donor.city
+                    .toLowerCase()
+                    .includes(city) &&
+
+                donor.availability ===
+                    "Available"
+
+            );
+
+        });
+
+
+    const results =
+        document.getElementById("results");
+
+
+    results.innerHTML = "";
+
+
+    if (matches.length === 0) {
+
+        results.innerHTML = `
+        
+        <div class="card">
+
+            <h3>
+                No donors found
+            </h3>
+
+            <p>
+                Try another location
+                or blood group.
+            </p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
+
+
+    matches.forEach(function(donor) {
+
+        results.innerHTML += `
+
+        <div class="card">
+
+            <h3>
+                🩸 ${donor.bloodGroup} Donor
+            </h3>
+
+            <p>
+                <strong>Location:</strong>
+                ${donor.city}, ${donor.state}
+            </p>
+
+            <p>
+                <strong>Area:</strong>
+                ${donor.area}
+            </p>
+
+            <p>
+                🟢 Available
+            </p>
+
+            <button onclick="requestContact('${donor.name}')">
+
+                Request Contact
+
+            </button>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+
+function requestContact(name) {
+
+    alert(
+        "Contact request sent to " +
+        name +
+        "!"
+    );
+
+}
+
+</script>
+
 </body>
-</html>
+
+    </html>
