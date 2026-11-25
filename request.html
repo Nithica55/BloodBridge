@@ -1,68 +1,486 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BloodBridge - Emergency Request</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>BloodBridge | Emergency Request</title>
 
 <style>
-*{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;background:#fff5f5;color:#333}
-header{background:#b51220;color:white;text-align:center;padding:20px}
-nav{background:#8e101b;padding:12px;text-align:center}
-nav a{color:white;text-decoration:none;margin:7px;display:inline-block}
-.container{max-width:850px;margin:25px auto;padding:18px}
-.card{background:white;padding:20px;border-radius:12px;margin-bottom:18px;box-shadow:0 3px 12px #0001}
-h2,h3{color:#b51220}
-input,select,button{width:100%;padding:12px;margin:8px 0;border:1px solid #ccc;border-radius:7px}
-button{background:#b51220;color:white;border:0;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.6}
-#message{font-weight:bold;text-align:center}
-.donor{border:1px solid #eee;padding:15px;border-radius:9px;margin:12px 0}
-.status{font-weight:bold;color:#b51220}
-.step{padding:12px;border-left:4px solid #ccc;margin:8px 0;background:#fafafa}
-.step.done{border-left-color:green}
-.muted{font-size:13px;color:#666;line-height:1.5}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff5f5, #f8f9fa);
+    color: #333;
+    min-height: 100vh;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    padding: 17px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 23px;
+    font-weight: bold;
+}
+
+.back-btn {
+    border: none;
+    background: white;
+    color: #b71c1c;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MAIN */
+
+.container {
+    max-width: 950px;
+    margin: 30px auto;
+    padding: 0 18px;
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.title h1 {
+    color: #8e0000;
+}
+
+.title p {
+    color: #777;
+    margin-top: 6px;
+}
+
+/* CARD */
+
+.card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+}
+
+.card h2 {
+    color: #8e0000;
+    margin-bottom: 18px;
+}
+
+/* FORM */
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+.field.full {
+    grid-column: 1 / -1;
+}
+
+label {
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 9px;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus {
+    border-color: #b71c1c;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* MESSAGE */
+
+.message {
+    display: none;
+    padding: 13px;
+    margin-top: 15px;
+    border-radius: 9px;
+    text-align: center;
+}
+
+.success {
+    display: block;
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.error {
+    display: block;
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* REQUEST INFO */
+
+.request-info {
+    display: none;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.info {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 14px;
+}
+
+.info-label {
+    color: #777;
+    font-size: 11px;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.blood {
+    color: #c62828;
+    font-size: 20px;
+}
+
+.critical {
+    color: #c62828;
+}
+
+.urgent {
+    color: #ef6c00;
+}
+
+/* TIMELINE */
+
+.timeline {
+    margin-top: 28px;
+    position: relative;
+}
+
+.timeline-step {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    min-height: 75px;
+}
+
+.timeline-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+
+    left: 16px;
+    top: 34px;
+
+    width: 3px;
+    height: 43px;
+
+    background: #ddd;
+}
+
+.timeline-step.completed:not(:last-child)::after {
+    background: #2e7d32;
+}
+
+.circle {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50%;
+
+    background: #eee;
+    color: #777;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: bold;
+
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+.timeline-step.completed .circle {
+    background: #2e7d32;
+    color: white;
+}
+
+.timeline-step.current .circle {
+    background: #b71c1c;
+    color: white;
+    box-shadow: 0 0 0 5px #ffebee;
+}
+
+.timeline-content {
+    margin-left: 15px;
+    padding-top: 2px;
+}
+
+.timeline-content h3 {
+    font-size: 15px;
+    color: #444;
+}
+
+.timeline-content p {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+}
+
+/* DONOR MATCH */
+
+.matches {
+    display: none;
+}
+
+.match-card {
+    border: 1px solid #eee;
+    border-left: 5px solid #2e7d32;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    background: #fff;
+}
+
+.match-name {
+    font-size: 17px;
+    font-weight: bold;
+    color: #333;
+}
+
+.match-details {
+    margin-top: 8px;
+    color: #666;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.match-status {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.protected {
+    margin-top: 8px;
+    color: #777;
+    font-size: 12px;
+}
+
+/* BUTTONS */
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 9px;
+    background: #b71c1c;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* FOOTER */
+
+footer {
+    text-align: center;
+    color: #888;
+    font-size: 11px;
+    margin: 25px;
+}
+
+@media(max-width:650px) {
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .field.full {
+        grid-column: auto;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .card {
+        padding: 20px;
+    }
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <header>
-<h1>🩸 BloodBridge</h1>
-<p>Emergency Blood Request & Donor Matching</p>
+
+<div class="logo">
+🩸 BloodBridge
+</div>
+
+<button
+class="back-btn"
+onclick="location.href='profile.html'">
+Profile
+</button>
+
 </header>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="register.html">Register</a>
-<a href="search.html">Find Donors</a>
-<a href="request.html">Emergency Request</a>
-<a href="notifications.html">Notifications</a>
-<a href="dashboard.html">Dashboard</a>
-<a href="login.html">Login</a>
-</nav>
 
 <div class="container">
 
+
+<div class="title">
+
+<h1>🚨 Emergency Blood Request</h1>
+
+<p>
+Find potential blood donors quickly
+</p>
+
+</div>
+
+
+<!-- =========================
+     REQUEST FORM
+========================= -->
+
 <div class="card">
-<h2>Submit Emergency Request</h2>
+
+<h2>Request Blood</h2>
+
 
 <form id="requestForm">
 
-<input id="patientName" placeholder="Patient Demo Name" required>
 
-<select id="bloodGroup" required>
-<option value="">Select Required Blood Group</option>
-<option>A+</option><option>A-</option>
-<option>B+</option><option>B-</option>
-<option>AB+</option><option>AB-</option>
-<option>O+</option><option>O-</option>
+<div class="form-grid">
+
+
+<div class="field">
+
+<label>Patient Name</label>
+
+<input
+type="text"
+id="patientName"
+placeholder="Enter patient name"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Blood Group Required</label>
+
+<select
+id="bloodGroup"
+required>
+
+<option value="">
+Select blood group
+</option>
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
 </select>
 
-<select id="state" required>
-<option value="">Select State</option>
+</div>
+
+
+<div class="field">
+
+<label>State</label>
+
+<select
+id="state"
+required>
+
+<option value="">
+Select state
+</option>
+
 <option>Tamil Nadu</option>
 <option>Kerala</option>
 <option>Karnataka</option>
@@ -72,274 +490,954 @@ button:disabled{opacity:.6}
 <option>Delhi</option>
 <option>Gujarat</option>
 <option>Rajasthan</option>
-<option>Uttar Pradesh</option>
 <option>West Bengal</option>
-<option>Punjab</option>
-<option>Haryana</option>
-<option>Bihar</option>
-<option>Odisha</option>
-<option>Assam</option>
+
 </select>
 
-<input id="city" placeholder="City" required>
+</div>
 
-<input id="hospital" placeholder="Hospital (Demo Name)" required>
 
-<input id="units" type="number" min="1" max="10"
-placeholder="Units required" required>
+<div class="field">
 
-<select id="urgency" required>
-<option value="">Select Urgency</option>
-<option>Emergency</option>
-<option>Urgent</option>
-<option>Normal</option>
+<label>City</label>
+
+<input
+type="text"
+id="city"
+placeholder="Example: Coimbatore"
+required>
+
+</div>
+
+
+<div class="field full">
+
+<label>Hospital</label>
+
+<input
+type="text"
+id="hospital"
+placeholder="Enter hospital name"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Units Required</label>
+
+<input
+type="number"
+id="units"
+min="1"
+max="10"
+value="1"
+required>
+
+</div>
+
+
+<div class="field">
+
+<label>Urgency</label>
+
+<select
+id="urgency"
+required>
+
+<option value="Normal">
+Normal
+</option>
+
+<option value="Urgent">
+Urgent
+</option>
+
+<option value="Critical">
+Critical
+</option>
+
 </select>
 
-<button id="submitBtn" type="submit">Submit Emergency Request</button>
+</div>
+
+
+</div>
+
+
+<button
+type="submit"
+class="submit-btn">
+🚨 Submit Emergency Request
+</button>
+
 
 </form>
 
-<p id="message" role="status"></p>
+
+<div
+id="message"
+class="message">
 </div>
 
-<div class="card">
-<h2>Request Tracking</h2>
-
-<input id="trackingId" placeholder="Enter Request ID">
-
-<button id="trackBtn" type="button">Track Request</button>
-<button id="refreshBtn" type="button">Refresh Tracking & Matches</button>
-
-<div id="trackingResult"></div>
 </div>
 
-<div class="card">
-<h2>Potential Matching Donors</h2>
-<p class="muted">Matches are based on exact blood group and same city.</p>
-<div id="donorResults">Submit or track a request to see potential matches.</div>
+
+<!-- =========================
+     REQUEST DETAILS
+========================= -->
+
+<div
+id="requestInfo"
+class="card request-info">
+
+<h2>📋 Request Details</h2>
+
+
+<div class="info-grid">
+
+
+<div class="info">
+
+<div class="info-label">
+REQUEST ID
 </div>
 
-<p class="muted">
-Hackathon demonstration only. Use fictional details. Blood group and location matching do not establish clinical compatibility. Medical professionals must verify donor eligibility and transfusion compatibility. Donor contact information requires explicit consent and authorized access.
+<div
+class="info-value"
+id="requestId">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+BLOOD GROUP
+</div>
+
+<div
+class="info-value blood"
+id="showBloodGroup">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+CITY
+</div>
+
+<div
+class="info-value"
+id="showCity">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+HOSPITAL
+</div>
+
+<div
+class="info-value"
+id="showHospital">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+UNITS
+</div>
+
+<div
+class="info-value"
+id="showUnits">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+URGENCY
+</div>
+
+<div
+class="info-value"
+id="showUrgency">
+-
+</div>
+
+</div>
+
+
+<div class="info">
+
+<div class="info-label">
+CURRENT STATUS
+</div>
+
+<div
+class="info-value"
+id="currentStatus">
+Pending
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     TRACKING TIMELINE
+========================= -->
+
+<div class="timeline">
+
+
+<div
+class="timeline-step completed"
+id="step1">
+
+<div class="circle">
+✓
+</div>
+
+<div class="timeline-content">
+
+<h3>Request Submitted</h3>
+
+<p>
+Your emergency request has been received.
 </p>
 
 </div>
 
+</div>
+
+
+<div
+class="timeline-step current"
+id="step2">
+
+<div class="circle">
+2
+</div>
+
+<div class="timeline-content">
+
+<h3>Searching for Donor</h3>
+
+<p>
+BloodBridge is searching for available donors.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="timeline-step"
+id="step3">
+
+<div class="circle">
+3
+</div>
+
+<div class="timeline-content">
+
+<h3>Potential Donor Found</h3>
+
+<p>
+A matching donor may be available.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="timeline-step"
+id="step4">
+
+<div class="circle">
+4
+</div>
+
+<div class="timeline-content">
+
+<h3>Donor Contacted</h3>
+
+<p>
+Authorized contact process initiated.
+</p>
+
+</div>
+
+</div>
+
+
+<div
+class="timeline-step"
+id="step5">
+
+<div class="circle">
+5
+</div>
+
+<div class="timeline-content">
+
+<h3>Request Completed</h3>
+
+<p>
+Emergency request has been completed.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+<!-- =========================
+     DONOR MATCHES
+========================= -->
+
+<div
+id="matches"
+class="card matches">
+
+<h2>
+🩸 Potential Donor Matches
+</h2>
+
+<div id="matchList"></div>
+
+</div>
+
+
+<div class="action-buttons">
+
+<button
+onclick="location.href='search.html'">
+🔎 Find Donor
+</button>
+
+<button
+onclick="location.href='dashboard.html'">
+📊 Dashboard
+</button>
+
+</div>
+
+
+</div>
+
+
+<footer>
+
+BloodBridge • Connecting donors with those in need
+
+</footer>
+
+
 <script type="module">
 
 import {
- db,
- collection,
- addDoc,
- getDocs,
- query,
- where,
- doc,
- updateDoc,
- serverTimestamp
+    db,
+    collection,
+    addDoc,
+    getDocs,
+    query,
+    where,
+    serverTimestamp
 } from "./firebase.js";
 
-const form = document.getElementById("requestForm");
-const message = document.getElementById("message");
-const trackingResult = document.getElementById("trackingResult");
-const donorResults = document.getElementById("donorResults");
 
-let activeRequest = null;
+let currentRequestId = "";
+
+
+/* =================================
+   SAFE HTML
+================================= */
 
 function safe(value) {
- return String(value ?? "").replace(/[&<>"']/g, c => ({
-  "&":"&amp;","<":"&lt;",">":"&gt;",
-  '"':"&quot;","'":"&#39;"
- }[c]));
+
+    return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+
 }
 
-function makeRequestId() {
- return "BB-" + Math.random().toString(36).slice(2,8).toUpperCase();
+
+/* =================================
+   MESSAGE
+================================= */
+
+function showMessage(text, type) {
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
+
 }
 
-form.addEventListener("submit", async event => {
- event.preventDefault();
 
- const button = document.getElementById("submitBtn");
- button.disabled = true;
- message.textContent = "Submitting request...";
+/* =================================
+   CREATE REQUEST ID
+================================= */
 
- const request = {
-  requestId: makeRequestId(),
-  patientName: document.getElementById("patientName").value.trim(),
-  bloodGroup: document.getElementById("bloodGroup").value,
-  state: document.getElementById("state").value,
-  city: document.getElementById("city").value.trim(),
-  hospital: document.getElementById("hospital").value.trim(),
-  units: Number(document.getElementById("units").value),
-  urgency: document.getElementById("urgency").value,
-  status: "Pending",
-  createdAt: serverTimestamp()
- };
+function generateRequestId() {
 
- try {
-  await addDoc(collection(db, "requests"), request);
+    return "BB-" +
+        Math.random()
+        .toString(36)
+        .substring(2, 8)
+        .toUpperCase();
 
-  activeRequest = request;
-  document.getElementById("trackingId").value = request.requestId;
+}
 
-  message.style.color = "green";
-  message.textContent = "Request submitted! Your ID is " + request.requestId;
 
-  await showTracking(request);
-  await findDonors(request);
+/* =================================
+   FORM SUBMIT
+================================= */
 
-  form.reset();
+document
+.getElementById("requestForm")
+.addEventListener("submit", async function(event) {
 
- } catch(error) {
-  console.error(error);
-  message.style.color = "red";
-  message.textContent = "Request failed: " + error.message;
- } finally {
-  button.disabled = false;
- }
+    event.preventDefault();
+
+
+    const patientName =
+        document.getElementById("patientName")
+        .value.trim();
+
+    const bloodGroup =
+        document.getElementById("bloodGroup")
+        .value;
+
+    const state =
+        document.getElementById("state")
+        .value;
+
+    const city =
+        document.getElementById("city")
+        .value.trim();
+
+    const hospital =
+        document.getElementById("hospital")
+        .value.trim();
+
+    const units =
+        document.getElementById("units")
+        .value;
+
+    const urgency =
+        document.getElementById("urgency")
+        .value;
+
+
+    if (
+        !patientName ||
+        !bloodGroup ||
+        !state ||
+        !city ||
+        !hospital
+    ) {
+
+        showMessage(
+            "Please complete all required fields.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        currentRequestId =
+            generateRequestId();
+
+
+        const requestData = {
+
+            requestId:
+                currentRequestId,
+
+            patientName,
+
+            bloodGroup,
+
+            state,
+
+            city,
+
+            hospital,
+
+            units:
+                Number(units),
+
+            urgency,
+
+            status:
+                "Pending",
+
+            createdAt:
+                serverTimestamp()
+
+        };
+
+
+        /* SAVE REQUEST */
+
+        await addDoc(
+            collection(db, "requests"),
+            requestData
+        );
+
+
+        showMessage(
+            "Emergency request submitted successfully!",
+            "success"
+        );
+
+
+        /* SHOW DETAILS */
+
+        document
+        .getElementById("requestInfo")
+        .style.display = "block";
+
+
+        document
+        .getElementById("requestId")
+        .textContent =
+            currentRequestId;
+
+        document
+        .getElementById("showBloodGroup")
+        .textContent =
+            bloodGroup;
+
+        document
+        .getElementById("showCity")
+        .textContent =
+            city;
+
+        document
+        .getElementById("showHospital")
+        .textContent =
+            hospital;
+
+        document
+        .getElementById("showUnits")
+        .textContent =
+            units;
+
+        document
+        .getElementById("showUrgency")
+        .textContent =
+            urgency;
+
+
+        if (urgency === "Critical") {
+
+            document
+            .getElementById("showUrgency")
+            .className =
+                "info-value critical";
+
+        }
+
+        else if (urgency === "Urgent") {
+
+            document
+            .getElementById("showUrgency")
+            .className =
+                "info-value urgent";
+
+        }
+
+
+        /*
+          Request submitted.
+          Start searching for donor.
+        */
+
+        updateTimeline("Matching");
+
+        await findMatchingDonors(
+            bloodGroup,
+            city
+        );
+
+
+        document
+        .getElementById("requestInfo")
+        .scrollIntoView({
+            behavior: "smooth"
+        });
+
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        showMessage(
+            "Operation failed. Please check Firebase and try again.",
+            "error"
+        );
+
+    }
+
 });
 
-async function loadRequest(id) {
- const snapshot = await getDocs(
-  query(collection(db, "requests"), where("requestId","==",id))
- );
 
- if(snapshot.empty) return null;
+/* =================================
+   FIND MATCHING DONORS
+================================= */
 
- const item = snapshot.docs[0];
- return { documentId:item.id, ...item.data() };
+async function findMatchingDonors(
+    bloodGroup,
+    city
+) {
+
+    try {
+
+        const donorQuery =
+            query(
+                collection(db, "donors"),
+
+                where(
+                    "bloodGroup",
+                    "==",
+                    bloodGroup
+                ),
+
+                where(
+                    "city",
+                    "==",
+                    city
+                ),
+
+                where(
+                    "availability",
+                    "==",
+                    "Available"
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(donorQuery);
+
+
+        const matchList =
+            document.getElementById("matchList");
+
+
+        matchList.innerHTML = "";
+
+
+        if (snapshot.empty) {
+
+            document
+            .getElementById("matches")
+            .style.display = "block";
+
+
+            matchList.innerHTML = `
+
+            <div class="match-card">
+
+                <div class="match-name">
+                    No potential donor found
+                </div>
+
+                <div class="match-details">
+                    No available donor currently
+                    matches ${safe(bloodGroup)}
+                    in ${safe(city)}.
+                </div>
+
+            </div>
+
+            `;
+
+
+            updateTimeline("Matching");
+
+            return;
+
+        }
+
+
+        document
+        .getElementById("matches")
+        .style.display = "block";
+
+
+        /*
+          At least one potential donor found.
+        */
+
+        updateTimeline("Donor Found");
+
+
+        snapshot.forEach(function(doc) {
+
+            const donor =
+                doc.data();
+
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "match-card";
+
+
+            let contactHTML = `
+
+                <div class="protected">
+                    🔒 Contact details are protected.
+                </div>
+
+            `;
+
+
+            /*
+              Only display contact information
+              when donor has explicitly consented.
+
+              This is still a demo-level display
+              condition, not a security boundary.
+            */
+
+            if (
+                donor.contactConsent === true
+            ) {
+
+                contactHTML = `
+
+                    <div class="protected">
+                        Contact sharing consent:
+                        Yes
+                    </div>
+
+                `;
+
+            }
+
+
+            card.innerHTML = `
+
+                <div class="match-name">
+                    ${safe(donor.name)}
+                </div>
+
+                <div style="margin-top:6px">
+
+                    <span class="match-status">
+                        AVAILABLE MATCH
+                    </span>
+
+                </div>
+
+                <div class="match-details">
+
+                    🩸 Blood Group:
+                    <b>${safe(donor.bloodGroup)}</b>
+                    <br>
+
+                    🎂 Age Group:
+                    ${safe(donor.ageGroup)}
+                    <br>
+
+                    📍 City:
+                    ${safe(donor.city)}
+                    <br>
+
+                    🗺️ State:
+                    ${safe(donor.state)}
+                    <br>
+
+                    🟢 Availability:
+                    ${safe(donor.availability)}
+
+                    ${contactHTML}
+
+                </div>
+
+            `;
+
+
+            matchList.appendChild(card);
+
+        });
+
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "Donor matching error:",
+            error
+        );
+
+    }
+
 }
 
-async function trackRequest() {
- const id = document.getElementById("trackingId").value.trim();
 
- if(!id) {
-  trackingResult.textContent = "Enter your request ID.";
-  return;
- }
+/* =================================
+   UPDATE TIMELINE
+================================= */
 
- trackingResult.textContent = "Loading tracking...";
+function updateTimeline(status) {
 
- try {
-  const request = await loadRequest(id);
+    const steps = [
+        "step1",
+        "step2",
+        "step3",
+        "step4",
+        "step5"
+    ];
 
-  if(!request) {
-   trackingResult.textContent = "Request ID not found.";
-   donorResults.innerHTML = "";
-   return;
-  }
 
-  activeRequest = request;
-  await showTracking(request);
-  await findDonors(request);
+    steps.forEach(function(id) {
 
- } catch(error) {
-  console.error(error);
-  trackingResult.textContent = "Unable to track: " + error.message;
- }
-}
+        document
+        .getElementById(id)
+        .classList.remove("completed");
 
-async function showTracking(request) {
+        document
+        .getElementById(id)
+        .classList.remove("current");
 
- const stages = ["Pending","Matching","Donor Found","Completed"];
- const current = stages.indexOf(request.status || "Pending");
+    });
 
- trackingResult.innerHTML = `
- <p><b>Request ID:</b> ${safe(request.requestId)}</p>
- <p><b>Patient:</b> ${safe(request.patientName)}</p>
- <p><b>Blood Group:</b> ${safe(request.bloodGroup)}</p>
- <p><b>Location:</b> ${safe(request.city)}, ${safe(request.state)}</p>
- <p><b>Hospital:</b> ${safe(request.hospital)}</p>
- <p><b>Urgency:</b> ${safe(request.urgency)}</p>
- <p><b>Current Status:</b> <span class="status">${safe(request.status || "Pending")}</span></p>
- <h3>Tracking Timeline</h3>
- ${stages.map((stage,index)=>`
-  <div class="step ${index <= current ? "done" : ""}">
-   ${index <= current ? "✅" : "⏳"} ${stage}
-  </div>
- `).join("")}
- `;
 
-}
+    if (status === "Pending") {
 
-async function findDonors(request) {
+        activateSteps(1);
 
- donorResults.textContent = "Searching shared donor database...";
+    }
 
- try {
+    else if (status === "Matching") {
 
-  const donorQuery = query(
-   collection(db,"donors"),
-   where("bloodGroup","==",request.bloodGroup),
-   where("city","==",request.city),
-   where("availability","==","Available")
-  );
+        activateSteps(2);
 
-  const snapshot = await getDocs(donorQuery);
+        document
+        .getElementById("currentStatus")
+        .textContent =
+            "Searching for Donor";
 
-  const donors = snapshot.docs.map(item=>({
-   id:item.id,
-   ...item.data()
-  }));
+    }
 
-  if(donors.length === 0) {
-   donorResults.innerHTML = `
-    <p>No available donors found in the same city with this exact blood group.</p>
-    <p class="muted">Try another location or consult the hospital blood bank.</p>
-   `;
-   return;
-  }
+    else if (status === "Donor Found") {
 
-  donorResults.innerHTML = `
-   <p><b>${donors.length}</b> potential donor(s) found.</p>
-   ${donors.map(donor=>`
-    <div class="donor">
-     <h3>${safe(donor.name)}</h3>
-     <p><b>Blood Group:</b> ${safe(donor.bloodGroup)}</p>
-     <p><b>Age Group:</b> ${safe(donor.ageGroup)}</p>
-     <p><b>City:</b> ${safe(donor.city)}</p>
-     <p><b>Availability:</b> ${safe(donor.availability)}</p>
-     <p><b>Phone:</b> ${safe(donor.phone || "Not provided")}</p>
-<p><b>Email:</b> ${safe(donor.email || "Not provided")}</p>
-     <p class="muted">Contact details are protected. Contact information can only be shared through an authorized, consent-based process.</p>
-    </div>
-   `).join("")}
-  `;
+        activateSteps(3);
 
- } catch(error) {
-  console.error(error);
-  donorResults.textContent = "Donor search failed: " + error.message;
- }
+        document
+        .getElementById("currentStatus")
+        .textContent =
+            "Potential Donor Found";
+
+    }
+
+    else if (status === "Contacted") {
+
+        activateSteps(4);
+
+        document
+        .getElementById("currentStatus")
+        .textContent =
+            "Donor Contacted";
+
+    }
+
+    else if (status === "Completed") {
+
+        activateSteps(5);
+
+        document
+        .getElementById("currentStatus")
+        .textContent =
+            "Completed";
+
+    }
 
 }
 
-document.getElementById("trackBtn").addEventListener("click",trackRequest);
 
-document.getElementById("refreshBtn").addEventListener("click",async()=>{
- if(!activeRequest) {
-  await trackRequest();
-  return;
- }
+/* =================================
+   ACTIVATE STEPS
+================================= */
 
- try {
-  const latest = await loadRequest(activeRequest.requestId);
+function activateSteps(number) {
 
-  if(!latest) {
-   trackingResult.textContent = "Request not found.";
-   return;
-  }
+    const steps = [
+        "step1",
+        "step2",
+        "step3",
+        "step4",
+        "step5"
+    ];
 
-  activeRequest = latest;
-  await showTracking(latest);
-  await findDonors(latest);
 
- } catch(error) {
-  trackingResult.textContent = "Refresh failed: " + error.message;
- }
-});
+    for (
+        let i = 0;
+        i < number;
+        i++
+    ) {
 
-</script>
-</body>
-    </html>
-    
+        document
+        .getElementById(steps[i])
+        .classList.add("completed");
+
+    }
+
+
+    if (number < steps.length) {
+
+        document
+        .getEl
