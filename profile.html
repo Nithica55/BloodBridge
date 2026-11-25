@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BloodBridge | My Profile</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #fff5f5, #f8f9fa);
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    padding: 18px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logout {
+    background: white;
+    color: #b71c1c;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.container {
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 0 18px;
+}
+
+.profile-card {
+    background: white;
+    border-radius: 22px;
+    padding: 30px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.10);
+}
+
+.profile-top {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    margin: auto;
+    border-radius: 50%;
+    background: #b71c1c;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    font-weight: bold;
+}
+
+.profile-top h2 {
+    margin-top: 15px;
+    color: #8e0000;
+}
+
+.role {
+    display: inline-block;
+    margin-top: 8px;
+    background: #ffe5e5;
+    color: #b71c1c;
+    padding: 6px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.info {
+    background: #fafafa;
+    border: 1px solid #eee;
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.label {
+    font-size: 12px;
+    color: #777;
+    margin-bottom: 6px;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.blood {
+    color: #c62828;
+    font-size: 20px;
+}
+
+.status {
+    color: #16803c;
+}
+
+.actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.action-btn {
+    border: none;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    background: #b71c1c;
+    color: white;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.action-btn:hover {
+    transform: translateY(-2px);
+    background: #8e0000;
+}
+
+.footer {
+    text-align: center;
+    color: #777;
+    font-size: 12px;
+    margin-top: 25px;
+}
+
+@media (max-width: 650px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .actions {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card {
+        padding: 20px;
+    }
+
+    header {
+        padding: 15px;
+    }
+
+    .logo {
+        font-size: 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">🩸 BloodBridge</div>
+
+    <button class="logout" onclick="logout()">
+        Logout
+    </button>
+</header>
+
+<div class="container">
+
+<div class="profile-card">
+
+    <div class="profile-top">
+
+        <div class="avatar" id="avatar">
+            U
+        </div>
+
+        <h2 id="userName">
+            BloodBridge User
+        </h2>
+
+        <span class="role" id="userRole">
+            USER
+        </span>
+
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info">
+            <div class="label">Email</div>
+            <div class="value" id="email">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">Account Role</div>
+            <div class="value" id="role">
+                User
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">Blood Group</div>
+            <div class="value blood" id="bloodGroup">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">Age Group</div>
+            <div class="value" id="ageGroup">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">City</div>
+            <div class="value" id="city">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">State</div>
+            <div class="value" id="state">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">Availability</div>
+            <div class="value status" id="availability">
+                Not available
+            </div>
+        </div>
+
+        <div class="info">
+            <div class="label">Phone</div>
+            <div class="value" id="phone">
+                Not available
+            </div>
+        </div>
+
+    </div>
+
+    <div class="actions">
+
+        <button class="action-btn"
+        onclick="location.href='request.html'">
+            🚨 Emergency Request
+        </button>
+
+        <button class="action-btn"
+        onclick="location.href='search.html'">
+            🔎 Find Donor
+        </button>
+
+        <button class="action-btn"
+        onclick="location.href='dashboard.html'">
+            📊 Dashboard
+        </button>
+
+    </div>
+
+</div>
+
+<div class="footer">
+    BloodBridge • Connecting donors with those in need
+</div>
+
+</div>
+
+<script>
+
+const loggedIn =
+    localStorage.getItem("bloodbridgeLoggedIn");
+
+if (loggedIn !== "true") {
+    window.location.href = "login.html";
+}
+
+const email =
+    localStorage.getItem("bloodbridgeUserEmail") ||
+    "Not available";
+
+const role =
+    localStorage.getItem("bloodbridgeUserRole") ||
+    "user";
+
+document.getElementById("email").textContent = email;
+
+document.getElementById("role").textContent =
+    role.charAt(0).toUpperCase() + role.slice(1);
+
+document.getElementById("userRole").textContent =
+    role.toUpperCase();
+
+let donorData = null;
+
+try {
+
+    const donors =
+        JSON.parse(localStorage.getItem("bloodbridgeDonors")) || [];
+
+    donorData = donors.find(
+        donor =>
+        donor.email &&
+        donor.email.toLowerCase() === email.toLowerCase()
+    );
+
+} catch (error) {
+
+    console.log("Donor data unavailable");
+
+}
+
+if (donorData) {
+
+    document.getElementById("userName").textContent =
+        donorData.name || "BloodBridge User";
+
+    document.getElementById("bloodGroup").textContent =
+        donorData.bloodGroup || "Not available";
+
+    document.getElementById("ageGroup").textContent =
+        donorData.ageGroup || "Not available";
+
+    document.getElementById("city").textContent =
+        donorData.city || "Not available";
+
+    document.getElementById("state").textContent =
+        donorData.state || "Not available";
+
+    document.getElementById("availability").textContent =
+        donorData.availability || "Not available";
+
+    document.getElementById("phone").textContent =
+        donorData.phone || "Not available";
+
+    const name =
+        donorData.name || "U";
+
+    document.getElementById("avatar").textContent =
+        name.charAt(0).toUpperCase();
+
+} else {
+
+    const firstLetter =
+        email.charAt(0).toUpperCase();
+
+    document.getElementById("avatar").textContent =
+        firstLetter;
+}
+
+function logout() {
+
+    localStorage.removeItem("bloodbridgeLoggedIn");
+    localStorage.removeItem("bloodbridgeUserRole");
+    localStorage.removeItem("bloodbridgeUserEmail");
+
+    window.location.href = "login.html";
+}
+
+</script>
+
+</body>
+      </html>
