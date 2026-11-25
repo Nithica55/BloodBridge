@@ -9,7 +9,7 @@
 <style>
 *{
     box-sizing:border-box;
-    font-family:Arial, sans-serif;
+    font-family:Arial,sans-serif;
 }
 
 body{
@@ -37,7 +37,7 @@ header{
     background:white;
     color:#b30000;
     border:none;
-    padding:10px 16px;
+    padding:10px 17px;
     border-radius:20px;
     cursor:pointer;
     font-weight:bold;
@@ -53,11 +53,7 @@ header{
     background:white;
     padding:28px;
     border-radius:18px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.12);
-}
-
-h1,h2{
-    color:#b30000;
+    box-shadow:0 5px 20px rgba(0,0,0,.12);
 }
 
 .tabs{
@@ -68,7 +64,7 @@ h1,h2{
 
 .tab{
     flex:1;
-    padding:12px;
+    padding:13px;
     border:none;
     background:#eee;
     border-radius:10px;
@@ -89,6 +85,11 @@ h1,h2{
     display:block;
 }
 
+h1{
+    color:#b30000;
+    margin-bottom:25px;
+}
+
 .form-group{
     margin-bottom:16px;
 }
@@ -96,18 +97,21 @@ h1,h2{
 label{
     display:block;
     font-weight:bold;
-    margin-bottom:6px;
+    margin-bottom:7px;
 }
 
-input,select{
+input,
+select{
     width:100%;
     padding:12px;
     border:1px solid #ccc;
     border-radius:8px;
     font-size:15px;
+    background:white;
 }
 
-input:focus,select:focus{
+input:focus,
+select:focus{
     outline:none;
     border-color:#b30000;
 }
@@ -120,7 +124,7 @@ input:focus,select:focus{
 }
 
 .role-btn{
-    padding:10px 15px;
+    padding:10px 16px;
     border:1px solid #b30000;
     color:#b30000;
     background:white;
@@ -150,10 +154,11 @@ input:focus,select:focus{
 }
 
 .message{
+    display:none;
     margin-top:15px;
     padding:12px;
     border-radius:8px;
-    display:none;
+    line-height:1.5;
 }
 
 .success{
@@ -177,22 +182,29 @@ input:focus,select:focus{
 .note{
     font-size:13px;
     color:#666;
-    margin-top:15px;
     line-height:1.5;
+    margin-top:16px;
 }
 
 .checkbox-row{
     display:flex;
-    align-items:center;
+    align-items:flex-start;
     gap:8px;
-    margin:10px 0;
+    margin:12px 0;
 }
 
 .checkbox-row input{
     width:auto;
+    margin-top:4px;
+}
+
+.checkbox-row label{
+    font-weight:normal;
+    margin:0;
 }
 
 @media(max-width:600px){
+
     header{
         padding:15px;
     }
@@ -212,7 +224,11 @@ input:focus,select:focus{
 </style>
 </head>
 
+
 <body>
+
+
+<!-- ================= HEADER ================= -->
 
 <header>
 
@@ -230,24 +246,29 @@ onclick="toggleLanguage()">
 </header>
 
 
+
 <div class="container">
 
 <div class="card">
 
+
+<!-- ================= TABS ================= -->
+
 <div class="tabs">
 
 <button
-class="tab active"
 id="loginTab"
+class="tab active"
 onclick="showSection('login')"
 data-en="Login"
 data-ta="உள்நுழைவு">
 Login
 </button>
 
+
 <button
-class="tab"
 id="registerTab"
+class="tab"
 onclick="showSection('register')"
 data-en="Register"
 data-ta="பதிவு செய்யவும்">
@@ -257,15 +278,21 @@ Register
 </div>
 
 
-<!-- ================= LOGIN ================= -->
 
-<div id="loginSection" class="section active">
+<!-- ================================================= -->
+<!-- ================= LOGIN SECTION ================= -->
+<!-- ================================================= -->
+
+<div
+id="loginSection"
+class="section active">
 
 <h1
 data-en="Login to BloodBridge"
 data-ta="BloodBridge-ல் உள்நுழையவும்">
 Login to BloodBridge
 </h1>
+
 
 
 <div class="form-group">
@@ -279,11 +306,12 @@ Email ID
 <input
 type="email"
 id="loginEmail"
+placeholder="Enter your email"
 data-en-placeholder="Enter your email"
-data-ta-placeholder="உங்கள் மின்னஞ்சலை உள்ளிடவும்"
-placeholder="Enter your email">
+data-ta-placeholder="உங்கள் மின்னஞ்சலை உள்ளிடவும்">
 
 </div>
+
 
 
 <div class="form-group">
@@ -297,11 +325,12 @@ Password
 <input
 type="password"
 id="loginPassword"
+placeholder="Enter your password"
 data-en-placeholder="Enter your password"
-data-ta-placeholder="உங்கள் கடவுச்சொல்லை உள்ளிடவும்"
-placeholder="Enter your password">
+data-ta-placeholder="உங்கள் கடவுச்சொல்லை உள்ளிடவும்">
 
 </div>
+
 
 
 <div class="form-group">
@@ -311,6 +340,7 @@ data-en="Login As"
 data-ta="எந்த வகையில் உள்நுழைகிறீர்கள்">
 Login As
 </label>
+
 
 <div class="role-buttons">
 
@@ -324,6 +354,7 @@ data-ta="நன்கொடையாளர்">
 Donor
 </button>
 
+
 <button
 type="button"
 class="role-btn"
@@ -333,6 +364,7 @@ data-en="Requester"
 data-ta="கோரிக்கையாளர்">
 Requester
 </button>
+
 
 <button
 type="button"
@@ -349,6 +381,7 @@ Admin
 </div>
 
 
+
 <button
 class="main-btn"
 onclick="loginUser()"
@@ -358,10 +391,14 @@ Login
 </button>
 
 
-<div id="loginMessage" class="message"></div>
+<div
+id="loginMessage"
+class="message">
+</div>
 
 
-<p class="note"
+<p
+class="note"
 data-en="Demo accounts can be used for testing the BloodBridge prototype."
 data-ta="BloodBridge முன்மாதிரியை சோதிக்க Demo கணக்குகளைப் பயன்படுத்தலாம்.">
 Demo accounts can be used for testing the BloodBridge prototype.
@@ -371,9 +408,13 @@ Demo accounts can be used for testing the BloodBridge prototype.
 
 
 
-<!-- ================= REGISTER ================= -->
+<!-- ================================================= -->
+<!-- ================ REGISTER SECTION ================ -->
+<!-- ================================================= -->
 
-<div id="registerSection" class="section">
+<div
+id="registerSection"
+class="section">
 
 <h1
 data-en="Create BloodBridge Account"
@@ -382,6 +423,9 @@ Create BloodBridge Account
 </h1>
 
 
+
+<!-- REGISTER ROLE -->
+
 <div class="form-group">
 
 <label
@@ -389,6 +433,7 @@ data-en="Register As"
 data-ta="எந்த வகையில் பதிவு செய்கிறீர்கள்">
 Register As
 </label>
+
 
 <div class="role-buttons">
 
@@ -402,6 +447,7 @@ data-ta="நன்கொடையாளர்">
 Donor
 </button>
 
+
 <button
 type="button"
 class="role-btn"
@@ -411,6 +457,7 @@ data-en="Requester"
 data-ta="கோரிக்கையாளர்">
 Requester
 </button>
+
 
 <button
 type="button"
@@ -428,6 +475,8 @@ Admin
 
 
 
+<!-- ================= COMMON DETAILS ================= -->
+
 <div class="form-group">
 
 <label
@@ -439,11 +488,12 @@ Full Name
 <input
 type="text"
 id="regName"
+placeholder="Enter your full name"
 data-en-placeholder="Enter your full name"
-data-ta-placeholder="உங்கள் முழுப் பெயரை உள்ளிடவும்"
-placeholder="Enter your full name">
+data-ta-placeholder="உங்கள் முழுப் பெயரை உள்ளிடவும்">
 
 </div>
+
 
 
 <div class="form-group">
@@ -457,11 +507,12 @@ Email ID
 <input
 type="email"
 id="regEmail"
+placeholder="Enter your email"
 data-en-placeholder="Enter your email"
-data-ta-placeholder="உங்கள் மின்னஞ்சலை உள்ளிடவும்"
-placeholder="Enter your email">
+data-ta-placeholder="உங்கள் மின்னஞ்சலை உள்ளிடவும்">
 
 </div>
+
 
 
 <div class="form-group">
@@ -475,17 +526,22 @@ Phone Number
 <input
 type="tel"
 id="regPhone"
+placeholder="Enter your phone number"
 data-en-placeholder="Enter your phone number"
-data-ta-placeholder="உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்"
-placeholder="Enter your phone number">
+data-ta-placeholder="உங்கள் தொலைபேசி எண்ணை உள்ளிடவும்">
 
 </div>
 
 
 
-<!-- DONOR -->
+<!-- ================================================= -->
+<!-- ================= DONOR FIELDS ================== -->
+<!-- ================================================= -->
 
-<div id="donorFields" class="role-section active">
+<div
+id="donorFields"
+class="role-section active">
+
 
 <div class="form-group">
 
@@ -494,6 +550,7 @@ data-en="Age Group"
 data-ta="வயது பிரிவு">
 Age Group
 </label>
+
 
 <select id="regAgeGroup">
 
@@ -504,40 +561,11 @@ data-ta="வயது பிரிவைத் தேர்ந்தெடுக
 Select age group
 </option>
 
-<option
-value="18-25"
-data-en="18-25"
-data-ta="18-25">
-18-25
-</option>
-
-<option
-value="26-35"
-data-en="26-35"
-data-ta="26-35">
-26-35
-</option>
-
-<option
-value="36-45"
-data-en="36-45"
-data-ta="36-45">
-36-45
-</option>
-
-<option
-value="46-55"
-data-en="46-55"
-data-ta="46-55">
-46-55
-</option>
-
-<option
-value="56+"
-data-en="56+"
-data-ta="56+">
-56+
-</option>
+<option value="18-25">18-25</option>
+<option value="26-35">26-35</option>
+<option value="36-45">36-45</option>
+<option value="46-55">46-55</option>
+<option value="56+">56+</option>
 
 </select>
 
@@ -552,6 +580,7 @@ data-en="Blood Group"
 data-ta="இரத்த வகை">
 Blood Group
 </label>
+
 
 <select id="regBloodGroup">
 
@@ -585,6 +614,7 @@ data-ta="மாநிலம்">
 State
 </label>
 
+
 <select id="regState">
 
 <option
@@ -594,14 +624,61 @@ data-ta="மாநிலத்தைத் தேர்ந்தெடுக்�
 Select state
 </option>
 
-<option>Tamil Nadu</option>
-<option>Kerala</option>
-<option>Karnataka</option>
-<option>Andhra Pradesh</option>
-<option>Telangana</option>
-<option>Maharashtra</option>
-<option>Delhi</option>
-<option>Other</option>
+<option
+value="Tamil Nadu"
+data-en="Tamil Nadu"
+data-ta="தமிழ்நாடு">
+Tamil Nadu
+</option>
+
+<option
+value="Kerala"
+data-en="Kerala"
+data-ta="கேரளா">
+Kerala
+</option>
+
+<option
+value="Karnataka"
+data-en="Karnataka"
+data-ta="கர்நாடகா">
+Karnataka
+</option>
+
+<option
+value="Andhra Pradesh"
+data-en="Andhra Pradesh"
+data-ta="ஆந்திரப் பிரதேசம்">
+Andhra Pradesh
+</option>
+
+<option
+value="Telangana"
+data-en="Telangana"
+data-ta="தெலங்கானா">
+Telangana
+</option>
+
+<option
+value="Maharashtra"
+data-en="Maharashtra"
+data-ta="மகாராஷ்டிரா">
+Maharashtra
+</option>
+
+<option
+value="Delhi"
+data-en="Delhi"
+data-ta="டெல்லி">
+Delhi
+</option>
+
+<option
+value="Other"
+data-en="Other"
+data-ta="மற்றவை">
+Other
+</option>
 
 </select>
 
@@ -620,9 +697,9 @@ City
 <input
 type="text"
 id="regCity"
+placeholder="Enter your city"
 data-en-placeholder="Enter your city"
-data-ta-placeholder="உங்கள் நகரத்தை உள்ளிடவும்"
-placeholder="Enter your city">
+data-ta-placeholder="உங்கள் நகரத்தை உள்ளிடவும்">
 
 </div>
 
@@ -635,6 +712,7 @@ data-en="Availability"
 data-ta="கிடைக்கும் நிலை">
 Availability
 </label>
+
 
 <select id="regAvailability">
 
@@ -664,6 +742,7 @@ Unavailable
 type="checkbox"
 id="contactConsent">
 
+
 <label
 for="contactConsent"
 data-en="I allow my contact details to be shared with matching blood requesters."
@@ -677,9 +756,14 @@ I allow my contact details to be shared with matching blood requesters.
 
 
 
-<!-- REQUESTER -->
+<!-- ================================================= -->
+<!-- =============== REQUESTER FIELDS ================ -->
+<!-- ================================================= -->
 
-<div id="requesterFields" class="role-section">
+<div
+id="requesterFields"
+class="role-section">
+
 
 <div class="form-group">
 
@@ -688,6 +772,7 @@ data-en="State"
 data-ta="மாநிலம்">
 State
 </label>
+
 
 <select id="reqState">
 
@@ -698,14 +783,61 @@ data-ta="மாநிலத்தைத் தேர்ந்தெடுக்�
 Select state
 </option>
 
-<option>Tamil Nadu</option>
-<option>Kerala</option>
-<option>Karnataka</option>
-<option>Andhra Pradesh</option>
-<option>Telangana</option>
-<option>Maharashtra</option>
-<option>Delhi</option>
-<option>Other</option>
+<option
+value="Tamil Nadu"
+data-en="Tamil Nadu"
+data-ta="தமிழ்நாடு">
+Tamil Nadu
+</option>
+
+<option
+value="Kerala"
+data-en="Kerala"
+data-ta="கேரளா">
+Kerala
+</option>
+
+<option
+value="Karnataka"
+data-en="Karnataka"
+data-ta="கர்நாடகா">
+Karnataka
+</option>
+
+<option
+value="Andhra Pradesh"
+data-en="Andhra Pradesh"
+data-ta="ஆந்திரப் பிரதேசம்">
+Andhra Pradesh
+</option>
+
+<option
+value="Telangana"
+data-en="Telangana"
+data-ta="தெலங்கானா">
+Telangana
+</option>
+
+<option
+value="Maharashtra"
+data-en="Maharashtra"
+data-ta="மகாராஷ்டிரா">
+Maharashtra
+</option>
+
+<option
+value="Delhi"
+data-en="Delhi"
+data-ta="டெல்லி">
+Delhi
+</option>
+
+<option
+value="Other"
+data-en="Other"
+data-ta="மற்றவை">
+Other
+</option>
 
 </select>
 
@@ -724,9 +856,9 @@ City
 <input
 type="text"
 id="reqCity"
+placeholder="Enter your city"
 data-en-placeholder="Enter your city"
-data-ta-placeholder="உங்கள் நகரத்தை உள்ளிடவும்"
-placeholder="Enter your city">
+data-ta-placeholder="உங்கள் நகரத்தை உள்ளிடவும்">
 
 </div>
 
@@ -743,9 +875,9 @@ Hospital / Medical Centre
 <input
 type="text"
 id="reqHospital"
+placeholder="Enter hospital name"
 data-en-placeholder="Enter hospital name"
-data-ta-placeholder="மருத்துவமனை பெயரை உள்ளிடவும்"
-placeholder="Enter hospital name">
+data-ta-placeholder="மருத்துவமனை பெயரை உள்ளிடவும்">
 
 </div>
 
@@ -753,9 +885,14 @@ placeholder="Enter hospital name">
 
 
 
-<!-- ADMIN -->
+<!-- ================================================= -->
+<!-- ================= ADMIN FIELDS ================== -->
+<!-- ================================================= -->
 
-<div id="adminFields" class="role-section">
+<div
+id="adminFields"
+class="role-section">
+
 
 <div class="form-group">
 
@@ -768,15 +905,17 @@ Admin ID
 <input
 type="text"
 id="adminId"
+placeholder="Enter admin ID"
 data-en-placeholder="Enter admin ID"
-data-ta-placeholder="நிர்வாகி ID-ஐ உள்ளிடவும்"
-placeholder="Enter admin ID">
+data-ta-placeholder="நிர்வாகி ID-ஐ உள்ளிடவும்">
 
 </div>
 
 </div>
 
 
+
+<!-- ================= PASSWORD ================= -->
 
 <div class="form-group">
 
@@ -789,9 +928,9 @@ Password
 <input
 type="password"
 id="regPassword"
+placeholder="Create a password"
 data-en-placeholder="Create a password"
-data-ta-placeholder="கடவுச்சொல்லை உருவாக்கவும்"
-placeholder="Create a password">
+data-ta-placeholder="கடவுச்சொல்லை உருவாக்கவும்">
 
 </div>
 
@@ -806,10 +945,16 @@ Create Account
 </button>
 
 
-<div id="registerMessage" class="message"></div>
+
+<div
+id="registerMessage"
+class="message">
+</div>
 
 
-<p class="note"
+
+<p
+class="note"
 data-en="BloodBridge is an educational prototype. Donor matching is preliminary and does not confirm medical eligibility or compatibility."
 data-ta="BloodBridge ஒரு கல்வி முன்மாதிரி ஆகும். நன்கொடையாளர் பொருத்தம் ஆரம்ப நிலை மட்டுமே; இது மருத்துவ தகுதி அல்லது இரத்தப் பொருத்தத்தை உறுதி செய்யாது.">
 BloodBridge is an educational prototype. Donor matching is preliminary and does not confirm medical eligibility or compatibility.
@@ -818,11 +963,14 @@ BloodBridge is an educational prototype. Donor matching is preliminary and does 
 </div>
 
 </div>
+
 </div>
 
 
 
-<!-- ================= FIREBASE ================= -->
+<!-- ================================================= -->
+<!-- ================= JAVASCRIPT ==================== -->
+<!-- ================================================= -->
 
 <script type="module">
 
@@ -835,7 +983,10 @@ import {
 } from "./firebase.js";
 
 
-/* ================= LANGUAGE ================= */
+
+/* ================================================= */
+/* ================= LANGUAGE ======================= */
+/* ================================================= */
 
 let currentLanguage =
     localStorage.getItem("bloodbridgeLanguage") || "en";
@@ -848,49 +999,47 @@ function setLanguage(language){
     document.documentElement.lang = language;
 
 
-    /* Text */
+    /* Change all normal text */
 
-    document.querySelectorAll("[data-en]").forEach(element => {
+    document
+        .querySelectorAll("[data-en][data-ta]")
+        .forEach(element => {
 
-        const text =
-            element.getAttribute("data-" + language);
+            const translatedText =
+                language === "ta"
+                ? element.getAttribute("data-ta")
+                : element.getAttribute("data-en");
 
-        if(text !== null){
-            element.textContent = text;
-        }
+            element.textContent =
+                translatedText;
 
-    });
-
-
-    /* Placeholders */
-
-    document.querySelectorAll("[data-en-placeholder]").forEach(element => {
-
-        const placeholder =
-            element.getAttribute(
-                "data-" + language + "-placeholder"
-            );
-
-        if(placeholder !== null){
-            element.placeholder = placeholder;
-        }
-
-    });
+        });
 
 
-    /* Button */
 
-    const languageButton =
-        document.getElementById("languageButton");
+    /* Change placeholders */
 
-    if(languageButton){
+    document
+        .querySelectorAll("[data-en-placeholder][data-ta-placeholder]")
+        .forEach(element => {
 
-        languageButton.textContent =
-            language === "en"
-            ? "தமிழ்"
-            : "English";
+            element.placeholder =
+                language === "ta"
+                ? element.getAttribute("data-ta-placeholder")
+                : element.getAttribute("data-en-placeholder");
 
-    }
+        });
+
+
+
+    /* Change language button */
+
+    document.getElementById(
+        "languageButton"
+    ).textContent =
+        language === "en"
+        ? "தமிழ்"
+        : "English";
 
 
     localStorage.setItem(
@@ -901,28 +1050,91 @@ function setLanguage(language){
 }
 
 
+
+/* ================= TOGGLE LANGUAGE ================= */
+
 window.toggleLanguage = function(){
 
-    const newLanguage =
-        currentLanguage === "en"
-        ? "ta"
-        : "en";
+    if(currentLanguage === "en"){
 
-    setLanguage(newLanguage);
+        setLanguage("ta");
+
+    }else{
+
+        setLanguage("en");
+
+    }
 
 };
 
 
-function translated(en,ta){
 
-    return currentLanguage === "en"
-        ? en
-        : ta;
+/* ================================================= */
+/* ================= SECTION SWITCH ================= */
+/* ================================================= */
 
-}
+window.showSection = function(section){
+
+    document
+        .getElementById("loginSection")
+        .classList.remove("active");
+
+    document
+        .getElementById("registerSection")
+        .classList.remove("active");
 
 
-/* ================= LOGIN ROLE ================= */
+    document
+        .getElementById("loginTab")
+        .classList.remove("active");
+
+    document
+        .getElementById("registerTab")
+        .classList.remove("active");
+
+
+
+    if(section === "login"){
+
+        document
+            .getElementById("loginSection")
+            .classList.add("active");
+
+        document
+            .getElementById("loginTab")
+            .classList.add("active");
+
+    }
+
+    else{
+
+        document
+            .getElementById("registerSection")
+            .classList.add("active");
+
+        document
+            .getElementById("registerTab")
+            .classList.add("active");
+
+    }
+
+
+
+    /*
+     IMPORTANT:
+     Apply the current language again
+     whenever Login/Register is opened.
+    */
+
+    setLanguage(currentLanguage);
+
+};
+
+
+
+/* ================================================= */
+/* ================= LOGIN ROLE ===================== */
+/* ================================================= */
 
 let loginRole = "donor";
 
@@ -930,6 +1142,7 @@ let loginRole = "donor";
 window.selectLoginRole = function(role){
 
     loginRole = role;
+
 
     document
         .querySelectorAll("#loginSection .role-btn")
@@ -939,20 +1152,26 @@ window.selectLoginRole = function(role){
 
         });
 
+
     const selected =
         document.querySelector(
             `#loginSection .role-btn[data-role="${role}"]`
         );
 
+
     if(selected){
+
         selected.classList.add("active");
+
     }
 
 };
 
 
 
-/* ================= REGISTER ROLE ================= */
+/* ================================================= */
+/* ================ REGISTER ROLE =================== */
+/* ================================================= */
 
 let registerRole = "donor";
 
@@ -963,7 +1182,9 @@ window.selectRegisterRole = function(role){
 
 
     document
-        .querySelectorAll("#registerSection .role-btn")
+        .querySelectorAll(
+            "#registerSection .role-btn"
+        )
         .forEach(button => {
 
             button.classList.remove("active");
@@ -976,8 +1197,11 @@ window.selectRegisterRole = function(role){
             `#registerSection .role-btn[data-register-role="${role}"]`
         );
 
+
     if(selected){
+
         selected.classList.add("active");
+
     }
 
 
@@ -1002,7 +1226,7 @@ window.selectRegisterRole = function(role){
 
     }
 
-    if(role === "requester"){
+    else if(role === "requester"){
 
         document
             .getElementById("requesterFields")
@@ -1010,7 +1234,7 @@ window.selectRegisterRole = function(role){
 
     }
 
-    if(role === "admin"){
+    else if(role === "admin"){
 
         document
             .getElementById("adminFields")
@@ -1018,58 +1242,43 @@ window.selectRegisterRole = function(role){
 
     }
 
-};
 
+    /* Re-apply language */
 
-
-/* ================= TABS ================= */
-
-window.showSection = function(section){
-
-    document
-        .getElementById("loginSection")
-        .classList.remove("active");
-
-    document
-        .getElementById("registerSection")
-        .classList.remove("active");
-
-    document
-        .getElementById("loginTab")
-        .classList.remove("active");
-
-    document
-        .getElementById("registerTab")
-        .classList.remove("active");
-
-
-    if(section === "login"){
-
-        document
-            .getElementById("loginSection")
-            .classList.add("active");
-
-        document
-            .getElementById("loginTab")
-            .classList.add("active");
-
-    }else{
-
-        document
-            .getElementById("registerSection")
-            .classList.add("active");
-
-        document
-            .getElementById("registerTab")
-            .classList.add("active");
-
-    }
+    setLanguage(currentLanguage);
 
 };
 
 
 
-/* ================= LOGIN ================= */
+/* ================================================= */
+/* ================= MESSAGE ======================== */
+/* ================================================= */
+
+function showMessage(
+    element,
+    english,
+    tamil,
+    type
+){
+
+    element.style.display = "block";
+
+    element.className =
+        "message " + type;
+
+    element.textContent =
+        currentLanguage === "ta"
+        ? tamil
+        : english;
+
+}
+
+
+
+/* ================================================= */
+/* ================= LOGIN ========================== */
+/* ================================================= */
 
 window.loginUser = async function(){
 
@@ -1087,105 +1296,19 @@ window.loginUser = async function(){
 
 
     const message =
-        document.getElementById("loginMessage");
-
-
-    message.style.display = "block";
+        document.getElementById(
+            "loginMessage"
+        );
 
 
     if(!email || !password){
 
-        message.className =
-            "message error";
-
-        message.textContent =
-            translated(
-                "Please enter email and password.",
-                "மின்னஞ்சல் மற்றும் கடவுச்சொல்லை உள்ளிடவும்."
-            );
-
-        return;
-
-    }
-
-
-    /* Demo accounts */
-
-    const demoAccounts = {
-
-        "donor@bloodbridge.demo":{
-            password:"donor123",
-            role:"donor"
-        },
-
-        "requester@bloodbridge.demo":{
-            password:"request123",
-            role:"requester"
-        },
-
-        "admin@bloodbridge.demo":{
-            password:"admin123",
-            role:"admin"
-        }
-
-    };
-
-
-    if(
-        demoAccounts[email] &&
-        demoAccounts[email].password === password
-    ){
-
-        if(
-            demoAccounts[email].role !== loginRole
-        ){
-
-            message.className =
-                "message error";
-
-            message.textContent =
-                translated(
-                    "Please select the correct login role.",
-                    "சரியான உள்நுழைவு வகையைத் தேர்ந்தெடுக்கவும்."
-                );
-
-            return;
-
-        }
-
-
-        localStorage.setItem(
-            "bloodbridgeLoggedIn",
-            "true"
+        showMessage(
+            message,
+            "Please enter email and password.",
+            "மின்னஞ்சல் மற்றும் கடவுச்சொல்லை உள்ளிடவும்.",
+            "error"
         );
-
-        localStorage.setItem(
-            "bloodbridgeUserRole",
-            loginRole
-        );
-
-        localStorage.setItem(
-            "bloodbridgeUserEmail",
-            email
-        );
-
-
-        message.className =
-            "message success";
-
-        message.textContent =
-            translated(
-                "Login successful. Redirecting...",
-                "உள்நுழைவு வெற்றிகரமாக முடிந்தது. மாற்றப்படுகிறது..."
-            );
-
-
-        setTimeout(() => {
-
-            window.location.href =
-                "profile.html";
-
-        },800);
 
         return;
 
@@ -1193,94 +1316,4 @@ window.loginUser = async function(){
 
 
 
-    /* Firebase users */
-
-    try{
-
-        let foundUser = false;
-
-        const collectionName =
-            loginRole === "donor"
-            ? "donors"
-            : loginRole === "requester"
-            ? "requesters"
-            : "admins";
-
-
-        const snapshot =
-            await getDocs(
-                collection(db,collectionName)
-            );
-
-
-        snapshot.forEach(doc => {
-
-            const data = doc.data();
-
-
-            if(
-                data.email === email &&
-                data.password === password
-            ){
-
-                foundUser = true;
-
-            }
-
-        });
-
-
-        if(foundUser){
-
-            localStorage.setItem(
-                "bloodbridgeLoggedIn",
-                "true"
-            );
-
-            localStorage.setItem(
-                "bloodbridgeUserRole",
-                loginRole
-            );
-
-            localStorage.setItem(
-                "bloodbridgeUserEmail",
-                email
-            );
-
-
-            message.className =
-                "message success";
-
-            message.textContent =
-                translated(
-                    "Login successful. Redirecting...",
-                    "உள்நுழைவு வெற்றிகரமாக முடிந்தது. மாற்றப்படுகிறது..."
-                );
-
-
-            setTimeout(() => {
-
-                window.location.href =
-                    "profile.html";
-
-            },800);
-
-        }else{
-
-            message.className =
-                "message error";
-
-            message.textContent =
-                translated(
-                    "Invalid email, password or role.",
-                    "மின்னஞ்சல், கடவுச்சொல் அல்லது வகை தவறாக உள்ளது."
-                );
-
-        }
-
-    }catch(error){
-
-        console.error(error);
-
-        message.className =
-            "messag
+    /* ==============
