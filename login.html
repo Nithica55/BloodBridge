@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BloodBridge | Login</title>
+<title>BloodBridge | Login & Registration</title>
 
 <style>
 * {
@@ -16,16 +16,14 @@
 body {
     font-family: Arial, sans-serif;
     min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: linear-gradient(135deg, #fff5f5, #f8f9fa);
-    padding: 20px;
+    padding: 25px 15px;
 }
 
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 480px;
+    margin: auto;
 }
 
 .logo {
@@ -34,8 +32,8 @@ body {
 }
 
 .logo-icon {
-    width: 75px;
-    height: 75px;
+    width: 70px;
+    height: 70px;
     margin: auto;
     border-radius: 50%;
     background: #b71c1c;
@@ -43,29 +41,50 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 34px;
-    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.25);
+    font-size: 32px;
 }
 
 .logo h1 {
     color: #b71c1c;
-    margin-top: 12px;
-    font-size: 30px;
+    margin-top: 10px;
 }
 
 .logo p {
     color: #777;
+    font-size: 14px;
     margin-top: 5px;
 }
 
 .card {
     background: white;
-    padding: 30px;
+    padding: 25px;
     border-radius: 22px;
-    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 35px rgba(0,0,0,.12);
 }
 
-.card h2 {
+.tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.tab {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.tab.active {
+    background: #b71c1c;
+    color: white;
+    border-color: #b71c1c;
+}
+
+h2 {
     text-align: center;
     color: #8e0000;
     margin-bottom: 8px;
@@ -74,27 +93,26 @@ body {
 .subtitle {
     text-align: center;
     color: #777;
-    font-size: 14px;
-    margin-bottom: 25px;
+    font-size: 13px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    margin-top: 15px;
-    margin-bottom: 6px;
+    margin: 13px 0 6px;
+    font-size: 13px;
     font-weight: bold;
     color: #444;
-    font-size: 14px;
 }
 
 input,
 select {
     width: 100%;
-    padding: 13px;
+    padding: 12px;
     border: 1px solid #ddd;
-    border-radius: 10px;
+    border-radius: 9px;
+    font-size: 14px;
     outline: none;
-    font-size: 15px;
 }
 
 input:focus,
@@ -102,37 +120,43 @@ select:focus {
     border-color: #b71c1c;
 }
 
-.password-box {
-    position: relative;
+.role-box {
+    display: flex;
+    gap: 8px;
+    margin: 15px 0;
 }
 
-.password-box input {
-    padding-right: 45px;
-}
-
-.show-password {
-    position: absolute;
-    right: 12px;
-    top: 12px;
+.role-box button {
+    flex: 1;
+    padding: 10px 5px;
+    border: 1px solid #ddd;
+    background: white;
+    border-radius: 9px;
     cursor: pointer;
-    color: #777;
 }
 
-.login-btn {
+.role-box button.active {
+    background: #ffebee;
+    border-color: #b71c1c;
+    color: #b71c1c;
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
+
+.main-btn {
     width: 100%;
-    margin-top: 24px;
+    margin-top: 22px;
     padding: 14px;
     border: none;
     border-radius: 10px;
-    background: linear-gradient(135deg, #b71c1c, #e53935);
+    background: linear-gradient(135deg,#b71c1c,#e53935);
     color: white;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     cursor: pointer;
-}
-
-.login-btn:hover {
-    transform: translateY(-1px);
 }
 
 .message {
@@ -141,68 +165,47 @@ select:focus {
     padding: 12px;
     border-radius: 9px;
     text-align: center;
-    font-size: 14px;
-}
-
-.error {
-    background: #ffebee;
-    color: #c62828;
+    font-size: 13px;
 }
 
 .success {
+    display: block;
     background: #e8f5e9;
     color: #2e7d32;
 }
 
-.demo {
-    margin-top: 22px;
-    background: #fafafa;
-    border: 1px dashed #ccc;
-    border-radius: 12px;
-    padding: 15px;
+.error {
+    display: block;
+    background: #ffebee;
+    color: #c62828;
 }
 
-.demo h3 {
-    color: #8e0000;
-    font-size: 14px;
-    margin-bottom: 10px;
-}
-
-.demo p {
+.consent {
+    margin-top: 15px;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
     font-size: 12px;
     color: #555;
-    margin: 5px 0;
 }
 
-.footer {
-    text-align: center;
-    margin-top: 18px;
-    color: #888;
-    font-size: 12px;
+.consent input {
+    width: auto;
+    margin-top: 2px;
 }
 
-.language {
-    text-align: right;
-    margin-bottom: 10px;
+.demo {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    background: #fafafa;
+    font-size: 11px;
+    color: #666;
 }
 
-.language button {
-    border: 1px solid #b71c1c;
-    background: white;
-    color: #b71c1c;
-    padding: 6px 10px;
-    border-radius: 15px;
-    cursor: pointer;
-    font-size: 12px;
-}
-
-@media (max-width: 480px) {
+@media(max-width:480px) {
     .card {
-        padding: 23px;
-    }
-
-    .logo h1 {
-        font-size: 26px;
+        padding: 20px;
     }
 }
 </style>
@@ -212,238 +215,560 @@ select:focus {
 
 <div class="container">
 
-    <div class="logo">
+<div class="logo">
 
-        <div class="logo-icon">
-            🩸
-        </div>
+    <div class="logo-icon">🩸</div>
 
-        <h1>BloodBridge</h1>
+    <h1>BloodBridge</h1>
 
-        <p>Connecting donors with those in need</p>
-
-    </div>
-
-    <div class="card">
-
-        <div class="language">
-            <button onclick="toggleLanguage()">
-                தமிழ் / English
-            </button>
-        </div>
-
-        <h2 id="title">
-            Welcome Back
-        </h2>
-
-        <p class="subtitle" id="subtitle">
-            Login to continue to BloodBridge
-        </p>
-
-        <form id="loginForm">
-
-            <label id="emailLabel">
-                Email
-            </label>
-
-            <input
-                type="email"
-                id="email"
-                placeholder="Enter your email"
-                required
-            >
-
-            <label id="passwordLabel">
-                Password
-            </label>
-
-            <div class="password-box">
-
-                <input
-                    type="password"
-                    id="password"
-                    placeholder="Enter your password"
-                    required
-                >
-
-                <span
-                    class="show-password"
-                    onclick="togglePassword()">
-                    👁
-                </span>
-
-            </div>
-
-            <label id="roleLabel">
-                Login As
-            </label>
-
-            <select id="role">
-
-                <option value="donor">
-                    Donor
-                </option>
-
-                <option value="requester">
-                    Requester
-                </option>
-
-                <option value="admin">
-                    Admin
-                </option>
-
-            </select>
-
-            <button
-                type="submit"
-                class="login-btn"
-                id="loginButton">
-                Login
-            </button>
-
-        </form>
-
-        <div
-            id="message"
-            class="message">
-        </div>
-
-        <div class="demo">
-
-            <h3>
-                Demo Login Accounts
-            </h3>
-
-            <p>
-                <b>Donor:</b>
-                donor@bloodbridge.demo
-                / donor123
-            </p>
-
-            <p>
-                <b>Requester:</b>
-                requester@bloodbridge.demo
-                / request123
-            </p>
-
-            <p>
-                <b>Admin:</b>
-                admin@bloodbridge.demo
-                / admin123
-            </p>
-
-        </div>
-
-    </div>
-
-    <div class="footer">
-        BloodBridge © 2026 • Blood Donation Connection Platform
-    </div>
+    <p>Connecting donors with those in need</p>
 
 </div>
 
-<script>
+<div class="card">
 
-let tamil = false;
+<div class="tabs">
 
-/* ==============================
-   DEMO LOGIN DETAILS
-============================== */
+    <button class="tab active" id="loginTab"
+    onclick="showLogin()">
+        Login
+    </button>
 
-const users = {
+    <button class="tab" id="registerTab"
+    onclick="showRegister()">
+        Register
+    </button>
 
-    "donor@bloodbridge.demo": {
-        password: "donor123",
-        role: "donor"
-    },
+</div>
 
-    "requester@bloodbridge.demo": {
-        password: "request123",
-        role: "requester"
-    },
 
-    "admin@bloodbridge.demo": {
-        password: "admin123",
-        role: "admin"
+<!-- ================= LOGIN ================= -->
+
+<div id="loginSection">
+
+<h2>Welcome Back</h2>
+
+<p class="subtitle">
+Login to continue to BloodBridge
+</p>
+
+<label>Email ID</label>
+
+<input
+type="email"
+id="loginEmail"
+placeholder="Enter email">
+
+<label>Password</label>
+
+<input
+type="password"
+id="loginPassword"
+placeholder="Enter password">
+
+<label>Login As</label>
+
+<select id="loginRole">
+
+<option value="donor">
+Donor
+</option>
+
+<option value="requester">
+Requester
+</option>
+
+<option value="admin">
+Admin
+</option>
+
+</select>
+
+<button
+class="main-btn"
+onclick="loginUser()">
+Login
+</button>
+
+</div>
+
+
+<!-- ================= REGISTER ================= -->
+
+<div id="registerSection" class="hidden">
+
+<h2>Create Account</h2>
+
+<p class="subtitle">
+Register according to your BloodBridge role
+</p>
+
+<div class="role-box">
+
+<button
+id="donorBtn"
+class="active"
+onclick="selectRole('donor')">
+🩸 Donor
+</button>
+
+<button
+id="requesterBtn"
+onclick="selectRole('requester')">
+🚨 Requester
+</button>
+
+<button
+id="adminBtn"
+onclick="selectRole('admin')">
+🛡️ Admin
+</button>
+
+</div>
+
+
+<!-- COMMON -->
+
+<label>Name</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your name">
+
+
+<label>Email ID</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter email address">
+
+
+<label>Phone Number</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="Enter demo phone number">
+
+
+<!-- DONOR FIELDS -->
+
+<div id="donorFields">
+
+<label>Age Group</label>
+
+<select id="ageGroup">
+
+<option value="">
+Select age group
+</option>
+
+<option>18-25</option>
+<option>26-35</option>
+<option>36-45</option>
+<option>46-55</option>
+<option>56+</option>
+
+</select>
+
+
+<label>Blood Group</label>
+
+<select id="bloodGroup">
+
+<option value="">
+Select blood group
+</option>
+
+<option>A+</option>
+<option>A-</option>
+<option>B+</option>
+<option>B-</option>
+<option>AB+</option>
+<option>AB-</option>
+<option>O+</option>
+<option>O-</option>
+
+</select>
+
+
+<label>State</label>
+
+<select id="state">
+
+<option value="">
+Select state
+</option>
+
+<option>Tamil Nadu</option>
+<option>Kerala</option>
+<option>Karnataka</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Maharashtra</option>
+<option>Delhi</option>
+<option>Gujarat</option>
+<option>Rajasthan</option>
+<option>West Bengal</option>
+
+</select>
+
+
+<label>City</label>
+
+<input
+type="text"
+id="city"
+placeholder="Enter city">
+
+
+<label>Availability</label>
+
+<select id="availability">
+
+<option value="">
+Select availability
+</option>
+
+<option>Available</option>
+<option>Unavailable</option>
+
+</select>
+
+
+<div class="consent">
+
+<input
+type="checkbox"
+id="contactConsent">
+
+<span>
+I consent to sharing my contact details with authorized requesters.
+</span>
+
+</div>
+
+</div>
+
+
+<!-- REQUESTER FIELDS -->
+
+<div id="requesterFields" class="hidden">
+
+<label>State</label>
+
+<select id="requesterState">
+
+<option value="">
+Select state
+</option>
+
+<option>Tamil Nadu</option>
+<option>Kerala</option>
+<option>Karnataka</option>
+<option>Andhra Pradesh</option>
+<option>Telangana</option>
+<option>Maharashtra</option>
+<option>Delhi</option>
+
+</select>
+
+
+<label>City</label>
+
+<input
+type="text"
+id="requesterCity"
+placeholder="Enter city">
+
+
+<label>Hospital</label>
+
+<input
+type="text"
+id="hospital"
+placeholder="Enter hospital name">
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminFields" class="hidden">
+
+<label>Admin ID</label>
+
+<input
+type="text"
+id="adminId"
+placeholder="Enter admin ID">
+
+</div>
+
+
+<label>Password</label>
+
+<input
+type="password"
+id="registerPassword"
+placeholder="Create password">
+
+
+<button
+class="main-btn"
+onclick="registerUser()">
+Create Account
+</button>
+
+</div>
+
+
+<div
+id="message"
+class="message">
+</div>
+
+
+<div class="demo">
+
+<b>Demo accounts:</b><br><br>
+
+Donor:
+donor@bloodbridge.demo / donor123<br>
+
+Requester:
+requester@bloodbridge.demo / request123<br>
+
+Admin:
+admin@bloodbridge.demo / admin123
+
+</div>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    db,
+    collection,
+    addDoc,
+    serverTimestamp,
+    getDocs
+} from "./firebase.js";
+
+
+let selectedRole = "donor";
+
+
+/* ===============================
+   SHOW LOGIN
+================================ */
+
+window.showLogin = function() {
+
+    document
+    .getElementById("loginSection")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("registerSection")
+    .classList.add("hidden");
+
+    document
+    .getElementById("loginTab")
+    .classList.add("active");
+
+    document
+    .getElementById("registerTab")
+    .classList.remove("active");
+
+};
+
+
+/* ===============================
+   SHOW REGISTER
+================================ */
+
+window.showRegister = function() {
+
+    document
+    .getElementById("loginSection")
+    .classList.add("hidden");
+
+    document
+    .getElementById("registerSection")
+    .classList.remove("hidden");
+
+    document
+    .getElementById("loginTab")
+    .classList.remove("active");
+
+    document
+    .getElementById("registerTab")
+    .classList.add("active");
+
+};
+
+
+/* ===============================
+   SELECT ROLE
+================================ */
+
+window.selectRole = function(role) {
+
+    selectedRole = role;
+
+    document
+    .getElementById("donorFields")
+    .classList.add("hidden");
+
+    document
+    .getElementById("requesterFields")
+    .classList.add("hidden");
+
+    document
+    .getElementById("adminFields")
+    .classList.add("hidden");
+
+    document
+    .getElementById("donorBtn")
+    .classList.remove("active");
+
+    document
+    .getElementById("requesterBtn")
+    .classList.remove("active");
+
+    document
+    .getElementById("adminBtn")
+    .classList.remove("active");
+
+
+    if (role === "donor") {
+
+        document
+        .getElementById("donorFields")
+        .classList.remove("hidden");
+
+        document
+        .getElementById("donorBtn")
+        .classList.add("active");
+
+    }
+
+    else if (role === "requester") {
+
+        document
+        .getElementById("requesterFields")
+        .classList.remove("hidden");
+
+        document
+        .getElementById("requesterBtn")
+        .classList.add("active");
+
+    }
+
+    else {
+
+        document
+        .getElementById("adminFields")
+        .classList.remove("hidden");
+
+        document
+        .getElementById("adminBtn")
+        .classList.add("active");
+
     }
 
 };
 
 
-/* ==============================
+/* ===============================
    LOGIN
-============================== */
+================================ */
 
-document
-.getElementById("loginForm")
-.addEventListener("submit", function(event) {
-
-    event.preventDefault();
+window.loginUser = async function() {
 
     const email =
-        document.getElementById("email")
+        document
+        .getElementById("loginEmail")
         .value
         .trim()
         .toLowerCase();
 
     const password =
-        document.getElementById("password")
+        document
+        .getElementById("loginPassword")
         .value;
 
-    const selectedRole =
-        document.getElementById("role")
+    const role =
+        document
+        .getElementById("loginRole")
         .value;
 
     const message =
         document.getElementById("message");
 
-    const user = users[email];
 
-    message.style.display = "block";
+    if (!email || !password) {
 
-    if (!user) {
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            tamil
-            ? "Email சரியாக இல்லை."
-            : "Invalid email.";
+        showMessage(
+            "Please enter email and password.",
+            "error"
+        );
 
         return;
-    }
 
-    if (user.password !== password) {
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            tamil
-            ? "Password சரியாக இல்லை."
-            : "Incorrect password.";
-
-        return;
-    }
-
-    if (user.role !== selectedRole) {
-
-        message.className =
-            "message error";
-
-        message.textContent =
-            tamil
-            ? "தேர்ந்தெடுத்த Role சரியாக இல்லை."
-            : "Selected role does not match this account.";
-
-        return;
     }
 
 
-    /* ==============================
-       SAVE LOGIN SESSION
-    ============================== */
+    /*
+      Demo login.
+      This is NOT Firebase Authentication yet.
+    */
+
+    const demoUsers = {
+
+        "donor@bloodbridge.demo": {
+            password: "donor123",
+            role: "donor"
+        },
+
+        "requester@bloodbridge.demo": {
+            password: "request123",
+            role: "requester"
+        },
+
+        "admin@bloodbridge.demo": {
+            password: "admin123",
+            role: "admin"
+        }
+
+    };
+
+
+    const user = demoUsers[email];
+
+
+    if (
+        !user ||
+        user.password !== password ||
+        user.role !== role
+    ) {
+
+        showMessage(
+            "Invalid login details or role.",
+            "error"
+        );
+
+        return;
+
+    }
+
 
     localStorage.setItem(
         "bloodbridgeLoggedIn",
@@ -452,7 +777,7 @@ document
 
     localStorage.setItem(
         "bloodbridgeUserRole",
-        user.role
+        role
     );
 
     localStorage.setItem(
@@ -461,121 +786,295 @@ document
     );
 
 
-    /* ==============================
-       SUCCESS
-    ============================== */
-
-    message.className =
-        "message success";
-
-    message.textContent =
-        tamil
-        ? "Login வெற்றிகரமாக முடிந்தது!"
-        : "Login successful! Opening your profile...";
+    showMessage(
+        "Login successful! Opening profile...",
+        "success"
+    );
 
 
-    /*
-       IMPORTANT:
-       Every user goes to profile.html
-    */
-
-    setTimeout(function() {
+    setTimeout(() => {
 
         window.location.href =
             "profile.html";
 
     }, 700);
 
-});
+};
 
 
-/* ==============================
-   SHOW / HIDE PASSWORD
-============================== */
+/* ===============================
+   REGISTER USER
+================================ */
 
-function togglePassword() {
+window.registerUser = async function() {
+
+    const name =
+        document.getElementById("name")
+        .value.trim();
+
+    const email =
+        document.getElementById("email")
+        .value.trim()
+        .toLowerCase();
+
+    const phone =
+        document.getElementById("phone")
+        .value.trim();
 
     const password =
-        document.getElementById("password");
+        document.getElementById("registerPassword")
+        .value;
 
-    if (password.type === "password") {
 
-        password.type = "text";
+    if (!name || !email || !phone || !password) {
 
-    } else {
+        showMessage(
+            "Please fill all required fields.",
+            "error"
+        );
 
-        password.type = "password";
+        return;
+
+    }
+
+
+    try {
+
+        if (selectedRole === "donor") {
+
+            const ageGroup =
+                document.getElementById("ageGroup")
+                .value;
+
+            const bloodGroup =
+                document.getElementById("bloodGroup")
+                .value;
+
+            const state =
+                document.getElementById("state")
+                .value;
+
+            const city =
+                document.getElementById("city")
+                .value.trim();
+
+            const availability =
+                document.getElementById("availability")
+                .value;
+
+            const contactConsent =
+                document.getElementById("contactConsent")
+                .checked;
+
+
+            if (
+                !ageGroup ||
+                !bloodGroup ||
+                !state ||
+                !city ||
+                !availability
+            ) {
+
+                showMessage(
+                    "Please complete all donor details.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            await addDoc(
+                collection(db, "donors"),
+                {
+
+                    name,
+                    ageGroup,
+                    bloodGroup,
+                    state,
+                    city,
+                    phone,
+                    email,
+                    availability,
+                    contactConsent,
+
+                    role: "donor",
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+        }
+
+
+        else if (selectedRole === "requester") {
+
+            const state =
+                document
+                .getElementById("requesterState")
+                .value;
+
+            const city =
+                document
+                .getElementById("requesterCity")
+                .value.trim();
+
+            const hospital =
+                document
+                .getElementById("hospital")
+                .value.trim();
+
+
+            if (!state || !city || !hospital) {
+
+                showMessage(
+                    "Please complete all requester details.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            await addDoc(
+                collection(db, "requesters"),
+                {
+
+                    name,
+                    email,
+                    phone,
+                    state,
+                    city,
+                    hospital,
+
+                    role: "requester",
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+        }
+
+
+        else {
+
+            const adminId =
+                document
+                .getElementById("adminId")
+                .value.trim();
+
+
+            if (!adminId) {
+
+                showMessage(
+                    "Please enter Admin ID.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            /*
+              Demo admin registration record.
+              Real admin authentication should
+              use Firebase Authentication.
+            */
+
+            await addDoc(
+                collection(db, "admins"),
+                {
+
+                    name,
+                    email,
+                    phone,
+                    adminId,
+
+                    role: "admin",
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+        }
+
+
+        /*
+          Save demo session
+        */
+
+        localStorage.setItem(
+            "bloodbridgeLoggedIn",
+            "true"
+        );
+
+        localStorage.setItem(
+            "bloodbridgeUserRole",
+            selectedRole
+        );
+
+        localStorage.setItem(
+            "bloodbridgeUserEmail",
+            email
+        );
+
+
+        showMessage(
+            "Registration successful! Opening profile...",
+            "success"
+        );
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "profile.html";
+
+        }, 1000);
+
 
     }
 
-}
+    catch (error) {
 
+        console.error(error);
 
-/* ==============================
-   LANGUAGE
-============================== */
-
-function toggleLanguage() {
-
-    tamil = !tamil;
-
-    if (tamil) {
-
-        document.getElementById("title")
-        .textContent =
-        "மீண்டும் வரவேற்கிறோம்";
-
-        document.getElementById("subtitle")
-        .textContent =
-        "BloodBridge-ல் தொடர உள்நுழையவும்";
-
-        document.getElementById("emailLabel")
-        .textContent =
-        "மின்னஞ்சல்";
-
-        document.getElementById("passwordLabel")
-        .textContent =
-        "கடவுச்சொல்";
-
-        document.getElementById("roleLabel")
-        .textContent =
-        "உள்நுழைவு வகை";
-
-        document.getElementById("loginButton")
-        .textContent =
-        "உள்நுழையவும்";
-
-    } else {
-
-        document.getElementById("title")
-        .textContent =
-        "Welcome Back";
-
-        document.getElementById("subtitle")
-        .textContent =
-        "Login to continue to BloodBridge";
-
-        document.getElementById("emailLabel")
-        .textContent =
-        "Email";
-
-        document.getElementById("passwordLabel")
-        .textContent =
-        "Password";
-
-        document.getElementById("roleLabel")
-        .textContent =
-        "Login As";
-
-        document.getElementById("loginButton")
-        .textContent =
-        "Login";
+        showMessage(
+            "Registration failed. Please check Firebase and try again.",
+            "error"
+        );
 
     }
+
+};
+
+
+/* ===============================
+   MESSAGE
+================================ */
+
+function showMessage(text, type) {
+
+    const message =
+        document.getElementById("message");
+
+    message.textContent = text;
+
+    message.className =
+        "message " + type;
 
 }
 
 </script>
 
 </body>
-</html>
+        </html>
