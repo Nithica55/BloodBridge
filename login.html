@@ -1,641 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BloodBridge | Login & Registration</title>
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial, sans-serif;
-    background:linear-gradient(135deg,#fff5f5,#ffe4e6);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-}
-
-.container{
-    width:100%;
-    max-width:500px;
-}
-
-.card{
-    background:white;
-    border-radius:18px;
-    padding:28px;
-    box-shadow:0 10px 35px rgba(0,0,0,0.15);
-}
-
-.logo{
-    text-align:center;
-    color:#c1121f;
-    font-size:30px;
-    font-weight:bold;
-    margin-bottom:8px;
-}
-
-.subtitle{
-    text-align:center;
-    color:#666;
-    margin-bottom:20px;
-}
-
-.language-btn{
-    display:block;
-    margin:0 auto 20px;
-    background:#c1121f;
-    color:white;
-    border:none;
-    padding:9px 18px;
-    border-radius:20px;
-    cursor:pointer;
-    font-size:14px;
-}
-
-.tabs{
-    display:flex;
-    margin-bottom:20px;
-    border-bottom:2px solid #eee;
-}
-
-.tab{
-    flex:1;
-    padding:13px;
-    border:none;
-    background:none;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    color:#777;
-}
-
-.tab.active{
-    color:#c1121f;
-    border-bottom:3px solid #c1121f;
-}
-
-.section{
-    display:none;
-}
-
-.section.active{
-    display:block;
-}
-
-.role-buttons{
-    display:flex;
-    gap:8px;
-    margin-bottom:18px;
-}
-
-.role-btn{
-    flex:1;
-    padding:10px 5px;
-    border:1px solid #ddd;
-    background:#fff;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:13px;
-}
-
-.role-btn.active{
-    background:#c1121f;
-    color:white;
-    border-color:#c1121f;
-}
-
-label{
-    display:block;
-    font-weight:bold;
-    margin:12px 0 6px;
-    color:#333;
-}
-
-input,
-select{
-    width:100%;
-    padding:12px;
-    border:1px solid #ccc;
-    border-radius:8px;
-    font-size:14px;
-    outline:none;
-}
-
-input:focus,
-select:focus{
-    border-color:#c1121f;
-}
-
-button.main-btn{
-    width:100%;
-    margin-top:20px;
-    padding:13px;
-    border:none;
-    border-radius:8px;
-    background:#c1121f;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-}
-
-button.main-btn:hover{
-    background:#a30f1a;
-}
-
-.message{
-    margin-top:15px;
-    padding:10px;
-    border-radius:7px;
-    text-align:center;
-    display:none;
-}
-
-.success{
-    display:block;
-    background:#e8f7e8;
-    color:#197019;
-}
-
-.error{
-    display:block;
-    background:#ffe8e8;
-    color:#a00000;
-}
-
-.small-text{
-    text-align:center;
-    color:#777;
-    font-size:12px;
-    margin-top:15px;
-}
-
-.hidden{
-    display:none !important;
-}
-
-.checkbox-row{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-top:15px;
-}
-
-.checkbox-row input{
-    width:auto;
-}
-
-.checkbox-row label{
-    margin:0;
-    font-weight:normal;
-}
-
-@media(max-width:450px){
-    .card{
-        padding:20px;
-    }
-
-    .role-btn{
-        font-size:12px;
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="container">
-
-<div class="card">
-
-<div class="logo">
-🩸 BloodBridge
-</div>
-
-<p class="subtitle"
-   data-en="Connect blood donors with people in need"
-   data-ta="இரத்த தானதாரர்களையும் இரத்தம் தேவைப்படுபவர்களையும் இணைக்கவும்">
-Connect blood donors with people in need
-</p>
-
-<button class="language-btn"
-        id="languageButton"
-        onclick="toggleLanguage()">
-தமிழ்
-</button>
-
-<!-- TABS -->
-
-<div class="tabs">
-
-<button class="tab active"
-        id="loginTab"
-        onclick="showSection('login')"
-        data-en="Login"
-        data-ta="உள்நுழைவு">
-Login
-</button>
-
-<button class="tab"
-        id="registerTab"
-        onclick="showSection('register')"
-        data-en="Register"
-        data-ta="பதிவு செய்யவும்">
-Register
-</button>
-
-</div>
-
-
-<!-- ================= LOGIN ================= -->
-
-<div id="loginSection" class="section active">
-
-<h2 data-en="Login"
-    data-ta="உள்நுழைவு">
-Login
-</h2>
-
-<div class="role-buttons">
-
-<button class="role-btn active"
-        onclick="selectLoginRole('donor',this)"
-        data-en="Donor"
-        data-ta="தானதாரர்">
-Donor
-</button>
-
-<button class="role-btn"
-        onclick="selectLoginRole('requester',this)"
-        data-en="Requester"
-        data-ta="கோருபவர்">
-Requester
-</button>
-
-<button class="role-btn"
-        onclick="selectLoginRole('admin',this)"
-        data-en="Admin"
-        data-ta="நிர்வாகி">
-Admin
-</button>
-
-</div>
-
-
-<label data-en="Email ID"
-       data-ta="மின்னஞ்சல் முகவரி">
-Email ID
-</label>
-
-<input type="email"
-       id="loginEmail"
-       placeholder="Enter email"
-       data-placeholder-en="Enter email"
-       data-placeholder-ta="மின்னஞ்சலை உள்ளிடவும்">
-
-
-<label data-en="Password"
-       data-ta="கடவுச்சொல்">
-Password
-</label>
-
-<input type="password"
-       id="loginPassword"
-       placeholder="Enter password"
-       data-placeholder-en="Enter password"
-       data-placeholder-ta="கடவுச்சொல்லை உள்ளிடவும்">
-
-
-<button class="main-btn"
-        onclick="loginUser()"
-        data-en="Login"
-        data-ta="உள்நுழைய">
-Login
-</button>
-
-<div id="loginMessage" class="message"></div>
-
-<p class="small-text"
-   data-en="Demo accounts can be used for presentation."
-   data-ta="விளக்கக்காட்சிக்காக Demo கணக்குகளைப் பயன்படுத்தலாம்.">
-Demo accounts can be used for presentation.
-</p>
-
-</div>
-
-
-<!-- ================= REGISTER ================= -->
-
-<div id="registerSection" class="section">
-
-<h2 data-en="Create Account"
-    data-ta="கணக்கை உருவாக்கவும்">
-Create Account
-</h2>
-
-
-<!-- REGISTER ROLE -->
-
-<div class="role-buttons">
-
-<button class="role-btn active"
-        onclick="selectRegisterRole('donor',this)"
-        data-en="Donor"
-        data-ta="தானதாரர்">
-Donor
-</button>
-
-<button class="role-btn"
-        onclick="selectRegisterRole('requester',this)"
-        data-en="Requester"
-        data-ta="கோருபவர்">
-Requester
-</button>
-
-<button class="role-btn"
-        onclick="selectRegisterRole('admin',this)"
-        data-en="Admin"
-        data-ta="நிர்வாகி">
-Admin
-</button>
-
-</div>
-
-
-<!-- COMMON DETAILS -->
-
-<label data-en="Full Name"
-       data-ta="முழு பெயர்">
-Full Name
-</label>
-
-<input type="text"
-       id="regName"
-       placeholder="Enter full name"
-       data-placeholder-en="Enter full name"
-       data-placeholder-ta="முழு பெயரை உள்ளிடவும்">
-
-
-<label data-en="Email ID"
-       data-ta="மின்னஞ்சல் முகவரி">
-Email ID
-</label>
-
-<input type="email"
-       id="regEmail"
-       placeholder="Enter email"
-       data-placeholder-en="Enter email"
-       data-placeholder-ta="மின்னஞ்சலை உள்ளிடவும்">
-
-
-<label data-en="Phone Number"
-       data-ta="தொலைபேசி எண்">
-Phone Number
-</label>
-
-<input type="tel"
-       id="regPhone"
-       placeholder="Enter phone number"
-       data-placeholder-en="Enter phone number"
-       data-placeholder-ta="தொலைபேசி எண்ணை உள்ளிடவும்">
-
-
-<!-- DONOR DETAILS -->
-
-<div id="donorFields">
-
-<label data-en="Age Group"
-       data-ta="வயது பிரிவு">
-Age Group
-</label>
-
-<select id="regAgeGroup">
-
-<option value=""
-        data-en="Select age group"
-        data-ta="வயது பிரிவை தேர்வு செய்யவும்">
-Select age group
-</option>
-
-<option value="18-25">18-25</option>
-<option value="26-35">26-35</option>
-<option value="36-45">36-45</option>
-<option value="46-55">46-55</option>
-<option value="56+">56+</option>
-
-</select>
-
-
-<label data-en="Blood Group"
-       data-ta="இரத்த வகை">
-Blood Group
-</label>
-
-<select id="regBloodGroup">
-
-<option value=""
-        data-en="Select blood group"
-        data-ta="இரத்த வகையை தேர்வு செய்யவும்">
-Select blood group
-</option>
-
-<option value="A+">A+</option>
-<option value="A-">A-</option>
-<option value="B+">B+</option>
-<option value="B-">B-</option>
-<option value="AB+">AB+</option>
-<option value="AB-">AB-</option>
-<option value="O+">O+</option>
-<option value="O-">O-</option>
-
-</select>
-
-
-<label data-en="State"
-       data-ta="மாநிலம்">
-State
-</label>
-
-<select id="regState">
-
-<option value=""
-        data-en="Select state"
-        data-ta="மாநிலத்தை தேர்வு செய்யவும்">
-Select state
-</option>
-
-<option>Tamil Nadu</option>
-<option>Kerala</option>
-<option>Karnataka</option>
-<option>Andhra Pradesh</option>
-<option>Telangana</option>
-<option>Maharashtra</option>
-<option>Delhi</option>
-<option>Other</option>
-
-</select>
-
-
-<label data-en="City"
-       data-ta="நகரம்">
-City
-</label>
-
-<input type="text"
-       id="regCity"
-       placeholder="Enter city"
-       data-placeholder-en="Enter city"
-       data-placeholder-ta="நகரத்தை உள்ளிடவும்">
-
-
-<label data-en="Availability"
-       data-ta="கிடைக்கும் நிலை">
-Availability
-</label>
-
-<select id="regAvailability">
-
-<option value=""
-        data-en="Select availability"
-        data-ta="கிடைக்கும் நிலையை தேர்வு செய்யவும்">
-Select availability
-</option>
-
-<option value="Available">Available</option>
-<option value="Not Available">Not Available</option>
-
-</select>
-
-
-<div class="checkbox-row">
-
-<input type="checkbox"
-       id="contactConsent">
-
-<label for="contactConsent"
-       data-en="Allow people to contact me"
-       data-ta="மற்றவர்கள் என்னை தொடர்பு கொள்ள அனுமதிக்கவும்">
-Allow people to contact me
-</label>
-
-</div>
-
-</div>
-
-
-<!-- REQUESTER DETAILS -->
-
-<div id="requesterFields" class="hidden">
-
-<label data-en="State"
-       data-ta="மாநிலம்">
-State
-</label>
-
-<select id="reqState">
-
-<option value=""
-        data-en="Select state"
-        data-ta="மாநிலத்தை தேர்வு செய்யவும்">
-Select state
-</option>
-
-<option>Tamil Nadu</option>
-<option>Kerala</option>
-<option>Karnataka</option>
-<option>Andhra Pradesh</option>
-<option>Telangana</option>
-<option>Maharashtra</option>
-<option>Delhi</option>
-<option>Other</option>
-
-</select>
-
-
-<label data-en="City"
-       data-ta="நகரம்">
-City
-</label>
-
-<input type="text"
-       id="reqCity"
-       placeholder="Enter city"
-       data-placeholder-en="Enter city"
-       data-placeholder-ta="நகரத்தை உள்ளிடவும்">
-
-
-<label data-en="Hospital / Medical Centre"
-       data-ta="மருத்துவமனை / மருத்துவ மையம்">
-Hospital / Medical Centre
-</label>
-
-<input type="text"
-       id="reqHospital"
-       placeholder="Enter hospital name"
-       data-placeholder-en="Enter hospital name"
-       data-placeholder-ta="மருத்துவமனை பெயரை உள்ளிடவும்">
-
-</div>
-
-
-<!-- ADMIN DETAILS -->
-
-<div id="adminFields" class="hidden">
-
-<label data-en="Admin ID"
-       data-ta="நிர்வாகி ID">
-Admin ID
-</label>
-
-<input type="text"
-       id="adminId"
-       placeholder="Enter admin ID"
-       data-placeholder-en="Enter admin ID"
-       data-placeholder-ta="நிர்வாகி ID-ஐ உள்ளிடவும்">
-
-</div>
-
-
-<!-- PASSWORD -->
-
-<label data-en="Password"
-       data-ta="கடவுச்சொல்">
-Password
-</label>
-
-<input type="password"
-       id="regPassword"
-       placeholder="Create password"
-       data-placeholder-en="Create password"
-       data-placeholder-ta="கடவுச்சொல்லை உருவாக்கவும்">
-
-
-<button class="main-btn"
-        onclick="registerUser()"
-        data-en="Create Account"
-        data-ta="கணக்கை உருவாக்கவும்">
-Create Account
-</button>
-
-<div id="registerMessage" class="message"></div>
-
-</div>
-
-
-</div>
-
-</div>
-
-
 <script type="module">
 
 import {
@@ -652,50 +14,45 @@ let currentLanguage =
     localStorage.getItem("bloodbridgeLanguage") || "en";
 
 
-function setLanguage(language){
+function setLanguage(language) {
 
     currentLanguage = language;
 
     document.documentElement.lang = language;
 
-    /* TEXT */
-
     document.querySelectorAll("[data-en]").forEach(element => {
 
-        const text =
+        const value =
             element.getAttribute("data-" + language);
 
-        if(text){
-            element.textContent = text;
+        if (value !== null) {
+            element.textContent = value;
         }
 
     });
 
-
-    /* PLACEHOLDERS */
-
     document.querySelectorAll("[data-placeholder-en]").forEach(element => {
 
-        const placeholder =
+        const value =
             element.getAttribute(
                 "data-placeholder-" + language
             );
 
-        if(placeholder){
-            element.placeholder = placeholder;
+        if (value !== null) {
+            element.placeholder = value;
         }
 
     });
 
-
-    /* LANGUAGE BUTTON */
-
     const languageButton =
         document.getElementById("languageButton");
 
-    languageButton.textContent =
-        language === "en" ? "தமிழ்" : "English";
-
+    if (languageButton) {
+        languageButton.textContent =
+            language === "en"
+                ? "தமிழ்"
+                : "English";
+    }
 
     localStorage.setItem(
         "bloodbridgeLanguage",
@@ -704,68 +61,55 @@ function setLanguage(language){
 }
 
 
-window.toggleLanguage = function(){
+window.toggleLanguage = function () {
 
-    const newLanguage =
+    setLanguage(
         currentLanguage === "en"
-        ? "ta"
-        : "en";
-
-    setLanguage(newLanguage);
+            ? "ta"
+            : "en"
+    );
 
 };
 
 
 /* ================= TAB SWITCH ================= */
 
-window.showSection = function(section){
+window.showSection = function(section) {
 
-    document
-        .getElementById("loginSection")
-        .classList.remove("active");
+    const loginSection =
+        document.getElementById("loginSection");
 
-    document
-        .getElementById("registerSection")
-        .classList.remove("active");
+    const registerSection =
+        document.getElementById("registerSection");
 
-    document
-        .getElementById("loginTab")
-        .classList.remove("active");
+    const loginTab =
+        document.getElementById("loginTab");
 
-    document
-        .getElementById("registerTab")
-        .classList.remove("active");
+    const registerTab =
+        document.getElementById("registerTab");
 
 
-    if(section === "login"){
+    loginSection.classList.remove("active");
+    registerSection.classList.remove("active");
 
-        document
-            .getElementById("loginSection")
-            .classList.add("active");
+    loginTab.classList.remove("active");
+    registerTab.classList.remove("active");
 
-        document
-            .getElementById("loginTab")
-            .classList.add("active");
 
-    }
+    if (section === "login") {
 
-    else{
+        loginSection.classList.add("active");
+        loginTab.classList.add("active");
 
-        document
-            .getElementById("registerSection")
-            .classList.add("active");
+    } else {
 
-        document
-            .getElementById("registerTab")
-            .classList.add("active");
+        registerSection.classList.add("active");
+        registerTab.classList.add("active");
 
     }
 
-
-    /* FIX: language stays applied after switching tabs */
 
     setLanguage(currentLanguage);
-
 };
 
 
@@ -774,18 +118,22 @@ window.showSection = function(section){
 let loginRole = "donor";
 
 
-window.selectLoginRole = function(role, button){
+window.selectLoginRole = function(role, button) {
 
     loginRole = role;
 
-    document
-        .querySelectorAll("#loginSection .role-btn")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
+    const buttons =
+        document.querySelectorAll(
+            "#loginSection .role-btn"
+        );
+
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
+    });
 
     button.classList.add("active");
 
+    console.log("Login role selected:", loginRole);
 };
 
 
@@ -794,54 +142,52 @@ window.selectLoginRole = function(role, button){
 let registerRole = "donor";
 
 
-window.selectRegisterRole = function(role, button){
+window.selectRegisterRole = function(role, button) {
 
     registerRole = role;
 
+    const buttons =
+        document.querySelectorAll(
+            "#registerSection .role-btn"
+        );
 
-    document
-        .querySelectorAll("#registerSection .role-btn")
-        .forEach(btn => {
-            btn.classList.remove("active");
-        });
+    buttons.forEach(btn => {
+        btn.classList.remove("active");
+    });
 
     button.classList.add("active");
 
 
-    document
-        .getElementById("donorFields")
-        .classList.add("hidden");
+    const donorFields =
+        document.getElementById("donorFields");
 
-    document
-        .getElementById("requesterFields")
-        .classList.add("hidden");
+    const requesterFields =
+        document.getElementById("requesterFields");
 
-    document
-        .getElementById("adminFields")
-        .classList.add("hidden");
+    const adminFields =
+        document.getElementById("adminFields");
 
 
-    if(role === "donor"){
+    donorFields.classList.add("hidden");
+    requesterFields.classList.add("hidden");
+    adminFields.classList.add("hidden");
 
-        document
-            .getElementById("donorFields")
-            .classList.remove("hidden");
 
-    }
+    if (role === "donor") {
 
-    else if(role === "requester"){
-
-        document
-            .getElementById("requesterFields")
-            .classList.remove("hidden");
+        donorFields.classList.remove("hidden");
 
     }
 
-    else if(role === "admin"){
+    else if (role === "requester") {
 
-        document
-            .getElementById("adminFields")
-            .classList.remove("hidden");
+        requesterFields.classList.remove("hidden");
+
+    }
+
+    else if (role === "admin") {
+
+        adminFields.classList.remove("hidden");
 
     }
 
@@ -850,7 +196,7 @@ window.selectRegisterRole = function(role, button){
 
 /* ================= MESSAGE ================= */
 
-function showMessage(element, message, type){
+function showMessage(element, message, type) {
 
     element.textContent = message;
 
@@ -862,7 +208,7 @@ function showMessage(element, message, type){
 
 /* ================= LOGIN ================= */
 
-window.loginUser = function(){
+window.loginUser = function() {
 
     const email =
         document
@@ -880,7 +226,7 @@ window.loginUser = function(){
         document.getElementById("loginMessage");
 
 
-    if(!email || !password){
+    if (!email || !password) {
 
         showMessage(
             message,
@@ -891,40 +237,44 @@ window.loginUser = function(){
         );
 
         return;
-
     }
 
-
-    /* DEMO LOGIN */
 
     let valid = false;
 
-    if(
+
+    if (
         loginRole === "donor" &&
         email === "donor@bloodbridge.demo" &&
         password === "donor123"
-    ){
+    ) {
+
         valid = true;
+
     }
 
-    else if(
+    else if (
         loginRole === "requester" &&
         email === "requester@bloodbridge.demo" &&
         password === "request123"
-    ){
+    ) {
+
         valid = true;
+
     }
 
-    else if(
+    else if (
         loginRole === "admin" &&
         email === "admin@bloodbridge.demo" &&
         password === "admin123"
-    ){
+    ) {
+
         valid = true;
+
     }
 
 
-    if(valid){
+    if (valid) {
 
         localStorage.setItem(
             "bloodbridgeLoggedIn",
@@ -945,8 +295,8 @@ window.loginUser = function(){
         showMessage(
             message,
             currentLanguage === "en"
-                ? "Login successful! Redirecting..."
-                : "உள்நுழைவு வெற்றிகரமாக முடிந்தது! மாற்றப்படுகிறது...",
+                ? "Login successful!"
+                : "உள்நுழைவு வெற்றிகரமாக முடிந்தது!",
             "success"
         );
 
@@ -956,11 +306,11 @@ window.loginUser = function(){
             window.location.href =
                 "profile.html";
 
-        },1000);
+        }, 1000);
 
     }
 
-    else{
+    else {
 
         showMessage(
             message,
@@ -975,141 +325,36 @@ window.loginUser = function(){
 };
 
 
-/* ================= REGISTER ================= */
+/* ================= START ================= */
 
-window.registerUser = async function(){
-
-    const message =
-        document.getElementById("registerMessage");
+setLanguage(currentLanguage);
 
 
-    const name =
-        document
-            .getElementById("regName")
-            .value
-            .trim();
+/* Make Donor selected when page opens */
 
-    const email =
-        document
-            .getElementById("regEmail")
-            .value
-            .trim();
+const firstLoginButton =
+    document.querySelector(
+        "#loginSection .role-btn"
+    );
 
-    const phone =
-        document
-            .getElementById("regPhone")
-            .value
-            .trim();
-
-    const password =
-        document
-            .getElementById("regPassword")
-            .value
-            .trim();
+if (firstLoginButton) {
+    selectLoginRole(
+        "donor",
+        firstLoginButton
+    );
+}
 
 
-    /* BASIC VALIDATION */
+const firstRegisterButton =
+    document.querySelector(
+        "#registerSection .role-btn"
+    );
 
-    if(!name || !email || !phone || !password){
+if (firstRegisterButton) {
+    selectRegisterRole(
+        "donor",
+        firstRegisterButton
+    );
+}
 
-        showMessage(
-            message,
-            currentLanguage === "en"
-                ? "Please fill all required fields."
-                : "தேவையான அனைத்து விவரங்களையும் நிரப்பவும்.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    if(password.length < 6){
-
-        showMessage(
-            message,
-            currentLanguage === "en"
-                ? "Password must contain at least 6 characters."
-                : "கடவுச்சொல்லில் குறைந்தது 6 எழுத்துகள் இருக்க வேண்டும்.",
-            "error"
-        );
-
-        return;
-
-    }
-
-
-    try{
-
-        let collectionName = "";
-
-        let userData = {
-
-            name:name,
-            email:email,
-            phone:phone,
-            role:registerRole,
-            createdAt:serverTimestamp()
-
-        };
-
-
-        /* ================= DONOR ================= */
-
-        if(registerRole === "donor"){
-
-            const ageGroup =
-                document
-                    .getElementById("regAgeGroup")
-                    .value;
-
-            const bloodGroup =
-                document
-                    .getElementById("regBloodGroup")
-                    .value;
-
-            const state =
-                document
-                    .getElementById("regState")
-                    .value;
-
-            const city =
-                document
-                    .getElementById("regCity")
-                    .value
-                    .trim();
-
-            const availability =
-                document
-                    .getElementById("regAvailability")
-                    .value;
-
-            const contactConsent =
-                document
-                    .getElementById("contactConsent")
-                    .checked;
-
-
-            if(
-                !ageGroup ||
-                !bloodGroup ||
-                !state ||
-                !city ||
-                !availability
-            ){
-
-                showMessage(
-                    message,
-                    currentLanguage === "en"
-                        ? "Please complete all donor details."
-                        : "தானதாரர் விவரங்கள் அனைத்தையும் நிரப்பவும்.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            collectionName
+        </script>
