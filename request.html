@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>BloodBridge - Emergency Request</title>
 
+
 <style>
+
 * {
   box-sizing: border-box;
   font-family: Arial, sans-serif;
@@ -20,7 +26,7 @@ body {
 
 .container {
   width: 92%;
-  max-width: 650px;
+  max-width: 680px;
   margin: 30px auto;
 }
 
@@ -35,10 +41,15 @@ body {
 h1 {
   text-align: center;
   color: #b30000;
+  margin-bottom: 8px;
 }
 
 h2 {
   color: #b30000;
+}
+
+h3 {
+  margin-bottom: 10px;
 }
 
 .subtitle {
@@ -61,6 +72,13 @@ select {
   border: 1px solid #ddd;
   border-radius: 10px;
   font-size: 15px;
+  background: white;
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #b30000;
 }
 
 button {
@@ -73,10 +91,15 @@ button {
   color: white;
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
 }
 
 button:hover {
   background: #8f0000;
+}
+
+.back-btn {
+  background: #444;
 }
 
 .success {
@@ -116,13 +139,13 @@ button:hover {
   border-radius: 10px;
   text-align: center;
   font-weight: bold;
+  margin-bottom: 15px;
 }
 
 .details {
   background: #fafafa;
   padding: 15px;
   border-radius: 12px;
-  margin-top: 15px;
 }
 
 .details p {
@@ -174,15 +197,21 @@ button:hover {
 }
 
 .contact-box {
-  background: #f0f8ff;
-  border: 1px solid #c7dff5;
-  padding: 12px;
+  background: #eef7ff;
+  border: 1px solid #c8ddf0;
+  padding: 13px;
   border-radius: 10px;
   margin-top: 15px;
 }
 
 .contact-box p {
   margin: 7px 0;
+}
+
+.contact-box a {
+  color: #005bbb;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .no-donor {
@@ -193,17 +222,30 @@ button:hover {
   margin-top: 15px;
 }
 
-.back-btn {
-  background: #444;
+.info {
+  background: #f5f7ff;
+  border-left: 4px solid #b30000;
+  padding: 12px;
+  margin-top: 15px;
+  border-radius: 7px;
+  font-size: 13px;
+  color: #555;
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
 <div class="container">
 
-<!-- EMERGENCY REQUEST -->
+
+<!-- ============================= -->
+<!-- EMERGENCY REQUEST FORM -->
+<!-- ============================= -->
 
 <div class="card">
 
@@ -213,7 +255,11 @@ button:hover {
 Find potential blood donors quickly
 </div>
 
+
 <form id="requestForm">
+
+
+<!-- PATIENT -->
 
 <label>Patient Name</label>
 
@@ -225,38 +271,151 @@ required
 >
 
 
-<label>Blood Group</label>
+<!-- BLOOD GROUP -->
 
-<select id="bloodGroup" required>
+<label>Blood Group Required</label>
 
-<option value="">Select Blood Group</option>
+<select
+id="bloodGroup"
+required
+>
+
+<option value="">
+Select Blood Group
+</option>
 
 <option>O+</option>
 <option>O-</option>
+
 <option>A+</option>
 <option>A-</option>
+
 <option>B+</option>
 <option>B-</option>
+
 <option>AB+</option>
 <option>AB-</option>
 
 </select>
 
 
-<label>State</label>
+<!-- STATE -->
 
-<select id="state" required>
+<label>
+State / Union Territory
+</label>
 
-<option value="">Select State</option>
+<select
+id="state"
+required
+>
+
+<option value="">
+Select State / Union Territory
+</option>
+
+
+<optgroup label="States">
+
+<option>Andhra Pradesh</option>
+
+<option>Arunachal Pradesh</option>
+
+<option>Assam</option>
+
+<option>Bihar</option>
+
+<option>Chhattisgarh</option>
+
+<option>Goa</option>
+
+<option>Gujarat</option>
+
+<option>Haryana</option>
+
+<option>Himachal Pradesh</option>
+
+<option>Jharkhand</option>
+
+<option>Karnataka</option>
+
+<option>Kerala</option>
+
+<option>Madhya Pradesh</option>
+
+<option>Maharashtra</option>
+
+<option>Manipur</option>
+
+<option>Meghalaya</option>
+
+<option>Mizoram</option>
+
+<option>Nagaland</option>
+
+<option>Odisha</option>
+
+<option>Punjab</option>
+
+<option>Rajasthan</option>
+
+<option>Sikkim</option>
 
 <option>Tamil Nadu</option>
-<option>Kerala</option>
-<option>Karnataka</option>
-<option>Andhra Pradesh</option>
+
 <option>Telangana</option>
+
+<option>Tripura</option>
+
+<option>Uttar Pradesh</option>
+
+<option>Uttarakhand</option>
+
+<option>West Bengal</option>
+
+</optgroup>
+
+
+<optgroup label="Union Territories">
+
+<option>
+Andaman and Nicobar Islands
+</option>
+
+<option>
+Chandigarh
+</option>
+
+<option>
+Dadra and Nagar Haveli and Daman and Diu
+</option>
+
+<option>
+Delhi
+</option>
+
+<option>
+Jammu and Kashmir
+</option>
+
+<option>
+Ladakh
+</option>
+
+<option>
+Lakshadweep
+</option>
+
+<option>
+Puducherry
+</option>
+
+</optgroup>
 
 </select>
 
+
+<!-- CITY -->
 
 <label>City</label>
 
@@ -268,6 +427,8 @@ required
 >
 
 
+<!-- HOSPITAL -->
+
 <label>Hospital</label>
 
 <input
@@ -277,6 +438,8 @@ placeholder="Hospital name"
 required
 >
 
+
+<!-- UNITS -->
 
 <label>Units Required</label>
 
@@ -290,57 +453,119 @@ required
 >
 
 
+<!-- URGENCY -->
+
 <label>Urgency</label>
 
-<select id="urgency" required>
+<select
+id="urgency"
+required
+>
 
-<option value="">Select Urgency</option>
+<option value="">
+Select Urgency
+</option>
 
 <option>Critical</option>
+
 <option>High</option>
+
 <option>Normal</option>
 
 </select>
 
 
+<!-- SUBMIT -->
+
 <button type="submit">
+
 🚨 Submit Emergency Request
+
 </button>
+
 
 </form>
 
 
-<div id="successMessage" class="success"></div>
+<div
+id="successMessage"
+class="success">
+</div>
 
-<div id="errorMessage" class="error"></div>
 
-<div id="loading" class="loading">
+<div
+id="errorMessage"
+class="error">
+</div>
+
+
+<div
+id="loading"
+class="loading">
+
 🔍 Searching for available donors...
+
+</div>
+
+
+<div class="info">
+
+<b>Matching:</b>
+BloodBridge searches for donors with the
+same blood group and city who are marked
+as Available.
+
 </div>
 
 </div>
 
 
-<!-- TRACKING -->
 
-<div id="trackingSection" class="card">
+<!-- ============================= -->
+<!-- TRACKING SECTION -->
+<!-- ============================= -->
 
-<h2>📍 Request Tracking</h2>
-
-<div id="requestIdBox" class="request-id"></div>
-
-<div id="requestDetails" class="details"></div>
+<div
+id="trackingSection"
+class="card">
 
 
-<h3>Status</h3>
+<h2>
+📍 Request Tracking
+</h2>
 
+
+<div
+id="requestIdBox"
+class="request-id">
+</div>
+
+
+<div
+id="requestDetails"
+class="details">
+</div>
+
+
+
+<h3>
+Request Status
+</h3>
+
+
+<!-- STEP 1 -->
 
 <div class="step completed">
 
-<div class="circle">✓</div>
+<div class="circle">
+✓
+</div>
 
 <div>
-<b>Request Submitted</b>
+
+<b>
+Request Submitted
+</b>
 
 <br>
 
@@ -353,18 +578,24 @@ Emergency request received.
 </div>
 
 
+<!-- STEP 2 -->
+
 <div class="step completed">
 
-<div class="circle">✓</div>
+<div class="circle">
+✓
+</div>
 
 <div>
 
-<b>Searching for Donor</b>
+<b>
+Searching for Donor
+</b>
 
 <br>
 
 <small>
-Checking the BloodBridge donor database.
+Checking available donors.
 </small>
 
 </div>
@@ -372,13 +603,21 @@ Checking the BloodBridge donor database.
 </div>
 
 
-<div id="donorStep" class="step">
+<!-- STEP 3 -->
 
-<div class="circle">3</div>
+<div
+id="donorStep"
+class="step">
+
+<div class="circle">
+3
+</div>
 
 <div>
 
-<b>Potential Donor Found</b>
+<b>
+Potential Donor Found
+</b>
 
 <br>
 
@@ -391,18 +630,24 @@ Searching...
 </div>
 
 
+<!-- STEP 4 -->
+
 <div class="step">
 
-<div class="circle">4</div>
+<div class="circle">
+4
+</div>
 
 <div>
 
-<b>Donor Contact</b>
+<b>
+Donor Contact
+</b>
 
 <br>
 
 <small>
-Requester can contact an eligible consenting donor.
+Contact the consenting matched donor.
 </small>
 
 </div>
@@ -410,13 +655,19 @@ Requester can contact an eligible consenting donor.
 </div>
 
 
+<!-- STEP 5 -->
+
 <div class="step">
 
-<div class="circle">5</div>
+<div class="circle">
+5
+</div>
 
 <div>
 
-<b>Request Completed</b>
+<b>
+Request Completed
+</b>
 
 <br>
 
@@ -429,16 +680,24 @@ Final medical confirmation is required.
 </div>
 
 
-<!-- DONORS -->
 
-<h2>🩸 Potential Donor Matches</h2>
+<!-- DONOR RESULTS -->
+
+<h2>
+🩸 Potential Donor Matches
+</h2>
+
 
 <div id="donorResults">
 Searching...
 </div>
 
+
 </div>
 
+
+
+<!-- BACK -->
 
 <button
 class="back-btn"
@@ -448,91 +707,176 @@ onclick="window.location.href='index.html'">
 
 </button>
 
+
 </div>
+
 
 
 <script type="module">
 
+
+/* ============================= */
+/* FIREBASE IMPORTS */
+/* ============================= */
+
 import {
+
   db,
+
   collection,
+
   addDoc,
+
   getDocs,
+
   query,
+
   where,
+
   serverTimestamp
+
 } from "./firebase.js";
 
 
+
+/* ============================= */
+/* ELEMENTS */
+/* ============================= */
+
 const form =
-document.getElementById("requestForm");
+document.getElementById(
+"requestForm"
+);
+
 
 const successMessage =
-document.getElementById("successMessage");
+document.getElementById(
+"successMessage"
+);
+
 
 const errorMessage =
-document.getElementById("errorMessage");
+document.getElementById(
+"errorMessage"
+);
+
 
 const loading =
-document.getElementById("loading");
+document.getElementById(
+"loading"
+);
+
 
 const trackingSection =
-document.getElementById("trackingSection");
+document.getElementById(
+"trackingSection"
+);
+
 
 const requestIdBox =
-document.getElementById("requestIdBox");
+document.getElementById(
+"requestIdBox"
+);
+
 
 const requestDetails =
-document.getElementById("requestDetails");
+document.getElementById(
+"requestDetails"
+);
+
 
 const donorResults =
-document.getElementById("donorResults");
+document.getElementById(
+"donorResults"
+);
+
 
 const donorStep =
-document.getElementById("donorStep");
+document.getElementById(
+"donorStep"
+);
+
 
 const donorStatus =
-document.getElementById("donorStatus");
+document.getElementById(
+"donorStatus"
+);
 
 
-/* SECURITY */
+
+/* ============================= */
+/* HTML SECURITY */
+/* ============================= */
 
 function safe(value) {
 
-  if (value === null ||
-      value === undefined) {
+  if (
+    value === null ||
+    value === undefined
+  ) {
 
     return "";
 
   }
 
   return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
+    );
 
 }
 
 
+
+/* ============================= */
 /* REQUEST ID */
+/* ============================= */
 
 function generateRequestId() {
 
-  return "BB-" +
+  return (
+    "BB-" +
+
     Math.random()
       .toString(36)
-      .substring(2, 8)
-      .toUpperCase();
+      .substring(2,8)
+      .toUpperCase()
+
+  );
 
 }
 
 
-/* SUBMIT */
+
+/* ============================= */
+/* SUBMIT REQUEST */
+/* ============================= */
 
 form.addEventListener(
 "submit",
+
 async function(event) {
 
   event.preventDefault();
@@ -551,97 +895,145 @@ async function(event) {
     "block";
 
 
+  /* GET VALUES */
+
   const patientName =
-    document
-      .getElementById("patientName")
-      .value
-      .trim();
+  document
+    .getElementById(
+      "patientName"
+    )
+    .value
+    .trim();
 
 
   const bloodGroup =
-    document
-      .getElementById("bloodGroup")
-      .value;
+  document
+    .getElementById(
+      "bloodGroup"
+    )
+    .value;
 
 
   const state =
-    document
-      .getElementById("state")
-      .value;
+  document
+    .getElementById(
+      "state"
+    )
+    .value;
 
 
   const city =
-    document
-      .getElementById("city")
-      .value
-      .trim();
+  document
+    .getElementById(
+      "city"
+    )
+    .value
+    .trim();
 
 
   const hospital =
-    document
-      .getElementById("hospital")
-      .value
-      .trim();
+  document
+    .getElementById(
+      "hospital"
+    )
+    .value
+    .trim();
 
 
   const units =
-    document
-      .getElementById("units")
-      .value;
+  document
+    .getElementById(
+      "units"
+    )
+    .value;
 
 
   const urgency =
-    document
-      .getElementById("urgency")
-      .value;
+  document
+    .getElementById(
+      "urgency"
+    )
+    .value;
 
 
   const requestId =
-    generateRequestId();
+  generateRequestId();
+
 
 
   try {
 
+
+    /* ============================= */
     /* SAVE REQUEST */
+    /* ============================= */
 
     await addDoc(
-      collection(db, "requests"),
+
+      collection(
+        db,
+        "requests"
+      ),
+
       {
 
-        requestId: requestId,
+        requestId:
+        requestId,
 
-        patientName: patientName,
+        patientName:
+        patientName,
 
-        bloodGroup: bloodGroup,
+        bloodGroup:
+        bloodGroup,
 
-        state: state,
+        state:
+        state,
 
-        city: city,
+        city:
+        city,
 
-        hospital: hospital,
+        hospital:
+        hospital,
 
-        units: Number(units),
+        units:
+        Number(units),
 
-        urgency: urgency,
+        urgency:
+        urgency,
 
-        status: "Pending",
+        status:
+        "Pending",
 
         createdAt:
-          serverTimestamp()
+        serverTimestamp()
 
       }
+
     );
 
 
+
+    /* ============================= */
     /* SUCCESS */
+    /* ============================= */
 
-    successMessage.innerHTML =
+    successMessage.innerHTML = `
 
-      "✅ <b>Emergency request submitted successfully!</b><br><br>" +
+      ✅
+      <b>
+      Emergency request submitted successfully!
+      </b>
 
-      "Request ID: <b>" +
-      safe(requestId) +
-      "</b>";
+      <br><br>
+
+      Request ID:
+
+      <b>
+      ${safe(requestId)}
+      </b>
+
+    `;
+
 
     successMessage.style.display =
       "block";
@@ -651,7 +1043,9 @@ async function(event) {
       "none";
 
 
+    /* ============================= */
     /* SHOW TRACKING */
+    /* ============================= */
 
     trackingSection.style.display =
       "block";
@@ -663,42 +1057,57 @@ async function(event) {
       safe(requestId);
 
 
+
     requestDetails.innerHTML = `
 
       <p>
-        <b>Patient:</b>
-        ${safe(patientName)}
+      <b>Patient:</b>
+      ${safe(patientName)}
       </p>
 
-      <p>
-        <b>Blood Group:</b>
-        ${safe(bloodGroup)}
-      </p>
 
       <p>
-        <b>Location:</b>
-        ${safe(city)}, ${safe(state)}
+      <b>Blood Group:</b>
+      ${safe(bloodGroup)}
       </p>
 
-      <p>
-        <b>Hospital:</b>
-        ${safe(hospital)}
-      </p>
 
       <p>
-        <b>Units:</b>
-        ${safe(units)}
+      <b>State:</b>
+      ${safe(state)}
       </p>
 
+
       <p>
-        <b>Urgency:</b>
-        ${safe(urgency)}
+      <b>City:</b>
+      ${safe(city)}
+      </p>
+
+
+      <p>
+      <b>Hospital:</b>
+      ${safe(hospital)}
+      </p>
+
+
+      <p>
+      <b>Units Required:</b>
+      ${safe(units)}
+      </p>
+
+
+      <p>
+      <b>Urgency:</b>
+      ${safe(urgency)}
       </p>
 
     `;
 
 
-    /* FIND DONOR */
+
+    /* ============================= */
+    /* SEARCH DONORS */
+    /* ============================= */
 
     await findDonors(
       bloodGroup,
@@ -710,16 +1119,30 @@ async function(event) {
 
   catch(error) {
 
-    console.error(error);
+
+    console.error(
+      "BloodBridge error:",
+      error
+    );
+
 
     loading.style.display =
       "none";
 
-    errorMessage.innerHTML =
 
-      "❌ <b>Request failed.</b><br><br>" +
+    errorMessage.innerHTML = `
 
-      safe(error.message);
+      ❌
+      <b>
+      Request could not be completed.
+      </b>
+
+      <br><br>
+
+      ${safe(error.message)}
+
+    `;
+
 
     errorMessage.style.display =
       "block";
@@ -729,15 +1152,19 @@ async function(event) {
 });
 
 
+
+/* ============================= */
 /* FIND DONORS */
+/* ============================= */
 
 async function findDonors(
-  bloodGroup,
-  city
+bloodGroup,
+city
 ) {
 
+
   donorResults.innerHTML =
-    "🔍 Searching donor database...";
+    "🔍 Checking donor database...";
 
 
   donorStatus.textContent =
@@ -746,50 +1173,77 @@ async function findDonors(
 
   try {
 
+
+    /* EXACT BLOOD GROUP
+       + EXACT CITY
+       + AVAILABLE */
+
     const donorQuery =
-      query(
+    query(
 
-        collection(db, "donors"),
+      collection(
+        db,
+        "donors"
+      ),
 
-        where(
-          "bloodGroup",
-          "==",
-          bloodGroup
-        ),
 
-        where(
-          "city",
-          "==",
-          city
-        ),
+      where(
+        "bloodGroup",
+        "==",
+        bloodGroup
+      ),
 
-        where(
-          "availability",
-          "==",
-          "Available"
-        )
 
-      );
+      where(
+        "city",
+        "==",
+        city
+      ),
+
+
+      where(
+        "availability",
+        "==",
+        "Available"
+      )
+
+    );
+
 
 
     const snapshot =
-      await getDocs(donorQuery);
+    await getDocs(
+      donorQuery
+    );
 
 
-    /* FOUND */
 
-    if (!snapshot.empty) {
+    /* ============================= */
+    /* DONORS FOUND */
+    /* ============================= */
 
-      donorStep.classList.add(
-        "completed"
-      );
+    if (
+      !snapshot.empty
+    ) {
+
 
       donorStep
-        .querySelector(".circle")
-        .textContent = "✓";
+        .classList
+        .add(
+          "completed"
+        );
+
+
+      donorStep
+        .querySelector(
+          ".circle"
+        )
+        .textContent =
+        "✓";
 
 
       donorStatus.textContent =
+
         snapshot.size +
         " potential donor(s) found";
 
@@ -798,136 +1252,220 @@ async function findDonors(
         "";
 
 
+
       snapshot.forEach(
-        function(donorDoc) {
-
-          const donor =
-            donorDoc.data();
+      function(donorDoc) {
 
 
-          const donorCard =
-            document.createElement(
-              "div"
-            );
-
-          donorCard.className =
-            "donor";
+        const donor =
+        donorDoc.data();
 
 
-          /*
-           IMPORTANT:
-           Phone/email are shown
-           only if donor gave consent.
-          */
-
-          let contactHTML = "";
+        const donorCard =
+        document.createElement(
+          "div"
+        );
 
 
-          if (
-            donor.contactConsent === true
-          ) {
-
-            contactHTML = `
-
-              <div class="contact-box">
-
-                <p>
-                  📞 <b>Phone:</b>
-                  <a href="tel:${safe(donor.phone)}">
-                    ${safe(donor.phone)}
-                  </a>
-                </p>
-
-                <p>
-                  📧 <b>Email:</b>
-                  <a href="mailto:${safe(donor.email)}">
-                    ${safe(donor.email)}
-                  </a>
-                </p>
-
-              </div>
-
-            `;
-
-          }
-
-          else {
-
-            contactHTML = `
-
-              <div class="contact-box">
-
-                🔒
-                Donor has not consented
-                to sharing contact details.
-
-              </div>
-
-            `;
-
-          }
+        donorCard.className =
+          "donor";
 
 
-          donorCard.innerHTML = `
 
-            <h3>
-              🩸 ${safe(
-                donor.name ||
-                "Blood Donor"
-              )}
-            </h3>
+        /* ============================= */
+        /* CONTACT DETAILS */
+        /* ============================= */
 
-
-            <p>
-              <b>Blood Group:</b>
-              ${safe(donor.bloodGroup)}
-            </p>
+        let contactHTML =
+          "";
 
 
-            <p>
-              <b>Age Group:</b>
-              ${safe(
-                donor.ageGroup ||
-                "Not provided"
-              )}
-            </p>
+
+        if (
+          donor.contactConsent ===
+          true
+        ) {
 
 
-            <p>
-              <b>City:</b>
-              ${safe(donor.city)}
-            </p>
+          contactHTML = `
+
+            <div
+            class="contact-box">
+
+              <p>
+
+                📞
+                <b>
+                Phone:
+                </b>
+
+                <a
+                href="tel:${safe(
+                  donor.phone
+                )}">
+
+                  ${safe(
+                    donor.phone
+                  )}
+
+                </a>
+
+              </p>
 
 
-            <p>
-              <b>State:</b>
-              ${safe(donor.state)}
-            </p>
+              <p>
 
+                📧
+                <b>
+                Email:
+                </b>
 
-            <p>
-              <b>Availability:</b>
-              <strong>
-                ${safe(donor.availability)}
-              </strong>
-            </p>
+                <a
+                href="mailto:${safe(
+                  donor.email
+                )}">
 
+                  ${safe(
+                    donor.email
+                  )}
 
-            ${contactHTML}
+                </a>
+
+              </p>
+
+            </div>
 
           `;
 
+        }
 
-          donorResults.appendChild(
-            donorCard
-          );
+        else {
+
+
+          contactHTML = `
+
+            <div
+            class="contact-box">
+
+              🔒
+              Donor has not consented
+              to share contact details.
+
+            </div>
+
+          `;
 
         }
-      );
+
+
+
+        /* ============================= */
+        /* DONOR CARD */
+        /* ============================= */
+
+        donorCard.innerHTML = `
+
+          <h3>
+
+            🩸
+            ${safe(
+              donor.name ||
+              "Blood Donor"
+            )}
+
+          </h3>
+
+
+          <p>
+
+            <b>
+            Blood Group:
+            </b>
+
+            ${safe(
+              donor.bloodGroup
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+            Age Group:
+            </b>
+
+            ${safe(
+              donor.ageGroup ||
+              "Not provided"
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+            City:
+            </b>
+
+            ${safe(
+              donor.city
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+            State:
+            </b>
+
+            ${safe(
+              donor.state
+            )}
+
+          </p>
+
+
+          <p>
+
+            <b>
+            Availability:
+            </b>
+
+            <strong>
+            ${safe(
+              donor.availability
+            )}
+            </strong>
+
+          </p>
+
+
+          ${contactHTML}
+
+        `;
+
+
+        donorResults.appendChild(
+          donorCard
+        );
+
+
+      });
+
 
     }
 
+
+    /* ============================= */
+    /* NO DONOR */
+    /* ============================= */
+
     else {
+
 
       donorStatus.textContent =
         "No matching donor found";
@@ -935,20 +1473,32 @@ async function findDonors(
 
       donorResults.innerHTML = `
 
-        <div class="no-donor">
+        <div
+        class="no-donor">
 
           ⚠️
-          <b>No available donor found.</b>
+
+          <b>
+          No available donor found.
+          </b>
 
           <br><br>
 
           Blood Group:
-          <b>${safe(bloodGroup)}</b>
+          <b>
+          ${safe(
+            bloodGroup
+          )}
+          </b>
 
           <br>
 
           City:
-          <b>${safe(city)}</b>
+          <b>
+          ${safe(
+            city
+          )}
+          </b>
 
           <br><br>
 
@@ -961,9 +1511,11 @@ async function findDonors(
 
     }
 
+
   }
 
   catch(error) {
+
 
     console.error(
       "Donor matching error:",
@@ -977,16 +1529,24 @@ async function findDonors(
 
     donorResults.innerHTML = `
 
-      <div class="error"
-           style="display:block">
+      <div
+      class="error"
+      style="display:block">
 
         ⚠️
+
         Request was saved successfully,
-        but donor matching failed.
+        but donor matching could not be completed.
 
         <br><br>
 
-        ${safe(error.message)}
+        <small>
+
+          ${safe(
+            error.message
+          )}
+
+        </small>
 
       </div>
 
@@ -999,4 +1559,5 @@ async function findDonors(
 </script>
 
 </body>
+
   </html>
