@@ -7,501 +7,575 @@
 <title>BloodBridge | Login</title>
 
 <style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    font-family:Arial,sans-serif;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-body{
-    min-height:100vh;
-    background:linear-gradient(135deg,#fff5f7,#f5f7fa);
-    color:#292d3a;
+body {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #fff5f5, #f8f9fa);
+    padding: 20px;
 }
 
-header{
-    background:#a50025;
-    color:white;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.container {
+    width: 100%;
+    max-width: 420px;
 }
 
-header h2{
-    font-size:24px;
+.logo {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.language{
-    background:white;
-    color:#a50025;
-    border:0;
-    padding:10px 16px;
-    border-radius:7px;
-    font-weight:bold;
-    cursor:pointer;
+.logo-icon {
+    width: 75px;
+    height: 75px;
+    margin: auto;
+    border-radius: 50%;
+    background: #b71c1c;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    box-shadow: 0 8px 20px rgba(183, 28, 28, 0.25);
 }
 
-.container{
-    min-height:calc(100vh - 70px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:30px 18px;
+.logo h1 {
+    color: #b71c1c;
+    margin-top: 12px;
+    font-size: 30px;
 }
 
-.login-card{
-    width:100%;
-    max-width:430px;
-    background:white;
-    padding:32px;
-    border-radius:16px;
-    box-shadow:0 8px 30px rgba(0,0,0,.1);
+.logo p {
+    color: #777;
+    margin-top: 5px;
 }
 
-.logo{
-    text-align:center;
-    font-size:45px;
-    margin-bottom:10px;
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.12);
 }
 
-h1{
-    text-align:center;
-    color:#a50025;
-    margin-bottom:8px;
+.card h2 {
+    text-align: center;
+    color: #8e0000;
+    margin-bottom: 8px;
 }
 
-.subtitle{
-    text-align:center;
-    color:#777;
-    line-height:1.5;
-    margin-bottom:25px;
+.subtitle {
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 25px;
 }
 
-label{
-    display:block;
-    font-weight:bold;
-    margin:15px 0 7px;
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #444;
+    font-size: 14px;
 }
 
-input,select{
-    width:100%;
-    padding:13px;
-    border:1px solid #ddd;
-    border-radius:7px;
-    outline:none;
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
 }
 
-input:focus,select:focus{
-    border-color:#a50025;
+input:focus,
+select:focus {
+    border-color: #b71c1c;
 }
 
-.login-btn{
-    width:100%;
-    background:#a50025;
-    color:white;
-    border:0;
-    padding:13px;
-    border-radius:7px;
-    font-weight:bold;
-    margin-top:22px;
-    cursor:pointer;
+.password-box {
+    position: relative;
 }
 
-.login-btn:hover{
-    opacity:.92;
+.password-box input {
+    padding-right: 45px;
 }
 
-.message{
-    display:none;
-    margin-top:18px;
-    padding:13px;
-    border-radius:8px;
-    line-height:1.5;
-    font-size:14px;
+.show-password {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    cursor: pointer;
+    color: #777;
 }
 
-.error{
-    display:block;
-    background:#fff0f3;
-    color:#a50025;
+.login-btn {
+    width: 100%;
+    margin-top: 24px;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #b71c1c, #e53935);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.success{
-    display:block;
-    background:#eaf8ef;
-    color:#167a42;
+.login-btn:hover {
+    transform: translateY(-1px);
 }
 
-.demo{
-    margin-top:25px;
-    padding:15px;
-    background:#fff8e8;
-    border-radius:8px;
-    font-size:13px;
-    line-height:1.6;
-    color:#66552e;
+.message {
+    display: none;
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 9px;
+    text-align: center;
+    font-size: 14px;
 }
 
-.demo strong{
-    color:#a50025;
+.error {
+    background: #ffebee;
+    color: #c62828;
 }
 
-.back{
-    display:block;
-    text-align:center;
-    margin-top:22px;
-    color:#a50025;
-    text-decoration:none;
-    font-weight:bold;
+.success {
+    background: #e8f5e9;
+    color: #2e7d32;
 }
 
-footer{
-    text-align:center;
-    color:#777;
-    font-size:12px;
-    padding:20px;
+.demo {
+    margin-top: 22px;
+    background: #fafafa;
+    border: 1px dashed #ccc;
+    border-radius: 12px;
+    padding: 15px;
 }
 
+.demo h3 {
+    color: #8e0000;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.demo p {
+    font-size: 12px;
+    color: #555;
+    margin: 5px 0;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 18px;
+    color: #888;
+    font-size: 12px;
+}
+
+.language {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.language button {
+    border: 1px solid #b71c1c;
+    background: white;
+    color: #b71c1c;
+    padding: 6px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 23px;
+    }
+
+    .logo h1 {
+        font-size: 26px;
+    }
+}
 </style>
 </head>
 
 <body>
 
-<header>
-
-<h2>🩸 BloodBridge</h2>
-
-<button
-class="language"
-onclick="toggleLanguage()"
-id="languageButton">
-தமிழ்
-</button>
-
-</header>
-
-
 <div class="container">
 
-<div class="login-card">
+    <div class="logo">
 
-<div class="logo">
-🩸
+        <div class="logo-icon">
+            🩸
+        </div>
+
+        <h1>BloodBridge</h1>
+
+        <p>Connecting donors with those in need</p>
+
+    </div>
+
+    <div class="card">
+
+        <div class="language">
+            <button onclick="toggleLanguage()">
+                தமிழ் / English
+            </button>
+        </div>
+
+        <h2 id="title">
+            Welcome Back
+        </h2>
+
+        <p class="subtitle" id="subtitle">
+            Login to continue to BloodBridge
+        </p>
+
+        <form id="loginForm">
+
+            <label id="emailLabel">
+                Email
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter your email"
+                required
+            >
+
+            <label id="passwordLabel">
+                Password
+            </label>
+
+            <div class="password-box">
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <span
+                    class="show-password"
+                    onclick="togglePassword()">
+                    👁
+                </span>
+
+            </div>
+
+            <label id="roleLabel">
+                Login As
+            </label>
+
+            <select id="role">
+
+                <option value="donor">
+                    Donor
+                </option>
+
+                <option value="requester">
+                    Requester
+                </option>
+
+                <option value="admin">
+                    Admin
+                </option>
+
+            </select>
+
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginButton">
+                Login
+            </button>
+
+        </form>
+
+        <div
+            id="message"
+            class="message">
+        </div>
+
+        <div class="demo">
+
+            <h3>
+                Demo Login Accounts
+            </h3>
+
+            <p>
+                <b>Donor:</b>
+                donor@bloodbridge.demo
+                / donor123
+            </p>
+
+            <p>
+                <b>Requester:</b>
+                requester@bloodbridge.demo
+                / request123
+            </p>
+
+            <p>
+                <b>Admin:</b>
+                admin@bloodbridge.demo
+                / admin123
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="footer">
+        BloodBridge © 2026 • Blood Donation Connection Platform
+    </div>
+
 </div>
-
-<h1
-data-en="Welcome Back"
-data-ta="மீண்டும் வரவேற்கிறோம்">
-Welcome Back
-</h1>
-
-<p class="subtitle"
-data-en="Login to access your BloodBridge account."
-data-ta="உங்கள் BloodBridge கணக்கை அணுக உள்நுழையுங்கள்.">
-Login to access your BloodBridge account.
-</p>
-
-
-<form id="loginForm">
-
-<label
-data-en="Email"
-data-ta="மின்னஞ்சல்">
-Email
-</label>
-
-<input
-type="email"
-id="email"
-required
-placeholder="example@email.com">
-
-
-<label
-data-en="Password"
-data-ta="கடவுச்சொல்">
-Password
-</label>
-
-<input
-type="password"
-id="password"
-required
-placeholder="Enter password">
-
-
-<label
-data-en="Login As"
-data-ta="உள்நுழைவு வகை">
-Login As
-</label>
-
-<select id="role" required>
-
-<option value="">
-Select role
-</option>
-
-<option value="donor">
-Donor
-</option>
-
-<option value="requester">
-Requester
-</option>
-
-<option value="admin">
-Admin
-</option>
-
-</select>
-
-
-<button
-class="login-btn"
-type="submit"
-data-en="Login"
-data-ta="உள்நுழைய">
-Login
-</button>
-
-</form>
-
-
-<div id="message" class="message"></div>
-
-
-<div class="demo">
-
-<strong
-data-en="Hackathon Demo Accounts"
-data-ta="ஹேக்கத்தான் டெமோ கணக்குகள்">
-Hackathon Demo Accounts
-</strong>
-
-<br><br>
-
-📌 Donor<br>
-Email: donor@bloodbridge.demo<br>
-Password: donor123
-
-<br><br>
-
-📌 Requester<br>
-Email: requester@bloodbridge.demo<br>
-Password: request123
-
-<br><br>
-
-📌 Admin<br>
-Email: admin@bloodbridge.demo<br>
-Password: admin123
-
-</div>
-
-
-<a
-href="index.html"
-class="back"
-data-en="← Back to Home"
-data-ta="← முகப்புக்குத் திரும்பு">
-← Back to Home
-</a>
-
-</div>
-
-</div>
-
-
-<footer>
-BloodBridge © 2026
-</footer>
-
 
 <script>
 
-let language =
-localStorage.getItem("bloodbridgeLanguage") || "en";
+let tamil = false;
 
+/* ==============================
+   DEMO LOGIN DETAILS
+============================== */
 
-function setLanguage(lang){
+const users = {
 
-language = lang;
+    "donor@bloodbridge.demo": {
+        password: "donor123",
+        role: "donor"
+    },
 
-document.documentElement.lang = lang;
+    "requester@bloodbridge.demo": {
+        password: "request123",
+        role: "requester"
+    },
 
-document.querySelectorAll("[data-en]").forEach(el => {
-
-el.textContent =
-el.getAttribute("data-" + lang);
-
-});
-
-document.getElementById("languageButton").textContent =
-lang === "en" ? "தமிழ்" : "English";
-
-localStorage.setItem(
-"bloodbridgeLanguage",
-lang
-);
-
-}
-
-
-function toggleLanguage(){
-
-setLanguage(
-language === "en" ? "ta" : "en"
-);
-
-}
-
-
-const demoAccounts = {
-
-donor:{
-email:"donor@bloodbridge.demo",
-password:"donor123",
-role:"donor"
-},
-
-requester:{
-email:"requester@bloodbridge.demo",
-password:"request123",
-role:"requester"
-},
-
-admin:{
-email:"admin@bloodbridge.demo",
-password:"admin123",
-role:"admin"
-}
+    "admin@bloodbridge.demo": {
+        password: "admin123",
+        role: "admin"
+    }
 
 };
 
 
+/* ==============================
+   LOGIN
+============================== */
+
 document
 .getElementById("loginForm")
-.addEventListener("submit",function(e){
+.addEventListener("submit", function(event) {
 
-e.preventDefault();
+    event.preventDefault();
 
-const email =
-document.getElementById("email")
-.value
-.trim()
-.toLowerCase();
+    const email =
+        document.getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
 
-const password =
-document.getElementById("password")
-.value;
+    const password =
+        document.getElementById("password")
+        .value;
 
-const role =
-document.getElementById("role")
-.value;
+    const selectedRole =
+        document.getElementById("role")
+        .value;
 
-const message =
-document.getElementById("message");
+    const message =
+        document.getElementById("message");
 
+    const user = users[email];
 
-if(!role){
+    message.style.display = "block";
 
-message.className="message error";
+    if (!user) {
 
-message.textContent =
-language === "en"
-?
-"Please select a login role."
-:
-"உள்நுழைவு வகையைத் தேர்ந்தெடுக்கவும்.";
+        message.className =
+            "message error";
 
-return;
+        message.textContent =
+            tamil
+            ? "Email சரியாக இல்லை."
+            : "Invalid email.";
 
-}
+        return;
+    }
 
+    if (user.password !== password) {
 
-const account =
-demoAccounts[role];
+        message.className =
+            "message error";
 
+        message.textContent =
+            tamil
+            ? "Password சரியாக இல்லை."
+            : "Incorrect password.";
 
-if(
-account &&
-email === account.email &&
-password === account.password
-){
+        return;
+    }
 
-localStorage.setItem(
-"bloodbridgeLoggedIn",
-"true"
-);
+    if (user.role !== selectedRole) {
 
-localStorage.setItem(
-"bloodbridgeUserRole",
-role
-);
+        message.className =
+            "message error";
 
-localStorage.setItem(
-"bloodbridgeUserEmail",
-email
-);
+        message.textContent =
+            tamil
+            ? "தேர்ந்தெடுத்த Role சரியாக இல்லை."
+            : "Selected role does not match this account.";
 
-
-message.className="message success";
-
-message.textContent =
-language === "en"
-?
-"Login successful! Redirecting..."
-:
-"உள்நுழைவு வெற்றிகரமாக முடிந்தது! மாற்றப்படுகிறது...";
+        return;
+    }
 
 
-setTimeout(function(){
+    /* ==============================
+       SAVE LOGIN SESSION
+    ============================== */
 
-if(role === "admin"){
+    localStorage.setItem(
+        "bloodbridgeLoggedIn",
+        "true"
+    );
 
-window.location.href="admin.html";
+    localStorage.setItem(
+        "bloodbridgeUserRole",
+        user.role
+    );
 
-}
+    localStorage.setItem(
+        "bloodbridgeUserEmail",
+        email
+    );
 
-else if(role === "donor"){
 
-window.location.href="dashboard.html";
+    /* ==============================
+       SUCCESS
+    ============================== */
 
-}
+    message.className =
+        "message success";
 
-else{
+    message.textContent =
+        tamil
+        ? "Login வெற்றிகரமாக முடிந்தது!"
+        : "Login successful! Opening your profile...";
 
-window.location.href="request.html";
 
-}
+    /*
+       IMPORTANT:
+       Every user goes to profile.html
+    */
 
-},800);
+    setTimeout(function() {
 
-}
+        window.location.href =
+            "profile.html";
 
-else{
-
-message.className="message error";
-
-message.textContent =
-language === "en"
-?
-"Invalid email, password, or role."
-:
-"மின்னஞ்சல், கடவுச்சொல் அல்லது உள்நுழைவு வகை தவறாக உள்ளது.";
-
-}
+    }, 700);
 
 });
 
 
-setLanguage(language);
+/* ==============================
+   SHOW / HIDE PASSWORD
+============================== */
+
+function togglePassword() {
+
+    const password =
+        document.getElementById("password");
+
+    if (password.type === "password") {
+
+        password.type = "text";
+
+    } else {
+
+        password.type = "password";
+
+    }
+
+}
+
+
+/* ==============================
+   LANGUAGE
+============================== */
+
+function toggleLanguage() {
+
+    tamil = !tamil;
+
+    if (tamil) {
+
+        document.getElementById("title")
+        .textContent =
+        "மீண்டும் வரவேற்கிறோம்";
+
+        document.getElementById("subtitle")
+        .textContent =
+        "BloodBridge-ல் தொடர உள்நுழையவும்";
+
+        document.getElementById("emailLabel")
+        .textContent =
+        "மின்னஞ்சல்";
+
+        document.getElementById("passwordLabel")
+        .textContent =
+        "கடவுச்சொல்";
+
+        document.getElementById("roleLabel")
+        .textContent =
+        "உள்நுழைவு வகை";
+
+        document.getElementById("loginButton")
+        .textContent =
+        "உள்நுழையவும்";
+
+    } else {
+
+        document.getElementById("title")
+        .textContent =
+        "Welcome Back";
+
+        document.getElementById("subtitle")
+        .textContent =
+        "Login to continue to BloodBridge";
+
+        document.getElementById("emailLabel")
+        .textContent =
+        "Email";
+
+        document.getElementById("passwordLabel")
+        .textContent =
+        "Password";
+
+        document.getElementById("roleLabel")
+        .textContent =
+        "Login As";
+
+        document.getElementById("loginButton")
+        .textContent =
+        "Login";
+
+    }
+
+}
 
 </script>
 
 </body>
-  </html>
+</html>
